@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru" style="overflow-y: scroll">
+<head>
+    <title>Главная</title>
+    <div th:replace="fragments/head :: head"></div>
+</head>
+<body>
+<div class="wrapper d-flex">
+    <div th:replace="fragments/headermain :: headermain"></div>
+    <main class="main" style="display: grid">
+
+        <div th:replace="fragments/carousel :: carousel"></div>
+
+        <div th:replace="fragments/advantage :: advantage"></div>
+
+        <div th:replace="fragments/cards :: cards"></div>
+
+        <div th:replace="fragments/videomain :: videomain"></div>
+
+        <div th:replace="fragments/accordion :: accordion"></div>
+
+    </main>
+    <footer>
+        <div th:replace="fragments/footermain :: footermain"></div>
+    </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="fragments/head :: head"></div>
+</head>
+<div class="modal-header p-2 m-2 text-center rounded-pill justify-content-center row" th:fragment="accordion"
+     style="justify-self: center; text-shadow: none">
+
+    <div class="container text-center text-light fs-4 p1 mb-2 bg-primary"
+         style="max-height: 7rem; border-radius: 1rem; max-width: 82rem;">
+        <strong style="padding-bottom: 1px">Технологии разработки приложения</strong>
+    </div>
+
+    <div class="accordion text-center rounded-pill justify-content-center row border border-0 mt-2"
+         id="accordionExample" style="max-width: 80rem">
+        <div class="accordion-item text-center col m-1 rounded-pill border border-0">
+            <h2 class="accordion-header border border-0 ">
+                <button class="accordion-button collapsed rounded-pill fs-3
+                            border border-primary-subtle"
+                        type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                        aria-expanded="false" aria-controls="collapseOne" style="text-shadow: none; min-width: 23rem">
+                    <img src="../img/frontend.png" alt="front"
+                    style="padding-left: 8vh"> <strong>FRONTEND</strong>
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse rounded-pill justify-content-center
+                    border border-0"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body fs-6 justify-content-center border border-0">
+                    <strong>HTML</strong> <strong>CSS</strong> <strong>JavaScript</strong> <strong>Bootstrap</strong>
+                    <strong>Thymeleaf</strong>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item col m-1 rounded-pill text-center border border-0">
+            <h2 class="accordion-header ">
+                <button class="accordion-button collapsed fs-3 rounded-pill justify-content-center
+                             border border-primary-subtle"
+                        type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                        aria-controls="collapseTwo" style="text-shadow: none; min-width: 23rem">
+                    <img src="../img/backend.png" alt="back" style="padding-left: 8vh">
+                    <strong>BACKEND</strong>
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse rounded-pill justify-content-center
+                    border border-0"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body fs-6 justify-content-center border border-0">
+                    <strong>Java</strong> <strong>Hibernate</strong> <strong>Spring Boot</strong>
+                    <strong>REST</strong> <strong>Spring security</strong>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item col m-1 rounded-pill text-center border border-0">
+            <h2 class="accordion-header text-center">
+                <button class="accordion-button collapsed fs-3 rounded-pill  justify-content-center
+                            border border-primary-subtle"
+                        type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                        aria-expanded="false" aria-controls="collapseThree" style="text-shadow: none; min-width: 23rem">
+                    <img src="../img/db.png" alt="db" style="padding-left: 8vh">
+                    <strong>DATABASE</strong>
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse rounded-pill justify-content-center
+                    border border-0"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body fs-6 rounded-pill justify-content-center border border-0">
+                    <strong>Postgres SQL</strong> <strong>MongoDB</strong> <strong>Compass</strong>
+                    <strong>PgAdmin</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

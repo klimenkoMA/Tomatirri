@@ -1,0 +1,12 @@
+/src/SomeErrors
+/.idea/sonarlint/issuestore/index.pb
+/node_modules/
+/target/classes/META-INF/
+/.idea/dataSources/
+/target/classes/templates/parts/common.ftl
+/target/AccApp-1.0-SNAPSHOT.jar
+/target/test-classes/accountingApp/repository/DevicesControllerTest.class
+/target/test-classes/accountingApp/repository/EmployeeControllerTest.class
+/target/test-classes/accountingApp/repository/EventsControllerTest.class
+/target/AccApp-1.0-SNAPSHOT.jar.original
+/.idea/Check List

@@ -1,0 +1,112 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="DanglingJavadoc" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="DuplicatedCode" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="FieldCanBeLocal" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="EXCLUDE_ANNOS">
+        <value>
+          <list size="1">
+            <item index="0" class="java.lang.String" itemvalue="javax.persistence.GeneratedValue" />
+          </list>
+        </value>
+      </option>
+      <option name="IGNORE_FIELDS_USED_IN_MULTIPLE_METHODS" value="true" />
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="41">
+            <item index="0" class="java.lang.String" itemvalue="charset" />
+            <item index="1" class="java.lang.String" itemvalue="placeholder" />
+            <item index="2" class="java.lang.String" itemvalue="th:each" />
+            <item index="3" class="java.lang.String" itemvalue="width" />
+            <item index="4" class="java.lang.String" itemvalue="cols" />
+            <item index="5" class="java.lang.String" itemvalue="th:src" />
+            <item index="6" class="java.lang.String" itemvalue="th:href" />
+            <item index="7" class="java.lang.String" itemvalue="crossorigin" />
+            <item index="8" class="java.lang.String" itemvalue="colspan" />
+            <item index="9" class="java.lang.String" itemvalue="for" />
+            <item index="10" class="java.lang.String" itemvalue="th:action" />
+            <item index="11" class="java.lang.String" itemvalue="th:if" />
+            <item index="12" class="java.lang.String" itemvalue="integrity" />
+            <item index="13" class="java.lang.String" itemvalue="th:replace" />
+            <item index="14" class="java.lang.String" itemvalue="th:fragment" />
+            <item index="15" class="java.lang.String" itemvalue="aria-controls" />
+            <item index="16" class="java.lang.String" itemvalue="data-target" />
+            <item index="17" class="java.lang.String" itemvalue="data-toggle" />
+            <item index="18" class="java.lang.String" itemvalue="aria-label" />
+            <item index="19" class="java.lang.String" itemvalue="aria-expanded" />
+            <item index="20" class="java.lang.String" itemvalue="method" />
+            <item index="21" class="java.lang.String" itemvalue="value" />
+            <item index="22" class="java.lang.String" itemvalue=".." />
+            <item index="23" class="java.lang.String" itemvalue="data-bs-slide-to" />
+            <item index="24" class="java.lang.String" itemvalue="aria-current" />
+            <item index="25" class="java.lang.String" itemvalue="data-bs-slide" />
+            <item index="26" class="java.lang.String" itemvalue="aria-hidden" />
+            <item index="27" class="java.lang.String" itemvalue="data-bs-interval" />
+            <item index="28" class="java.lang.String" itemvalue="data-bs-ride" />
+            <item index="29" class="java.lang.String" itemvalue="loading" />
+            <item index="30" class="java.lang.String" itemvalue="style" />
+            <item index="31" class="java.lang.String" itemvalue="action" />
+            <item index="32" class="java.lang.String" itemvalue="th:class" />
+            <item index="33" class="java.lang.String" itemvalue="th:style" />
+            <item index="34" class="java.lang.String" itemvalue="th:value" />
+            <item index="35" class="java.lang.String" itemvalue="th:text" />
+            <item index="36" class="java.lang.String" itemvalue="th:field" />
+            <item index="37" class="java.lang.String" itemvalue="data-work-area-name" />
+            <item index="38" class="java.lang.String" itemvalue="data-work-area-count" />
+            <item index="39" class="java.lang.String" itemvalue="data-room-count" />
+            <item index="40" class="java.lang.String" itemvalue="th:inline" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="26">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="form" />
+            <item index="7" class="java.lang.String" itemvalue="div" />
+            <item index="8" class="java.lang.String" itemvalue="tr" />
+            <item index="9" class="java.lang.String" itemvalue="input" />
+            <item index="10" class="java.lang.String" itemvalue="col" />
+            <item index="11" class="java.lang.String" itemvalue="td" />
+            <item index="12" class="java.lang.String" itemvalue="header" />
+            <item index="13" class="java.lang.String" itemvalue="nav" />
+            <item index="14" class="java.lang.String" itemvalue="section" />
+            <item index="15" class="java.lang.String" itemvalue="article" />
+            <item index="16" class="java.lang.String" itemvalue="aside" />
+            <item index="17" class="java.lang.String" itemvalue="footer" />
+            <item index="18" class="java.lang.String" itemvalue="h5" />
+            <item index="19" class="java.lang.String" itemvalue="table" />
+            <item index="20" class="java.lang.String" itemvalue="p" />
+            <item index="21" class="java.lang.String" itemvalue="main" />
+            <item index="22" class="java.lang.String" itemvalue="svg" />
+            <item index="23" class="java.lang.String" itemvalue="html" />
+            <item index="24" class="java.lang.String" itemvalue="th:block" />
+            <item index="25" class="java.lang.String" itemvalue="option" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N806" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="RequiredAttributes" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myAdditionalRequiredHtmlAttributes" value="action" />
+    </inspection_tool>
+  </profile>
+</component>
