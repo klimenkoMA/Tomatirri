@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "APPUSERS")
-public class AppUser {
+public class TomatirriUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class AppUser {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    public AppUser(long id, String userName, String userPass, boolean isActive, Set<Role> roles) {
+    public TomatirriUser(long id, String userName, String userPass, boolean isActive, Set<Role> roles) {
         this.id = id;
         this.userName = userName;
         this.userPass = userPass;
@@ -42,7 +42,7 @@ public class AppUser {
         this.roles = roles;
     }
 
-    public AppUser(String userName, String userPass, boolean isActive, Set<Role> roles) {
+    public TomatirriUser(String userName, String userPass, boolean isActive, Set<Role> roles) {
         this.userName = userName;
         this.userPass = userPass;
         if (isActive) {
@@ -54,7 +54,7 @@ public class AppUser {
         this.roles = roles;
     }
 
-    public AppUser() {
+    public TomatirriUser() {
     }
 
     public String getIsActiveForView() {
@@ -114,14 +114,14 @@ public class AppUser {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AppUser)) return false;
-        AppUser appUser = (AppUser) o;
-        return getId() == appUser.getId()
-                && isActive() == appUser.isActive()
-                && Objects.equals(getUserName(), appUser.getUserName())
-                && Objects.equals(getUserPass(), appUser.getUserPass())
-                && Objects.equals(getIsActiveForView(), appUser.getIsActiveForView())
-                && Objects.equals(getRoles(), appUser.getRoles());
+        if (!(o instanceof TomatirriUser)) return false;
+        TomatirriUser tomatirriUser = (TomatirriUser) o;
+        return getId() == tomatirriUser.getId()
+                && isActive() == tomatirriUser.isActive()
+                && Objects.equals(getUserName(), tomatirriUser.getUserName())
+                && Objects.equals(getUserPass(), tomatirriUser.getUserPass())
+                && Objects.equals(getIsActiveForView(), tomatirriUser.getIsActiveForView())
+                && Objects.equals(getRoles(), tomatirriUser.getRoles());
     }
 
     @Override

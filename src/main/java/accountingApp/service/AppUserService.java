@@ -1,6 +1,6 @@
 package accountingApp.service;
 
-import accountingApp.entity.AppUser;
+import accountingApp.entity.TomatirriUser;
 import accountingApp.entity.Role;
 import accountingApp.repository.AppUserRepository;
 import org.slf4j.Logger;
@@ -29,56 +29,56 @@ public class AppUserService {
         return new BCryptPasswordEncoder();
     }
 
-    public List<AppUser> getAllAppUsers() {
+    public List<TomatirriUser> getAllAppUsers() {
 
-        List<AppUser> appUserList = new ArrayList<>();
+        List<TomatirriUser> tomatirriUserList = new ArrayList<>();
 
         try {
             if (appUserRepository.findAll() == null) {
-                AppUser user = new AppUser(1, "test"
+                TomatirriUser user = new TomatirriUser(1, "test"
                         , "test", true,
                         new HashSet<>(Collections.singleton(Role.USER)) {
                         });
-                appUserList.add(user);
-                return appUserList;
+                tomatirriUserList.add(user);
+                return tomatirriUserList;
             }
         } catch (Exception e) {
             logger.warn("***AppUserService.getAllAppUsers() appUserRepository.findAll()" +
                     "return "
                     + e.getMessage());
-            AppUser user = new AppUser(0, "test"
+            TomatirriUser user = new TomatirriUser(0, "test"
                     , "test", true,
                     new HashSet<>(Collections.singleton(Role.USER)) {
                     });
-            appUserList.add(user);
-            return appUserList;
+            tomatirriUserList.add(user);
+            return tomatirriUserList;
         }
 
         return setIsActiveFromBooleanIntoString(appUserRepository.findAll());
     }
 
-    public AppUser createUser(AppUser user, String password) {
+    public TomatirriUser createUser(TomatirriUser user, String password) {
         user.setUserPass(passwordEncoder.encode(password));
         logger.warn("AppUser " + user.getUserName() + " created!");
         return appUserRepository.save(user);
     }
 
-    public AppUser updateUser(AppUser user, String password) {
+    public TomatirriUser updateUser(TomatirriUser user, String password) {
         user.setUserPass(passwordEncoder.encode(password));
         logger.warn("AppUser " + user.getUserName() + " updated!");
         return appUserRepository.save(user);
     }
 
-    public List<AppUser> findUserById(long id) {
+    public List<TomatirriUser> findUserById(long id) {
         return appUserRepository.findAppUserById(id);
     }
 
-    public Optional<AppUser> findUserByName(String userName) {
+    public Optional<TomatirriUser> findUserByName(String userName) {
         return appUserRepository.findByUserName(userName);
     }
 
     public void deleteUser(long id) {
-        AppUser user = findUserById(id).get(0);
+        TomatirriUser user = findUserById(id).get(0);
         logger.warn("AppUser " + user.getUserName() + " deleted!");
         appUserRepository.deleteById(id);
     }
@@ -90,21 +90,21 @@ public class AppUserService {
      * @param outerUserList
      * @return
      */
-    private List<AppUser> setIsActiveFromBooleanIntoString(List<AppUser> outerUserList) {
+    private List<TomatirriUser> setIsActiveFromBooleanIntoString(List<TomatirriUser> outerUserList) {
         try {
             if (outerUserList == null) {
                 throw new Exception("OuterUserList is NULL");
             }
 
-            List<AppUser> innerUserList = new ArrayList<>();
-            for (AppUser outerUser : outerUserList) {
-                AppUser innerUser;
+            List<TomatirriUser> innerUserList = new ArrayList<>();
+            for (TomatirriUser outerUser : outerUserList) {
+                TomatirriUser innerUser;
 
                 long userId = outerUser.getId();
                 String userName = outerUser.getUserName();
                 Set<Role> userRoles = outerUser.getRoles();
 
-                innerUser = new AppUser(userId,
+                innerUser = new TomatirriUser(userId,
                         userName,
                         outerUser.getUserPass(),
                         outerUser.isActive(),

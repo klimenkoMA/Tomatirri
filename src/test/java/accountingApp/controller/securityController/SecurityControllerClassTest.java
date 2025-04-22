@@ -4,7 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import accountingApp.entity.AppUser;
+import accountingApp.entity.TomatirriUser;
 import accountingApp.entity.Role;
 import accountingApp.securityController.SecurityControllerClass;
 import accountingApp.service.AppUserService;
@@ -44,13 +44,13 @@ class SecurityControllerClassTest {
     @Mock
     private Model model;
 
-    private final List<AppUser> appUserList = new ArrayList<>();
+    private final List<TomatirriUser> tomatirriUserList = new ArrayList<>();
     private String userName;
     private String userPass;
     private String isActive;
     private String roles;
     private Set<Role> roleSet;
-    private AppUser user;
+    private TomatirriUser user;
     private String viewName;
     private long userId;
 
@@ -62,9 +62,9 @@ class SecurityControllerClassTest {
         roles = "USER";
         roleSet = new HashSet<>();
         roleSet.add(Role.USER);
-        user = new AppUser(userName
+        user = new TomatirriUser(userName
                 , userPass, false, roleSet);
-        appUserList.add(user);
+        tomatirriUserList.add(user);
     }
 
     @BeforeEach
@@ -99,13 +99,13 @@ class SecurityControllerClassTest {
     @Test
     void getUsersShouldReturnAppUserList() {
 
-        when(appUserService.getAllAppUsers()).thenReturn(appUserList);
+        when(appUserService.getAllAppUsers()).thenReturn(tomatirriUserList);
 
         viewName = securityControllerClass.getUsers(model);
 
         Assertions.assertEquals("users", viewName);
 
-        verify(model).addAttribute("appUserList", appUserList);
+        verify(model).addAttribute("appUserList", tomatirriUserList);
 
         verify(appUserService).getAllAppUsers();
     }
@@ -113,16 +113,16 @@ class SecurityControllerClassTest {
     @Test
     void validUserAttributesAdded() {
 
-        when(appUserService.createUser(new AppUser(), "")).thenReturn(new AppUser());
+        when(appUserService.createUser(new TomatirriUser(), "")).thenReturn(new TomatirriUser());
 
         viewName = securityControllerClass.addNewUser(userName
                 , userPass, isActive, roles, model);
 
         Assertions.assertEquals("users", viewName);
 
-        verify(model, atMost(1)).addAttribute("appUserList", appUserList);
+        verify(model, atMost(1)).addAttribute("appUserList", tomatirriUserList);
 
-        verify(appUserService, atMost(1)).createUser(new AppUser(userName
+        verify(appUserService, atMost(1)).createUser(new TomatirriUser(userName
                 , userPass, false, roleSet), userPass);
 
     }
@@ -131,16 +131,16 @@ class SecurityControllerClassTest {
     void noNameUserAttributesAdded() {
 
         userName = " ";
-        user = new AppUser(userName, userPass, true, roleSet);
+        user = new TomatirriUser(userName, userPass, true, roleSet);
 
-        when(appUserService.createUser(new AppUser(), "")).thenReturn(new AppUser());
+        when(appUserService.createUser(new TomatirriUser(), "")).thenReturn(new TomatirriUser());
 
         viewName = securityControllerClass.addNewUser(userName
                 , userPass, isActive, roles, model);
 
         Assertions.assertEquals("users", viewName);
 
-        verify(model, atMost(3)).addAttribute("appUserList", appUserList);
+        verify(model, atMost(3)).addAttribute("appUserList", tomatirriUserList);
 
         verify(appUserService, never()).createUser(user, userPass);
 
@@ -161,16 +161,16 @@ class SecurityControllerClassTest {
 
         userId = 1;
 
-        when(appUserService.updateUser(new AppUser(), "222")).thenReturn(new AppUser());
+        when(appUserService.updateUser(new TomatirriUser(), "222")).thenReturn(new TomatirriUser());
 
         viewName = securityControllerClass.updateAppUser(userId + "", userName
                 , userPass, isActive, roles, model);
 
         Assertions.assertEquals("users", viewName);
 
-        verify(model, atMost(1)).addAttribute("appUserList", appUserList);
+        verify(model, atMost(1)).addAttribute("appUserList", tomatirriUserList);
 
-        verify(appUserService, atMost(1)).updateUser(new AppUser(userId, userName
+        verify(appUserService, atMost(1)).updateUser(new TomatirriUser(userId, userName
                 , userPass, false, roleSet), userPass);
     }
 
@@ -178,11 +178,11 @@ class SecurityControllerClassTest {
     void emptyNameUpdatingAppUser() {
         userName = " ";
 
-        when(appUserService.updateUser(new AppUser(), "222")).thenThrow(new RuntimeException());
+        when(appUserService.updateUser(new TomatirriUser(), "222")).thenThrow(new RuntimeException());
 
-        verify(model, atMost(1)).addAttribute("appUserList", appUserList);
+        verify(model, atMost(1)).addAttribute("appUserList", tomatirriUserList);
 
-        verify(appUserService, never()).updateUser(new AppUser(userId, userName
+        verify(appUserService, never()).updateUser(new TomatirriUser(userId, userName
                 , userPass, false, roleSet), userPass);
     }
 
@@ -192,7 +192,7 @@ class SecurityControllerClassTest {
         doThrow(new RuntimeException("exceptionDuringUpdatingAppUser TEST"))
                 .when(appUserService).updateUser(user, userPass);
 
-        verify(appUserService, never()).updateUser(new AppUser(userId, userName
+        verify(appUserService, never()).updateUser(new TomatirriUser(userId, userName
                 , userPass, false, roleSet), userPass);
     }
 
@@ -204,7 +204,7 @@ class SecurityControllerClassTest {
 
         Assertions.assertEquals("users", viewName);
 
-        verify(model, atMost(1)).addAttribute("appUserList", appUserList);
+        verify(model, atMost(1)).addAttribute("appUserList", tomatirriUserList);
 
         verify(appUserService, atMost(1)).deleteUser(userId);
     }
@@ -213,7 +213,7 @@ class SecurityControllerClassTest {
     void wrongIdDeletingAppUser() {
         userId = -1;
 
-        verify(model, atMost(1)).addAttribute("appUserList", appUserList);
+        verify(model, atMost(1)).addAttribute("appUserList", tomatirriUserList);
 
         verify(appUserService, never()).deleteUser(userId);
     }
@@ -235,7 +235,7 @@ class SecurityControllerClassTest {
 
         Assertions.assertEquals("users", viewName);
 
-        verify(model, atMost(1)).addAttribute("appUserList", appUserList);
+        verify(model, atMost(1)).addAttribute("appUserList", tomatirriUserList);
 
         verify(appUserService, atMost(1)).findUserByName(userName);
     }
@@ -244,7 +244,7 @@ class SecurityControllerClassTest {
     void wrongIdFindingAppUser() {
         userId = -1;
 
-        verify(model, atMost(1)).addAttribute("appUserList", appUserList);
+        verify(model, atMost(1)).addAttribute("appUserList", tomatirriUserList);
 
         verify(appUserService, never()).findUserById(userId);
     }
