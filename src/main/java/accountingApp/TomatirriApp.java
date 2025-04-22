@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * Main class
  */
 @SpringBootApplication
-public class AccountingApplication implements WebMvcConfigurer {
+public class TomatirriApp implements WebMvcConfigurer {
 
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
             "classpath:/META-INF/resources/", "classpath:/resources/",
@@ -20,7 +20,7 @@ public class AccountingApplication implements WebMvcConfigurer {
     };
 
     public static void main(String[] args) {
-        SpringApplication.run(AccountingApplication.class, args);
+        SpringApplication.run(TomatirriApp.class, args);
     }
 
     @Override

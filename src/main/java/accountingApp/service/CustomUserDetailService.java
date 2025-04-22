@@ -1,6 +1,6 @@
 package accountingApp.service;
 
-import accountingApp.entity.AppUser;
+import accountingApp.entity.TomatirriUser;
 import accountingApp.entity.Role;
 import accountingApp.repository.AppUserRepository;
 import org.slf4j.Logger;
@@ -38,8 +38,8 @@ class CustomUserDetailsService implements UserDetailsService {
         try {
 
             try{
-                List<AppUser> appUserList = appUserService.getAllAppUsers();
-                for (AppUser user: appUserList
+                List<TomatirriUser> tomatirriUserList = appUserService.getAllAppUsers();
+                for (TomatirriUser user: tomatirriUserList
                      ) {
                     if (user.getUserName().equals("admin")){
                         throw new Exception();
@@ -49,18 +49,18 @@ class CustomUserDetailsService implements UserDetailsService {
                 Set<Role> roleSet = new HashSet<>();
                 roleSet.add(Role.ADMIN);
                 roleSet.add(Role.USER);
-                AppUser admin = new AppUser("admin", "1", true, roleSet );
+                TomatirriUser admin = new TomatirriUser("admin", "1", true, roleSet );
                 appUserService.createUser(admin, "1");
             }catch (Exception exception){
                 logger.warn("CustomUserDetailsService.loadUserByUsername: INITIALISATION");
             }
 
             // Получаем пользователя из репозитория
-            AppUser appUser = userRepository.findByUserName(userName).orElseThrow(() ->
+            TomatirriUser tomatirriUser = userRepository.findByUserName(userName).orElseThrow(() ->
                     new UsernameNotFoundException("User not found"));
 
-            if (!appUser.isActive()) {
-                throw new Exception("User " + appUser.getUserName() + " isn't active!");
+            if (!tomatirriUser.isActive()) {
+                throw new Exception("User " + tomatirriUser.getUserName() + " isn't active!");
             }
 
             // Логируем успешную авторизацию
@@ -69,10 +69,10 @@ class CustomUserDetailsService implements UserDetailsService {
 
             String roles = "";
             synchronized (roles) {
-                if (appUser.getRoles().isEmpty()) {
+                if (tomatirriUser.getRoles().isEmpty()) {
                     roles = "USER";
                 } else {
-                    roles = appUser
+                    roles = tomatirriUser
                             .getRoles()
                             .stream()
                             .iterator()
@@ -80,7 +80,7 @@ class CustomUserDetailsService implements UserDetailsService {
                             .getAuthority();
                 }
 
-                if (appUser.getUserName().equals("admin")) {
+                if (tomatirriUser.getUserName().equals("admin")) {
                     roles = "ADMIN";
                 }
                 logger.warn("CustomUserDetailsService.loadUserByUsername " +
@@ -89,8 +89,8 @@ class CustomUserDetailsService implements UserDetailsService {
                 // Создаем UserDetails
                 return User
                         .builder()
-                        .username(appUser.getUserName())
-                        .password(appUser.getUserPass())
+                        .username(tomatirriUser.getUserName())
+                        .password(tomatirriUser.getUserPass())
                         .roles(roles)
                         .build();
             }
@@ -110,12 +110,12 @@ class CustomUserDetailsService implements UserDetailsService {
      */
     private void bCryptEncode() {
 
-        List<AppUser> appUserList = appUserService.getAllAppUsers();
-        AppUser user;
+        List<TomatirriUser> tomatirriUserList = appUserService.getAllAppUsers();
+        TomatirriUser user;
         String password;
 
-        for (AppUser appUser : appUserList) {
-            user = appUser;
+        for (TomatirriUser tomatirriUser : tomatirriUserList) {
+            user = tomatirriUser;
             password = user.getUserPass();
             user.setUserPass(passwordEncoder.encode(password));
             userRepository.save(user);

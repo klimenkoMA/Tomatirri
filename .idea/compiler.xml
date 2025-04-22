@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="RecProj" />
         <module name="AccApp" />
+        <module name="Tomatirri" />
       </profile>
     </annotationProcessing>
   </component>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="AccApp" options="-parameters" />
       <module name="RecProj" options="-parameters" />
+      <module name="Tomatirri" options="-parameters" />
     </option>
   </component>
 </project>

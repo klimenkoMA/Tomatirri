@@ -1,6 +1,6 @@
 package accountingApp.securityController;
 
-import accountingApp.entity.AppUser;
+import accountingApp.entity.TomatirriUser;
 import accountingApp.entity.Role;
 import accountingApp.service.AppUserService;
 import accountingApp.usefulmethods.Checker;
@@ -50,7 +50,7 @@ public class SecurityControllerClass {
 
     @GetMapping("/users")
     public String getUsers(Model model) {
-        List<AppUser> appUserList = service.getAllAppUsers();
+        List<TomatirriUser> tomatirriUserList = service.getAllAppUsers();
         Role[] rolesArray = Role.values();
         List<String> rolesList = new ArrayList<>();
         for (Role r : rolesArray
@@ -64,7 +64,7 @@ public class SecurityControllerClass {
 
         model.addAttribute("isActiveList", isActiveList);
         model.addAttribute("rolesList", rolesList);
-        model.addAttribute("appUserList", appUserList);
+        model.addAttribute("appUserList", tomatirriUserList);
         return "users";
     }
 
@@ -91,7 +91,7 @@ public class SecurityControllerClass {
         String rolesWithoutSpaces = roles.trim();
 
         try {
-            AppUser user;
+            TomatirriUser user;
             Set<Role> rolesSet = new HashSet<>();
             boolean isActiveUser;
             isActiveUser = isActiveWithoutSpaces.toLowerCase(Locale.ROOT).equals("active");
@@ -101,7 +101,7 @@ public class SecurityControllerClass {
             }
             rolesSet.add(Role.USER);
 
-            user = new AppUser(userNameWithoutSpaces
+            user = new TomatirriUser(userNameWithoutSpaces
                     , userPassWithoutSpaces
                     , isActiveUser
                     , rolesSet);
@@ -152,7 +152,7 @@ public class SecurityControllerClass {
                     && !rolesWithoutSpaces.equals("")
             ) {
 
-                AppUser user;
+                TomatirriUser user;
                 Set<Role> rolesSet = new HashSet<>();
                 boolean isActiveUser;
                 isActiveUser = isActiveWithoutSpaces.toLowerCase(Locale.ROOT).equals("active");
@@ -162,7 +162,7 @@ public class SecurityControllerClass {
                 }
                 rolesSet.add(Role.USER);
 
-                user = new AppUser(idCheck
+                user = new TomatirriUser(idCheck
                         , userNameWithoutSpaces
                         , userPassWithoutSpaces
                         , isActiveUser
@@ -229,16 +229,16 @@ public class SecurityControllerClass {
                         " WRONG ID FORMAT");
                 return getUsers(model);
             }
-            List<AppUser> appUserList = service.findUserById(idCheck);
-            model.addAttribute("appUserList", appUserList);
+            List<TomatirriUser> tomatirriUserList = service.findUserById(idCheck);
+            model.addAttribute("appUserList", tomatirriUserList);
             return "users";
         } catch (Exception e) {
             try {
-                Optional<AppUser> appUserOptional =
+                Optional<TomatirriUser> appUserOptional =
                         service.findUserByName(userIdWithoutSpaces);
-                List<AppUser> appUserList = new ArrayList<>();
-                appUserOptional.ifPresent(appUserList::add);
-                model.addAttribute("appUserList", appUserList);
+                List<TomatirriUser> tomatirriUserList = new ArrayList<>();
+                appUserOptional.ifPresent(tomatirriUserList::add);
+                model.addAttribute("appUserList", tomatirriUserList);
                 logger.debug("SecurityControllerClass.findAppUser(): " +
                         "found an AppUser by fio  *** " + e.getMessage());
                 return "users";
@@ -264,29 +264,29 @@ public class SecurityControllerClass {
 
         String attrsWithoutSpaces = attrs.trim().toLowerCase(Locale.ROOT);
         try {
-            List<AppUser> users = service.getAllAppUsers();
-            List<AppUser> appUserList = new ArrayList<>();
+            List<TomatirriUser> users = service.getAllAppUsers();
+            List<TomatirriUser> tomatirriUserList = new ArrayList<>();
 
-            for (AppUser us : users
+            for (TomatirriUser us : users
             ) {
                 if ((us.getId() + "").contains(attrsWithoutSpaces)) {
-                    appUserList.add(us);
+                    tomatirriUserList.add(us);
                 } else if (us.getUserName().toLowerCase(Locale.ROOT)
                         .contains(attrsWithoutSpaces)) {
-                    appUserList.add(us);
+                    tomatirriUserList.add(us);
                 } else if (us.getIsActiveForView().toLowerCase(Locale.ROOT)
                         .contains(attrsWithoutSpaces)) {
-                    appUserList.add(us);
+                    tomatirriUserList.add(us);
                 } else if (us.getRoles().stream()
                         .anyMatch(descr -> descr.getAuthority().toLowerCase(Locale.ROOT)
                                 .contains(attrsWithoutSpaces))) {
-                    appUserList.add(us);
+                    tomatirriUserList.add(us);
                 }
             }
 
-            model.addAttribute("appUserList", appUserList);
+            model.addAttribute("appUserList", tomatirriUserList);
 
-            if (appUserList.isEmpty()) {
+            if (tomatirriUserList.isEmpty()) {
                 logger.debug("*** ITStaffController.getItStaffListByAttrs():  DATA NOT FOUND IN DB***");
                 return getUsers(model);
             }
