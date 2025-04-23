@@ -87,7 +87,7 @@ class EventsControllerTest {
                 , "Плотникова"
                 , profession);
 
-        Devices dev1 = new Devices(1
+        Tomatoes dev1 = new Tomatoes(1
                 , category
                 , "Kyocera"
                 , description
@@ -96,7 +96,7 @@ class EventsControllerTest {
                 , room
                 , emp1
                 , it1);
-        Devices dev2 = new Devices(2
+        Tomatoes dev2 = new Tomatoes(2
                 , category
                 , "HP"
                 , description
@@ -105,7 +105,7 @@ class EventsControllerTest {
                 , room
                 , emp2
                 , it1);
-        Devices dev3 = new Devices(3
+        Tomatoes dev3 = new Tomatoes(3
                 , category
                 , "Acer"
                 , description
@@ -170,7 +170,7 @@ class EventsControllerTest {
         Mockito.when(eventsService.findAllEvents()).thenReturn(eventsList);
 
         String viewName = eventsController.addNewEvent(dateWithoutSpaces
-                , new Devices(category
+                , new Tomatoes(category
                         , deviceWithoutSpaces
                         , description
                         , inventory
@@ -205,7 +205,7 @@ class EventsControllerTest {
         description = " ";
         inventory = -1;
 
-        Events event = new Events(dateWithoutSpaces, new Devices(category
+        Events event = new Events(dateWithoutSpaces, new Tomatoes(category
                 , deviceWithoutSpaces
                 , description
                 , inventory
@@ -224,7 +224,7 @@ class EventsControllerTest {
         Mockito.when(eventsService.findAllEvents()).thenReturn(eventsList);
 
         String viewName = eventsController.addNewEvent(dateWithoutSpaces
-                , new Devices(category
+                , new Tomatoes(category
                         , deviceWithoutSpaces
                         , description
                         , inventory
@@ -306,7 +306,7 @@ class EventsControllerTest {
 
         int idCheck = Integer.parseInt(eventsId);
 
-        Events event = new Events(idCheck, dateWithoutSpaces, new Devices(category
+        Events event = new Events(idCheck, dateWithoutSpaces, new Tomatoes(category
                 , deviceWithoutSpaces
                 , description
                 , inventory
@@ -328,7 +328,7 @@ class EventsControllerTest {
         Mockito.when(eventsService.findAllEvents()).thenReturn(events);
 
         String viewName = eventsController.updateEvent(eventsId, dateWithoutSpaces
-                , new Devices(category
+                , new Tomatoes(category
                         , deviceWithoutSpaces
                         , description
                         , inventory
@@ -365,7 +365,7 @@ class EventsControllerTest {
         inventory = -1;
         int idCheck = Integer.parseInt(eventsId);
 
-        Events event = new Events(idCheck, dateWithoutSpaces, new Devices(category
+        Events event = new Events(idCheck, dateWithoutSpaces, new Tomatoes(category
                 , deviceWithoutSpaces
                 , description
                 , inventory
@@ -387,7 +387,7 @@ class EventsControllerTest {
 
         String viewName = eventsController.updateEvent(eventsId
                 , dateWithoutSpaces
-                , new Devices(category
+                , new Tomatoes(category
                         , deviceWithoutSpaces
                         , description
                         , inventory
@@ -427,7 +427,7 @@ class EventsControllerTest {
 
         int idCheck = Integer.parseInt(eventsId);
 
-        Events event = new Events(idCheck, dateWithoutSpaces, new Devices(category
+        Events event = new Events(idCheck, dateWithoutSpaces, new Tomatoes(category
                 , deviceWithoutSpaces
                 , description
                 , inventory

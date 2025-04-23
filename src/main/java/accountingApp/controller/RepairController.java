@@ -1,6 +1,6 @@
 package accountingApp.controller;
 
-import accountingApp.entity.Devices;
+import accountingApp.entity.Tomatoes;
 import accountingApp.entity.Important;
 import accountingApp.entity.Repair;
 import accountingApp.service.DevicesService;
@@ -34,20 +34,20 @@ public class RepairController {
     @GetMapping("/repair")
     public String getRepair(Model model) {
         List<Repair> repairList = repairService.getAllRepairs();
-        List<Devices> devicesList = devicesService.findAllDevices();
+        List<Tomatoes> tomatoesList = devicesService.findAllDevices();
         List<String> importantList = new ArrayList<>();
         importantList.add("Высокая");
         importantList.add("Низкая");
 
         model.addAttribute("repairList", repairList);
-        model.addAttribute("devicesList", devicesList);
+        model.addAttribute("devicesList", tomatoesList);
         model.addAttribute("importantList", importantList);
         return "repair";
     }
 
     @PostMapping("/addrepair")
     public String addNewRepair(@RequestParam String firstDay
-            , @RequestParam(required = false) Devices device
+            , @RequestParam(required = false) Tomatoes device
             , Model model) {
         if (checker.checkAttribute(firstDay)
                 || device == null) {
@@ -141,7 +141,7 @@ public class RepairController {
                 List<Repair> repairList = repairService.findRepair(idCheck);
 
                 Repair currentRepair = repairList.get(0);
-                Devices device = currentRepair.getDevice();
+                Tomatoes device = currentRepair.getDevice();
                 String firstDay = currentRepair.getFirstDay();
                 int repairCount = currentRepair.getRepairCount();
                 String health = currentRepair.getHealth();

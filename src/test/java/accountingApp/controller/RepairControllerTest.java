@@ -1,6 +1,6 @@
 package accountingApp.controller;
 
-import accountingApp.entity.Devices;
+import accountingApp.entity.Tomatoes;
 import accountingApp.entity.Important;
 import accountingApp.entity.Repair;
 import accountingApp.service.DevicesService;
@@ -40,7 +40,7 @@ class RepairControllerTest {
     private String lastRepairDay;
     private int repairCount;
     private boolean isImportant;
-    private Devices device;
+    private Tomatoes device;
     private String health;
     private int durability;
     private String repairedPart;
@@ -56,7 +56,7 @@ class RepairControllerTest {
         lastRepairDay = "15-01-2025";
         repairCount = 3;
         isImportant = true;
-        device = new Devices();
+        device = new Tomatoes();
         health = "green";
         durability = 35;
         repairedPart = "трансформатор";

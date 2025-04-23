@@ -28,7 +28,7 @@ public class Employee {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Events> events;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Devices> devices;
+    private List<Tomatoes> devices;
 
     public Employee() {
     }
@@ -59,7 +59,7 @@ public class Employee {
         this.room = room;
     }
 
-    public List<Devices> getDevices() {
+    public List<Tomatoes> getDevices() {
         return devices;
     }
 
@@ -71,7 +71,7 @@ public class Employee {
         this.profession = profession;
     }
 
-    public void setDevices(List<Devices> devices) {
+    public void setDevices(List<Tomatoes> devices) {
         this.devices = devices;
     }
 

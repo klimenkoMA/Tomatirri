@@ -22,7 +22,7 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 
 
-class DevicesControllerTest {
+class TomatoesControllerTest {
 
     @InjectMocks
     private DevicesController devicesController;
@@ -39,13 +39,13 @@ class DevicesControllerTest {
     @Mock
     private Checker checker;
 
-    private List<Devices> devicesList;
+    private List<Tomatoes> tomatoesList;
     private String deviceName;
     private String deviceId;
     private String viewName;
     private String description;
     private long inventory;
-    private Devices device;
+    private Tomatoes device;
     private Room room;
     private Employee employee;
     private ITStaff itstaff;
@@ -63,7 +63,7 @@ class DevicesControllerTest {
         room = new Room();
         employee = new Employee();
         itstaff = new ITStaff();
-        device = new Devices(category
+        device = new Tomatoes(category
                 , deviceName
                 , description
                 , inventory
@@ -71,12 +71,12 @@ class DevicesControllerTest {
                 , room
                 , employee
                 , itstaff);
-        Devices device2 = new Devices();
+        Tomatoes device2 = new Tomatoes();
 
         // Создаем список устройств
-        devicesList = new ArrayList<>();
-        devicesList.add(device);
-        devicesList.add(device2);
+        tomatoesList = new ArrayList<>();
+        tomatoesList.add(device);
+        tomatoesList.add(device2);
     }
 
     /**
@@ -91,7 +91,7 @@ class DevicesControllerTest {
     void getDevicesShouldReturnDevicesList() {
 
         // Настраиваем поведение мока
-        when(devicesService.findAllDevices()).thenReturn(devicesList);
+        when(devicesService.findAllDevices()).thenReturn(tomatoesList);
 
         // Act: Вызов тестируемого метода
         viewName = devicesController.getDevices(model);
@@ -101,7 +101,7 @@ class DevicesControllerTest {
         Assertions.assertEquals("devices", viewName);
 
         // Убеждаемся, что список устройств добавлен в модель
-        verify(model).addAttribute("devicesList", devicesList);
+        verify(model).addAttribute("devicesList", tomatoesList);
 
         // Проверяем, что сервис был вызван
         verify(devicesService).findAllDevices();
@@ -129,7 +129,7 @@ class DevicesControllerTest {
         // Проверка
         Assertions.assertEquals("devices", viewName);
 
-        verify(devicesService, atMost(1)).addNewDevice(new Devices(category
+        verify(devicesService, atMost(1)).addNewDevice(new Tomatoes(category
                 , deviceName
                 , description
                 , inventory
@@ -160,7 +160,7 @@ class DevicesControllerTest {
         // Пример ожидаемого имени представления
         Assertions.assertEquals("devices", viewName);
 
-        verify(devicesService, never()).addNewDevice(new Devices(category
+        verify(devicesService, never()).addNewDevice(new Tomatoes(category
                 , deviceName
                 , description
                 , -1L
@@ -175,8 +175,8 @@ class DevicesControllerTest {
         deviceId = "1";
         int idCheck = Integer.parseInt(deviceId);
 
-        when(devicesService.findAllDevices()).thenReturn(Arrays.asList(new Devices(),
-                new Devices()));
+        when(devicesService.findAllDevices()).thenReturn(Arrays.asList(new Tomatoes(),
+                new Tomatoes()));
 
         viewName = devicesController.deleteDevice(deviceId, model);
 
@@ -220,7 +220,7 @@ class DevicesControllerTest {
         // Данные
         deviceId = "1";
         deviceName = "DeviceName";
-        device = new Devices(1
+        device = new Tomatoes(1
                 , category
                 , deviceName
                 , description
@@ -229,9 +229,9 @@ class DevicesControllerTest {
                 , room
                 , employee
                 , itstaff);
-        devicesList.add(device);
+        tomatoesList.add(device);
 
-        when(devicesService.findAllDevices()).thenReturn(devicesList);
+        when(devicesService.findAllDevices()).thenReturn(tomatoesList);
 
         // Действие
         viewName = devicesController.updateDevice(deviceId
@@ -272,7 +272,7 @@ class DevicesControllerTest {
         // Проверка
         Assertions.assertEquals("devices", viewName);
 
-        verify(devicesService, never()).updateDevice(new Devices(-1
+        verify(devicesService, never()).updateDevice(new Tomatoes(-1
                 , category
                 , deviceName
                 , description
@@ -305,7 +305,7 @@ class DevicesControllerTest {
         // Проверка
         Assertions.assertEquals("devices", viewName);
 
-        verify(devicesService, never()).updateDevice(new Devices(1
+        verify(devicesService, never()).updateDevice(new Tomatoes(1
                 , category
                 , deviceName
                 , description
@@ -325,7 +325,7 @@ class DevicesControllerTest {
         //Симуляция выброса исключения
         doThrow(new RuntimeException()).when(devicesService).updateDevice(any());
 
-        verify(devicesService, never()).updateDevice(new Devices(1
+        verify(devicesService, never()).updateDevice(new Tomatoes(1
                 , category
                 , deviceName
                 , description
@@ -341,17 +341,17 @@ class DevicesControllerTest {
     void testFindDevicesByIdValidId() {
         deviceName = "1";
         int id = Integer.parseInt(deviceName);
-        device = new Devices();
+        device = new Tomatoes();
 
-        devicesList = Collections.singletonList(device);
+        tomatoesList = Collections.singletonList(device);
 
-        when(devicesService.getDevicesById(1)).thenReturn(devicesList);
+        when(devicesService.getDevicesById(1)).thenReturn(tomatoesList);
 
         viewName = devicesController.findDevicesById(deviceName, model);
 
         Assertions.assertEquals("devices", viewName);
 
-        verify(model).addAttribute("devicesList", devicesList);
+        verify(model).addAttribute("devicesList", tomatoesList);
 
         verify(devicesService).getDevicesById(id);
     }
@@ -361,15 +361,15 @@ class DevicesControllerTest {
         deviceName = "0";
         int idCheck = Integer.parseInt(deviceName);
 
-        devicesList = new ArrayList<>();
+        tomatoesList = new ArrayList<>();
 
-        when(devicesService.findAllDevices()).thenReturn(devicesList);
+        when(devicesService.findAllDevices()).thenReturn(tomatoesList);
 
         viewName = devicesController.findDevicesById(deviceName, model);
 
         Assertions.assertEquals("devices", viewName);
 
-        verify(model).addAttribute("devicesList", devicesList);
+        verify(model).addAttribute("devicesList", tomatoesList);
 
         verify(devicesService, never()).getDevicesById(idCheck);
     }
@@ -378,7 +378,7 @@ class DevicesControllerTest {
     void testFindDevicesThrowsException() {
         deviceName = "invalid";
 
-        device = new Devices(category
+        device = new Tomatoes(category
                 , deviceName
                 , description
                 , inventory
@@ -386,10 +386,10 @@ class DevicesControllerTest {
                 , room
                 , employee
                 , itstaff);
-        devicesList = Collections.singletonList(device);
+        tomatoesList = Collections.singletonList(device);
 
         doThrow(new RuntimeException()).when(devicesService).getDevicesByName(deviceName);
 
-        verify(model, never()).addAttribute("devicesList", devicesList);
+        verify(model, never()).addAttribute("devicesList", tomatoesList);
     }
 }

@@ -1,6 +1,5 @@
 package accountingApp.repository;
 
-import accountingApp.entity.Devices;
 import accountingApp.entity.ITStaff;
 import accountingApp.entity.Profession;
 import org.springframework.data.jpa.repository.JpaRepository;

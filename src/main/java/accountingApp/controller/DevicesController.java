@@ -48,7 +48,7 @@ public class DevicesController {
 
     @GetMapping("/devices")
     public String getDevices(Model model) {
-        List<Devices> devicesList = devicesService.findAllDevices();
+        List<Tomatoes> tomatoesList = devicesService.findAllDevices();
         List<Room> roomList = roomService.findAllRoom();
         List<Employee> employeeList = employeeService.getListEmployee();
         List<ITStaff> itStaffList = itStaffService.getAllItStaff();
@@ -57,7 +57,7 @@ public class DevicesController {
                 .map(DeviceCategory::getCategory)
                 .collect(Collectors.toList());
 
-        model.addAttribute("devicesList", devicesList);
+        model.addAttribute("devicesList", tomatoesList);
         model.addAttribute("roomList", roomList);
         model.addAttribute("employeeList", employeeList);
         model.addAttribute("itStaffList", itStaffList);
@@ -110,7 +110,7 @@ public class DevicesController {
                         .findFirst()
                         .orElse(DeviceCategory.Компьютер);
 
-                Devices devices = new Devices(deviceCategory
+                Tomatoes tomatoes = new Tomatoes(deviceCategory
                         , nameWithoutSpaces
                         , descriptionWithoutSpaces
                         , inventoryCheck
@@ -118,12 +118,12 @@ public class DevicesController {
                         , room
                         , employee
                         , itstaff);
-                devicesService.addNewDevice(devices);
+                devicesService.addNewDevice(tomatoes);
 
-                List<Devices> devicesList = devicesService.findAllDevices();
-                Devices dev = new Devices();
+                List<Tomatoes> tomatoesList = devicesService.findAllDevices();
+                Tomatoes dev = new Tomatoes();
 
-                for (Devices dv : devicesList
+                for (Tomatoes dv : tomatoesList
                 ) {
                     if (dv.getName().equals(nameWithoutSpaces)
                             && dv.getCategory().getCategory().equals(deviceCategory.getCategory())
@@ -172,8 +172,8 @@ public class DevicesController {
                 return getDevices(model);
             }
 
-            List<Devices> devices = devicesService.getDevicesById(idCheck);
-            Devices device = devices.get(0);
+            List<Tomatoes> devices = devicesService.getDevicesById(idCheck);
+            Tomatoes device = devices.get(0);
             device.setEmployee(null);
             device.setRoom(null);
             device.setItstaff(null);
@@ -252,7 +252,7 @@ public class DevicesController {
 
                 Repair repair = devicesService.getDevicesById(idCheck).get(0).getRepair();
 
-                Devices devices = new Devices(idCheck
+                Tomatoes tomatoes = new Tomatoes(idCheck
                         , deviceCategory
                         , nameWithoutSpaces
                         , descriptionWithoutSpaces
@@ -261,8 +261,8 @@ public class DevicesController {
                         , room
                         , employee
                         , itstaff);
-                devices.setRepair(repair);
-                devicesService.updateDevice(devices);
+                tomatoes.setRepair(repair);
+                devicesService.updateDevice(tomatoes);
                 return getDevices(model);
             }
             throw new Exception("Attribute is empty!");
@@ -292,15 +292,15 @@ public class DevicesController {
             } else {
                 logger.debug("*** DevicesController.findDevicesById():" +
                         "FOUND DEVICE BY ID ***");
-                List<Devices> devicesList;
-                devicesList = devicesService.getDevicesById(idCheck);
-                model.addAttribute("devicesList", devicesList);
+                List<Tomatoes> tomatoesList;
+                tomatoesList = devicesService.getDevicesById(idCheck);
+                model.addAttribute("devicesList", tomatoesList);
                 return "devices";
             }
         } catch (Exception e) {
             try {
-                List<Devices> devicesList = devicesService.getDevicesByName(name);
-                model.addAttribute("devicesList", devicesList);
+                List<Tomatoes> tomatoesList = devicesService.getDevicesByName(name);
+                model.addAttribute("devicesList", tomatoesList);
                 logger.debug("*** DevicesController.findDevicesById():" +
                         " FOUND DEVICE BY NAME *** " + e.getMessage());
                 return "devices";
@@ -330,8 +330,8 @@ public class DevicesController {
                     .findFirst()
                     .orElse(DeviceCategory.Компьютер);
 
-            List<Devices> devicesList = devicesService.getDevicesByCategory(deviceCategory);
-            model.addAttribute("devicesList", devicesList);
+            List<Tomatoes> tomatoesList = devicesService.getDevicesByCategory(deviceCategory);
+            model.addAttribute("devicesList", tomatoesList);
 
             return "devices";
         } catch (Exception e) {
@@ -353,44 +353,44 @@ public class DevicesController {
         String attrsWithoutSpaces = attrs.trim().toLowerCase(Locale.ROOT);
 
         try {
-            List<Devices> devices = devicesService.findAllDevices();
-            List<Devices> devicesList = new ArrayList<>();
+            List<Tomatoes> devices = devicesService.findAllDevices();
+            List<Tomatoes> tomatoesList = new ArrayList<>();
 
-            for (Devices dev : devices
+            for (Tomatoes dev : devices
             ) {
                 if ((dev.getId() + "").contains(attrsWithoutSpaces)) {
-                    devicesList.add(dev);
+                    tomatoesList.add(dev);
                 } else if (dev.getName().toLowerCase(Locale.ROOT)
                         .contains(attrsWithoutSpaces)) {
-                    devicesList.add(dev);
+                    tomatoesList.add(dev);
                 } else if (dev.getCategory().getCategory().toLowerCase(Locale.ROOT)
                         .contains(attrsWithoutSpaces)) {
-                    devicesList.add(dev);
+                    tomatoesList.add(dev);
                 } else if (dev.getDescription().toLowerCase(Locale.ROOT)
                         .contains(attrsWithoutSpaces)) {
-                    devicesList.add(dev);
+                    tomatoesList.add(dev);
                 } else if (dev.getEmployee().getFio().toLowerCase(Locale.ROOT)
                         .contains(attrsWithoutSpaces)) {
-                    devicesList.add(dev);
+                    tomatoesList.add(dev);
                 } else if ((dev.getInventory() + "").toLowerCase(Locale.ROOT)
                         .contains(attrsWithoutSpaces)) {
-                    devicesList.add(dev);
+                    tomatoesList.add(dev);
                 } else if (dev.getItstaff().getName().toLowerCase(Locale.ROOT)
                         .contains(attrsWithoutSpaces)) {
-                    devicesList.add(dev);
+                    tomatoesList.add(dev);
                 } else if ((dev.getRepair().getDurability() + "").toLowerCase(Locale.ROOT)
                         .contains(attrsWithoutSpaces)) {
-                    devicesList.add(dev);
+                    tomatoesList.add(dev);
                 } else if (dev.getRoom().getNumber().contains(attrsWithoutSpaces)) {
-                    devicesList.add(dev);
+                    tomatoesList.add(dev);
                 } else if (dev.getSerial().toLowerCase(Locale.ROOT)
                         .contains(attrsWithoutSpaces)) {
-                    devicesList.add(dev);
+                    tomatoesList.add(dev);
                 }
             }
 
-            model.addAttribute("devicesList", devicesList);
-            if (devicesList.isEmpty()) {
+            model.addAttribute("devicesList", tomatoesList);
+            if (tomatoesList.isEmpty()) {
                 logger.debug("*** DevicesController.findDevicesListByAttrs():  DATA NOT FOUND IN DB***");
                 return getDevices(model);
             }

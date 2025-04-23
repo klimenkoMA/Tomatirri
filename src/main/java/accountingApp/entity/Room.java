@@ -20,7 +20,7 @@ public class Room {
     @JoinColumn(name="workarea")
     private WorkArea workarea;
     @OneToMany
-    private List<Devices> devices;
+    private List<Tomatoes> devices;
     @Column
     private String description;
 
@@ -40,11 +40,11 @@ public class Room {
         this.description = description;
     }
 
-    public List<Devices> getDevices() {
+    public List<Tomatoes> getDevices() {
         return devices;
     }
 
-    public void setDevices(List<Devices> devices) {
+    public void setDevices(List<Tomatoes> devices) {
         this.devices = devices;
     }
 

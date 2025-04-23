@@ -27,7 +27,7 @@ public interface RepairRepository extends JpaRepository<Repair, Long> {
     List<Repair> findRepairByRepairCount(int repairCount);
 
     @Query(value = "select r from Repair r where r.device = ?1")
-    List<Repair> findRepairByDevice(Devices device);
+    List<Repair> findRepairByDevice(Tomatoes device);
 
     @Query(value = "select r from Repair r where r.category = ?1")
     List<Repair> findRepairByDeviceCategory(DeviceCategory category);

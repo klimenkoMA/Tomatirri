@@ -1,10 +1,10 @@
 package accountingApp.service;
 
 import accountingApp.entity.DeviceCategory;
+import accountingApp.entity.Tomatoes;
 import accountingApp.entity.dto.devicesdto.MaxOwnerCountDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import accountingApp.entity.Devices;
 import accountingApp.repository.DevicesRepository;
 
 import java.util.List;
@@ -15,25 +15,25 @@ public class DevicesService {
     @Autowired
     DevicesRepository devicesRepository;
 
-    public List<Devices> findAllDevices() {
+    public List<Tomatoes> findAllDevices() {
         return devicesRepository.findAll();
     }
 
-    public void addNewDevice(Devices devices) {
-        devicesRepository.save(devices);
+    public void addNewDevice(Tomatoes tomatoes) {
+        devicesRepository.save(tomatoes);
     }
 
     public void deleteDeviceById(Integer id) {
         devicesRepository.deleteById(id);
     }
 
-    public void updateDevice(Devices devices) {
-        devicesRepository.save(devices);
+    public void updateDevice(Tomatoes tomatoes) {
+        devicesRepository.save(tomatoes);
     }
 
-    public List<Devices> getDevicesByName(String name) {
+    public List<Tomatoes> getDevicesByName(String name) {
 
-        List<Devices> cloneDevices = devicesRepository.findAll().stream()
+        List<Tomatoes> cloneDevices = devicesRepository.findAll().stream()
         .filter(dev -> dev.getName().contains(name))
         .collect(Collectors.toList());
 
@@ -45,11 +45,11 @@ public class DevicesService {
         }
     }
 
-    public List<Devices> getDevicesById(int id) {
+    public List<Tomatoes> getDevicesById(int id) {
         return devicesRepository.findByid(id);
     }
 
-    public List<Devices> getDevicesByCategory(DeviceCategory category) {
+    public List<Tomatoes> getDevicesByCategory(DeviceCategory category) {
         return devicesRepository.findByCategory(category);
     }
 

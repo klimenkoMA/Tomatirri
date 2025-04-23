@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "devices")
-public class Devices {
+public class Tomatoes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -44,10 +44,10 @@ public class Devices {
     @JoinColumn
     private Repair repair;
 
-    public Devices() {
+    public Tomatoes() {
     }
 
-    public Devices(int id
+    public Tomatoes(int id
             , DeviceCategory category
             , String name
             , String description
@@ -67,7 +67,7 @@ public class Devices {
         this.itstaff = itstaff;
     }
 
-    public Devices(DeviceCategory category
+    public Tomatoes(DeviceCategory category
             , String name
             , String description
             , Long inventory
