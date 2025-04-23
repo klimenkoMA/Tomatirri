@@ -40,18 +40,18 @@ public class EventsController {
         List<Employee> employeeList = employeeService.getListEmployee();
         List<ITStaff> itStaffList = itStaffService.getAllItStaff();
         List<WorkArea> workAreaList = workAreaService.findAllWorkArea();
-        List<Devices> devicesList = devicesService.findAllDevices();
+        List<Tomatoes> tomatoesList = devicesService.findAllDevices();
         model.addAttribute("eventsList", eventsList);
         model.addAttribute("employeeList", employeeList);
         model.addAttribute("itStaffList", itStaffList);
         model.addAttribute("workAreaList", workAreaList);
-        model.addAttribute("devicesList", devicesList);
+        model.addAttribute("devicesList", tomatoesList);
         return "events";
     }
 
     @PostMapping("/addevent")
     public String addNewEvent(@RequestParam String date,
-                              @RequestParam(required = false) Devices device,
+                              @RequestParam(required = false) Tomatoes device,
                               @RequestParam(required = false) Employee employee,
                               @RequestParam(required = false) ITStaff itstaff,
                               @RequestParam(required = false) WorkArea workarea,
@@ -127,7 +127,7 @@ public class EventsController {
     @PostMapping("/updateevent")
     public String updateEvent(@RequestParam String id,
                               @RequestParam String date,
-                              @RequestParam(required = false) Devices device,
+                              @RequestParam(required = false) Tomatoes device,
                               @RequestParam(required = false) Employee employee,
                               @RequestParam(required = false) ITStaff itstaff,
                               @RequestParam(required = false) WorkArea workarea,

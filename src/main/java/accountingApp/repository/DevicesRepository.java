@@ -13,44 +13,44 @@ import java.util.List;
  */
 
 @Repository
-public interface DevicesRepository extends JpaRepository<Devices, Integer> {
+public interface DevicesRepository extends JpaRepository<Tomatoes, Integer> {
     @Override
-    List<Devices> findAll();
+    List<Tomatoes> findAll();
 
-    List<Devices> findByid(int id);
+    List<Tomatoes> findByid(int id);
 
-    List<Devices> findByName(String name);
+    List<Tomatoes> findByName(String name);
 
     @Override
     void deleteById(Integer integer);
 
-    @Query(value = "SELECT d from Devices d where d.category = ?1")
-    List<Devices> findByCategory(DeviceCategory category);
+    @Query(value = "SELECT d from Tomatoes d where d.category = ?1")
+    List<Tomatoes> findByCategory(DeviceCategory category);
 
-    @Query(value = "SELECT d from Devices d where d.description = ?1")
-    List<Devices> findByDescription(String description);
+    @Query(value = "SELECT d from Tomatoes d where d.description = ?1")
+    List<Tomatoes> findByDescription(String description);
 
-    @Query(value = "SELECT d from Devices d where d.inventory = ?1")
-    List<Devices> findByInventory(Long inventory);
+    @Query(value = "SELECT d from Tomatoes d where d.inventory = ?1")
+    List<Tomatoes> findByInventory(Long inventory);
 
-    @Query(value = "SELECT d from Devices d where d.serial = ?1")
-    List<Devices> findBySerial(String serial);
+    @Query(value = "SELECT d from Tomatoes d where d.serial = ?1")
+    List<Tomatoes> findBySerial(String serial);
 
-    @Query(value = "SELECT d from Devices d where d.room = ?1")
-    List<Devices> findByRoom(Room room);
+    @Query(value = "SELECT d from Tomatoes d where d.room = ?1")
+    List<Tomatoes> findByRoom(Room room);
 
-    @Query(value = "SELECT d from Devices d where d.employee = ?1")
-    List<Devices> findByEmployee(Employee employee);
+    @Query(value = "SELECT d from Tomatoes d where d.employee = ?1")
+    List<Tomatoes> findByEmployee(Employee employee);
 
-    @Query(value = "SELECT d from Devices d where d.itstaff = ?1")
-    List<Devices> findByItStaff(ITStaff itstaff);
+    @Query(value = "SELECT d from Tomatoes d where d.itstaff = ?1")
+    List<Tomatoes> findByItStaff(ITStaff itstaff);
 
-    @Query(value = "SELECT d from Devices d where d.repair = ?1")
-    List<Devices> findByRepair(Repair repair);
+    @Query(value = "SELECT d from Tomatoes d where d.repair = ?1")
+    List<Tomatoes> findByRepair(Repair repair);
 
     @Query(value = "select new accountingApp.entity.dto.devicesdto.MaxOwnerCountDTO(" +
             " i.name, count(i.id)) " +
-            " from Devices  d" +
+            " from Tomatoes  d" +
             " join d.itstaff i" +
             " group by i.name")
     List<MaxOwnerCountDTO> reportingDevicesMaxOwnerCount();

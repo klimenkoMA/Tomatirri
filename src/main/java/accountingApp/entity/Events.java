@@ -18,7 +18,7 @@ public class Events {
 
     @ManyToOne
     @JoinColumn(name = "deviceid")
-    private Devices device;
+    private Tomatoes device;
 
     @ManyToOne
     @JoinColumn(name = "EMPLOYEEID")
@@ -35,7 +35,7 @@ public class Events {
     @Column(name = "COMMENT")
     private String comment;
 
-    public Events(String date, Devices device,
+    public Events(String date, Tomatoes device,
                   Employee employeeid, ITStaff itstaffid,
                   WorkArea workarea, String comment) {
         this.date = date;
@@ -46,7 +46,7 @@ public class Events {
         this.comment = comment;
     }
 
-    public Events(int id, String date, Devices device,
+    public Events(int id, String date, Tomatoes device,
                   Employee employeeid, ITStaff itstaffid,
                   WorkArea workarea, String comment) {
         this.id = id;
@@ -95,11 +95,11 @@ public class Events {
         this.date = date;
     }
 
-    public Devices getDevice() {
+    public Tomatoes getDevice() {
         return device;
     }
 
-    public void setDevice(Devices device) {
+    public void setDevice(Tomatoes device) {
         this.device = device;
     }
 

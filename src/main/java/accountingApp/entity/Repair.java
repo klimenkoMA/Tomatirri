@@ -26,7 +26,7 @@ public class Repair {
     private boolean isImportant;
     @OneToOne
     @JoinColumn
-    private Devices device;
+    private Tomatoes device;
     @Column
     private DeviceCategory category;
     @Column
@@ -45,7 +45,7 @@ public class Repair {
     public Repair() {
     }
 
-    public Repair(String firstDay, Devices device) {
+    public Repair(String firstDay, Tomatoes device) {
         this.firstDay = firstDay;
         this.device = device;
         lastRepairDay = firstDay;
@@ -63,7 +63,7 @@ public class Repair {
     public Repair(Long id
             , String lastRepairDay
             , boolean isImportant
-            , Devices device
+            , Tomatoes device
             , String repairedPart) {
         this.id = id;
         this.lastRepairDay = lastRepairDay;
@@ -95,7 +95,7 @@ public class Repair {
             , String lastRepairDay
             , int repairCount
             , boolean isImportant
-            , Devices device
+            , Tomatoes device
             , String health
             , int durability
             , String repairedPart
@@ -232,11 +232,11 @@ public class Repair {
         isImportant = important;
     }
 
-    public Devices getDevice() {
+    public Tomatoes getDevice() {
         return device;
     }
 
-    public void setDevice(Devices device) {
+    public void setDevice(Tomatoes device) {
         this.device = device;
     }
 
