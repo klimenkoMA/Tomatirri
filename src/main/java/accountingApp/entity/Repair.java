@@ -28,7 +28,7 @@ public class Repair {
     @JoinColumn
     private Tomatoes device;
     @Column
-    private DeviceCategory category;
+    private TomatoesCategory category;
     @Column
     private String health;
     @Column
@@ -162,7 +162,7 @@ public class Repair {
         return durability;
     }
 
-    public DeviceCategory getCategory() {
+    public TomatoesCategory getCategory() {
         return category;
     }
 

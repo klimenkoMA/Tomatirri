@@ -25,7 +25,7 @@ public interface DevicesRepository extends JpaRepository<Tomatoes, Integer> {
     void deleteById(Integer integer);
 
     @Query(value = "SELECT d from Tomatoes d where d.category = ?1")
-    List<Tomatoes> findByCategory(DeviceCategory category);
+    List<Tomatoes> findByCategory(TomatoesCategory category);
 
     @Query(value = "SELECT d from Tomatoes d where d.description = ?1")
     List<Tomatoes> findByDescription(String description);

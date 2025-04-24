@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 public class DevicesController {
 
     final Logger logger = LoggerFactory.getLogger(DevicesController.class);
-    private static final DeviceCategory[] DEVICE_CATEGORIES = DeviceCategory.values();
+    private static final TomatoesCategory[] DEVICE_CATEGORIES = TomatoesCategory.values();
 
     @Autowired
     private DevicesService devicesService;
@@ -54,7 +54,7 @@ public class DevicesController {
         List<ITStaff> itStaffList = itStaffService.getAllItStaff();
 
         List<String> categoryList = Arrays.stream(DEVICE_CATEGORIES)
-                .map(DeviceCategory::getCategory)
+                .map(TomatoesCategory::getCategory)
                 .collect(Collectors.toList());
 
         model.addAttribute("devicesList", tomatoesList);
@@ -105,12 +105,12 @@ public class DevicesController {
                     && !checker.checkAttribute(serialWithoutSpaces)
             ) {
 
-                DeviceCategory deviceCategory = Arrays.stream(DEVICE_CATEGORIES)
+                TomatoesCategory tomatoesCategory = Arrays.stream(DEVICE_CATEGORIES)
                         .filter(cat -> cat.getCategory().equals(categoryWithoutSpaces))
                         .findFirst()
-                        .orElse(DeviceCategory.Компьютер);
+                        .orElse(TomatoesCategory.Штамбовый);
 
-                Tomatoes tomatoes = new Tomatoes(deviceCategory
+                Tomatoes tomatoes = new Tomatoes(tomatoesCategory
                         , nameWithoutSpaces
                         , descriptionWithoutSpaces
                         , inventoryCheck
@@ -126,7 +126,7 @@ public class DevicesController {
                 for (Tomatoes dv : tomatoesList
                 ) {
                     if (dv.getName().equals(nameWithoutSpaces)
-                            && dv.getCategory().getCategory().equals(deviceCategory.getCategory())
+                            && dv.getCategory().getCategory().equals(tomatoesCategory.getCategory())
                             && dv.getSerial().equals(serialWithoutSpaces)
                             && dv.getRoom().equals(room)
                             && dv.getItstaff().equals(itstaff)
@@ -245,15 +245,15 @@ public class DevicesController {
                     && !checker.checkAttribute(descriptionWithoutSpaces)
             ) {
 
-                DeviceCategory deviceCategory = Arrays.stream(DEVICE_CATEGORIES)
+                TomatoesCategory tomatoesCategory = Arrays.stream(DEVICE_CATEGORIES)
                         .filter(cat -> cat.getCategory().equals(categoryWithoutSpaces))
                         .findFirst()
-                        .orElse(DeviceCategory.Компьютер);
+                        .orElse(TomatoesCategory.Штамбовый);
 
                 Repair repair = devicesService.getDevicesById(idCheck).get(0).getRepair();
 
                 Tomatoes tomatoes = new Tomatoes(idCheck
-                        , deviceCategory
+                        , tomatoesCategory
                         , nameWithoutSpaces
                         , descriptionWithoutSpaces
                         , inventoryCheck
@@ -325,12 +325,12 @@ public class DevicesController {
 
         try {
 
-            DeviceCategory deviceCategory = Arrays.stream(DEVICE_CATEGORIES)
+            TomatoesCategory tomatoesCategory = Arrays.stream(DEVICE_CATEGORIES)
                     .filter(cat -> cat.getCategory().equals(categoryWithoutSpaces))
                     .findFirst()
-                    .orElse(DeviceCategory.Компьютер);
+                    .orElse(TomatoesCategory.Штамбовый);
 
-            List<Tomatoes> tomatoesList = devicesService.getDevicesByCategory(deviceCategory);
+            List<Tomatoes> tomatoesList = devicesService.getDevicesByCategory(tomatoesCategory);
             model.addAttribute("devicesList", tomatoesList);
 
             return "devices";

@@ -1,12 +1,6 @@
 package accountingApp.entity;
 
-import org.springframework.format.datetime.DateFormatter;
-
 import javax.persistence.*;
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -20,7 +14,7 @@ public class Tomatoes {
     @Column(name = "id")
     private int id;
     @Column
-    private DeviceCategory category;
+    private TomatoesCategory category;
     @Column(name = "name")
     private String name;
     @Column
@@ -48,7 +42,7 @@ public class Tomatoes {
     }
 
     public Tomatoes(int id
-            , DeviceCategory category
+            , TomatoesCategory category
             , String name
             , String description
             , Long inventory
@@ -67,7 +61,7 @@ public class Tomatoes {
         this.itstaff = itstaff;
     }
 
-    public Tomatoes(DeviceCategory category
+    public Tomatoes(TomatoesCategory category
             , String name
             , String description
             , Long inventory
@@ -101,11 +95,11 @@ public class Tomatoes {
         this.serial = serial;
     }
 
-    public DeviceCategory getCategory() {
+    public TomatoesCategory getCategory() {
         return category;
     }
 
-    public void setCategory(DeviceCategory category) {
+    public void setCategory(TomatoesCategory category) {
         this.category = category;
     }
 

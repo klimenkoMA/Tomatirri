@@ -1,6 +1,6 @@
 package accountingApp.service;
 
-import accountingApp.entity.DeviceCategory;
+import accountingApp.entity.TomatoesCategory;
 import accountingApp.entity.Tomatoes;
 import accountingApp.entity.dto.devicesdto.MaxOwnerCountDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ public class DevicesService {
         return devicesRepository.findByid(id);
     }
 
-    public List<Tomatoes> getDevicesByCategory(DeviceCategory category) {
+    public List<Tomatoes> getDevicesByCategory(TomatoesCategory category) {
         return devicesRepository.findByCategory(category);
     }
 
