@@ -2,7 +2,7 @@ package accountingApp.service;
 
 import accountingApp.entity.TomatirriUser;
 import accountingApp.entity.Role;
-import accountingApp.repository.AppUserRepository;
+import accountingApp.repository.TomatirriUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class AppUserService {
     private final Logger logger = LoggerFactory.getLogger(AppUserService.class);
 
     @Autowired
-    private AppUserRepository appUserRepository;
+    private TomatirriUserRepository tomatirriUserRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -34,7 +34,7 @@ public class AppUserService {
         List<TomatirriUser> tomatirriUserList = new ArrayList<>();
 
         try {
-            if (appUserRepository.findAll() == null) {
+            if (tomatirriUserRepository.findAll() == null) {
                 TomatirriUser user = new TomatirriUser(1, "test"
                         , "test", true,
                         new HashSet<>(Collections.singleton(Role.USER)) {
@@ -54,33 +54,33 @@ public class AppUserService {
             return tomatirriUserList;
         }
 
-        return setIsActiveFromBooleanIntoString(appUserRepository.findAll());
+        return setIsActiveFromBooleanIntoString(tomatirriUserRepository.findAll());
     }
 
     public TomatirriUser createUser(TomatirriUser user, String password) {
         user.setUserPass(passwordEncoder.encode(password));
         logger.warn("AppUser " + user.getUserName() + " created!");
-        return appUserRepository.save(user);
+        return tomatirriUserRepository.save(user);
     }
 
     public TomatirriUser updateUser(TomatirriUser user, String password) {
         user.setUserPass(passwordEncoder.encode(password));
         logger.warn("AppUser " + user.getUserName() + " updated!");
-        return appUserRepository.save(user);
+        return tomatirriUserRepository.save(user);
     }
 
     public List<TomatirriUser> findUserById(long id) {
-        return appUserRepository.findAppUserById(id);
+        return tomatirriUserRepository.findAppUserById(id);
     }
 
     public Optional<TomatirriUser> findUserByName(String userName) {
-        return appUserRepository.findByUserName(userName);
+        return tomatirriUserRepository.findByUserName(userName);
     }
 
     public void deleteUser(long id) {
         TomatirriUser user = findUserById(id).get(0);
         logger.warn("AppUser " + user.getUserName() + " deleted!");
-        appUserRepository.deleteById(id);
+        tomatirriUserRepository.deleteById(id);
     }
 
     /**

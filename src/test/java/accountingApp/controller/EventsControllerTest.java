@@ -46,12 +46,12 @@ class EventsControllerTest {
     private Room room;
     private Employee employee;
     private ITStaff itstaff;
-    private DeviceCategory category;
+    private TomatoesCategory category;
     private Profession profession;
     private String serial;
 
     {
-        category = DeviceCategory.Компьютер;
+        category = TomatoesCategory.Штамбовый;
         profession = Profession.Преподаватель;
         description = "Description";
         inventory = 111111L;

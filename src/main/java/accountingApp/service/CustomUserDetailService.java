@@ -2,7 +2,7 @@ package accountingApp.service;
 
 import accountingApp.entity.TomatirriUser;
 import accountingApp.entity.Role;
-import accountingApp.repository.AppUserRepository;
+import accountingApp.repository.TomatirriUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ class CustomUserDetailsService implements UserDetailsService {
     final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
 
     @Autowired
-    private AppUserRepository userRepository;
+    private TomatirriUserRepository userRepository;
 
     @Autowired
     private AppUserService appUserService;

@@ -49,12 +49,12 @@ class TomatoesControllerTest {
     private Room room;
     private Employee employee;
     private ITStaff itstaff;
-    private DeviceCategory category;
+    private TomatoesCategory category;
     private String serial;
 
     {
         // Arrange: Подготовка данных для теста
-        category = DeviceCategory.Компьютер;
+        category = TomatoesCategory.Штамбовый;
         deviceName = "Hiper";
         deviceId = "1";
         description = "Нет-топ для сотрудников IT-отдела";
