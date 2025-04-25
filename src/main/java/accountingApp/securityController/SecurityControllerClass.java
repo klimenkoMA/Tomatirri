@@ -2,7 +2,7 @@ package accountingApp.securityController;
 
 import accountingApp.entity.TomatirriUser;
 import accountingApp.entity.Role;
-import accountingApp.service.AppUserService;
+import accountingApp.service.TomatirriUserService;
 import accountingApp.usefulmethods.Checker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class SecurityControllerClass {
     final Logger logger = LoggerFactory.getLogger(SecurityControllerClass.class);
 
     @Autowired(required = false)
-    private AppUserService service;
+    private TomatirriUserService service;
 
     @Autowired
     private Checker checker;
