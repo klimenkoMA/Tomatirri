@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class AppUserService {
+public class TomatirriUserService {
 
-    private final Logger logger = LoggerFactory.getLogger(AppUserService.class);
+    private final Logger logger = LoggerFactory.getLogger(TomatirriUserService.class);
 
     @Autowired
     private TomatirriUserRepository tomatirriUserRepository;

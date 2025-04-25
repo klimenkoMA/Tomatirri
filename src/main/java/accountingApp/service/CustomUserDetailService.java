@@ -28,7 +28,7 @@ class CustomUserDetailsService implements UserDetailsService {
     private TomatirriUserRepository userRepository;
 
     @Autowired
-    private AppUserService appUserService;
+    private TomatirriUserService tomatirriUserService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -38,7 +38,7 @@ class CustomUserDetailsService implements UserDetailsService {
         try {
 
             try{
-                List<TomatirriUser> tomatirriUserList = appUserService.getAllAppUsers();
+                List<TomatirriUser> tomatirriUserList = tomatirriUserService.getAllAppUsers();
                 for (TomatirriUser user: tomatirriUserList
                      ) {
                     if (user.getUserName().equals("admin")){
@@ -50,7 +50,7 @@ class CustomUserDetailsService implements UserDetailsService {
                 roleSet.add(Role.ADMIN);
                 roleSet.add(Role.USER);
                 TomatirriUser admin = new TomatirriUser("admin", "1", true, roleSet );
-                appUserService.createUser(admin, "1");
+                tomatirriUserService.createUser(admin, "1");
             }catch (Exception exception){
                 logger.warn("CustomUserDetailsService.loadUserByUsername: INITIALISATION");
             }
@@ -110,7 +110,7 @@ class CustomUserDetailsService implements UserDetailsService {
      */
     private void bCryptEncode() {
 
-        List<TomatirriUser> tomatirriUserList = appUserService.getAllAppUsers();
+        List<TomatirriUser> tomatirriUserList = tomatirriUserService.getAllAppUsers();
         TomatirriUser user;
         String password;
 

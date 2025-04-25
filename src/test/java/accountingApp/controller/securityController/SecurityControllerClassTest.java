@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import accountingApp.entity.TomatirriUser;
 import accountingApp.entity.Role;
 import accountingApp.securityController.SecurityControllerClass;
-import accountingApp.service.AppUserService;
+import accountingApp.service.TomatirriUserService;
 import accountingApp.usefulmethods.Checker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +33,7 @@ class SecurityControllerClassTest {
     private MockMvc mockMvc;
 
     @Mock
-    private AppUserService appUserService;
+    private TomatirriUserService tomatirriUserService;
 
     @Mock
     private Checker checker;
@@ -99,7 +99,7 @@ class SecurityControllerClassTest {
     @Test
     void getUsersShouldReturnAppUserList() {
 
-        when(appUserService.getAllAppUsers()).thenReturn(tomatirriUserList);
+        when(tomatirriUserService.getAllAppUsers()).thenReturn(tomatirriUserList);
 
         viewName = securityControllerClass.getUsers(model);
 
@@ -107,13 +107,13 @@ class SecurityControllerClassTest {
 
         verify(model).addAttribute("appUserList", tomatirriUserList);
 
-        verify(appUserService).getAllAppUsers();
+        verify(tomatirriUserService).getAllAppUsers();
     }
 
     @Test
     void validUserAttributesAdded() {
 
-        when(appUserService.createUser(new TomatirriUser(), "")).thenReturn(new TomatirriUser());
+        when(tomatirriUserService.createUser(new TomatirriUser(), "")).thenReturn(new TomatirriUser());
 
         viewName = securityControllerClass.addNewUser(userName
                 , userPass, isActive, roles, model);
@@ -122,7 +122,7 @@ class SecurityControllerClassTest {
 
         verify(model, atMost(1)).addAttribute("appUserList", tomatirriUserList);
 
-        verify(appUserService, atMost(1)).createUser(new TomatirriUser(userName
+        verify(tomatirriUserService, atMost(1)).createUser(new TomatirriUser(userName
                 , userPass, false, roleSet), userPass);
 
     }
@@ -133,7 +133,7 @@ class SecurityControllerClassTest {
         userName = " ";
         user = new TomatirriUser(userName, userPass, true, roleSet);
 
-        when(appUserService.createUser(new TomatirriUser(), "")).thenReturn(new TomatirriUser());
+        when(tomatirriUserService.createUser(new TomatirriUser(), "")).thenReturn(new TomatirriUser());
 
         viewName = securityControllerClass.addNewUser(userName
                 , userPass, isActive, roles, model);
@@ -142,7 +142,7 @@ class SecurityControllerClassTest {
 
         verify(model, atMost(3)).addAttribute("appUserList", tomatirriUserList);
 
-        verify(appUserService, never()).createUser(user, userPass);
+        verify(tomatirriUserService, never()).createUser(user, userPass);
 
     }
 
@@ -150,9 +150,9 @@ class SecurityControllerClassTest {
     void exceptionWhenAppUserAdded() {
 
         doThrow(new RuntimeException("exceptionWhenAppUserAdded TEST"))
-                .when(appUserService).createUser(user, userPass);
+                .when(tomatirriUserService).createUser(user, userPass);
 
-        verify(appUserService, never()).createUser(user, userPass);
+        verify(tomatirriUserService, never()).createUser(user, userPass);
 
     }
 
@@ -161,7 +161,7 @@ class SecurityControllerClassTest {
 
         userId = 1;
 
-        when(appUserService.updateUser(new TomatirriUser(), "222")).thenReturn(new TomatirriUser());
+        when(tomatirriUserService.updateUser(new TomatirriUser(), "222")).thenReturn(new TomatirriUser());
 
         viewName = securityControllerClass.updateAppUser(userId + "", userName
                 , userPass, isActive, roles, model);
@@ -170,7 +170,7 @@ class SecurityControllerClassTest {
 
         verify(model, atMost(1)).addAttribute("appUserList", tomatirriUserList);
 
-        verify(appUserService, atMost(1)).updateUser(new TomatirriUser(userId, userName
+        verify(tomatirriUserService, atMost(1)).updateUser(new TomatirriUser(userId, userName
                 , userPass, false, roleSet), userPass);
     }
 
@@ -178,11 +178,11 @@ class SecurityControllerClassTest {
     void emptyNameUpdatingAppUser() {
         userName = " ";
 
-        when(appUserService.updateUser(new TomatirriUser(), "222")).thenThrow(new RuntimeException());
+        when(tomatirriUserService.updateUser(new TomatirriUser(), "222")).thenThrow(new RuntimeException());
 
         verify(model, atMost(1)).addAttribute("appUserList", tomatirriUserList);
 
-        verify(appUserService, never()).updateUser(new TomatirriUser(userId, userName
+        verify(tomatirriUserService, never()).updateUser(new TomatirriUser(userId, userName
                 , userPass, false, roleSet), userPass);
     }
 
@@ -190,9 +190,9 @@ class SecurityControllerClassTest {
     void exceptionDuringUpdatingAppUser() {
 
         doThrow(new RuntimeException("exceptionDuringUpdatingAppUser TEST"))
-                .when(appUserService).updateUser(user, userPass);
+                .when(tomatirriUserService).updateUser(user, userPass);
 
-        verify(appUserService, never()).updateUser(new TomatirriUser(userId, userName
+        verify(tomatirriUserService, never()).updateUser(new TomatirriUser(userId, userName
                 , userPass, false, roleSet), userPass);
     }
 
@@ -206,7 +206,7 @@ class SecurityControllerClassTest {
 
         verify(model, atMost(1)).addAttribute("appUserList", tomatirriUserList);
 
-        verify(appUserService, atMost(1)).deleteUser(userId);
+        verify(tomatirriUserService, atMost(1)).deleteUser(userId);
     }
 
     @Test
@@ -215,16 +215,16 @@ class SecurityControllerClassTest {
 
         verify(model, atMost(1)).addAttribute("appUserList", tomatirriUserList);
 
-        verify(appUserService, never()).deleteUser(userId);
+        verify(tomatirriUserService, never()).deleteUser(userId);
     }
 
     @Test
     void exceptionDuringDeletingAppUser() {
 
         doThrow(new RuntimeException("exceptionDuringDeletingAppUser TEST"))
-                .when(appUserService).deleteUser(userId);
+                .when(tomatirriUserService).deleteUser(userId);
 
-        verify(appUserService, never()).deleteUser(userId);
+        verify(tomatirriUserService, never()).deleteUser(userId);
     }
 
     @Test
@@ -237,7 +237,7 @@ class SecurityControllerClassTest {
 
         verify(model, atMost(1)).addAttribute("appUserList", tomatirriUserList);
 
-        verify(appUserService, atMost(1)).findUserByName(userName);
+        verify(tomatirriUserService, atMost(1)).findUserByName(userName);
     }
 
     @Test
@@ -246,15 +246,15 @@ class SecurityControllerClassTest {
 
         verify(model, atMost(1)).addAttribute("appUserList", tomatirriUserList);
 
-        verify(appUserService, never()).findUserById(userId);
+        verify(tomatirriUserService, never()).findUserById(userId);
     }
 
     @Test
     void exceptionDuringFindingAppUser() {
 
         doThrow(new RuntimeException("exceptionDuringDeletingAppUser TEST"))
-                .when(appUserService).findUserById(userId);
+                .when(tomatirriUserService).findUserById(userId);
 
-        verify(appUserService, never()).findUserById(userId);
+        verify(tomatirriUserService, never()).findUserById(userId);
     }
 }
