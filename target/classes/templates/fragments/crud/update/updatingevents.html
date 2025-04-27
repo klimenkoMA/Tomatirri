@@ -37,7 +37,7 @@
                         <select class="form-select-custom m-2" name="device">
 
                             <option value="0">Оборудование</option>
-                            <option th:each="element : ${devicesList}"
+                            <option th:each="element : ${tomatoesList}"
                                     th:value="${element.id}"
                                     th:text="${element.name}"></option>
                         </select>

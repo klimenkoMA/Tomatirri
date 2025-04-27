@@ -1,10 +1,10 @@
-package accountingApp.entity;
-
-public enum Important {
-    Да,
-    Нет,;
-
-    public String getImportant () {
-        return name();
-    }
-}
+//package accountingApp.entity;
+//
+//public enum Important {
+//    Да,
+//    Нет,;
+//
+//    public String getImportant () {
+//        return name();
+//    }
+//}
