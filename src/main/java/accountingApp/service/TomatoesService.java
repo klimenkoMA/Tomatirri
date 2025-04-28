@@ -16,21 +16,18 @@ public class TomatoesService {
     @Autowired
     TomatoesRepository tomatoesRepository;
 
-//    public List<Tomatoes> findAllDevices() {
-//        return tomatoesRepository.findAll();
-//    }
-//
-//    public void addNewDevice(Tomatoes tomatoes) {
-//        tomatoesRepository.save(tomatoes);
-//    }
-//
-//    public void deleteDeviceById(ObjectId id) {
-//        tomatoesRepository.deleteById(id);
-//    }
-//
-//    public void updateDevice(Tomatoes tomatoes) {
-//        tomatoesRepository.save(tomatoes);
-//    }
+    public List<Tomatoes> findAllTomatoes() {
+        return tomatoesRepository.findAll();
+    }
+
+    public void addNewTomato(Tomatoes tomato) {
+        tomatoesRepository.save(tomato);
+    }
+
+    public void deleteTomato(Tomatoes tomato) {
+        tomatoesRepository.delete(tomato);
+    }
+
 //
 //    public List<Tomatoes> getDevicesByName(String name) {
 //
