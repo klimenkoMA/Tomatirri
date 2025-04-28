@@ -1,29 +1,24 @@
 package accountingApp.repository;
 
 import accountingApp.entity.*;
-import accountingApp.entity.dto.devicesdto.MaxOwnerCountDTO;
-import org.bson.types.ObjectId;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
- * Интерфейс для связи с таблицей оборудования (Devices) в БД
+ * Интерфейс для связи с коллекцией семян томатов (Tomatoes) в БД
  */
 
 @Repository
-public interface TomatoesRepository extends JpaRepository<Tomatoes, Integer> {
+public interface TomatoesRepository extends MongoRepository<Tomatoes, Integer> {
     @Override
     List<Tomatoes> findAll();
 
-    List<Tomatoes> findByid(ObjectId id);
 
-    List<Tomatoes> findByName(String name);
-
-    @Override
-    void deleteById(Integer integer);
+    @Query("{'tomatoesName' :  {$regex: ?0, $options: 'i' }}")
+    List<Tomatoes> findByName(String tomatoesName);
 
 //    @Query(value = "SELECT d from Tomatoes d where d.category = ?1")
 //    List<Tomatoes> findByCategory(TomatoesCategory category);

@@ -32,39 +32,25 @@ import java.util.stream.Collectors;
 public class TomatoesController {
 
     final Logger logger = LoggerFactory.getLogger(TomatoesController.class);
-    private static final TomatoesCategory[] DEVICE_CATEGORIES = TomatoesCategory.values();
-//
-//    @Autowired
-//    private DevicesService devicesService;
-//    @Autowired
-//    private RoomService roomService;
-//    @Autowired
-//    private EmployeeService employeeService;
-//    @Autowired
-//    private ITStaffService itStaffService;
-//    @Autowired
-//    private RepairService repairService;
-//    @Autowired
-//    private Checker checker;
-//
-//    @GetMapping("/devices")
-//    public String getDevices(Model model) {
-//        List<Tomatoes> tomatoesList = devicesService.findAllDevices();
-//        List<Room> roomList = roomService.findAllRoom();
-//        List<Employee> employeeList = employeeService.getListEmployee();
-//        List<ITStaff> itStaffList = itStaffService.getAllItStaff();
-//
-//        List<String> categoryList = Arrays.stream(DEVICE_CATEGORIES)
-//                .map(TomatoesCategory::getCategory)
-//                .collect(Collectors.toList());
-//
-//        model.addAttribute("devicesList", tomatoesList);
-//        model.addAttribute("roomList", roomList);
-//        model.addAttribute("employeeList", employeeList);
-//        model.addAttribute("itStaffList", itStaffList);
-//        model.addAttribute("categoryList", categoryList);
-//        return "devices";
-//    }
+    private static final TomatoesCategory[] TOMATOES_CATEGORIES = TomatoesCategory.values();
+
+    @Autowired
+    private TomatoesService tomatoesService;
+    @Autowired
+    private Checker checker;
+
+    @GetMapping("/tomatoes")
+    public String getDevices(Model model) {
+        List<Tomatoes> tomatoesList = tomatoesService.findAllTomatoes();
+        List<String> categoryList = Arrays.stream(TOMATOES_CATEGORIES)
+                .map(TomatoesCategory::getCategory)
+                .collect(Collectors.toList());
+
+        model.addAttribute("tomatoesList", tomatoesList);
+
+        model.addAttribute("categoryList", categoryList);
+        return "tomatoes";
+    }
 //
 //    @PostMapping("/adddevices")
 //    public String addDevice(@RequestParam(required = false) String category,
