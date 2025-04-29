@@ -71,8 +71,8 @@ public class SecurityControllerClass {
     @PostMapping("/adduser")
     public String addNewUser(@RequestParam String userName
             , @RequestParam String userPass
-            , @RequestParam String isActive
-            , @RequestParam String roles
+            , @RequestParam(required = false) String isActive
+            , @RequestParam(required = false) String roles
             , Model model
     ) {
 
@@ -98,8 +98,9 @@ public class SecurityControllerClass {
 
             if (rolesWithoutSpaces.toLowerCase(Locale.ROOT).equals("admin")) {
                 rolesSet.add(Role.ADMIN);
+            } else {
+                rolesSet.add(Role.USER);
             }
-            rolesSet.add(Role.USER);
 
             user = new TomatirriUser(userNameWithoutSpaces
                     , userPassWithoutSpaces
