@@ -33,14 +33,17 @@ public class TomatoesController {
 
     final Logger logger = LoggerFactory.getLogger(TomatoesController.class);
     private static final TomatoesCategory[] TOMATOES_CATEGORIES = TomatoesCategory.values();
+    private final TomatoesService tomatoesService;
+    private final Checker checker;
 
     @Autowired
-    private TomatoesService tomatoesService;
-    @Autowired
-    private Checker checker;
+    public TomatoesController(TomatoesService tomatoesService, Checker checker) {
+        this.tomatoesService = tomatoesService;
+        this.checker = checker;
+    }
 
     @GetMapping("/tomatoes")
-    public String getDevices(Model model) {
+    public String getTomatoes(Model model) {
         List<Tomatoes> tomatoesList = tomatoesService.findAllTomatoes();
         List<String> categoryList = Arrays.stream(TOMATOES_CATEGORIES)
                 .map(TomatoesCategory::getCategory)
