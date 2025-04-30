@@ -1,7 +1,6 @@
 package accountingApp.controller;
 
 import accountingApp.entity.*;
-import accountingApp.entity.dto.devicesdto.MaxOwnerCountDTO;
 import accountingApp.service.*;
 import accountingApp.usefulmethods.Checker;
 import org.bson.types.ObjectId;
@@ -15,13 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 /**
  * Класс для переадресации введенных пользователем данных в БД, получение ответа
@@ -50,9 +45,101 @@ public class TomatoesController {
                 .collect(Collectors.toList());
 
         model.addAttribute("tomatoesList", tomatoesList);
-
         model.addAttribute("categoryList", categoryList);
         return "tomatoes";
+    }
+
+    @PostMapping("/addtomato")
+    public String addTomato(@RequestParam(required = false) String category
+            , @RequestParam String tomatoesName
+            , @RequestParam String tomatoesHeight
+            , @RequestParam String tomatoesDiameter
+            , @RequestParam String tomatoesFruit
+            , @RequestParam String tomatoesFlowerpot
+            , @RequestParam String tomatoesAgroTech
+            , @RequestParam String tomatoesDescription
+            , @RequestParam String tomatoesTaste
+            , @RequestParam String tomatoesSpecificity
+            , @RequestParam String tomatoesPrice
+            , Model model
+    ) {
+        if (category == null
+                || checker.checkAttribute(tomatoesName)
+                || checker.checkAttribute(tomatoesHeight)
+                || checker.checkAttribute(tomatoesDiameter)
+                || checker.checkAttribute(tomatoesFruit)
+                || checker.checkAttribute(tomatoesFlowerpot)
+                || checker.checkAttribute(tomatoesAgroTech)
+                || checker.checkAttribute(tomatoesDescription)
+                || checker.checkAttribute(tomatoesTaste)
+                || checker.checkAttribute(tomatoesPrice)
+        ) {
+            logger.warn("*** TomatoesController.addTomato():" +
+                    "  Attribute has a null value! ***");
+            return getTomatoes(model);
+        }
+
+        String tomatoesNameTrim = tomatoesName.trim();
+        String tomatoesHeightTrim = tomatoesHeight.trim();
+        String tomatoesDiameterTrim = tomatoesDiameter.trim();
+        String tomatoesFruitTrim = tomatoesFruit.trim();
+        String tomatoesFlowerpotTrim = tomatoesFlowerpot.trim();
+        String tomatoesAgroTechTrim = tomatoesAgroTech.trim();
+        String tomatoesDescriptionTrim = tomatoesDescription.trim();
+        String tomatoesTasteTrim = tomatoesTaste.trim();
+        String tomatoesPriceTrim = tomatoesPrice.trim();
+        String tomatoesSpecificityTrim = "\uD83C\uDF45 \uD83C\uDF45 \uD83C\uDF45";
+
+        if (!checker.checkAttribute(tomatoesSpecificity)) {
+            tomatoesSpecificityTrim = tomatoesSpecificity.trim();
+        }
+
+        try {
+            TomatoesCategory tomatoesCategory = Arrays.stream(TOMATOES_CATEGORIES)
+                    .filter(cat -> cat.getCategory().equals(category))
+                    .findFirst()
+                    .orElse(TomatoesCategory.Штамбовый);
+
+            Tomatoes tomato = new Tomatoes(tomatoesCategory
+                    , tomatoesNameTrim
+                    , tomatoesHeightTrim
+                    , tomatoesDiameterTrim
+                    , tomatoesFruitTrim
+                    , tomatoesFlowerpotTrim
+                    , tomatoesAgroTechTrim
+                    , tomatoesDescriptionTrim
+                    , tomatoesTasteTrim
+                    , tomatoesSpecificityTrim
+                    , tomatoesPriceTrim
+            );
+
+            tomatoesService.addNewTomato(tomato);
+            ObjectId objectId = tomato.getId();
+
+            long idCount = 1L;
+            List<Tomatoes> tomatoesList = tomatoesService.findAllTomatoes();
+
+            Set<Long> idSet = tomatoesList.stream()
+                    .map(Tomatoes::getIdCount)
+                    .collect(Collectors.toSet());
+
+            idCount = LongStream.rangeClosed(1, idSet.size() + +1_000_000_000_000_000_000L)
+                    .filter(idc -> !idSet.contains(idc))
+                    .findFirst()
+                    .orElse(0L);
+
+            Map<ObjectId, Long> idLongMap = new HashMap<>();
+            idLongMap.put(objectId, idCount);
+            tomato.setIdMap(idLongMap);
+            tomato.setIdCount(idCount);
+            tomatoesService.addNewTomato(tomato);
+
+            return getTomatoes(model);
+        } catch (Exception e) {
+            logger.error("*** TomatoesController.addTomato():" +
+                    "  wrong DB's values! ***" + e.getMessage());
+            return getTomatoes(model);
+        }
     }
 //
 //    @PostMapping("/adddevices")

@@ -24,17 +24,19 @@ public class SecurityControllerClass {
 
     final Logger logger = LoggerFactory.getLogger(SecurityControllerClass.class);
 
-    @Autowired(required = false)
-    private TomatirriUserService service;
-
-    @Autowired
-    private Checker checker;
+    private final TomatirriUserService service;
+    private final Checker checker;
 
     @Bean
     public static Checker checker() {
         return new Checker();
     }
 
+    @Autowired
+    public SecurityControllerClass(TomatirriUserService service, Checker checker) {
+        this.service = service;
+        this.checker = checker;
+    }
 
     @GetMapping("/")
     @PreAuthorize("isAuthenticated()")
@@ -64,7 +66,7 @@ public class SecurityControllerClass {
 
         model.addAttribute("isActiveList", isActiveList);
         model.addAttribute("rolesList", rolesList);
-        model.addAttribute("appUserList", tomatirriUserList);
+        model.addAttribute("tomatirriUserList", tomatirriUserList);
         return "users";
     }
 
@@ -121,8 +123,8 @@ public class SecurityControllerClass {
     public String updateAppUser(@RequestParam String id
             , @RequestParam String userName
             , @RequestParam String userPass
-            , @RequestParam String isActive
-            , @RequestParam String roles
+            , @RequestParam(required = false) String isActive
+            , @RequestParam(required = false) String roles
             , Model model
     ) {
         if (checker.checkAttribute(id)

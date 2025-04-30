@@ -12,7 +12,7 @@
             style=" border-radius: 1rem; text-shadow: 2px 2px 4px black; align-self: center;
                ">
 
-        <div class="col" th:replace="fragments/nav/navdevices :: navdevices"></div>
+        <div class="col" th:replace="fragments/nav/navtomato :: navtomato"></div>
 
     </header>
 
@@ -21,7 +21,7 @@
         background-repeat: no-repeat; align-self: center;
         max-width: 80rem; border-radius: 1rem">
 
-        <div th:replace="fragments/crud/cruddevices :: cruddevices"></div>
+        <div th:replace="fragments/crud/crudtomato :: crudtomato"></div>
 
         <div class="table-result-db" style="justify-content: center; max-height: min-content">
 
@@ -30,147 +30,142 @@
 
                 <tr class="text-light fs-7" style="background-color: #62a0f6">
                     <th class=" text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
-                        ; width: 5rem; text-shadow: 2px 2px 4px #07237a">
+                        style="
+                        border-color: #62a0f6
+                        ; width: 3rem; text-shadow: 2px 2px 4px #07237a">
                         ID
                     </th>
                     <th class=" text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
-                        ; width: 5rem; text-shadow: 2px 2px 4px #07237a">
+                        style="
+                        border-color: #62a0f6
+                        ; width: 4rem; text-shadow: 2px 2px 4px #07237a">
                         Тип
                     </th>
                     <th class=" text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
-                        ; width: 14rem; text-shadow: 2px 2px 4px #07237a">
+                        style="
+                         border-color: #62a0f6
+                        ; width: 7rem; text-shadow: 2px 2px 4px #07237a">
                         Название
                     </th>
                     <th class=" text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
-                        ; width: 15rem; text-shadow: 2px 2px 4px #07237a">
+                        style="
+                        border-color: #62a0f6
+                        ; width: 3rem; text-shadow: 2px 2px 4px #07237a">
+                        h
+                    </th>
+                    <th class=" text-center align-self-center"
+                        style="
+                        border-color: #62a0f6
+                        ; width: 3rem; text-shadow: 2px 2px 4px #07237a">
+                        d
+                    </th>
+                    <th class="text-center align-self-center"
+                        style="
+                        border-color: #62a0f6
+                        ; width: 4rem; text-shadow: 2px 2px 4px #07237a">
+                        Вес
+                    </th>
+                    <th class=" text-center align-self-center"
+                        style="
+                        border-color: #62a0f6
+                        ; width: 3rem; text-shadow: 2px 2px 4px #07237a">
+                        Кашпо
+                    </th>
+                    <th class=" text-center align-self-center"
+                        style="
+                        border-color: #62a0f6
+                        ; width: 12rem; text-shadow: 2px 2px 4px #07237a">
+                        Агротехника
+                    </th>
+                    <th class=" text-center align-self-center"
+                        style="
+                        border-color: #62a0f6
+                        ; width: 18rem; text-shadow: 2px 2px 4px #07237a">
                         Описание
                     </th>
                     <th class=" text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
-                        ; width: 10rem; text-shadow: 2px 2px 4px #07237a">
-                        Инв.номер
-                    </th>
-                    <th class="text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
-                        ; width: 10rem; text-shadow: 2px 2px 4px #07237a">
-                        С/Н
-                    </th>
-                    <th class=" text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
-                        ; width: 5rem; text-shadow: 2px 2px 4px #07237a">
-                        Износ
-                    </th>
-                    <th class=" text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
-                        ; width: 5rem; text-shadow: 2px 2px 4px #07237a">
-                        Каб.
-                    </th>
-                    <th class=" text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
+                        style="
+                        border-color: #62a0f6
                         ; width: 7rem; text-shadow: 2px 2px 4px #07237a">
-                        Выдано
+                        Вкус
                     </th>
                     <th class=" text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
+                        style="
+                         border-color: #62a0f6
+                        ; width: 10rem; text-shadow: 2px 2px 4px #07237a">
+                        Особенность
+                    </th>
+                    <th class=" text-center align-self-center"
+                        style="
+                         border-color: #62a0f6
                         ; width: 7rem; text-shadow: 2px 2px 4px #07237a">
-                        МОЛ
+                        Цена
                     </th>
                 </tr>
             </table>
 
             <div class="scroll-tbody">
-                <table class="col" style="align-self: center">
+                <table class="col" style="align-self: center; font-size: small">
                     <div th:each="element : ${tomatoesList}">
                         <div class="col">
                             <tr style="align-self: center">
                                 <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 5rem">
-                                    <div>[[${element.id}]]</div>
+                                    style="width: 3rem">
+                                    <div>[[${element.idCount}]]</div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 5rem">
+                                    style="width: 4rem; word-break: break-all; overflow-wrap: anywhere;
+                                    white-space: normal">
                                     <form action="/filterdevicesbycategory" method="post">
                                         <input type="hidden" name="category" th:value="${element.category}"/>
                                         <button type="submit" class=""
                                                 style="background: none;color: darkblue; border: none;
-                                                cursor: pointer;text-shadow: none">
+                                                cursor: pointer;text-shadow: none; word-break: break-word;">
                                             [[${element.category}]]
                                         </button>
                                     </form>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 16rem">
-                                    <div>[[${element.name}]]</div>
+                                    style="width: 7rem">
+                                    <div>[[${element.tomatoesName}]]</div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 25rem">
-                                    <div>[[${element.description}]]</div>
+                                    style="width: 3rem">
+                                    <div>[[${element.tomatoesHeight}]]</div>
+                                </td>
+                                <td class="p-2 m-2 text-center border border-1 border-dark"
+                                    style="width: 3rem">
+                                    <div>[[${element.tomatoesDiameter}]]</div>
+                                </td>
+                                <td class="p-2 m-2 text-center border border-1 border-dark"
+                                    style="width: 3rem">
+                                    <div>[[${element.tomatoesFruit}]]</div>
+                                </td>
+                                <td class="p-2 m-2 text-center border border-1 border-dark"
+                                    style="width: 4rem">
+                                    <div>[[${element.tomatoesFlowerpot}]]</div>
+                                </td>
+                                <td class="p-2 m-2 text-center border border-1 border-dark"
+                                    style="width: 12rem">
+                                    <div>[[${element.tomatoesAgroTech}]]</div>
+                                </td>
+                                <td class="p-2 m-2 text-center border border-1 border-dark"
+                                    style="width: 18rem">
+                                    <div>[[${element.tomatoesDescription}]]</div>
+                                </td>
+                                <td class="p-2 m-2 text-center border border-1 border-dark"
+                                    style="width: 4rem">
+                                    <div>[[${element.tomatoesTaste}]]</div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-1 border-dark"
                                     style="width: 10rem">
-                                    <div>[[${element.inventory}]]</div>
-                                </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 10rem">
-                                    <div>[[${element.serial}]]</div>
+                                    <div>[[${element.tomatoesSpecificity}]]</div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-1 border-dark"
                                     style="width: 7rem">
-                                    <form action="/findrepair" method="post">
-                                        <input type="hidden" name="id" th:value="${element.repair.id}"/>
-                                        <button type="submit" class="text-decoration-none"
-                                                style="background: none;color: darkblue; border: none;
-                                                cursor: pointer;text-shadow: none">
-                                             <span th:if="${element.repair.health == 'green'}">
-                                            <div class="green">[[${element.repair}]]</div>
-                                        </span>
-                                            <span th:if="${element.repair.health == 'yellow'}">
-                                             <div class="yellow">[[${element.repair}]]</div>
-                                        </span>
-                                            <span th:if="${element.repair.health == 'red'}">
-                                             <div class="red">[[${element.repair}]]</div>
-                                        </span>
-                                        </button>
-                                    </form>
+                                    <div>[[${element.tomatoesPrice}]]</div>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 5rem">
-                                    <form action="/findroomyid" method="post">
-                                        <input type="hidden" name="id" th:value="${element.room.id}"/>
-                                        <button type="submit" class=""
-                                                style="background: none;color: darkblue; border: none;
-                                                cursor: pointer;text-shadow: none">
-                                            [[${element.room}]]
-                                        </button>
-                                    </form>
-                                </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 7rem">
-                                    <form action="/findbyfio" method="post">
-                                        <input type="hidden" name="fio" th:value="${element.employee.id}"/>
-                                        <button type="submit" class="text-decoration-none"
-                                                style="background: none;color: darkblue; border: none;
-                                                cursor: pointer;text-shadow: none">
-                                            [[${element.employee}]]
-                                        </button>
-                                    </form>
 
-                                </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 7rem">
-                                    <form action="/finditstaffbyid" method="post">
-                                        <input type="hidden" name="id" th:value="${element.itstaff.id}"/>
-                                        <button type="submit" class="text-decoration-none"
-                                                style="background: none;color: darkblue; border: none;
-                                                cursor: pointer;text-shadow: none">
-                                            [[${element.itstaff}]]
-                                        </button>
-                                    </form>
-                                </td>
                             </tr>
                         </div>
                     </div>
