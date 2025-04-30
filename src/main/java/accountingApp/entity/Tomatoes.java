@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -18,40 +20,37 @@ public class Tomatoes {
     @Id
     private ObjectId id;
     @Field
-    @Indexed
+    private TomatoesCategory category;
+    @Field
     private String tomatoesName;
     @Field
-    @Indexed
     private String tomatoesHeight;
     @Field
-    @Indexed
     private String tomatoesDiameter;
     @Field
-    @Indexed
     private String tomatoesFruit;
     @Field
-    @Indexed
     private String tomatoesFlowerpot;
     @Field
-    @Indexed
     private String tomatoesAgroTech;
     @Field
-    @Indexed
     private String tomatoesDescription;
     @Field
-    @Indexed
     private String tomatoesTaste;
     @Field
-    @Indexed
     private String tomatoesSpecificity;
     @Field
-    @Indexed
     private String tomatoesPrice;
+    @Field
+    private Long idCount;
+    @Field
+    private Map<ObjectId, Long> idMap = new HashMap<>();
 
     public Tomatoes() {
     }
 
-    public Tomatoes(String tomatoesName,
+    public Tomatoes(TomatoesCategory category,
+                    String tomatoesName,
                     String tomatoesHeight,
                     String tomatoesDiameter,
                     String tomatoesFruit,
@@ -62,6 +61,7 @@ public class Tomatoes {
                     String tomatoesSpecificity,
                     String tomatoesPrice) {
         this.tomatoesName = tomatoesName;
+        this.category = category;
         this.tomatoesHeight = tomatoesHeight;
         this.tomatoesDiameter = tomatoesDiameter;
         this.tomatoesFruit = tomatoesFruit;
@@ -74,6 +74,7 @@ public class Tomatoes {
     }
 
     public Tomatoes(ObjectId id,
+                    TomatoesCategory category,
                     String tomatoesName,
                     String tomatoesHeight,
                     String tomatoesDiameter,
@@ -85,6 +86,7 @@ public class Tomatoes {
                     String tomatoesSpecificity,
                     String tomatoesPrice) {
         this.id = id;
+        this.category = category;
         this.tomatoesName = tomatoesName;
         this.tomatoesHeight = tomatoesHeight;
         this.tomatoesDiameter = tomatoesDiameter;
@@ -103,6 +105,22 @@ public class Tomatoes {
 
     public void setId(ObjectId id) {
         this.id = id;
+    }
+
+    public Long getIdCount() {
+        return idCount;
+    }
+
+    public void setIdCount(Long idCount) {
+        this.idCount = idCount;
+    }
+
+    public Map<ObjectId, Long> getIdMap() {
+        return idMap;
+    }
+
+    public void setIdMap(Map<ObjectId, Long> idMap) {
+        this.idMap = idMap;
     }
 
     public String getTomatoesName() {
@@ -179,6 +197,14 @@ public class Tomatoes {
 
     public String getTomatoesPrice() {
         return tomatoesPrice;
+    }
+
+    public TomatoesCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(TomatoesCategory category) {
+        this.category = category;
     }
 
     public void setTomatoesPrice(String tomatoesPrice) {

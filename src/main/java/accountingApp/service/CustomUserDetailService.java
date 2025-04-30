@@ -23,25 +23,28 @@ import java.util.Set;
 class CustomUserDetailsService implements UserDetailsService {
 
     final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
+    private final TomatirriUserRepository userRepository;
+    private final TomatirriUserService tomatirriUserService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private TomatirriUserRepository userRepository;
-
-    @Autowired
-    private TomatirriUserService tomatirriUserService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public CustomUserDetailsService(TomatirriUserRepository userRepository
+            , TomatirriUserService tomatirriUserService
+            , PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.tomatirriUserService = tomatirriUserService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         try {
 
-            try{
+            try {
                 List<TomatirriUser> tomatirriUserList = tomatirriUserService.getAllAppUsers();
-                for (TomatirriUser user: tomatirriUserList
-                     ) {
-                    if (user.getUserName().equals("admin")){
+                for (TomatirriUser user : tomatirriUserList
+                ) {
+                    if (user.getUserName().equals("admin")) {
                         throw new Exception();
                     }
                 }
@@ -49,9 +52,9 @@ class CustomUserDetailsService implements UserDetailsService {
                 Set<Role> roleSet = new HashSet<>();
                 roleSet.add(Role.ADMIN);
                 roleSet.add(Role.USER);
-                TomatirriUser admin = new TomatirriUser("admin", "1", true, roleSet );
+                TomatirriUser admin = new TomatirriUser("admin", "1", true, roleSet);
                 tomatirriUserService.createUser(admin, "1");
-            }catch (Exception exception){
+            } catch (Exception exception) {
                 logger.warn("CustomUserDetailsService.loadUserByUsername: INITIALISATION");
             }
 
@@ -67,33 +70,33 @@ class CustomUserDetailsService implements UserDetailsService {
             logger.warn("CustomUserDetailsService.loadUserByUsername " +
                     "Successful authorization with user: " + userName);
 
-            String roles = "";
-            synchronized (roles) {
-                if (tomatirriUser.getRoles().isEmpty()) {
-                    roles = "USER";
-                } else {
-                    roles = tomatirriUser
-                            .getRoles()
-                            .stream()
-                            .iterator()
-                            .next()
-                            .getAuthority();
-                }
+            String roles;
 
-                if (tomatirriUser.getUserName().equals("admin")) {
-                    roles = "ADMIN";
-                }
-                logger.warn("CustomUserDetailsService.loadUserByUsername " +
-                        "User's role is : " + roles);
-
-                // Создаем UserDetails
-                return User
-                        .builder()
-                        .username(tomatirriUser.getUserName())
-                        .password(tomatirriUser.getUserPass())
-                        .roles(roles)
-                        .build();
+            if (tomatirriUser.getRoles().isEmpty()) {
+                roles = "USER";
+            } else {
+                roles = tomatirriUser
+                        .getRoles()
+                        .stream()
+                        .iterator()
+                        .next()
+                        .getAuthority();
             }
+
+            if (tomatirriUser.getUserName().equals("admin")) {
+                roles = "ADMIN";
+            }
+            logger.warn("CustomUserDetailsService.loadUserByUsername " +
+                    "User's role is : " + roles);
+
+            // Создаем UserDetails
+            return User
+                    .builder()
+                    .username(tomatirriUser.getUserName())
+                    .password(tomatirriUser.getUserPass())
+                    .roles(roles)
+                    .build();
+
         } catch (UsernameNotFoundException e) {
             logger.error("User not found: " + userName, e);
             throw e;
