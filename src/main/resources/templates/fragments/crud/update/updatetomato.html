@@ -4,25 +4,28 @@
 <head>
     <div th:replace="fragments/head :: head"></div>
 </head>
-<div th:fragment="addtomato">
+<div th:fragment="updatetomato">
     <label class="popup_try d-flex" style="justify-content: center;
-              font-size: 17px; box-shadow: 2px 2px 4px black">Добавление
+              font-size: 17px; box-shadow: 2px 2px 4px black">Обновление
         <button type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasaddtomato"
-                aria-controls="offcanvasaddtomato"
-                style="background-color: #4ed652; color: white; height: 1px; width: 1px" hidden>
+                data-bs-target="#offcanvasupdatetomato"
+                aria-controls="offcanvasupdatetomato"
+                style="background-color: #198754; color: white; height: 1px; width: 1px" hidden>
         </button>
     </label>
 
     <div class="card col offcanvas offcanvas-end border border-0"
-         tabindex="-1" id="offcanvasaddtomato" aria-labelledby="offcanvasRightAddTomatoLabel"
+         tabindex="-1" id="offcanvasupdatetomato" aria-labelledby="offcanvasRightUpdateTomatoLabel"
          style="width: 40vh">
-        <div class="card-body d-grid gap-2 offcanvas-title bg-light" id="offcanvasRightAddTomatoLabel"
+        <div class="card-body d-grid gap-2 offcanvas-title bg-light" id="offcanvasRightUpdateTomatoLabel"
              style="min-height: 100vh; align-content: start">
 
-            <form action="/addtomato" method="post" autocomplete="off"
+            <form action="/updatetomato" method="post" autocomplete="off"
                   class="card-text offcanvas-body align-self-start">
                 <div align="center">
+                    <label>
+                        <input type="text" name="id" align="middle" placeholder="ID томата">
+                    </label>
                     <label class="d-flex justify-content-center align-items-center">
                         <select class="form-select-custom" name="category">
 
@@ -50,17 +53,17 @@
                     </label>
                     <label for="tomatoesAgroTech"><strong>Агротехника</strong></label>
                     <textarea class="form-control" name="tomatoesAgroTech" id="tomatoesAgroTech" rows="3" required
-                              style="border: 1px solid #4ed652;  box-shadow: 0 0 0 1px #bcd3e9;"></textarea>
+                              style="border: 1px solid #198754;  box-shadow: 0 0 0 1px #bcd3e9;"></textarea>
                     <label for="tomatoesDescription"><strong>Описание</strong></label>
                     <textarea class="form-control" name="tomatoesDescription" id="tomatoesDescription" rows="3"
                               required
-                              style="border: 1px solid #4ed652;  box-shadow: 0 0 0 1px #bcd3e9;"></textarea>
+                              style="border: 1px solid #198754;  box-shadow: 0 0 0 1px #bcd3e9;"></textarea>
                     <label>
                         <input type="text" name="tomatoesTaste" align="middle" placeholder="Вкус томата"/>
                     </label>
                     <label for="tomatoesSpecificity"><strong>Особенности(необязательно)</strong></label>
                     <textarea class="form-control" name="tomatoesSpecificity" id="tomatoesSpecificity" rows="3"
-                              style="border: 1px solid #4ed652;  box-shadow: 0 0 0 1px #bcd3e9;"></textarea>
+                              style="border: 1px solid #198754;  box-shadow: 0 0 0 1px #bcd3e9;"></textarea>
                     <label>
                         <input type="text" name="tomatoesPrice" align="middle" placeholder="Цена"/>
                     </label>
@@ -69,7 +72,7 @@
                     <button class="btn text-light crud-btn bg-success" type="submit"
                             style="justify-self: center; min-width: max-content; max-height: min-content;
                      align-self: center; box-shadow: 2px 2px 4px black"
-                    >Добавить
+                    >Обновить
                     </button>
                 </div>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
@@ -77,7 +80,7 @@
         </div>
 
     </div>
-
 </div>
 
 </html>
+

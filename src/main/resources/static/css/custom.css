@@ -24,7 +24,7 @@ html, body {
     align-items: start;
     min-height: 80px;
     max-height: 110px;
-    background: #62a0f6;
+    background: #198754;
     outline: none;
     text-shadow: #002349 2px 3px 4px;
     padding-left: 10%;
@@ -94,7 +94,7 @@ html, body {
     appearance: none;
     border: 0;
     border-radius: 5px;
-    background-color: #62a0f6;
+    background-color: #198754;
     width: 130px;
     height: 5vh;
     color: #fcf6f6;
@@ -113,7 +113,7 @@ html, body {
     appearance: none;
     border: 0;
     border-radius: 5px;
-    background-color: #62a0f6;
+    background-color: #198754;
     width: 130px;
     height: 54px;
     line-height: 16px;
@@ -133,7 +133,7 @@ html, body {
 
 .popup_try:focus {
     outline: 4px;
-    box-shadow: 0 0 0 4px #62a0f6;
+    box-shadow: 0 0 0 4px #198754;
 }
 
 .popup_try_1_row:hover {
@@ -143,7 +143,7 @@ html, body {
 
 .popup_try_1_row:focus {
     outline: 4px;
-    box-shadow: 0 0 0 4px #62a0f6;
+    box-shadow: 0 0 0 4px #198754;
 }
 
 .popup_form {
@@ -153,7 +153,7 @@ html, body {
     justify-content: center;
     border-radius: 15px; /* Закругляем углы */
     background-color: #ffffff;
-    border: 2px solid #62a0f6;
+    border: 2px solid #198754;
     padding: 28px;
     text-transform: uppercase;
     color: #fcf6f6; /* Цвет текста */
@@ -229,7 +229,7 @@ html, body {
     top: 2px;
     right: 10px;
     cursor: pointer;
-    color: #62a0f6;
+    color: #198754;
 }
 
 input::placeholder {
@@ -242,8 +242,8 @@ input::placeholder {
     appearance: none;
     height: 30px;
     width: 9.4rem;
-    border: 0 #62a0f6;
-    box-shadow: 0 0 3px 1px #62a0f6;
+    border: 0 #198754;
+    box-shadow: 0 0 3px 1px #198754;
     border-radius: 5px;
     background: #fcf6f6;
     color: gray;
@@ -310,7 +310,7 @@ input[type="file"] {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    border: 2px solid #62a0f6;
+    border: 2px solid #198754;
     border-radius: 5px;
     box-shadow: 0 0 0 2px #15467a;
 }
@@ -359,7 +359,7 @@ tr:nth-of-type(odd) {
 }
 
 .footer {
-    background: #62a0f6;
+    background: #198754;
     font-size: 16px;
     color: #fcf6f6;
     text-align: center;
@@ -371,7 +371,7 @@ button {
     appearance: none;
     border: 0;
     border-radius: 5px;
-    background: #62a0f6;
+    background: #198754;
     color: #fcf6f6;
     padding: 2px 5px;
     font-size: 12px;
@@ -385,7 +385,11 @@ button {
 
 .button:focus {
     outline: 4px;
-    box-shadow: 0 0 0 4px #62a0f6;
+    box-shadow: 0 0 0 4px #198754;
+}
+
+.crud-btn{
+    margin-top: 4px;
 }
 
 input[type="text"] {
@@ -397,10 +401,10 @@ input[type="text"] {
     align-items: center;
     margin: 4px 0;
     padding: 2px;
-    box-shadow: 0 0 3px 1px #62a0f6;
+    box-shadow: 0 0 3px 1px #198754;
     border-radius: 5px;
-    border: 0 #62a0f6;
-    width: 17.6rem;
+    border: 0 #198754;
+    min-width: 19.5rem;
     height: 2rem;
 }
 
@@ -413,9 +417,9 @@ input[type="password"] {
     align-items: center;
     margin: 4px 0;
     padding: 2px;
-    box-shadow: 0 0 3px 1px #62a0f6;
+    box-shadow: 0 0 3px 1px #198754;
     border-radius: 5px;
-    border: 0 #62a0f6;
+    border: 0 #198754;
     width: 17.6rem;
     height: 2rem;
 }
@@ -424,17 +428,21 @@ input[type="password"] {
     appearance: none;
     outline: none;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 12px;
     line-height: inherit;
     align-items: center;
-    margin: 4px 0;
+    margin: 4px;
     padding: 2px;
-    box-shadow: 0 0 3px 1px #62a0f6;
+    box-shadow: 0 0 3px 1px #198754;
     border-radius: 5px;
-    border: 0 #62a0f6;
-    width: 17.6rem;
+    border: 0 #198754;
+    min-width: 19.5rem;
     height: 2rem;
     text-align: center;
+}
+
+.form-control{
+    margin-bottom: 4px;
 }
 
 *, *:before, *:after {
