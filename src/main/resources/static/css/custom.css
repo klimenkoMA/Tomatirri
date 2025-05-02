@@ -47,7 +47,7 @@ html, body {
 }
 
 .navbar .nav-link:hover {
-    color: grey;
+    color: #ffc107;
     transition: font-size 2s ease-in-out;
     transform: scale(1.2);
 }
@@ -127,7 +127,7 @@ html, body {
 }
 
 .popup_try:hover {
-    color: #564827;
+    color: #ffc107;
     cursor: pointer;
 }
 
@@ -137,7 +137,7 @@ html, body {
 }
 
 .popup_try_1_row:hover {
-    color: #564827;
+    color: #ffc107;
     cursor: pointer;
 }
 
@@ -379,7 +379,7 @@ button {
 }
 
 .button:hover {
-    color: #564827;
+    color: #ffc107;
     cursor: pointer;
 }
 
@@ -420,7 +420,7 @@ input[type="password"] {
     box-shadow: 0 0 3px 1px #198754;
     border-radius: 5px;
     border: 0 #198754;
-    width: 17.6rem;
+    min-width: 19.5rem;
     height: 2rem;
 }
 
