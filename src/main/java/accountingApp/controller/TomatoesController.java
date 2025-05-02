@@ -7,12 +7,10 @@ import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -141,93 +139,81 @@ public class TomatoesController {
             return getTomatoes(model);
         }
     }
-//
-//    @PostMapping("/adddevices")
-//    public String addDevice(@RequestParam(required = false) String category,
-//                            @RequestParam String name,
-//                            @RequestParam String description,
-//                            @RequestParam String inventory,
-//                            @RequestParam String serial,
-//                            @RequestParam(required = false) Room room,
-//                            @RequestParam(required = false) Employee employee,
-//                            @RequestParam(required = false) ITStaff itstaff,
-//                            Model model) {
-//
-//        if (checker.checkAttribute(category)
-//                || checker.checkAttribute(name)
-//                || checker.checkAttribute(description)
-//                || checker.checkAttribute(inventory)
-//                || checker.checkAttribute(serial)
-//                || room == null
-//                || employee == null
-//                || itstaff == null
-//        ) {
-//            logger.warn("*** DevicesController.addDevice():" +
-//                    "  Attribute has a null value! ***");
-//            return getDevices(model);
-//        }
-//
-//        String categoryWithoutSpaces = category.trim();
-//        String nameWithoutSpaces = name.trim();
-//        String descriptionWithoutSpaces = description.trim();
-//        String inventoryWithoutSpaces = inventory.trim();
-//        String serialWithoutSpaces = serial.trim();
-//
+
+    @PostMapping("/updatetomato")
+    public String updateTomato(@RequestParam String id
+            , @RequestParam(required = false) String category
+            , @RequestParam String tomatoesName
+            , @RequestParam String tomatoesHeight
+            , @RequestParam String tomatoesDiameter
+            , @RequestParam String tomatoesFruit
+            , @RequestParam String tomatoesFlowerpot
+            , @RequestParam String tomatoesAgroTech
+            , @RequestParam String tomatoesDescription
+            , @RequestParam String tomatoesTaste
+            , @RequestParam String tomatoesSpecificity
+            , @RequestParam String tomatoesPrice
+            , Model model) {
+
+        if (checker.checkAttribute(id)
+                || category == null
+                || checker.checkAttribute(tomatoesName)
+                || checker.checkAttribute(tomatoesHeight)
+                || checker.checkAttribute(tomatoesDiameter)
+                || checker.checkAttribute(tomatoesFruit)
+                || checker.checkAttribute(tomatoesFlowerpot)
+                || checker.checkAttribute(tomatoesAgroTech)
+                || checker.checkAttribute(tomatoesDescription)
+                || checker.checkAttribute(tomatoesTaste)
+                || checker.checkAttribute(tomatoesPrice)
+        ) {
+            logger.warn("*** TomatoesController.updateTomato():" +
+                    "  Attribute has a null value! ***");
+            return getTomatoes(model);
+        }
+
+        String tomatoesIdTrim = id.trim();
+        String tomatoesNameTrim = tomatoesName.trim();
+        String tomatoesHeightTrim = tomatoesHeight.trim();
+        String tomatoesDiameterTrim = tomatoesDiameter.trim();
+        String tomatoesFruitTrim = tomatoesFruit.trim();
+        String tomatoesFlowerpotTrim = tomatoesFlowerpot.trim();
+        String tomatoesAgroTechTrim = tomatoesAgroTech.trim();
+        String tomatoesDescriptionTrim = tomatoesDescription.trim();
+        String tomatoesTasteTrim = tomatoesTaste.trim();
+        String tomatoesPriceTrim = tomatoesPrice.trim();
+        String tomatoesSpecificityTrim = "\uD83C\uDF45 \uD83C\uDF45 \uD83C\uDF45";
+
+        if (!checker.checkAttribute(tomatoesSpecificity)) {
+            tomatoesSpecificityTrim = tomatoesSpecificity.trim();
+        }
+
+
+        return getTomatoes(model);
+    }
+
+
+
+//        @GetMapping("/download/{id}")
+//    public ResponseEntity<byte[]> downloadDocument(@PathVariable String id) {
 //        try {
-//            long inventoryCheck = Long.parseLong(inventoryWithoutSpaces);
-//            if (!checker.checkAttribute(categoryWithoutSpaces)
-//                    && !checker.checkAttribute(nameWithoutSpaces)
-//                    && !checker.checkAttribute(descriptionWithoutSpaces)
-//                    && !checker.checkAttribute(inventoryWithoutSpaces)
-//                    && !checker.checkAttribute(serialWithoutSpaces)
-//            ) {
+//            DocumentClass document = documentServiceClass.findDocumentById(id);
+//            if (document != null) {
 //
-//                TomatoesCategory tomatoesCategory = Arrays.stream(DEVICE_CATEGORIES)
-//                        .filter(cat -> cat.getCategory().equals(categoryWithoutSpaces))
-//                        .findFirst()
-//                        .orElse(TomatoesCategory.Штамбовый);
+//                HttpHeaders headers = new HttpHeaders();
+//                String docType = document.getContentType();
+//                assert docType != null;
+//                headers.setContentType(MediaType.parseMediaType(docType));
+//                headers.setContentDisposition(ContentDisposition.attachment().filename(document.getName()).build());
+//                headers.setContentLength(document.getContent().length);
 //
-//                Tomatoes tomatoes = new Tomatoes(tomatoesCategory
-//                        , nameWithoutSpaces
-//                        , descriptionWithoutSpaces
-//                        , inventoryCheck
-//                        , serialWithoutSpaces
-//                        , room
-//                        , employee
-//                        , itstaff);
-//                devicesService.addNewDevice(tomatoes);
-//
-//                List<Tomatoes> tomatoesList = devicesService.findAllDevices();
-//                Tomatoes dev = new Tomatoes();
-//
-//                for (Tomatoes dv : tomatoesList
-//                ) {
-//                    if (dv.getName().equals(nameWithoutSpaces)
-//                            && dv.getCategory().getCategory().equals(tomatoesCategory.getCategory())
-//                            && dv.getSerial().equals(serialWithoutSpaces)
-//                            && dv.getRoom().equals(room)
-//                            && dv.getItstaff().equals(itstaff)
-//                            && dv.getEmployee().equals(employee)
-//                            && dv.getInventory() == inventoryCheck
-//                            && dv.getDescription().equals(descriptionWithoutSpaces)) {
-//                        dev = dv;
-//                        break;
-//                    }
-//                }
-//
-//                LocalDate currentDate = LocalDate.now();
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-//                Repair repair = new Repair(currentDate.format(formatter), dev);
-//                repairService.createRepair(repair);
-//                dev.setRepair(repair);
-//                devicesService.addNewDevice(dev);
-//                return getDevices(model);
+//                return new ResponseEntity<>(document.getContent(), headers, HttpStatus.OK);
 //            }
-//            throw new Exception("Attribute is empty!");
+//            throw new Exception("document is NULL");
 //        } catch (Exception e) {
-//            logger.error("*** DevicesController.addDevice(): wrong DB's values! *** "
-//                    + e.getMessage());
-//            return getDevices(model);
+//            logger.error("*** DocumentControllerClass.downloadDocument():" +
+//                    "  WRONG DB VALUES*** " + e.getMessage());
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 //        }
 //    }
 //

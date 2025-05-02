@@ -16,7 +16,7 @@ html, body {
     align-items: start;
     min-height: 80px;
     max-height: 110px;
-    background: #62a0f6;
+    background: #198754;
     outline: none;
     text-shadow: #002349 2px 3px 4px;
     padding-left: 10%;
@@ -46,7 +46,7 @@ html, body {
     display: flex;
     appearance: none;
     border: 0;
-    background: #62a0f6;
+    background: #198754;
     color: #fcf6f6;
     padding: 5px 5px;
     font-size: 14px;
@@ -60,14 +60,14 @@ html, body {
 
 .buttonsec:focus {
     outline: 4px;
-    box-shadow: 0 0 0 4px #62a0f6;
+    box-shadow: 0 0 0 4px #198754;
 }
 
 .buttonin {
     display: flex;
     appearance: none;
     border: 0;
-    background: #62a0f6;
+    background: #198754;
     color: #fcf6f6;
     padding: 2px 5px;
     font-size: 16px;
@@ -81,7 +81,7 @@ html, body {
 
 .buttonin:focus {
     outline: 4px;
-    box-shadow: 0 0 0 4px #62a0f6;
+    box-shadow: 0 0 0 4px #198754;
 }
 
 input[type="password"] {
@@ -93,7 +93,7 @@ input[type="password"] {
     align-items: center;
     margin: 4px 0;
     padding: 2px;
-    box-shadow: 0 0 3px 1px #62a0f6;
+    box-shadow: 0 0 3px 1px #198754;
     border-radius: 5px;
-    border: 0 #62a0f6;
+    border: 0 #198754;
 }
