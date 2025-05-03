@@ -143,56 +143,102 @@ public class TomatoesController {
     @PostMapping("/updatetomato")
     public String updateTomato(@RequestParam String id
             , @RequestParam(required = false) String category
-            , @RequestParam String tomatoesName
-            , @RequestParam String tomatoesHeight
-            , @RequestParam String tomatoesDiameter
-            , @RequestParam String tomatoesFruit
-            , @RequestParam String tomatoesFlowerpot
-            , @RequestParam String tomatoesAgroTech
-            , @RequestParam String tomatoesDescription
-            , @RequestParam String tomatoesTaste
-            , @RequestParam String tomatoesSpecificity
-            , @RequestParam String tomatoesPrice
+            , @RequestParam(required = false) String tomatoesName
+            , @RequestParam(required = false) String tomatoesHeight
+            , @RequestParam(required = false) String tomatoesDiameter
+            , @RequestParam(required = false) String tomatoesFruit
+            , @RequestParam(required = false) String tomatoesFlowerpot
+            , @RequestParam(required = false) String tomatoesAgroTech
+            , @RequestParam(required = false) String tomatoesDescription
+            , @RequestParam(required = false) String tomatoesTaste
+            , @RequestParam(required = false) String tomatoesSpecificity
+            , @RequestParam(required = false) String tomatoesPrice
             , Model model) {
 
-        if (checker.checkAttribute(id)
-                || category == null
-                || checker.checkAttribute(tomatoesName)
-                || checker.checkAttribute(tomatoesHeight)
-                || checker.checkAttribute(tomatoesDiameter)
-                || checker.checkAttribute(tomatoesFruit)
-                || checker.checkAttribute(tomatoesFlowerpot)
-                || checker.checkAttribute(tomatoesAgroTech)
-                || checker.checkAttribute(tomatoesDescription)
-                || checker.checkAttribute(tomatoesTaste)
-                || checker.checkAttribute(tomatoesPrice)
-        ) {
-            logger.warn("*** TomatoesController.updateTomato():" +
-                    "  Attribute has a null value! ***");
-            return getTomatoes(model);
-        }
-
-        String tomatoesIdTrim = id.trim();
-        String tomatoesNameTrim = tomatoesName.trim();
-        String tomatoesHeightTrim = tomatoesHeight.trim();
-        String tomatoesDiameterTrim = tomatoesDiameter.trim();
-        String tomatoesFruitTrim = tomatoesFruit.trim();
-        String tomatoesFlowerpotTrim = tomatoesFlowerpot.trim();
-        String tomatoesAgroTechTrim = tomatoesAgroTech.trim();
-        String tomatoesDescriptionTrim = tomatoesDescription.trim();
-        String tomatoesTasteTrim = tomatoesTaste.trim();
-        String tomatoesPriceTrim = tomatoesPrice.trim();
         String tomatoesSpecificityTrim = "\uD83C\uDF45 \uD83C\uDF45 \uD83C\uDF45";
+        String tomatoesIdTrim = id.trim();
 
         if (!checker.checkAttribute(tomatoesSpecificity)) {
             tomatoesSpecificityTrim = tomatoesSpecificity.trim();
         }
 
+        try {
 
-        return getTomatoes(model);
+            String realId = getIdFromMap(Long.parseLong(tomatoesIdTrim));
+
+            Tomatoes tomato = tomatoesService.getTomatoById(realId);
+            TomatoesCategory currentCategory = tomato.getCategory();
+
+            TomatoesCategory tomatoesCategory = Arrays.stream(TOMATOES_CATEGORIES)
+                    .filter(cat -> cat.getCategory().equals(category))
+                    .findFirst()
+                    .orElse(currentCategory);
+
+            if (!checker.checkAttribute(category)) {
+                tomato.setCategory(tomatoesCategory);
+            }
+            if (!checker.checkAttribute(tomatoesName)) {
+                tomato.setTomatoesName(tomatoesName.trim());
+            }
+            if (!checker.checkAttribute(tomatoesHeight)) {
+                tomato.setTomatoesHeight(tomatoesHeight.trim());
+            }
+            if (!checker.checkAttribute(tomatoesDiameter)) {
+                tomato.setTomatoesDiameter(tomatoesDiameter.trim());
+            }
+            if (!checker.checkAttribute(tomatoesFruit)) {
+                tomato.setTomatoesFruit(tomatoesFruit.trim());
+            }
+            if (!checker.checkAttribute(tomatoesFlowerpot)) {
+                tomato.setTomatoesFlowerpot(tomatoesFlowerpot.trim());
+            }
+            if (!checker.checkAttribute(tomatoesAgroTech)) {
+                tomato.setTomatoesAgroTech(tomatoesAgroTech.trim());
+            }
+            if (!checker.checkAttribute(tomatoesDescription)) {
+                tomato.setTomatoesDescription(tomatoesDescription.trim());
+            }
+            if (!checker.checkAttribute(tomatoesTaste)) {
+                tomato.setTomatoesTaste(tomatoesTaste.trim());
+            }
+            if (!checker.checkAttribute(tomatoesPrice)) {
+                tomato.setTomatoesPrice(tomatoesPrice.trim());
+            }
+            tomato.setTomatoesSpecificity(tomatoesSpecificityTrim);
+
+            tomatoesService.addNewTomato(tomato);
+
+            return getTomatoes(model);
+        } catch (Exception e) {
+            logger.error("*** TomatoesController.updateTomato():" +
+                    "  wrong DB's values! ***" + e.getMessage());
+            return getTomatoes(model);
+        }
     }
 
+    private String getIdFromMap(long id) {
 
+        List<Tomatoes> classList = tomatoesService.findAllTomatoes();
+        if (classList.isEmpty()) {
+            logger.error("*** TomatoesController.getIdFromMap():" +
+                    "  WRONG DB VALUES*** ");
+            return null;
+        }
+        String objectId = "";
+        for (Tomatoes tom : classList
+        ) {
+            Map<ObjectId, Long> idLongMap = tom.getIdMap();
+
+            for (Map.Entry<ObjectId, Long> entry : idLongMap.entrySet()
+            ) {
+                if (entry.getValue() == id) {
+                    objectId = entry.getKey().toString();
+                    break;
+                }
+            }
+        }
+        return objectId;
+    }
 
 //        @GetMapping("/download/{id}")
 //    public ResponseEntity<byte[]> downloadDocument(@PathVariable String id) {

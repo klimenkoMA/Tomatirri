@@ -16,7 +16,6 @@ public interface TomatoesRepository extends MongoRepository<Tomatoes, Integer> {
     @Override
     List<Tomatoes> findAll();
 
-
     @Query("{'tomatoesName' :  {$regex: ?0, $options: 'i' }}")
     List<Tomatoes> findByName(String tomatoesName);
 
