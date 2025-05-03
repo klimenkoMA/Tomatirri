@@ -28,6 +28,13 @@ public class TomatoesService {
         tomatoesRepository.delete(tomato);
     }
 
+    public Tomatoes getTomatoById(String id) {
+
+        return tomatoesRepository.findAll().stream()
+                .filter(tomId -> (tomId.getId() + "").equals(id))
+                .findFirst()
+                .orElse(null);
+    }
 //
 //    public List<Tomatoes> getDevicesByName(String name) {
 //
@@ -43,9 +50,7 @@ public class TomatoesService {
 //        }
 //    }
 //
-//    public List<Tomatoes> getDevicesById(ObjectId id) {
-//        return tomatoesRepository.findByid(id);
-//    }
+
 //
 //    public List<Tomatoes> getDevicesByCategory(TomatoesCategory category) {
 //        return tomatoesRepository.findByCategory(category);
