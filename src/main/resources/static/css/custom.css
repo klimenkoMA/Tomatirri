@@ -165,73 +165,6 @@ html, body {
     transition: 0.01s all linear; /* Плавный переход */
 }
 
-#callback:checked ~ .popup_form {
-    top: -70px;
-}
-
-#callback {
-    display: none;
-}
-
-#callback2:checked ~ .popup_form {
-    top: -70px;
-}
-
-#callback2 {
-    display: none;
-}
-
-#callback3:checked ~ .popup_form {
-    top: -110px;
-}
-
-#callback3 {
-    display: none;
-}
-
-#callback4:checked ~ .popup_form {
-    top: -70px;
-}
-
-#callback4 {
-    display: none;
-}
-
-#callback5:checked ~ .popup_form {
-    top: -70px;
-}
-
-#callback5 {
-    display: none;
-}
-
-#callbackLongUpdate:checked ~ .popup_form {
-    top: -110px;
-}
-
-#callbackLongUpdate {
-    display: none;
-}
-
-#callbackLongAdd:checked ~ .popup_form {
-    top: -110px;
-}
-
-#callbackLongAdd {
-    display: none;
-}
-
-.close {
-    display: block;
-    position: absolute;
-    transform: rotate(45deg); /*Поворот плюса на 45 градусов*/
-    font-size: 30px;
-    top: 2px;
-    right: 10px;
-    cursor: pointer;
-    color: #198754;
-}
-
 input::placeholder {
     font-size: 14px; /* Размер шрифта placeholder */
     color: gray; /* Цвет текста в placeholder */
@@ -388,7 +321,7 @@ button {
     box-shadow: 0 0 0 4px #198754;
 }
 
-.crud-btn{
+.crud-btn {
     margin-top: 4px;
 }
 
@@ -441,7 +374,7 @@ input[type="password"] {
     text-align: center;
 }
 
-.form-control{
+.form-control {
     margin-bottom: 4px;
 }
 

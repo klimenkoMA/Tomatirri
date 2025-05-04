@@ -11,8 +11,10 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
@@ -59,6 +61,7 @@ public class TomatoesController {
             , @RequestParam String tomatoesTaste
             , @RequestParam String tomatoesSpecificity
             , @RequestParam String tomatoesPrice
+            , @RequestParam (value = "content", required = false) MultipartFile content
             , Model model
     ) {
         if (category == null
@@ -76,6 +79,8 @@ public class TomatoesController {
                     "  Attribute has a null value! ***");
             return getTomatoes(model);
         }
+
+
 
         String tomatoesNameTrim = tomatoesName.trim();
         String tomatoesHeightTrim = tomatoesHeight.trim();
@@ -113,8 +118,17 @@ public class TomatoesController {
 
             tomatoesService.addNewTomato(tomato);
             ObjectId objectId = tomato.getId();
+            byte[] tomatoContent;
+            String contentType;
 
-            long idCount = 1L;
+            if (!content.isEmpty()){
+                tomatoContent = content.getBytes();
+                contentType = content.getContentType();
+                tomato.setContent(tomatoContent);
+                tomato.setContentType(contentType);
+            }
+
+            long idCount;
             List<Tomatoes> tomatoesList = tomatoesService.findAllTomatoes();
 
             Set<Long> idSet = tomatoesList.stream()
@@ -153,58 +167,34 @@ public class TomatoesController {
             , @RequestParam(required = false) String tomatoesTaste
             , @RequestParam(required = false) String tomatoesSpecificity
             , @RequestParam(required = false) String tomatoesPrice
+            , @RequestParam (value = "content", required = false) MultipartFile content
             , Model model) {
-
-        String tomatoesSpecificityTrim = "\uD83C\uDF45 \uD83C\uDF45 \uD83C\uDF45";
-        String tomatoesIdTrim = id.trim();
-
-        if (!checker.checkAttribute(tomatoesSpecificity)) {
-            tomatoesSpecificityTrim = tomatoesSpecificity.trim();
-        }
-
         try {
-
+            String tomatoesIdTrim = id.trim();
             String realId = getIdFromMap(Long.parseLong(tomatoesIdTrim));
-
             Tomatoes tomato = tomatoesService.getTomatoById(realId);
-            TomatoesCategory currentCategory = tomato.getCategory();
+            byte[] tomatoContent;
+            String contentType;
 
-            TomatoesCategory tomatoesCategory = Arrays.stream(TOMATOES_CATEGORIES)
-                    .filter(cat -> cat.getCategory().equals(category))
-                    .findFirst()
-                    .orElse(currentCategory);
+            if (!content.isEmpty()){
+                tomatoContent = content.getBytes();
+                contentType = content.getContentType();
+                tomato.setContent(tomatoContent);
+                tomato.setContentType(contentType);
+            }
 
-            if (!checker.checkAttribute(category)) {
-                tomato.setCategory(tomatoesCategory);
-            }
-            if (!checker.checkAttribute(tomatoesName)) {
-                tomato.setTomatoesName(tomatoesName.trim());
-            }
-            if (!checker.checkAttribute(tomatoesHeight)) {
-                tomato.setTomatoesHeight(tomatoesHeight.trim());
-            }
-            if (!checker.checkAttribute(tomatoesDiameter)) {
-                tomato.setTomatoesDiameter(tomatoesDiameter.trim());
-            }
-            if (!checker.checkAttribute(tomatoesFruit)) {
-                tomato.setTomatoesFruit(tomatoesFruit.trim());
-            }
-            if (!checker.checkAttribute(tomatoesFlowerpot)) {
-                tomato.setTomatoesFlowerpot(tomatoesFlowerpot.trim());
-            }
-            if (!checker.checkAttribute(tomatoesAgroTech)) {
-                tomato.setTomatoesAgroTech(tomatoesAgroTech.trim());
-            }
-            if (!checker.checkAttribute(tomatoesDescription)) {
-                tomato.setTomatoesDescription(tomatoesDescription.trim());
-            }
-            if (!checker.checkAttribute(tomatoesTaste)) {
-                tomato.setTomatoesTaste(tomatoesTaste.trim());
-            }
-            if (!checker.checkAttribute(tomatoesPrice)) {
-                tomato.setTomatoesPrice(tomatoesPrice.trim());
-            }
-            tomato.setTomatoesSpecificity(tomatoesSpecificityTrim);
+            updateTomatoFields(tomato
+                    , category
+                    , tomatoesName
+                    , tomatoesHeight
+                    , tomatoesDiameter
+                    , tomatoesFruit
+                    , tomatoesFlowerpot
+                    , tomatoesAgroTech
+                    , tomatoesDescription
+                    , tomatoesTaste
+                    , tomatoesSpecificity
+                    , tomatoesPrice);
 
             tomatoesService.addNewTomato(tomato);
 
@@ -240,28 +230,74 @@ public class TomatoesController {
         return objectId;
     }
 
-//        @GetMapping("/download/{id}")
-//    public ResponseEntity<byte[]> downloadDocument(@PathVariable String id) {
-//        try {
-//            DocumentClass document = documentServiceClass.findDocumentById(id);
-//            if (document != null) {
-//
-//                HttpHeaders headers = new HttpHeaders();
-//                String docType = document.getContentType();
-//                assert docType != null;
-//                headers.setContentType(MediaType.parseMediaType(docType));
-//                headers.setContentDisposition(ContentDisposition.attachment().filename(document.getName()).build());
-//                headers.setContentLength(document.getContent().length);
-//
-//                return new ResponseEntity<>(document.getContent(), headers, HttpStatus.OK);
-//            }
-//            throw new Exception("document is NULL");
-//        } catch (Exception e) {
-//            logger.error("*** DocumentControllerClass.downloadDocument():" +
-//                    "  WRONG DB VALUES*** " + e.getMessage());
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//        }
-//    }
+    private void updateTomatoFields(Tomatoes tomato
+            , String category
+            , String tomatoesName
+            , String tomatoesHeight
+            , String tomatoesDiameter
+            , String tomatoesFruit
+            , String tomatoesFlowerpot
+            , String tomatoesAgroTech
+            , String tomatoesDescription
+            , String tomatoesTaste
+            , String tomatoesSpecificity
+            , String tomatoesPrice
+    ) {
+        TomatoesCategory tomatoesCategory = Arrays.stream(TOMATOES_CATEGORIES)
+                .filter(cat -> cat.getCategory().equals(category))
+                .findFirst()
+                .orElse(tomato.getCategory());
+        tomato.setCategory(tomatoesCategory);
+
+        String specificityValue;
+        if (!checker.checkAttribute(tomatoesSpecificity)) {
+            specificityValue = tomatoesSpecificity.trim();
+            tomato.setTomatoesSpecificity(specificityValue);
+        } else {
+            updateFieldIfProvided(tomato::setTomatoesSpecificity, tomato.getTomatoesSpecificity());
+        }
+
+        updateFieldIfProvided(tomato::setTomatoesName, tomatoesName);
+        updateFieldIfProvided(tomato::setTomatoesHeight, tomatoesHeight);
+        updateFieldIfProvided(tomato::setTomatoesDiameter, tomatoesDiameter);
+        updateFieldIfProvided(tomato::setTomatoesFruit, tomatoesFruit);
+        updateFieldIfProvided(tomato::setTomatoesFlowerpot, tomatoesFlowerpot);
+        updateFieldIfProvided(tomato::setTomatoesAgroTech, tomatoesAgroTech);
+        updateFieldIfProvided(tomato::setTomatoesDescription, tomatoesDescription);
+        updateFieldIfProvided(tomato::setTomatoesTaste, tomatoesTaste);
+        updateFieldIfProvided(tomato::setTomatoesPrice, tomatoesPrice);
+    }
+
+    private void updateFieldIfProvided(Consumer<String> setter, String value) {
+        if (!checker.checkAttribute(value)) {
+            setter.accept(value.trim());
+        }
+    }
+
+        @GetMapping("/download/{id}")
+    public ResponseEntity<byte[]> downloadTomatoesPhoto(@PathVariable String id) {
+        try {
+            Tomatoes tomato = tomatoesService.getTomatoById(id);
+            if (tomato != null) {
+
+                HttpHeaders headers = new HttpHeaders();
+                String docType = tomato.getContentType();
+                assert docType != null;
+                headers.setContentType(MediaType.parseMediaType(docType));
+                headers.setContentDisposition(ContentDisposition.attachment()
+                        .filename(tomato.getName())
+                        .build());
+                headers.setContentLength(tomato.getContent().length);
+
+                return new ResponseEntity<>(tomato.getContent(), headers, HttpStatus.OK);
+            }
+            throw new Exception("tomato is NULL");
+        } catch (Exception e) {
+            logger.error("*** TomatoesControllerClass.downloadTomatoesPhoto():" +
+                    "  WRONG DB VALUES*** " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 //
 //    @PostMapping("/deletedevice")
 //    public String deleteDevice(@RequestParam String id,
@@ -298,85 +334,6 @@ public class TomatoesController {
 //            return getDevices(model);
 //        } catch (Exception e) {
 //            logger.error("*** DevicesController.deleteDevice(): wrong DB's values! *** "
-//                    + e.getMessage());
-//            return getDevices(model);
-//        }
-//    }
-//
-//    @PostMapping("/updatedevice")
-//    public String updateDevice(@RequestParam String id,
-//                               @RequestParam(required = false) String category,
-//                               @RequestParam String name,
-//                               @RequestParam String description,
-//                               @RequestParam String inventory,
-//                               @RequestParam String serial,
-//                               @RequestParam(required = false) Room room,
-//                               @RequestParam(required = false) Employee employee,
-//                               @RequestParam(required = false) ITStaff itstaff,
-//                               Model model) {
-//
-//        if (checker.checkAttribute(category)
-//                || checker.checkAttribute(id)
-//                || checker.checkAttribute(name)
-//                || checker.checkAttribute(description)
-//                || checker.checkAttribute(inventory)
-//                || checker.checkAttribute(serial)
-//                || room == null
-//                || employee == null
-//                || itstaff == null
-//        ) {
-//            logger.warn("*** DevicesController.updateDevice():" +
-//                    "  Attribute has a null value! ***");
-//            return getDevices(model);
-//        }
-//
-//        try {
-//            String categoryWithoutSpaces = category.trim();
-//            String nameWithoutSpaces = name.trim();
-//            String descriptionWithoutSpaces = description.trim();
-//            String inventoryWithoutSpaces = inventory.trim();
-//            ObjectId idCheck = Integer.parseInt(id);
-//            long inventoryCheck = Long.parseLong(inventoryWithoutSpaces);
-//            String serialWithoutSpaces = serial.trim();
-//
-//            if (idCheck <= 0
-//                    || checker.checkAttribute(idCheck + "")
-//                    || inventoryCheck <= 0
-//                    || checker.checkAttribute(inventoryCheck + "")
-//                    || checker.checkAttribute(serialWithoutSpaces)
-//            ) {
-//                logger.warn("*** DevicesController.updateDevice(): dborn <<<< 0 ***");
-//                return getDevices(model);
-//            }
-//
-//            if (!checker.checkAttribute(categoryWithoutSpaces)
-//                    && !checker.checkAttribute(nameWithoutSpaces)
-//                    && !checker.checkAttribute(descriptionWithoutSpaces)
-//            ) {
-//
-//                TomatoesCategory tomatoesCategory = Arrays.stream(DEVICE_CATEGORIES)
-//                        .filter(cat -> cat.getCategory().equals(categoryWithoutSpaces))
-//                        .findFirst()
-//                        .orElse(TomatoesCategory.Штамбовый);
-//
-//                Repair repair = devicesService.getDevicesById(idCheck).get(0).getRepair();
-//
-//                Tomatoes tomatoes = new Tomatoes(idCheck
-//                        , tomatoesCategory
-//                        , nameWithoutSpaces
-//                        , descriptionWithoutSpaces
-//                        , inventoryCheck
-//                        , serialWithoutSpaces
-//                        , room
-//                        , employee
-//                        , itstaff);
-//                tomatoes.setRepair(repair);
-//                devicesService.updateDevice(tomatoes);
-//                return getDevices(model);
-//            }
-//            throw new Exception("Attribute is empty!");
-//        } catch (Exception e) {
-//            logger.error("*** DevicesController.updateDevice(): wrong DB's values! *** "
 //                    + e.getMessage());
 //            return getDevices(model);
 //        }

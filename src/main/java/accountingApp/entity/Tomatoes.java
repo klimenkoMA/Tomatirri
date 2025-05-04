@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 
 @Document(collection = "tomatoes")
-public class Tomatoes {
+public class Tomatoes extends MultipartFileAdapter {
     @Id
     private ObjectId id;
     @Field
@@ -44,6 +44,10 @@ public class Tomatoes {
     private Long idCount;
     @Field
     private Map<ObjectId, Long> idMap = new HashMap<>();
+    @Field
+    private byte[] content;
+    @Field
+    private String contentType;
 
     public Tomatoes() {
     }
@@ -58,7 +62,8 @@ public class Tomatoes {
                     String tomatoesDescription,
                     String tomatoesTaste,
                     String tomatoesSpecificity,
-                    String tomatoesPrice) {
+                    String tomatoesPrice
+                    ) {
         this.tomatoesName = tomatoesName;
         this.category = category;
         this.tomatoesHeight = tomatoesHeight;
@@ -83,7 +88,8 @@ public class Tomatoes {
                     String tomatoesDescription,
                     String tomatoesTaste,
                     String tomatoesSpecificity,
-                    String tomatoesPrice) {
+                    String tomatoesPrice
+                   ) {
         this.id = id;
         this.category = category;
         this.tomatoesName = tomatoesName;
@@ -208,6 +214,23 @@ public class Tomatoes {
 
     public void setTomatoesPrice(String tomatoesPrice) {
         this.tomatoesPrice = tomatoesPrice;
+    }
+
+    public byte[] getContent() {
+        return content;
+    }
+
+    public void setContent(byte[] content) {
+        this.content = content;
+    }
+
+    @Override
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
     }
 
     @Override
