@@ -4,8 +4,14 @@
 
 <head>
     <div th:replace="fragments/head :: head"></div>
-<!--    <script type="text/javascript" src="js/crudjs/cruddevices.js"></script>-->
+    <!--    <script type="text/javascript" src="js/crudjs/cruddevices.js"></script>-->
+
 </head>
+<style>
+    a.btn.stretched-link.text-light:hover {
+        color: #ffc107 !important;
+    }
+</style>
 
 <div class="d-flex" style="min-width: max-content;justify-content: center;
                 max-height: min-content" th:fragment="crudtomato">
@@ -87,17 +93,28 @@
             </td>
 
             <td style="padding-top: 0; padding-bottom: 0">
-                <div id="all-tomatoes" class="card col text-center" style="width: 10rem; height: 13rem;
-                    box-shadow: 2px 2px 4px black">
+                <div id="all-tomatoes" class="card col text-center"
+                     style="width: 10rem;
+                            height: 13rem;
+                            box-shadow: 2px 2px 4px black">
                     <img src="../img/tomatoes.png" class="card-img-top"
-                         style="max-height: 5rem; max-width: 5rem; align-self: center" alt="Томатосписок">
+                         style="max-height: 5rem;
+                         max-width: 5rem;
+                         align-self: center"
+                         alt="Томатосписок">
                     <div class="card-body d-grid gap-2">
-                        <p class="card-text" style="font-size: medium;
-                        margin: 0"><strong>Список <br>томатов</strong></p>
+                        <p class="card-text"
+                           style="font-size: medium;
+                           margin: 0">
+                            <strong>Список <br>томатов</strong></p>
                         <a th:href="@{/tomatoes}" class="btn stretched-link text-light"
-                           style="background-color: #198754
-                ; align-content: center; box-shadow: 2px 2px 4px black; height: 5vh;font-size: medium;
-                width: 130px; text-shadow: #002349 2px 3px 4px">
+                           style="background-color: #198754;
+                            align-content: center;
+                            box-shadow: 2px 2px 4px black;
+                            height: 5vh;
+                            font-size: medium;
+                            width: 130px;
+                            text-shadow: #002349 2px 3px 4px">
                             Томаты
                         </a>
                     </div>
@@ -125,7 +142,7 @@
         </tr>
 
     </table>
-<!--    <script type="text/javascript" src="js/crudjs/cruddevices.js"></script>-->
+    <!--    <script type="text/javascript" src="js/crudjs/cruddevices.js"></script>-->
 </div>
 </html>
 
