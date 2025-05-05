@@ -61,7 +61,7 @@ public class TomatoesController {
             , @RequestParam String tomatoesTaste
             , @RequestParam String tomatoesSpecificity
             , @RequestParam String tomatoesPrice
-            , @RequestParam (value = "content", required = false) MultipartFile content
+            , @RequestParam ("content") MultipartFile content
             , Model model
     ) {
         if (category == null
@@ -79,8 +79,6 @@ public class TomatoesController {
                     "  Attribute has a null value! ***");
             return getTomatoes(model);
         }
-
-
 
         String tomatoesNameTrim = tomatoesName.trim();
         String tomatoesHeightTrim = tomatoesHeight.trim();
@@ -167,7 +165,7 @@ public class TomatoesController {
             , @RequestParam(required = false) String tomatoesTaste
             , @RequestParam(required = false) String tomatoesSpecificity
             , @RequestParam(required = false) String tomatoesPrice
-            , @RequestParam (value = "content", required = false) MultipartFile content
+            , @RequestParam ("content") MultipartFile content
             , Model model) {
         try {
             String tomatoesIdTrim = id.trim();
@@ -201,7 +199,7 @@ public class TomatoesController {
             return getTomatoes(model);
         } catch (Exception e) {
             logger.error("*** TomatoesController.updateTomato():" +
-                    "  wrong DB's values! ***" + e.getMessage());
+                    "  wrong DB's values! ***" + e.getMessage() + " ||| " + e);
             return getTomatoes(model);
         }
     }

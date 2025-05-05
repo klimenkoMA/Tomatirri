@@ -13,8 +13,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class TomatoesService {
+
+    private final TomatoesRepository tomatoesRepository;
+
     @Autowired
-    TomatoesRepository tomatoesRepository;
+    public TomatoesService(TomatoesRepository tomatoesRepository) {
+        this.tomatoesRepository = tomatoesRepository;
+    }
 
     public List<Tomatoes> findAllTomatoes() {
         return tomatoesRepository.findAll();
@@ -33,7 +38,7 @@ public class TomatoesService {
         return tomatoesRepository.findAll().stream()
                 .filter(tomId -> (tomId.getId() + "").equals(id))
                 .findFirst()
-                .orElse(null);
+                .orElse(new Tomatoes());
     }
 //
 //    public List<Tomatoes> getDevicesByName(String name) {
