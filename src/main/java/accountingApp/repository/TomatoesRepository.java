@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 @Repository
-public interface TomatoesRepository extends MongoRepository<Tomatoes, Integer> {
+public interface TomatoesRepository extends MongoRepository<Tomatoes, String> {
     @Override
     List<Tomatoes> findAll();
 
