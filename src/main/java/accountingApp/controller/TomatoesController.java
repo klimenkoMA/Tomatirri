@@ -39,10 +39,16 @@ public class TomatoesController {
 
     @GetMapping("/tomatoes")
     public String getTomatoes(Model model) {
-        List<Tomatoes> tomatoesList = tomatoesService.findAllTomatoes();
+        List<Tomatoes> tomatoesList = tomatoesService.findAllTomatoes()
+                .stream()
+                .sorted(Comparator.comparingLong(Tomatoes::getIdCount).reversed())
+                .collect(Collectors.toList());
+
+
         List<String> categoryList = Arrays.stream(TOMATOES_CATEGORIES)
                 .map(TomatoesCategory::getCategory)
                 .collect(Collectors.toList());
+
 
         model.addAttribute("tomatoesList", tomatoesList);
         model.addAttribute("categoryList", categoryList);
@@ -61,7 +67,7 @@ public class TomatoesController {
             , @RequestParam String tomatoesTaste
             , @RequestParam String tomatoesSpecificity
             , @RequestParam String tomatoesPrice
-            , @RequestParam ("content") MultipartFile content
+            , @RequestParam("content") MultipartFile content
             , Model model
     ) {
         if (category == null
@@ -119,7 +125,7 @@ public class TomatoesController {
             byte[] tomatoContent;
             String contentType;
 
-            if (!content.isEmpty()){
+            if (!content.isEmpty()) {
                 tomatoContent = content.getBytes();
                 contentType = content.getContentType();
                 tomato.setContent(tomatoContent);
@@ -165,7 +171,7 @@ public class TomatoesController {
             , @RequestParam(required = false) String tomatoesTaste
             , @RequestParam(required = false) String tomatoesSpecificity
             , @RequestParam(required = false) String tomatoesPrice
-            , @RequestParam ("content") MultipartFile content
+            , @RequestParam("content") MultipartFile content
             , Model model) {
         try {
             String tomatoesIdTrim = id.trim();
@@ -174,7 +180,7 @@ public class TomatoesController {
             byte[] tomatoContent;
             String contentType;
 
-            if (!content.isEmpty()){
+            if (!content.isEmpty()) {
                 tomatoContent = content.getBytes();
                 contentType = content.getContentType();
                 tomato.setContent(tomatoContent);
@@ -200,6 +206,36 @@ public class TomatoesController {
         } catch (Exception e) {
             logger.error("*** TomatoesController.updateTomato():" +
                     "  wrong DB's values! ***" + e.getMessage() + " ||| " + e);
+            return getTomatoes(model);
+        }
+    }
+
+    @PostMapping("/deletetomato")
+    public String deleteTomato(@RequestParam String id
+            , Model model) {
+
+        if (checker.checkAttribute(id)
+        ) {
+            logger.warn("*** TomatoesController.deleteTomato():" +
+                    "  Attribute has a null value! ***");
+            return getTomatoes(model);
+        }
+
+        try {
+            long idCheck = Long.parseLong(id);
+            if (idCheck <= 0 || checker.checkAttribute(idCheck + "")) {
+                logger.warn("*** TomatoesController.deleteTomato(): id <<<< 0 ***");
+                return getTomatoes(model);
+            }
+
+            String realId = getIdFromMap(idCheck);
+            Tomatoes tomato = tomatoesService.getTomatoById(realId);
+            tomatoesService.deleteTomato(tomato);
+            return getTomatoes(model);
+
+        } catch (Exception e) {
+            logger.error("*** TomatoesController.deleteTomato(): wrong DB's values! *** "
+                    + e.getMessage());
             return getTomatoes(model);
         }
     }
@@ -272,7 +308,7 @@ public class TomatoesController {
         }
     }
 
-        @GetMapping("/download/{id}")
+    @GetMapping("/download/{id}")
     public ResponseEntity<byte[]> downloadTomatoesPhoto(@PathVariable String id) {
         try {
             Tomatoes tomato = tomatoesService.getTomatoById(id);
@@ -296,46 +332,7 @@ public class TomatoesController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-//
-//    @PostMapping("/deletedevice")
-//    public String deleteDevice(@RequestParam String id,
-//                               Model model) {
-//
-//        if (checker.checkAttribute(id)
-//        ) {
-//            logger.warn("*** DevicesController.deleteDevice():" +
-//                    "  Attribute has a null value! ***");
-//            return getDevices(model);
-//        }
-//
-//        try {
-//            ObjectId idCheck = Integer.parseInt(id);
-//            if (idCheck <= 0 || checker.checkAttribute(idCheck + "")) {
-//                logger.warn("*** DevicesController.deleteDevice(): dborn <<<< 0 ***");
-//                return getDevices(model);
-//            }
-//
-//            List<Tomatoes> devices = devicesService.getDevicesById(idCheck);
-//            Tomatoes device = devices.get(0);
-//            device.setEmployee(null);
-//            device.setRoom(null);
-//            device.setItstaff(null);
-//            device.setEvents(null);
-//
-//            Repair repair = device.getRepair();
-//            device.setRepair(null);
-//            repairService.deleteRepair(repair.getId());
-//
-//            devicesService.updateDevice(device);
-//
-//            devicesService.deleteDeviceById(idCheck);
-//            return getDevices(model);
-//        } catch (Exception e) {
-//            logger.error("*** DevicesController.deleteDevice(): wrong DB's values! *** "
-//                    + e.getMessage());
-//            return getDevices(model);
-//        }
-//    }
+
 //
 //    @PostMapping("/finddevicebyname")
 //    public String findDevicesById(@RequestParam String name,
