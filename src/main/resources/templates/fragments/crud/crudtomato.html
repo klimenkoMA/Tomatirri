@@ -13,68 +13,115 @@
     }
 </style>
 
-<div class="d-flex" style="min-width: max-content;justify-content: center;
-                max-height: min-content" th:fragment="crudtomato">
+<div class="d-flex"
+     style="min-width: max-content;
+     justify-content: center;
+     max-height: min-content"
+     th:fragment="crudtomato">
+
     <table class="crud_buttons col" cellpadding="20px" align="center"
-           style="padding-top: 0; padding-bottom: 0; max-height: 13rem; margin-top: 2.5rem;
-            margin-bottom: 1rem">
+           style="padding-top: 0;
+           padding-bottom: 0;
+           max-height: 13rem;
+           margin-top: 2.5rem;
+           margin-bottom: 1rem">
 
         <tr>
-            <td style="padding-top: 0; padding-bottom: 0">
-                <div id="add-tomato" class="card col text-center" style="width: 10rem; height: 13rem;
-                    box-shadow: 2px 2px 4px black">
+            <td style="padding-top: 0;
+                padding-bottom: 0">
+                <div id="add-tomato" class="card col text-center"
+                     style="width: 10rem;
+                     height: 13rem;
+                     box-shadow: 2px 2px 4px black">
                     <img src="../img/greenadd.png" class="card-img-top"
-                         style="height: 5rem; width: 5rem; align-self: center" alt="Томатодобавление">
+                         style="height: 5rem;
+                         width: 5rem;
+                         align-self: center"
+                         alt="Томатодобавление">
                     <div class="card-body d-grid gap-2">
-                        <p class="card-text" style="font-size: medium;
-                        margin: 0"><strong>Добавить <br>томат</strong></p>
+                        <p class="card-text"
+                           style="font-size: medium;
+                           margin: 0">
+                            <strong>Добавить <br>томат</strong>
+                        </p>
                         <a th:replace="fragments/crud/add/addtomato :: addtomato"
-                           class="btn stretched-link text-light" style="background-color: #198754
-                ;justify-self: center; min-width: max-content; max-height: min-content; align-self: center;
-                    box-shadow: 2px 2px 4px black">
+                           class="btn stretched-link text-light"
+                           style="background-color: #198754;
+                           justify-self: center;
+                           min-width: max-content;
+                           max-height: min-content;
+                           align-self: center;
+                           box-shadow: 2px 2px 4px black">
                             Добавление
                         </a>
                     </div>
                 </div>
             </td>
 
-            <td style="padding-top: 0; padding-bottom: 0">
-                <div id="update-tomato" class="card col text-center" style="width: 10rem; height: 13rem;
+            <td style="padding-top: 0;
+                padding-bottom: 0">
+                <div id="update-tomato" class="card col text-center"
+                     style="width: 10rem;
+                     height: 13rem;
                     box-shadow: 2px 2px 4px black">
                     <img src="../img/greenupdate.png" class="card-img-top"
-                         style="height: 5rem; width: 5rem; align-self: center" alt="Томатообновление">
+                         style="height: 5rem;
+                         width: 5rem;
+                         align-self: center"
+                         alt="Томатообновление">
                     <div class="card-body d-grid gap-2">
-                        <p class="card-text" style="font-size: medium;
-                        margin: 0"><strong>Обновить <br>томат</strong></p>
+                        <p class="card-text"
+                           style="font-size: medium;
+                           margin: 0">
+                            <strong>Обновить <br>томат</strong>
+                        </p>
                         <a th:replace="fragments/crud/update/updatetomato :: updatetomato"
-                           class="btn stretched-link text-light" style="background-color: #198754
-                ;justify-self: center; min-width: max-content; max-height: min-content; align-self: center;
-                    box-shadow: 2px 2px 4px black">
+                           class="btn stretched-link text-light"
+                           style="background-color: #198754;
+                           justify-self: center;
+                           min-width: max-content;
+                           max-height: min-content;
+                           align-self: center;
+                           box-shadow: 2px 2px 4px black">
                             Обновление
                         </a>
                     </div>
                 </div>
             </td>
 
-            <td style="padding-top: 0; padding-bottom: 0">
-                <div id="find-device" class="card col text-center" style="width: 10rem; height: 13rem;
+            <td style="padding-top: 0;
+                padding-bottom: 0">
+                <div id="find-device" class="card col text-center"
+                     style="width: 10rem;
+                     height: 13rem;
                     box-shadow: 2px 2px 4px black">
                     <img src="../img/greensearch.png" class="card-img-top"
-                         style="height: 5rem; width: 5rem; align-self: center" alt="Томатопоиск">
+                         style="height: 5rem;
+                         width: 5rem;
+                         align-self: center"
+                         alt="Томатопоиск">
                     <div class="card-body d-grid gap-2">
-                        <p class="card-text" style="font-size: medium;
-                        margin: 0"><strong>Поиск <br>томата</strong></p>
-                        <a th:replace="fragments/searching/devicessearching :: devicessearching"
-                           class="btn stretched-link text-light" style="background-color: #198754
-                ;justify-self: center; min-width: max-content; max-height: min-content; align-self: center;
-                    box-shadow: 2px 2px 4px black">
+                        <p class="card-text"
+                           style="font-size: medium;
+                           margin: 0">
+                            <strong>Поиск <br>томата</strong>
+                        </p>
+                        <a th:replace="fragments/searching/tomatosearching :: tomatosearching"
+                           class="btn stretched-link text-light"
+                           style="background-color: #198754;
+                           justify-self: center;
+                           min-width: max-content;
+                           max-height: min-content;
+                           align-self: center;
+                           box-shadow: 2px 2px 4px black">
                             Поиск
                         </a>
                     </div>
                 </div>
             </td>
 
-            <td style="padding-top: 0; padding-bottom: 0">
+            <td style="padding-top: 0;
+                padding-bottom: 0">
                 <div id="delete-device" class="card col text-center"
                      style="width: 10rem;
                      height: 13rem;
@@ -86,8 +133,9 @@
                     <div class="card-body d-grid gap-2">
                         <p class="card-text"
                            style="font-size: medium;
-                        margin: 0">
-                            <strong>Удалить <br>томат</strong></p>
+                           margin: 0">
+                            <strong>Удалить <br>томат</strong>
+                        </p>
                         <a th:replace="fragments/crud/delete/deletetomato :: deletetomato"
                            class="btn stretched-link text-light"
                            style="background-color: #198754;
@@ -102,7 +150,9 @@
                 </div>
             </td>
 
-            <td style="padding-top: 0; padding-bottom: 0">
+            <td style="padding-top: 0;
+                padding-bottom: 0">
+
                 <div id="all-tomatoes" class="card col text-center"
                      style="width: 10rem;
                             height: 13rem;
@@ -116,7 +166,8 @@
                         <p class="card-text"
                            style="font-size: medium;
                            margin: 0">
-                            <strong>Список <br>томатов</strong></p>
+                            <strong>Список <br>томатов</strong>
+                        </p>
                         <a th:href="@{/tomatoes}" class="btn stretched-link text-light"
                            style="background-color: #198754;
                             align-content: center;
@@ -131,18 +182,32 @@
                 </div>
             </td>
 
-            <td style="padding-top: 0; padding-bottom: 0">
-                <div id="report-device" class="card col text-center" style="width: 10rem; height: 13rem;
-                    box-shadow: 2px 2px 4px black">
+            <td style="padding-top: 0;
+                padding-bottom: 0">
+
+                <div id="report-device" class="card col text-center"
+                     style="width: 10rem;
+                     height: 13rem;
+                     box-shadow: 2px 2px 4px black">
                     <img src="../img/tomatoreport.png" class="card-img-top"
-                         style="max-height: 5rem; max-width: 5rem; align-self: center" alt="Томатоотчет">
+                         style="max-height: 5rem;
+                         max-width: 5rem;
+                         align-self: center"
+                         alt="Томатоотчет">
                     <div class="card-body d-grid gap-2">
-                        <p class="card-text" style="font-size: medium;
-                        margin: 0"><strong>Отчеты по <br>томатам</strong></p>
+                        <p class="card-text"
+                           style="font-size: medium;
+                           margin: 0">
+                            <strong>Отчеты по <br>томатам</strong>
+                        </p>
                         <a th:href="@{/maxownercountreport}" class="btn stretched-link text-light"
-                           style="background-color: #198754
-                ; align-content: center; box-shadow: 2px 2px 4px black; height: 5vh;font-size: medium;
-                width: 130px; text-shadow: #002349 2px 3px 4px">
+                           style="background-color: #198754;
+                           align-content: center;
+                           box-shadow: 2px 2px 4px black;
+                           height: 5vh;
+                           font-size: medium;
+                           width: 130px;
+                           text-shadow: #002349 2px 3px 4px">
                             Отчет
                         </a>
                     </div>

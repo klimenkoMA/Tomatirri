@@ -16,10 +16,17 @@
 
     </header>
 
-    <main class="main d-flex row" style="align-content: baseline;
-        background-image: url('../img/bg/bdfon2.jpg');
-        background-repeat: no-repeat; align-self: center;
-        max-width: 80rem; border-radius: 1rem">
+    <main class="main d-flex row"
+          style="align-content: baseline;
+          background-image: url('../img/bg/bdfon.jpg');
+          linear-gradient(rgba(255,255,255,1), rgba(255,255,255,1)),
+          url('../img/bg/bdfon.jpg') no-repeat center/cover;
+          background-repeat: no-repeat;
+          background-size: cover;       /* Растягивает изображение чтобы покрыть весь элемент */
+          background-position: center; /* Центрирует изображение */
+          align-self: center;
+          max-width: 80rem;
+          border-radius: 1rem">
 
         <div th:replace="fragments/crud/crudtomato :: crudtomato"></div>
 
