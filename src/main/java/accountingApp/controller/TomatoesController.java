@@ -333,6 +333,67 @@ public class TomatoesController {
         }
     }
 
+    @PostMapping("/findtomato")
+    public String findTomato(@RequestParam String attr
+            , Model model) {
+
+        if (checker.checkAttribute(attr)) {
+            logger.error("*** TomatoesController.findTomato():" +
+                    "  WRONG DB VALUES*** ");
+            return getTomatoes(model);
+        }
+
+        try {
+            List<Tomatoes> tomatoes = tomatoesService.findAllTomatoes();
+            List<Tomatoes> tomatoesList = new ArrayList<>();
+            String attrTrim = attr.trim();
+
+            for (Tomatoes t : tomatoes
+            ) {
+                if ((t.getId() + "").contains(attrTrim)) {
+                    tomatoesList.add(t);
+                } else if (t.getCategory().getCategory().contains(attrTrim)) {
+                    tomatoesList.add(t);
+                } else if (t.getTomatoesName().contains(attrTrim)) {
+                    tomatoesList.add(t);
+                } else if (t.getTomatoesHeight().contains(attrTrim)) {
+                    tomatoesList.add(t);
+                } else if (t.getTomatoesDiameter().contains(attrTrim)) {
+                    tomatoesList.add(t);
+                } else if (t.getTomatoesFruit().contains(attrTrim)) {
+                    tomatoesList.add(t);
+                } else if (t.getTomatoesFlowerpot().contains(attrTrim)) {
+                    tomatoesList.add(t);
+                } else if (t.getTomatoesAgroTech().contains(attrTrim)) {
+                    tomatoesList.add(t);
+                } else if (t.getTomatoesDescription().contains(attrTrim)) {
+                    tomatoesList.add(t);
+                } else if (t.getTomatoesTaste().contains(attrTrim)) {
+                    tomatoesList.add(t);
+                } else if (t.getTomatoesSpecificity().contains(attrTrim)) {
+                    tomatoesList.add(t);
+                } else if (t.getTomatoesPrice().contains(attrTrim)) {
+                    tomatoesList.add(t);
+                } else if ((t.getIdCount() + "").contains(attrTrim)) {
+                    tomatoesList.add(t);
+                }
+            }
+
+            if (tomatoesList.isEmpty()) {
+                logger.debug("*** TomatoesController.findTomato():  DATA NOT FOUND IN DB***");
+                return getTomatoes(model);
+            }
+
+            model.addAttribute("tomatoesList", tomatoesList);
+            return "tomatoes";
+
+        } catch (Exception e) {
+            logger.error("*** TomatoesController.findTomato(): wrong DB's values! *** "
+                    + e.getMessage());
+            return getTomatoes(model);
+        }
+    }
+
 //
 //    @PostMapping("/finddevicebyname")
 //    public String findDevicesById(@RequestParam String name,
@@ -397,67 +458,6 @@ public class TomatoesController {
 //            return "devices";
 //        } catch (Exception e) {
 //            logger.error("*** DevicesController.findDevicesListByCategory(): wrong DB's values! *** "
-//                    + e.getMessage());
-//            return getDevices(model);
-//        }
-//    }
-//
-//    @PostMapping("/filterdevicesbyattrs")
-//    public String findDevicesListByAttrs(@RequestParam String attrs
-//            , Model model) {
-//
-//        if (checker.checkAttribute(attrs)) {
-//            logger.warn("*** DevicesController.findDevicesListByAttrs():" +
-//                    "  Attribute has a null value! ***");
-//            return getDevices(model);
-//        }
-//        String attrsWithoutSpaces = attrs.trim().toLowerCase(Locale.ROOT);
-//
-//        try {
-//            List<Tomatoes> devices = devicesService.findAllDevices();
-//            List<Tomatoes> tomatoesList = new ArrayList<>();
-//
-//            for (Tomatoes dev : devices
-//            ) {
-//                if ((dev.getId() + "").contains(attrsWithoutSpaces)) {
-//                    tomatoesList.add(dev);
-//                } else if (dev.getName().toLowerCase(Locale.ROOT)
-//                        .contains(attrsWithoutSpaces)) {
-//                    tomatoesList.add(dev);
-//                } else if (dev.getCategory().getCategory().toLowerCase(Locale.ROOT)
-//                        .contains(attrsWithoutSpaces)) {
-//                    tomatoesList.add(dev);
-//                } else if (dev.getDescription().toLowerCase(Locale.ROOT)
-//                        .contains(attrsWithoutSpaces)) {
-//                    tomatoesList.add(dev);
-//                } else if (dev.getEmployee().getFio().toLowerCase(Locale.ROOT)
-//                        .contains(attrsWithoutSpaces)) {
-//                    tomatoesList.add(dev);
-//                } else if ((dev.getInventory() + "").toLowerCase(Locale.ROOT)
-//                        .contains(attrsWithoutSpaces)) {
-//                    tomatoesList.add(dev);
-//                } else if (dev.getItstaff().getName().toLowerCase(Locale.ROOT)
-//                        .contains(attrsWithoutSpaces)) {
-//                    tomatoesList.add(dev);
-//                } else if ((dev.getRepair().getDurability() + "").toLowerCase(Locale.ROOT)
-//                        .contains(attrsWithoutSpaces)) {
-//                    tomatoesList.add(dev);
-//                } else if (dev.getRoom().getNumber().contains(attrsWithoutSpaces)) {
-//                    tomatoesList.add(dev);
-//                } else if (dev.getSerial().toLowerCase(Locale.ROOT)
-//                        .contains(attrsWithoutSpaces)) {
-//                    tomatoesList.add(dev);
-//                }
-//            }
-//
-//            model.addAttribute("devicesList", tomatoesList);
-//            if (tomatoesList.isEmpty()) {
-//                logger.debug("*** DevicesController.findDevicesListByAttrs():  DATA NOT FOUND IN DB***");
-//                return getDevices(model);
-//            }
-//            return "devices";
-//        } catch (Exception e) {
-//            logger.error("*** DevicesController.findDevicesListByAttrs(): wrong DB's values! *** "
 //                    + e.getMessage());
 //            return getDevices(model);
 //        }
