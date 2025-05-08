@@ -40,27 +40,7 @@ public class TomatoesService {
                 .findFirst()
                 .orElse(new Tomatoes());
     }
-//
-//    public List<Tomatoes> getDevicesByName(String name) {
-//
-//        List<Tomatoes> cloneDevices = tomatoesRepository.findAll().stream()
-//        .filter(dev -> dev.getName().contains(name))
-//        .collect(Collectors.toList());
-//
-//
-//        if (!cloneDevices.isEmpty()) {
-//            return cloneDevices;
-//        } else {
-//            return tomatoesRepository.findAll();
-//        }
-//    }
-//
 
-//
-//    public List<Tomatoes> getDevicesByCategory(TomatoesCategory category) {
-//        return tomatoesRepository.findByCategory(category);
-//    }
-//
 //    public List<MaxOwnerCountDTO> getOwnersCount(){
 //        return tomatoesRepository.reportingDevicesMaxOwnerCount();
 //    }
