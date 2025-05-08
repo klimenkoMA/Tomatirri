@@ -16,8 +16,9 @@ public interface TomatoesRepository extends MongoRepository<Tomatoes, String> {
     @Override
     List<Tomatoes> findAll();
 
-    @Query("{'tomatoesName' :  {$regex: ?0, $options: 'i' }}")
-    List<Tomatoes> findByName(String tomatoesName);
+//    @Query("{'tomatoesName' :  {$regex: ?0, $options: 'i' }}")
+//    List<Tomatoes> findByName(String tomatoesName);
+
 
 //    @Query(value = "SELECT d from Tomatoes d where d.category = ?1")
 //    List<Tomatoes> findByCategory(TomatoesCategory category);

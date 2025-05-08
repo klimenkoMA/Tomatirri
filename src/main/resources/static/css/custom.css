@@ -249,7 +249,7 @@ input[type="file"] {
 }
 
 tr:nth-of-type(even) {
-    background-color: #d0dede;
+    background-color: #e4f5de;
 }
 
 tr:nth-of-type(odd) {
@@ -277,7 +277,7 @@ tr:nth-of-type(odd) {
 
 /* Стиль для ползунка (thumb) */
 ::-webkit-scrollbar-thumb {
-    background-color: #d0dede; /* Цвет ползунка */
+    background-color: #198754; /* Цвет ползунка */
     border-radius: 6px; /* Закругление углов */
     scroll-margin: 5px;
 

@@ -394,74 +394,34 @@ public class TomatoesController {
         }
     }
 
-//
-//    @PostMapping("/finddevicebyname")
-//    public String findDevicesById(@RequestParam String name,
-//                                  Model model) {
-//
-//        if (checker.checkAttribute(name)
-//        ) {
-//            logger.warn("*** DevicesController.findDevicesById():" +
-//                    "  Attribute has a null value! ***");
-//            return getDevices(model);
-//        }
-//
-//        try {
-//            ObjectId idCheck = Integer.parseInt(name);
-//            if (idCheck <= 0 || checker.checkAttribute(idCheck + "")) {
-//                logger.warn("*** DevicesController.findDevicesById(): dborn <<<< 0 ***");
-//                return getDevices(model);
-//            } else {
-//                logger.debug("*** DevicesController.findDevicesById():" +
-//                        "FOUND DEVICE BY ID ***");
-//                List<Tomatoes> tomatoesList;
-//                tomatoesList = devicesService.getDevicesById(idCheck);
-//                model.addAttribute("devicesList", tomatoesList);
-//                return "devices";
-//            }
-//        } catch (Exception e) {
-//            try {
-//                List<Tomatoes> tomatoesList = devicesService.getDevicesByName(name);
-//                model.addAttribute("devicesList", tomatoesList);
-//                logger.debug("*** DevicesController.findDevicesById():" +
-//                        " FOUND DEVICE BY NAME *** " + e.getMessage());
-//                return "devices";
-//            } catch (Exception e1) {
-//                logger.error("*** DevicesController.findDevicesById(): wrong DB's values! *** "
-//                        + e1.getMessage());
-//                return getDevices(model);
-//            }
-//        }
-//    }
-//
-//    @PostMapping("/filterdevicesbycategory")
-//    public String findDevicesListByCategory(@RequestParam String category
-//            , Model model) {
-//
-//        if (checker.checkAttribute(category)) {
-//            logger.warn("*** DevicesController.findDevicesListByCategory():" +
-//                    "  Attribute has a null value! ***");
-//            return getDevices(model);
-//        }
-//        String categoryWithoutSpaces = category.trim();
-//
-//        try {
-//
-//            TomatoesCategory tomatoesCategory = Arrays.stream(DEVICE_CATEGORIES)
-//                    .filter(cat -> cat.getCategory().equals(categoryWithoutSpaces))
-//                    .findFirst()
-//                    .orElse(TomatoesCategory.Штамбовый);
-//
-//            List<Tomatoes> tomatoesList = devicesService.getDevicesByCategory(tomatoesCategory);
-//            model.addAttribute("devicesList", tomatoesList);
-//
-//            return "devices";
-//        } catch (Exception e) {
-//            logger.error("*** DevicesController.findDevicesListByCategory(): wrong DB's values! *** "
-//                    + e.getMessage());
-//            return getDevices(model);
-//        }
-//    }
+    @PostMapping("/filtertomatoesbycategory")
+    public String findTomatoesListByCategory(@RequestParam String category
+            , Model model) {
+
+        if (checker.checkAttribute(category)) {
+            logger.warn("*** TomatoesController.findTomatoesListByCategory():" +
+                    "  Attribute has a null value! ***");
+            return getTomatoes(model);
+        }
+
+        try {
+            List<Tomatoes> tomatoes = tomatoesService.findAllTomatoes();
+            List<Tomatoes> tomatoesList = new ArrayList<>();
+            for (Tomatoes t : tomatoes
+            ) {
+                if (t.getCategory().getCategory().equals(category)) {
+                    tomatoesList.add(t);
+                }
+            }
+            model.addAttribute("tomatoesList", tomatoesList);
+
+            return "tomatoes";
+        } catch (Exception e) {
+            logger.error("*** TomatoesController.findTomatoesListByCategory(): wrong DB's values! *** "
+                    + e.getMessage());
+            return getTomatoes(model);
+        }
+    }
 //
 //    @GetMapping("/maxownercountreport")
 //    public String maxOwnerCountReport(Model model) {

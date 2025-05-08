@@ -9,8 +9,9 @@
 <body>
 <div class="wrapper d-flex justify-content-center" style="align-self: center">
     <header class="modal-header bg-success container row"
-            style=" border-radius: 1rem; text-shadow: 2px 2px 4px black; align-self: center;
-               ">
+            style=" border-radius: 1rem;
+            text-shadow: 2px 2px 4px black;
+            align-self: center">
 
         <div class="col" th:replace="fragments/nav/navtomato :: navtomato"></div>
 
@@ -18,7 +19,7 @@
 
     <main class="main d-flex row"
           style="align-content: baseline;
-          background-image: url('../img/bg/bdfon.jpg');
+          background-image: url('../img/bg/bdfon_2.jpg');
           linear-gradient(rgba(255,255,255,1), rgba(255,255,255,1)),
           url('../img/bg/bdfon.jpg') no-repeat center/cover;
           background-repeat: no-repeat;
@@ -30,89 +31,101 @@
 
         <div th:replace="fragments/crud/crudtomato :: crudtomato"></div>
 
-        <div class="table-result-db" style="justify-content: center; max-height: min-content">
+        <div class="table-result-db"
+             style="justify-content: center;
+             max-height: min-content">
 
-            <table class="row" style=" justify-content: center;
-                  align-content: center; height: 3rem; table-layout: fixed">
+            <table class="row"
+                   style=" justify-content: center;
+                   align-content: center;
+                   height: 3rem;
+                   table-layout: fixed">
 
-                <tr class="text-light fs-7" style="background-color: #198754">
+                <tr class="text-light fs-7"
+                    style="background-color: #198754">
                     <th class=" text-center align-self-center"
-                        style="
-                        border-color: #198754
-                        ; width: 3rem; text-shadow: 2px 2px 4px #07237a">
+                        style="border-color: #198754;
+                        width: 3rem;
+                        text-shadow: 2px 2px 4px #07237a">
                         ID
                     </th>
                     <th class=" text-center align-self-center"
-                        style="
-                        border-color: #198754
-                        ; width: 4rem; text-shadow: 2px 2px 4px #07237a">
+                        style="border-color: #198754;
+                        width: 4rem;
+                        text-shadow: 2px 2px 4px #07237a">
                         Тип
                     </th>
                     <th class=" text-center align-self-center"
-                        style="
-                         border-color: #198754
-                        ; width: 7rem; text-shadow: 2px 2px 4px #07237a">
+                        style="border-color: #198754;
+                        width: 7rem;
+                        text-shadow: 2px 2px 4px #07237a">
                         Название
                     </th>
                     <th class=" text-center align-self-center"
-                        style="
-                        border-color: #198754
-                        ; width: 3rem; text-shadow: 2px 2px 4px #07237a">
+                        style="border-color: #198754;
+                        width: 3rem;
+                        text-shadow: 2px 2px 4px #07237a">
                         h
                     </th>
                     <th class=" text-center align-self-center"
-                        style="
-                        border-color: #198754
-                        ; width: 3rem; text-shadow: 2px 2px 4px #07237a">
+                        style="border-color: #198754;
+                        width: 3rem;
+                        text-shadow: 2px 2px 4px #07237a">
                         d
                     </th>
                     <th class="text-center align-self-center"
-                        style="
-                        border-color: #198754
-                        ; width: 4rem; text-shadow: 2px 2px 4px #07237a">
+                        style="border-color: #198754;
+                        width: 4rem;
+                        text-shadow: 2px 2px 4px #07237a">
                         Вес
                     </th>
                     <th class=" text-center align-self-center"
-                        style="
-                        border-color: #198754
-                        ; width: 3rem; text-shadow: 2px 2px 4px #07237a">
+                        style="border-color: #198754;
+                        width: 3rem;
+                        text-shadow: 2px 2px 4px #07237a">
                         Кашпо
                     </th>
                     <th class=" text-center align-self-center"
-                        style="
-                        border-color: #198754
-                        ; width: 12rem; text-shadow: 2px 2px 4px #07237a">
+                        style="border-color: #198754;
+                        width: 12rem;
+                        text-shadow: 2px 2px 4px #07237a">
                         Агротехника
                     </th>
                     <th class=" text-center align-self-center"
-                        style="
-                        border-color: #198754
-                        ; width: 18rem; text-shadow: 2px 2px 4px #07237a">
+                        style="border-color: #198754;
+                        width: 18rem;
+                        text-shadow: 2px 2px 4px #07237a">
                         Описание
                     </th>
                     <th class=" text-center align-self-center"
-                        style="
-                        border-color: #198754
-                        ; width: 7rem; text-shadow: 2px 2px 4px #07237a">
+                        style="border-color: #198754;
+                        width: 7rem;
+                        text-shadow: 2px 2px 4px #07237a">
                         Вкус
                     </th>
                     <th class=" text-center align-self-center"
                         style="
-                         border-color: #198754
-                        ; width: 10rem; text-shadow: 2px 2px 4px #07237a">
+                         border-color: #198754;
+                         width: 10rem;
+                         text-shadow: 2px 2px 4px #07237a">
                         Особенность
                     </th>
                     <th class=" text-center align-self-center"
-                        style="
-                         border-color: #198754
-                        ; width: 7rem; text-shadow: 2px 2px 4px #07237a">
+                        style="border-color: #198754;
+                        width: 7rem;
+                        text-shadow: 2px 2px 4px #07237a">
                         Цена
                     </th>
                 </tr>
             </table>
 
             <div class="scroll-tbody">
-                <table class="col" style="align-self: center; font-size: small">
+                <table class="col"
+                       style="align-self: center;
+                       font-size: small;
+                       word-break: break-all;
+                       overflow-wrap: anywhere;
+                       white-space: normal">
                     <div th:each="element : ${tomatoesList}">
                         <div class="col">
                             <tr style="align-self: center">
@@ -121,13 +134,19 @@
                                     <div>[[${element.idCount}]]</div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 4rem; word-break: break-all; overflow-wrap: anywhere;
+                                    style="width: 4rem;
+                                    word-break: break-all;
+                                    overflow-wrap: anywhere;
                                     white-space: normal">
-                                    <form action="/filterdevicesbycategory" method="post">
+                                    <form action="/filtertomatoesbycategory" method="post">
                                         <input type="hidden" name="category" th:value="${element.category}"/>
                                         <button type="submit" class=""
-                                                style="background: none;color: darkblue; border: none;
-                                                cursor: pointer;text-shadow: none; word-break: break-word;">
+                                                style="background: none;
+                                                color: darkblue;
+                                                border: none;
+                                                cursor: pointer;
+                                                text-shadow: none;
+                                                word-break: break-word;">
                                             [[${element.category}]]
                                         </button>
                                     </form>
