@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -28,6 +29,7 @@ public class TomatoesController {
 
     final Logger logger = LoggerFactory.getLogger(TomatoesController.class);
     private static final TomatoesCategory[] TOMATOES_CATEGORIES = TomatoesCategory.values();
+    private static final IsPresent[] IS_PRESENTS = IsPresent.values();
     private final TomatoesService tomatoesService;
     private final Checker checker;
 
@@ -49,7 +51,6 @@ public class TomatoesController {
                 .map(TomatoesCategory::getCategory)
                 .collect(Collectors.toList());
 
-
         model.addAttribute("tomatoesList", tomatoesList);
         model.addAttribute("categoryList", categoryList);
         return "tomatoes";
@@ -66,8 +67,8 @@ public class TomatoesController {
             , @RequestParam String tomatoesDescription
             , @RequestParam String tomatoesTaste
             , @RequestParam String tomatoesSpecificity
-            , @RequestParam String tomatoesPrice
-            , @RequestParam("content") MultipartFile content
+            , @RequestParam(required = false) String isPresent
+            , @RequestParam(value = "content", required = false) MultipartFile[] content
             , Model model
     ) {
         if (category == null
@@ -79,7 +80,6 @@ public class TomatoesController {
                 || checker.checkAttribute(tomatoesAgroTech)
                 || checker.checkAttribute(tomatoesDescription)
                 || checker.checkAttribute(tomatoesTaste)
-                || checker.checkAttribute(tomatoesPrice)
         ) {
             logger.warn("*** TomatoesController.addTomato():" +
                     "  Attribute has a null value! ***");
@@ -94,7 +94,6 @@ public class TomatoesController {
         String tomatoesAgroTechTrim = tomatoesAgroTech.trim();
         String tomatoesDescriptionTrim = tomatoesDescription.trim();
         String tomatoesTasteTrim = tomatoesTaste.trim();
-        String tomatoesPriceTrim = tomatoesPrice.trim();
         String tomatoesSpecificityTrim = "\uD83C\uDF45 \uD83C\uDF45 \uD83C\uDF45";
 
         if (!checker.checkAttribute(tomatoesSpecificity)) {
@@ -107,6 +106,11 @@ public class TomatoesController {
                     .findFirst()
                     .orElse(TomatoesCategory.Штамбовый);
 
+            IsPresent tomatoIsPresent = Arrays.stream(IS_PRESENTS)
+                    .filter(isp -> isp.getPresent().equals(isPresent))
+                    .findFirst()
+                    .orElse(IsPresent.ДА);
+
             Tomatoes tomato = new Tomatoes(tomatoesCategory
                     , tomatoesNameTrim
                     , tomatoesHeightTrim
@@ -117,20 +121,18 @@ public class TomatoesController {
                     , tomatoesDescriptionTrim
                     , tomatoesTasteTrim
                     , tomatoesSpecificityTrim
-                    , tomatoesPriceTrim
+                    , tomatoIsPresent
             );
 
             tomatoesService.addNewTomato(tomato);
-            ObjectId objectId = tomato.getId();
-            byte[] tomatoContent;
-            String contentType;
 
-            if (!content.isEmpty()) {
-                tomatoContent = content.getBytes();
-                contentType = content.getContentType();
-                tomato.setContent(tomatoContent);
-                tomato.setContentType(contentType);
-            }
+            ObjectId objectId = tomato.getId();
+            List<Photo> photos = new ArrayList<>();
+            long count = 0;
+
+            createPhotoList(content, photos, count);
+
+            tomato.setPhotos(photos);
 
             long idCount;
             List<Tomatoes> tomatoesList = tomatoesService.findAllTomatoes();
@@ -170,22 +172,13 @@ public class TomatoesController {
             , @RequestParam(required = false) String tomatoesDescription
             , @RequestParam(required = false) String tomatoesTaste
             , @RequestParam(required = false) String tomatoesSpecificity
-            , @RequestParam(required = false) String tomatoesPrice
-            , @RequestParam("content") MultipartFile content
+            , @RequestParam(required = false) String isPresent
+            , @RequestParam(value = "content", required = false) MultipartFile[] content
             , Model model) {
         try {
             String tomatoesIdTrim = id.trim();
             String realId = getIdFromMap(Long.parseLong(tomatoesIdTrim));
             Tomatoes tomato = tomatoesService.getTomatoById(realId);
-            byte[] tomatoContent;
-            String contentType;
-
-            if (!content.isEmpty()) {
-                tomatoContent = content.getBytes();
-                contentType = content.getContentType();
-                tomato.setContent(tomatoContent);
-                tomato.setContentType(contentType);
-            }
 
             updateTomatoFields(tomato
                     , category
@@ -198,7 +191,14 @@ public class TomatoesController {
                     , tomatoesDescription
                     , tomatoesTaste
                     , tomatoesSpecificity
-                    , tomatoesPrice);
+                    , isPresent);
+
+            List<Photo> photos = new ArrayList<>();
+            long count = 0;
+
+            createPhotoList(content, photos, count);
+
+            tomato.setPhotos(photos);
 
             tomatoesService.addNewTomato(tomato);
 
@@ -240,6 +240,22 @@ public class TomatoesController {
         }
     }
 
+    private void createPhotoList(MultipartFile[] content, List<Photo> photos, long count) throws IOException {
+        if (content != null) {
+            for (MultipartFile f : content
+            ) {
+                long id = count;
+                byte[] photoContent = f.getBytes();
+                String contentType = f.getContentType();
+                Photo photo = new Photo(id,
+                        photoContent,
+                        contentType);
+                photos.add(photo);
+                count++;
+            }
+        }
+    }
+
     private String getIdFromMap(long id) {
 
         List<Tomatoes> classList = tomatoesService.findAllTomatoes();
@@ -275,7 +291,7 @@ public class TomatoesController {
             , String tomatoesDescription
             , String tomatoesTaste
             , String tomatoesSpecificity
-            , String tomatoesPrice
+            , String isPresent
     ) {
         TomatoesCategory tomatoesCategory = Arrays.stream(TOMATOES_CATEGORIES)
                 .filter(cat -> cat.getCategory().equals(category))
@@ -283,12 +299,19 @@ public class TomatoesController {
                 .orElse(tomato.getCategory());
         tomato.setCategory(tomatoesCategory);
 
+        IsPresent tomatoIsPresent = Arrays.stream(IS_PRESENTS)
+                .filter(isp -> isp.getPresent().equals(isPresent))
+                .findFirst()
+                .orElse(tomato.getIsPresent());
+        tomato.setIsPresent(tomatoIsPresent);
+
         String specificityValue;
         if (!checker.checkAttribute(tomatoesSpecificity)) {
             specificityValue = tomatoesSpecificity.trim();
             tomato.setTomatoesSpecificity(specificityValue);
         } else {
-            updateFieldIfProvided(tomato::setTomatoesSpecificity, tomato.getTomatoesSpecificity());
+            updateFieldIfProvided(tomato::setTomatoesSpecificity,
+                    tomato.getTomatoesSpecificity());
         }
 
         updateFieldIfProvided(tomato::setTomatoesName, tomatoesName);
@@ -299,7 +322,6 @@ public class TomatoesController {
         updateFieldIfProvided(tomato::setTomatoesAgroTech, tomatoesAgroTech);
         updateFieldIfProvided(tomato::setTomatoesDescription, tomatoesDescription);
         updateFieldIfProvided(tomato::setTomatoesTaste, tomatoesTaste);
-        updateFieldIfProvided(tomato::setTomatoesPrice, tomatoesPrice);
     }
 
     private void updateFieldIfProvided(Consumer<String> setter, String value) {
@@ -315,9 +337,9 @@ public class TomatoesController {
             if (tomato != null) {
 
                 HttpHeaders headers = new HttpHeaders();
-                String docType = tomato.getContentType();
-                assert docType != null;
-                headers.setContentType(MediaType.parseMediaType(docType));
+                String contentType = tomato.getContentType();
+                assert contentType != null;
+                headers.setContentType(MediaType.parseMediaType(contentType));
                 headers.setContentDisposition(ContentDisposition.attachment()
                         .filename(tomato.getName())
                         .build());
@@ -372,7 +394,7 @@ public class TomatoesController {
                     tomatoesList.add(t);
                 } else if (t.getTomatoesSpecificity().contains(attrTrim)) {
                     tomatoesList.add(t);
-                } else if (t.getTomatoesPrice().contains(attrTrim)) {
+                } else if (t.getIsPresent().getPresent().contains(attrTrim)) {
                     tomatoesList.add(t);
                 } else if ((t.getIdCount() + "").contains(attrTrim)) {
                     tomatoesList.add(t);

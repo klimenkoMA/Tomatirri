@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+
+<head>
+    <div th:replace="fragments/head :: head"></div>
+</head>
+<div th:fragment="tomatosearching">
+    <label class="popup_try d-flex"
+           style="justify-content: center;
+           font-size: 17px;
+           box-shadow: 2px 2px 4px black">
+        Поиск
+        <button type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasRightfeedback"
+                aria-controls="offcanvasRightfeedback"
+                style="background-color: #198754;
+                color: white;
+                height: 1px;
+                width: 1px" hidden>
+        </button>
+    </label>
+
+    <div class="card col offcanvas offcanvas-end border border-0"
+         tabindex="-1" id="offcanvasRightfeedback" aria-labelledby="offcanvasRightLabel"
+         style="width: 40vh">
+        <img src="../img/greensearch.png" class="card-img-top" alt="TomatoSearch"
+             style="max-height: 10vh;
+             max-width: 10vh;
+             border-radius: 10%;
+             align-self: center;
+             margin-bottom: 18rem;
+             margin-top: 2rem">
+        <div class="card-body d-grid gap-2 offcanvas-title bg-light" id="offcanvasRightLabel"
+             style="min-height: 100vh;
+             align-content: start">
+
+            <form action="/findtomato" method="post" autocomplete="off"
+                  class="card-text offcanvas-body align-self-start">
+
+                <label for="attr"></label>
+                <input type="text" class="text-start" name="attr" id="attr"
+                       placeholder="Поиск"
+                       required>
+                <button class="btn text-light" type="submit"
+                        style="background-color: #198754;
+                            justify-self: center;
+                            min-width: max-content;
+                            max-height: min-content;
+                            align-self: center;
+                            box-shadow: 2px 2px 4px black">
+                    Найти
+                </button>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+            </form>
+            <img src="../img/tomatoes.png" class="card-img-bottom" alt="TomatoSearch"
+                 style="max-height: 10vh;
+                 max-width: 10vh;
+                 justify-self: center;
+                 margin-top: 18rem;
+                 border-radius: 10%;
+                 align-self: end">
+        </div>
+    </div>
+</div>
+
+</html>
