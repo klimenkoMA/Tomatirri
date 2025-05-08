@@ -5,9 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 
 /**
@@ -39,15 +37,13 @@ public class Tomatoes extends MultipartFileAdapter {
     @Field
     private String tomatoesSpecificity;
     @Field
-    private String tomatoesPrice;
-    @Field
     private Long idCount;
     @Field
     private Map<ObjectId, Long> idMap = new HashMap<>();
     @Field
-    private byte[] content;
+    private IsPresent isPresent;
     @Field
-    private String contentType;
+    private List<Photo> photos = new ArrayList<>();
 
     public Tomatoes() {
     }
@@ -62,8 +58,8 @@ public class Tomatoes extends MultipartFileAdapter {
                     String tomatoesDescription,
                     String tomatoesTaste,
                     String tomatoesSpecificity,
-                    String tomatoesPrice
-                    ) {
+                    IsPresent isPresent
+    ) {
         this.tomatoesName = tomatoesName;
         this.category = category;
         this.tomatoesHeight = tomatoesHeight;
@@ -74,7 +70,7 @@ public class Tomatoes extends MultipartFileAdapter {
         this.tomatoesDescription = tomatoesDescription;
         this.tomatoesTaste = tomatoesTaste;
         this.tomatoesSpecificity = tomatoesSpecificity;
-        this.tomatoesPrice = tomatoesPrice;
+        this.isPresent = isPresent;
     }
 
     public Tomatoes(ObjectId id,
@@ -88,8 +84,8 @@ public class Tomatoes extends MultipartFileAdapter {
                     String tomatoesDescription,
                     String tomatoesTaste,
                     String tomatoesSpecificity,
-                    String tomatoesPrice
-                   ) {
+                    IsPresent isPresent
+    ) {
         this.id = id;
         this.category = category;
         this.tomatoesName = tomatoesName;
@@ -101,7 +97,7 @@ public class Tomatoes extends MultipartFileAdapter {
         this.tomatoesDescription = tomatoesDescription;
         this.tomatoesTaste = tomatoesTaste;
         this.tomatoesSpecificity = tomatoesSpecificity;
-        this.tomatoesPrice = tomatoesPrice;
+        this.isPresent = isPresent;
     }
 
     public ObjectId getId() {
@@ -200,10 +196,6 @@ public class Tomatoes extends MultipartFileAdapter {
         this.tomatoesSpecificity = tomatoesSpecificity;
     }
 
-    public String getTomatoesPrice() {
-        return tomatoesPrice;
-    }
-
     public TomatoesCategory getCategory() {
         return category;
     }
@@ -212,25 +204,20 @@ public class Tomatoes extends MultipartFileAdapter {
         this.category = category;
     }
 
-    public void setTomatoesPrice(String tomatoesPrice) {
-        this.tomatoesPrice = tomatoesPrice;
+    public IsPresent getIsPresent() {
+        return isPresent;
     }
 
-    public byte[] getContent() {
-        return content;
+    public void setIsPresent(IsPresent isPresent) {
+        this.isPresent = isPresent;
     }
 
-    public void setContent(byte[] content) {
-        this.content = content;
+    public List<Photo> getPhotos() {
+        return photos;
     }
 
-    @Override
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
     }
 
     @Override
@@ -248,8 +235,7 @@ public class Tomatoes extends MultipartFileAdapter {
                 && getTomatoesDescription().equals(tomatoes.getTomatoesDescription())
                 && getTomatoesTaste().equals(tomatoes.getTomatoesTaste())
                 && Objects.equals(getTomatoesSpecificity(),
-                tomatoes.getTomatoesSpecificity())
-                && getTomatoesPrice().equals(tomatoes.getTomatoesPrice());
+                tomatoes.getTomatoesSpecificity());
     }
 
     @Override
@@ -263,8 +249,7 @@ public class Tomatoes extends MultipartFileAdapter {
                 , getTomatoesAgroTech()
                 , getTomatoesDescription()
                 , getTomatoesTaste()
-                , getTomatoesSpecificity()
-                , getTomatoesPrice());
+                , getTomatoesSpecificity());
     }
 
     @Override
@@ -280,7 +265,6 @@ public class Tomatoes extends MultipartFileAdapter {
                 ", tomatoesDescription='" + tomatoesDescription + '\'' +
                 ", tomatoesTaste='" + tomatoesTaste + '\'' +
                 ", tomatoesSpecificity='" + tomatoesSpecificity + '\'' +
-                ", tomatoesPrice='" + tomatoesPrice + '\'' +
                 '}';
     }
 }
