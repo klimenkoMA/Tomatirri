@@ -6,6 +6,8 @@ public class Photo extends MultipartFileAdapter {
     private byte[] content;
     private String contentType;
 
+    public Photo() {
+    }
 
     public Photo(long photoId,
                  byte[] content,

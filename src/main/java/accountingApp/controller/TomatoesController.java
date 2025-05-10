@@ -46,13 +46,17 @@ public class TomatoesController {
                 .sorted(Comparator.comparingLong(Tomatoes::getIdCount).reversed())
                 .collect(Collectors.toList());
 
-
         List<String> categoryList = Arrays.stream(TOMATOES_CATEGORIES)
                 .map(TomatoesCategory::getCategory)
                 .collect(Collectors.toList());
 
+        List<List<Photo>> photos = tomatoesList.stream()
+                .map(Tomatoes::getPhotos)
+                .collect(Collectors.toList());
+
         model.addAttribute("tomatoesList", tomatoesList);
         model.addAttribute("categoryList", categoryList);
+        model.addAttribute("photos", photos);
         return "tomatoes";
     }
 
@@ -330,22 +334,25 @@ public class TomatoesController {
         }
     }
 
-    @GetMapping("/download/{id}")
+    @GetMapping("/download/{id}/{index}")
     public ResponseEntity<byte[]> downloadTomatoesPhoto(@PathVariable String id) {
         try {
             Tomatoes tomato = tomatoesService.getTomatoById(id);
             if (tomato != null) {
+                List<Photo> photos = tomato.getPhotos();
 
-                HttpHeaders headers = new HttpHeaders();
-                String contentType = tomato.getContentType();
-                assert contentType != null;
-                headers.setContentType(MediaType.parseMediaType(contentType));
-                headers.setContentDisposition(ContentDisposition.attachment()
-                        .filename(tomato.getName())
-                        .build());
-                headers.setContentLength(tomato.getContent().length);
-
-                return new ResponseEntity<>(tomato.getContent(), headers, HttpStatus.OK);
+                for (Photo ph: photos
+                     ) {
+                    HttpHeaders headers = new HttpHeaders();
+                    String contentType = tomato.getContentType();
+                    assert contentType != null;
+                    headers.setContentType(MediaType.parseMediaType(contentType));
+                    headers.setContentDisposition(ContentDisposition.attachment()
+                            .filename(tomato.getName())
+                            .build());
+                    headers.setContentLength(ph.getContent().length);
+                    return new ResponseEntity<>(ph.getContent(), headers, HttpStatus.OK);
+                }
             }
             throw new Exception("tomato is NULL");
         } catch (Exception e) {
