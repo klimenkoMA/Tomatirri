@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
@@ -202,8 +203,11 @@ public class TomatoesController {
             long count = 0;
 
             createPhotoList(content, photos, count);
-
-            tomato.setPhotos(photos);
+            if (!photos.isEmpty()){
+                tomato.setPhotos(photos);
+            }else{
+                tomato.setPhotos(tomato.getPhotos());
+            }
 
             tomatoesService.addNewTomato(tomato);
 
@@ -309,29 +313,39 @@ public class TomatoesController {
                 .findFirst()
                 .orElse(tomato.getIsPresent());
         tomato.setIsPresent(tomatoIsPresent);
+//
+//        if (checker.checkAttribute(tomatoesName)){
+//            tomatoesName = tomato.getTomatoesName();
+//        }
+//
+//        String specificityValue;
+//        if (!checker.checkAttribute(tomatoesSpecificity)) {
+//            specificityValue = tomatoesSpecificity.trim();
+//            tomato.setTomatoesSpecificity(specificityValue);
+//        } else {
+//            updateFieldIfProvided(tomato::setTomatoesSpecificity,
+//                    tomato::getTomatoesSpecificity,
+//                    tomato.getTomatoesSpecificity());
+//        }
 
-        String specificityValue;
-        if (!checker.checkAttribute(tomatoesSpecificity)) {
-            specificityValue = tomatoesSpecificity.trim();
-            tomato.setTomatoesSpecificity(specificityValue);
-        } else {
-            updateFieldIfProvided(tomato::setTomatoesSpecificity,
-                    tomato.getTomatoesSpecificity());
-        }
-
-        updateFieldIfProvided(tomato::setTomatoesName, tomatoesName);
-        updateFieldIfProvided(tomato::setTomatoesHeight, tomatoesHeight);
-        updateFieldIfProvided(tomato::setTomatoesDiameter, tomatoesDiameter);
-        updateFieldIfProvided(tomato::setTomatoesFruit, tomatoesFruit);
-        updateFieldIfProvided(tomato::setTomatoesFlowerpot, tomatoesFlowerpot);
-        updateFieldIfProvided(tomato::setTomatoesAgroTech, tomatoesAgroTech);
-        updateFieldIfProvided(tomato::setTomatoesDescription, tomatoesDescription);
-        updateFieldIfProvided(tomato::setTomatoesTaste, tomatoesTaste);
+        updateFieldIfProvided(tomato::setTomatoesSpecificity, tomato::getTomatoesSpecificity, tomatoesSpecificity);
+        updateFieldIfProvided(tomato::setTomatoesName, tomato::getTomatoesName, tomatoesName);
+        updateFieldIfProvided(tomato::setTomatoesHeight, tomato::getTomatoesHeight, tomatoesHeight);
+        updateFieldIfProvided(tomato::setTomatoesDiameter, tomato::getTomatoesDiameter, tomatoesDiameter);
+        updateFieldIfProvided(tomato::setTomatoesFruit, tomato::getTomatoesFruit, tomatoesFruit);
+        updateFieldIfProvided(tomato::setTomatoesFlowerpot, tomato::getTomatoesFlowerpot, tomatoesFlowerpot);
+        updateFieldIfProvided(tomato::setTomatoesAgroTech, tomato::getTomatoesAgroTech, tomatoesAgroTech);
+        updateFieldIfProvided(tomato::setTomatoesDescription, tomato::getTomatoesDescription, tomatoesDescription);
+        updateFieldIfProvided(tomato::setTomatoesTaste, tomato::getTomatoesTaste, tomatoesTaste);
     }
 
-    private void updateFieldIfProvided(Consumer<String> setter, String value) {
+    private void updateFieldIfProvided(Consumer<String> setter,
+                                       Supplier<String> getter,
+                                       String value) {
         if (!checker.checkAttribute(value)) {
             setter.accept(value.trim());
+        }else{
+            setter.accept(getter.get());
         }
     }
 
