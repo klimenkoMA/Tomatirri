@@ -1,5 +1,8 @@
 package accountingApp.entity;
 
+import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.cache.annotation.Cacheable;
+
 public class Photo extends MultipartFileAdapter {
 
     private long photoId;
@@ -47,6 +50,11 @@ public class Photo extends MultipartFileAdapter {
 
     public void setContentType(String contentType) {
         this.contentType = contentType;
+    }
+
+    //    @Cacheable(value = "content", key = "#photoId")
+    public String getImageDataBase64() {
+        return Base64.encodeBase64String(this.getContent());
     }
 
 }

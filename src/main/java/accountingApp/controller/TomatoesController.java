@@ -50,13 +50,14 @@ public class TomatoesController {
                 .map(TomatoesCategory::getCategory)
                 .collect(Collectors.toList());
 
-        List<List<Photo>> photos = tomatoesList.stream()
-                .map(Tomatoes::getPhotos)
+        List<String> isPresentList = Arrays.stream(IS_PRESENTS)
+                .map(IsPresent::getPresent)
                 .collect(Collectors.toList());
 
         model.addAttribute("tomatoesList", tomatoesList);
         model.addAttribute("categoryList", categoryList);
-        model.addAttribute("photos", photos);
+        model.addAttribute("isPresentList", isPresentList);
+
         return "tomatoes";
     }
 
@@ -334,15 +335,15 @@ public class TomatoesController {
         }
     }
 
-    @GetMapping("/download/{id}/{index}")
+    @GetMapping("/download/{id}")
     public ResponseEntity<byte[]> downloadTomatoesPhoto(@PathVariable String id) {
         try {
             Tomatoes tomato = tomatoesService.getTomatoById(id);
             if (tomato != null) {
                 List<Photo> photos = tomato.getPhotos();
 
-                for (Photo ph: photos
-                     ) {
+                for (Photo ph : photos
+                ) {
                     HttpHeaders headers = new HttpHeaders();
                     String contentType = tomato.getContentType();
                     assert contentType != null;
@@ -451,24 +452,4 @@ public class TomatoesController {
             return getTomatoes(model);
         }
     }
-//
-//    @GetMapping("/maxownercountreport")
-//    public String maxOwnerCountReport(Model model) {
-//
-//        List<MaxOwnerCountDTO> dtoList = devicesService.getOwnersCount();
-//
-//        String[] owners = dtoList.stream()
-//                .map(MaxOwnerCountDTO::getOwner)
-//                .toArray(String[]::new);
-//
-//        long[] counts = dtoList.stream()
-//                .mapToLong(MaxOwnerCountDTO::getDevicesCount)
-//                .toArray();
-//
-//        model.addAttribute("dtoList", dtoList);
-//        model.addAttribute("owners", owners);
-//        model.addAttribute("counts", counts);
-//
-//        return "/reports/devicesreports/reportmaxownercount";
-//    }
 }

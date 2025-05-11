@@ -32,6 +32,15 @@
                                     th:text="${element}"></option>
                         </select>
                     </label>
+                    <label class="d-flex justify-content-center align-items-center">
+                        <select class="form-select-custom m-2" name="room">
+
+                            <option value="0">Кабинет</option>
+                            <option th:each="element : ${roomList}"
+                                    th:value="${element.id}"
+                                    th:text="${element.number}"></option>
+                        </select>
+                    </label>
                     <label>
                         <input type="text" name="tomatoesName" align="middle" placeholder="Название томата"/>
                     </label>
