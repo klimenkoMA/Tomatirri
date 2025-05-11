@@ -1,16 +1,21 @@
 package accountingApp.entity;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.bson.types.ObjectId;
+import org.hibernate.annotations.Target;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
  * Семена томатов
  */
+@Cacheable
 
 @Document(collection = "tomatoes")
 public class Tomatoes extends MultipartFileAdapter {
@@ -43,6 +48,7 @@ public class Tomatoes extends MultipartFileAdapter {
     @Field
     private IsPresent isPresent;
     @Field
+    @Lazy
     private List<Photo> photos = new ArrayList<>();
 
     public Tomatoes() {
@@ -98,6 +104,13 @@ public class Tomatoes extends MultipartFileAdapter {
         this.tomatoesTaste = tomatoesTaste;
         this.tomatoesSpecificity = tomatoesSpecificity;
         this.isPresent = isPresent;
+    }
+
+    public List<String> getListOfImagesDataBase64() {
+
+        return this.photos.stream()
+                .map(ph -> Base64.encodeBase64String(ph.getContent()))
+                .collect(Collectors.toList());
     }
 
     public ObjectId getId() {
