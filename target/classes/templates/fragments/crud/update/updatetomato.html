@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
-    <div th:replace="fragments/head :: head"></div>
+    <div th:replace="fragments/headers/head :: head"></div>
 </head>
 
 <div th:fragment="updatetomato">
@@ -75,7 +75,7 @@
                         <input type="text"
                                name="tomatoesDiameter"
                                align="middle"
-                               placeholder="Диаметр плода"/>
+                               placeholder="Диаметр куста"/>
                     </label>
                     <label>
                         <input type="text"
@@ -87,10 +87,10 @@
                         <input type="text"
                                name="tomatoesFlowerpot"
                                align="middle"
-                               placeholder="Кашпо"/>
+                               placeholder="Выращивание"/>
                     </label>
                     <label for="tomatoesAgroTech">
-                        <strong>Агротехника</strong>
+                        <strong>Созревание</strong>
                     </label>
                     <textarea class="form-control"
                               name="tomatoesAgroTech"
