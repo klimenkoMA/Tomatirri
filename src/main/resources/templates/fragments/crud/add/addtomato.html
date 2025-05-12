@@ -44,13 +44,6 @@
                                     th:text="${element}"></option>
                         </select>
                     </label>
-                    <label class="d-flex justify-content-center align-items-center">
-                        <select class="form-select-custom" name="isPresent">
-                            <option value="0">В наличии</option>
-                            <option th:each="element : ${isPresentList}"
-                                    th:text="${element}"></option>
-                        </select>
-                    </label>
                     <label>
                         <input type="text"
                                name="tomatoesName"
@@ -67,7 +60,7 @@
                         <input type="text"
                                name="tomatoesDiameter"
                                align="middle"
-                               placeholder="Диаметр плода"/>
+                               placeholder="Диаметр куста"/>
                     </label>
                     <label>
                         <input type="text"
@@ -116,11 +109,12 @@
                               rows="3"
                               style="border: 1px solid #4ed652;
                               box-shadow: 0 0 0 1px #bcd3e9;"></textarea>
-                    <label>
-                        <input type="text"
-                               name="tomatoesPrice"
-                               align="middle"
-                               placeholder="Цена"/>
+                    <label class="d-flex justify-content-center align-items-center">
+                        <select class="form-select-custom" name="isPresent">
+                            <option value="0">В наличии</option>
+                            <option th:each="element : ${isPresentList}"
+                                    th:text="${element}"></option>
+                        </select>
                     </label>
                     <label class="d-flex justify-content-center align-items-center
                         button custom-file-upload"

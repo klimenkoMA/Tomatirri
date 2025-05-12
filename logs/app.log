@@ -86,3 +86,52 @@ Caused by: com.mongodb.MongoTimeoutException: Timed out after 30000 ms while wai
 2025-05-11 15:10:36.634  WARN 14332 --- [http-nio-8080-exec-2] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername: INITIALISATION
 2025-05-11 15:10:36.698  WARN 14332 --- [http-nio-8080-exec-2] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername Successful authorization with user: u
 2025-05-11 15:10:36.700  WARN 14332 --- [http-nio-8080-exec-2] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername User's role is : ADMIN
+2025-05-11 17:04:55.455  WARN 10588 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-11 17:05:22.650  WARN 10588 --- [http-nio-8080-exec-7] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername: INITIALISATION
+2025-05-11 17:05:22.717  WARN 10588 --- [http-nio-8080-exec-7] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername Successful authorization with user: u
+2025-05-11 17:05:22.719  WARN 10588 --- [http-nio-8080-exec-7] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername User's role is : ADMIN
+2025-05-11 17:08:40.411  WARN 10588 --- [http-nio-8080-exec-9] a.controller.TomatoesController          : *** TomatoesController.addTomato():  Attribute has a null value! ***
+2025-05-11 17:11:24.048  WARN 14228 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-11 17:13:25.858  WARN 14228 --- [http-nio-8080-exec-6] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername: INITIALISATION
+2025-05-11 17:13:25.935  WARN 14228 --- [http-nio-8080-exec-6] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername Successful authorization with user: u
+2025-05-11 17:13:25.938  WARN 14228 --- [http-nio-8080-exec-6] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername User's role is : ADMIN
+2025-05-11 17:15:32.082  WARN 14228 --- [http-nio-8080-exec-8] a.controller.TomatoesController          : *** TomatoesController.addTomato():  Attribute has a null value! ***
+2025-05-11 17:18:39.844  WARN 7444 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-11 17:18:51.522  WARN 7444 --- [http-nio-8080-exec-1] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [177] milliseconds.
+2025-05-11 17:18:57.341  WARN 7444 --- [http-nio-8080-exec-6] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername: INITIALISATION
+2025-05-11 17:18:57.445  WARN 7444 --- [http-nio-8080-exec-6] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername Successful authorization with user: u
+2025-05-11 17:18:57.446  WARN 7444 --- [http-nio-8080-exec-6] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername User's role is : ADMIN
+2025-05-11 17:20:31.491  WARN 7444 --- [http-nio-8080-exec-5] a.controller.TomatoesController          : *** TomatoesController.addTomato():  Attribute has a null value! ***
+2025-05-11 17:26:40.839  WARN 7444 --- [http-nio-8080-exec-3] a.controller.TomatoesController          : *** TomatoesController.addTomato():  Attribute has a null value! ***
+2025-05-11 17:28:01.648  WARN 9940 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-11 17:29:16.071  WARN 9940 --- [http-nio-8080-exec-7] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername: INITIALISATION
+2025-05-11 17:29:16.136  WARN 9940 --- [http-nio-8080-exec-7] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername Successful authorization with user: u
+2025-05-11 17:29:16.138  WARN 9940 --- [http-nio-8080-exec-7] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername User's role is : ADMIN
+2025-05-11 17:31:13.398  WARN 9940 --- [http-nio-8080-exec-5] a.controller.TomatoesController          : *** TomatoesController.addTomato():  Attribute has a null value! ***
+category: Штамбовый
+tomatoesName: Фузи Вузи (Fuzzy Wuzzy) или Маленькое чудо
+tomatoesHeight: до 40см
+tomatoesDiameter: до 80см
+tomatoesFruit: до 50г
+tomatoesFlowerpot: 4-6л
+tomatoesAgroTech: семена хорошо прорастают в любом субстрате, МВП и на влажном диске. Сроки всхожести от 2х дней. 
+tomatoesDescription: это ампельный томат с очень красивой пушистой листвой холодного оттенка и полосатыми пушистыми плодами. Урожайный, отлично вяжет до самых холодов. Неприхотлив в питании и условиях. Можно формировать как угодно, или вообще не формировать. Если нет места просто оставляете столько ствола и пасынков на сколько места есть. Растёт в любых системах выращивания и способен дать немного плодов даже зимой на южном солнечном окне без досветки.
+tomatoesTaste: нейтральный, не кислый и не сладкий. Шкура толстая. Это его единственный минус. С второй волны урожая появляется сладость. 
+2025-05-11 17:34:02.619  WARN 4608 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-11 17:34:08.720  WARN 4608 --- [http-nio-8080-exec-1] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [151] milliseconds.
+2025-05-11 17:34:13.153  WARN 4608 --- [http-nio-8080-exec-7] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername: INITIALISATION
+2025-05-11 17:34:13.258  WARN 4608 --- [http-nio-8080-exec-7] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername Successful authorization with user: u
+2025-05-11 17:34:13.260  WARN 4608 --- [http-nio-8080-exec-7] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername User's role is : ADMIN
+2025-05-11 18:43:07.561  WARN 4608 --- [http-nio-8080-exec-1] a.controller.TomatoesController          : *** TomatoesController.addTomato():  Attribute has a null value! ***
+category: Индетерминантный
+tomatoesName: Черри гибриды F2: Пульсион, Снекион, Ивердион и Ханаду
+tomatoesHeight: 999
+tomatoesDiameter: 999
+tomatoesFruit: до 20г
+tomatoesFlowerpot: 15л
+tomatoesAgroTech: семена хорошо прорастают в любом субстрате, МВП и на влажном диске. Сроки всхожести от 2х дней. Вести можно в 1-2 ствола, обязательны подвязка и пасынкование. Лиану, после сбора нижних кистей, можно приспускать. В квартире нужно место и формировка в 1 ствол и и 7-9 кистей. 
+tomatoesDescription: эти гибриды предназначены для профессиональных теплиц, у них растянутое плодоношение и товарный вид кистей. Вы могли видеть этот тип черри под названием Медовые в Магнитах и Пятёрочках. Все росли у меня на балконе в 25ти литровых кашпо по двое. Все были отличные, но мне самым вкусным показался, Ханаду. Он и Ивердион  более компактные, с короткими междоузлиями в сравнении с Пульсионом и Снэкионом. 
+tomatoesTaste: ***
+2025-05-11 18:48:24.473  WARN 4608 --- [http-nio-8080-exec-3] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername: INITIALISATION
+2025-05-11 18:48:24.481  WARN 4608 --- [http-nio-8080-exec-3] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername Successful authorization with user: u
+2025-05-11 18:48:24.482  WARN 4608 --- [http-nio-8080-exec-3] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername User's role is : ADMIN
