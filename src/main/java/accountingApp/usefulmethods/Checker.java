@@ -10,7 +10,7 @@ public class Checker {
                 || attr.equals("")
                 || attr.isEmpty()
                 || attr.equals(" ")
-                || !attr.matches(".*[\\p{L}\\p{N}].");
+                || !attr.matches(".*[\\p{L}\\p{N}].*");
 
         return isValid;
     }

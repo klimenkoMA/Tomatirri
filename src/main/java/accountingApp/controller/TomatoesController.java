@@ -72,7 +72,7 @@ public class TomatoesController {
             , @RequestParam String tomatoesAgroTech
             , @RequestParam String tomatoesDescription
             , @RequestParam String tomatoesTaste
-            , @RequestParam String tomatoesSpecificity
+            , @RequestParam(required = false) String tomatoesSpecificity
             , @RequestParam(required = false) String isPresent
             , @RequestParam(value = "content", required = false) MultipartFile[] content
             , Model model
@@ -88,7 +88,17 @@ public class TomatoesController {
                 || checker.checkAttribute(tomatoesTaste)
         ) {
             logger.warn("*** TomatoesController.addTomato():" +
-                    "  Attribute has a null value! ***");
+                    "  Attribute has a null value! ***" +
+                    "\ncategory: " + category +
+                    "\ntomatoesName: " + tomatoesName +
+                    "\ntomatoesHeight: " + tomatoesHeight +
+                    "\ntomatoesDiameter: " + tomatoesDiameter +
+                    "\ntomatoesFruit: " + tomatoesFruit +
+                    "\ntomatoesFlowerpot: " + tomatoesFlowerpot +
+                    "\ntomatoesAgroTech: " + tomatoesAgroTech +
+                    "\ntomatoesDescription: " + tomatoesDescription +
+                    "\ntomatoesTaste: " + tomatoesTaste
+                    );
             return getTomatoes(model);
         }
 
@@ -203,9 +213,9 @@ public class TomatoesController {
             long count = 0;
 
             createPhotoList(content, photos, count);
-            if (!photos.isEmpty()){
+            if (!photos.isEmpty()) {
                 tomato.setPhotos(photos);
-            }else{
+            } else {
                 tomato.setPhotos(tomato.getPhotos());
             }
 
@@ -344,7 +354,7 @@ public class TomatoesController {
                                        String value) {
         if (!checker.checkAttribute(value)) {
             setter.accept(value.trim());
-        }else{
+        } else {
             setter.accept(getter.get());
         }
     }
