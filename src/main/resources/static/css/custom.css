@@ -17,18 +17,12 @@ html, body {
 
 }
 
-.header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    min-height: 80px;
-    max-height: 110px;
-    background: #198754;
-    outline: none;
-    text-shadow: #002349 2px 3px 4px;
-    padding-left: 3%;
-    padding-right: 3%;
+.container {
+    min-width: 90%;
+}
+
+.me-10 {
+    margin-right: 15rem;
 }
 
 .page-name {
@@ -55,9 +49,7 @@ html, body {
 .main {
     flex: 1 1 auto;
     max-width: 100%;
-    align-items: center;
-    justify-content: center;
-    vertical-align: top;
+    margin-left: 0;
 }
 
 .main-work {
@@ -187,55 +179,6 @@ input::placeholder {
 
 input[type="file"] {
     display: none; /* Скрыть стандартный элемент input */
-}
-
-.mid_part {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 5px 8%;
-}
-
-.mid_part_2 {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 5px 8%;
-}
-
-.mid_part_3 {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 5px 8%;
-}
-
-.mid_part_4 {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 5px 8%;
-}
-
-.mid_part_5 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 5px 8%;
-    vertical-align: middle;
-}
-
-.mid_part_6 {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 5px 8%;
 }
 
 .db_table_border {

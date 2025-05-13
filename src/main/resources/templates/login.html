@@ -4,15 +4,16 @@
 
 <head>
 
-       <title>Login </title>
+    <title>Login </title>
     <div th:replace="fragments/headers/head :: head"></div>
 
     <link rel="stylesheet" href="css/security.css">
 
 </head>
 <body>
+
 <div class="wrapper">
-      <header class="modal-header bg-success container" style="min-height: 10%
+    <header class="modal-header bg-success container" style="min-height: 10%
             ;text-shadow: 2px 2px 4px black">
         <div class="w-100 container text-center text-light fs-2 h-100 p-3 m-3 fw-bold">
             Семена seeds_Ri
@@ -24,10 +25,13 @@
                 Неправильное имя или пароль.
             </div>
             <form th:action="@{/login}" method="post" style="display: grid">
-                <div style="justify-self: center"><label> <input type="text" name="username" placeholder="Логин" style="width: 15rem;
+                <div style="justify-self: center"><label> <input type="text" name="username" placeholder="Логин"
+                                                                 style="width: 15rem;
                         margin-bottom: 4%"/> </label></div>
-                <div style="justify-self: center"><label> <input type="password" name="password" placeholder="Пароль"
-                                                                 style="width: 15rem; margin-bottom: 4%"/> </label>
+                <div style="justify-self: center"><label> <input type="password" name="password"
+                                                                 placeholder="Пароль"
+                                                                 style="width: 15rem; margin-bottom: 4%"/>
+                </label>
                 </div>
                 <div align="center" style="justify-self: center">
                     <button class="btn btn-success gap-2" type="submit" style="margin-top: 5%">Войти</button>
@@ -44,3 +48,4 @@
 </div>
 </body>
 </html>
+

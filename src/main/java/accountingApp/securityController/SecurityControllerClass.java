@@ -2,7 +2,9 @@ package accountingApp.securityController;
 
 import accountingApp.entity.TomatirriUser;
 import accountingApp.entity.Role;
+import accountingApp.entity.Tomatoes;
 import accountingApp.service.TomatirriUserService;
+import accountingApp.service.TomatoesService;
 import accountingApp.usefulmethods.Checker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RequestMapping
 @Controller
@@ -25,6 +28,7 @@ public class SecurityControllerClass {
     final Logger logger = LoggerFactory.getLogger(SecurityControllerClass.class);
 
     private final TomatirriUserService service;
+    private final TomatoesService tomatoesService;
     private final Checker checker;
 
     @Bean
@@ -33,14 +37,23 @@ public class SecurityControllerClass {
     }
 
     @Autowired
-    public SecurityControllerClass(TomatirriUserService service, Checker checker) {
+    public SecurityControllerClass(TomatirriUserService service,
+                                   Checker checker,
+                                   TomatoesService tomatoesService) {
         this.service = service;
         this.checker = checker;
+        this.tomatoesService = tomatoesService;
     }
 
     @GetMapping("/")
     @PreAuthorize("isAuthenticated()")
-    public String getHome() {
+    public String getHome(Model model) {
+        List<Tomatoes> tomatoesList = tomatoesService.findAllTomatoes()
+                .stream()
+                .sorted(Comparator.comparingLong(Tomatoes::getIdCount).reversed())
+                .collect(Collectors.toList());
+        model.addAttribute("tomatoesList", tomatoesList);
+
         return "main";
     }
 

@@ -5,98 +5,229 @@
 <head>
     <div th:replace="fragments/headers/head :: head"></div>
 </head>
-<div class="container row-cols-1" th:fragment="carousel">
-    <div class="container modal-body text-center position-static">
-        <div class="row justify-content-center" style="background-color: coral; border-radius: 1rem">
-            <div id="carousel-example-captions" class="carousel slide"
-                 style="width: 80%; height: 12rem; margin-bottom: 1rem"
-                 data-bs-interval="5000" data-bs-ride="carousel">
+<div class="container row-cols-1 m-0"
+     th:fragment="carousel">
+    <div class="container text-center w-50">
+        <div class="row justify-content-center"
+             style="background-color: coral;
+             max-width: 80rem;
+             border-radius: 1rem">
+            <div id="carousel-example-captions"
+                 class="carousel slide"
+                 style="width: 80%;
+                 height: 20rem;
+                 margin-bottom: 1rem"
+                 data-bs-interval="5000"
+                 data-bs-ride="carousel">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carousel-example-captions" data-bs-slide-to="0"
+                    <button type="button"
+                            data-bs-target="#carousel-example-captions"
+                            data-bs-slide-to="0"
                             class="active"
-                            aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carousel-example-captions" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carousel-example-captions" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#carousel-example-captions" data-bs-slide-to="3"
-                            aria-label="Slide 4"></button>
-                    <button type="button" data-bs-target="#carousel-example-captions" data-bs-slide-to="4"
-                            aria-label="Slide 5"></button>
-                    <button type="button" data-bs-target="#carousel-example-captions" data-bs-slide-to="5"
-                            aria-label="Slide 6"></button>
-                    <button type="button" data-bs-target="#carousel-example-captions" data-bs-slide-to="6"
-                            aria-label="Slide 7"></button>
+                            aria-current="true"
+                            aria-label="Slide 1">
+                    </button>
+                    <button type="button"
+                            data-bs-target="#carousel-example-captions"
+                            data-bs-slide-to="1"
+                            aria-label="Slide 2">
+                    </button>
+                    <button type="button"
+                            data-bs-target="#carousel-example-captions"
+                            data-bs-slide-to="2"
+                            aria-label="Slide 3">
+                    </button>
+                    <button type="button"
+                            data-bs-target="#carousel-example-captions"
+                            data-bs-slide-to="3"
+                            aria-label="Slide 4">
+                    </button>
+                    <button type="button"
+                            data-bs-target="#carousel-example-captions"
+                            data-bs-slide-to="4"
+                            aria-label="Slide 5">
+                    </button>
+                    <button type="button"
+                            data-bs-target="#carousel-example-captions"
+                            data-bs-slide-to="5"
+                            aria-label="Slide 6">
+                    </button>
+                    <button type="button"
+                            data-bs-target="#carousel-example-captions"
+                            data-bs-slide-to="6"
+                            aria-label="Slide 7">
+                    </button>
                 </div>
-                <div class="carousel-inner" style="padding-top: 4%">
+                <div class="carousel-inner"
+                     style="padding-top: 4%;
+                        text-shadow: 3px 3px 5px black;">
                     <div class="carousel-item active">
-                        <img src="../img/events.png" class="d-block h-100" alt="First">
-                        <div class="carousel-caption d-none d-md-block h-100 p-1">
-                            <h4><strong>СОБЫТИЯ</strong></h4>
-                            <h5> <p>Вкладка "События" показывает историю использования оборудования.
-                                Дата, ФИО сотрудников, название оборудования, действие с оборудованием</p></h5>
+                        <img src="../img/carousel/CherrySummer1.jpg"
+                             style="border-radius: 20%;
+                             margin-right: 5rem;
+                             max-height: 15rem;
+                             min-width: 15rem;"
+                             class="d-block h-100"
+                             alt="First">
+                        <div class="carousel-caption d-none d-md-block h-100 p-1 text-light"
+                             style="margin-left: 10rem">
+                            <h3 style="min-width: 40rem">
+                                <strong>Черри Саммер Сан (Summer Sun)</strong>
+                            </h3>
+                            <h5>
+                                <p style="min-width: 40rem">
+                                    Высота: 2м.
+                                    <br>Диаметр: 45+см
+                                    <br>Плоды: до 35г.
+                                    <br>Кашпо: 15л.
+                                    <br>Агротехника: семена хорошо прорастают
+                                    в любом субстрате, МВП и на влажном диске.
+                                    Сроки всхожести от 2х дней. Формировать в
+                                    1-2 ствола. Обязательна подвязка к опоре.
+                                    В квартире выращивать не рекомендую, он гигантский.
+                                </p>
+                            </h5>
+                        </div>
+
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../img/carousel/ChokoKapelka2.jpg"
+                             style="border-radius: 20%;
+                             margin-right: 5rem;
+                             max-height: 15rem;
+                             min-width: 15rem;"
+                             class="d-block h-100"
+                             alt="Second">
+                        <div class="carousel-caption d-none d-md-block h-100 p-1 text-light"
+                             style="margin-left: 10rem">
+                            <h3 style="min-width: 40rem">
+                                <strong>Черри Шоколадная Капелька</strong>
+                            </h3>
+                            <h5>
+                                <p style="min-width: 40rem">
+                                    Высота: 2м.
+                                    <br>Диаметр: 45+см
+                                    <br>Плоды: 10-20г.
+                                    <br>Кашпо: 15л.
+                                    <br>Агротехника: семена хорошо
+                                    прорастают в любом субстрате, МВП
+                                    и на влажном диске. Сроки всхожести
+                                    от 2х дней. Индетерминантный томат.
+                                    Требуется подвязка. Выращивать в 1-2 ствола,
+                                    пасынковать. В квартире выращивать не рекомендую.
+                                </p>
+                            </h5>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../img/building.png" class="d-block h-100" alt="Second">
-                        <div class="carousel-caption d-none d-md-block h-100 p-2">
-                            <h4><strong>ФИЛИАЛЫ</strong></h4>
-                            <h5><p>Вкладка "Филиалы" отображает дочерние подразделения, бэк-офисы организации</p></h5>
+                        <img src="../img/carousel/NastyaMini1.jpg"
+                             style="border-radius: 20%;
+                             margin-right: 5rem;
+                             max-height: 15rem;
+                             min-width: 15rem;"
+                             class="d-block h-100"
+                             alt="Third">
+                        <div class="carousel-caption d-none d-md-block h-100 p-1"
+                             style="margin-left: 10rem">
+                            <h3 style="min-width: 40rem">
+                                <strong>Микро перец сладкий Настя Мини</strong>
+                            </h3>
+                            <h5>
+                                <p style="min-width: 40rem">
+                                    Высота: 15см.
+                                    <br>Диаметр: 20см
+                                    <br>Плоды: 5г.
+                                    <br>Кашпо: 0,5-1л.
+                                    <br>Агротехника: Семена всходят на до 20 дней,
+                                    Этот перчик не нуждается не в какой формировке.
+                                    Растёт на южном окне зимой без досветки.
+                                    При регулярной подкормке плодоносит волнами постоянно.
+                                </p>
+                            </h5>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../img/laptop.png" class="d-block h-100" alt="Third">
-                        <div class="carousel-caption d-none d-md-block h-100 p-2 m-1">
-                            <h4><strong>ОБОРУДОВАНИЕ</strong></h4>
-                            <h5><p>Вкладка "Оборудование" показывает компьютерную технику, которая используется
-                             в организации</p></h5>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../img/carousel/document.png" class="d-block h-100" alt="Fourth">
+                        <img src="../img/carousel/document.png"
+                             class="d-block h-100"
+                             alt="Fourth">
                         <div class="carousel-caption d-none d-md-block h-100 p-2 m-1">
                             <h4><strong>ДОКУМЕНТЫ</strong></h4>
-                            <h5><p>Вкладка "Документы" показывает документацию к оборудованию, инструкции, комментарии
-                             </p></h5>
+                            <h5>
+                                <p>
+                                    Вкладка "Документы" показывает
+                                    документацию к оборудованию,
+                                    инструкции, комментарии
+                                </p>
+                            </h5>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../img/employees.png" class="d-block h-100" alt="Fifth">
+                        <img src="../img/employees.png"
+                             class="d-block h-100"
+                             alt="Fifth">
                         <div class="carousel-caption d-none d-md-block h-100 p-2 m-1">
                             <h4><strong>СОТРУДНИКИ</strong></h4>
-                            <h5><p>Вкладка "Сотрудники" показывает список сотрудников организации, которые пользуются
-                                компьютерным оборудованием
-                             </p></h5>
+                            <h5>
+                                <p>
+                                    Вкладка "Сотрудники" показывает
+                                    список сотрудников организации,
+                                    которые пользуются
+                                    компьютерным оборудованием
+                                </p>
+                            </h5>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../img/coders.png" class="d-block h-100" alt="Sixth">
+                        <img src="../img/coders.png"
+                             class="d-block h-100"
+                             alt="Sixth">
                         <div class="carousel-caption d-none d-md-block h-100 p-2 m-1">
                             <h4><strong>СПЕЦИАЛИСТЫ IT</strong></h4>
-                            <h5><p>Вкладка "Специалисты ИТ" показывает список программистов и инженеров организации, которые следят за
-                                компьютерным оборудованием
-                             </p></h5>
+                            <h5>
+                                <p>
+                                    Вкладка "Специалисты ИТ"
+                                    показывает список программистов
+                                    и инженеров организации,
+                                    которые следят за
+                                    компьютерным оборудованием
+                                </p>
+                            </h5>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../img/rooms.png" class="d-block h-100" alt="Seventh">
+                        <img src="../img/rooms.png"
+                             class="d-block h-100"
+                             alt="Seventh">
                         <div class="carousel-caption d-none d-md-block h-100 p-2 m-1">
                             <h4><strong>КАБИНЕТЫ</strong></h4>
-                            <h5><p>Вкладка "Кабинеты" показывает список кабинетов всех филиалов организации
-                             </p></h5>
+                            <h5>
+                                <p>
+                                    Вкладка "Кабинеты"
+                                    показывает список кабинетов
+                                    всех филиалов организации
+                                </p>
+                            </h5>
                         </div>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button"
+                <button class="carousel-control-prev"
+                        type="button"
                         data-bs-target="#carousel-example-captions"
-                        data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        data-bs-slide="prev"
+                        style="margin-left: -10rem">
+                    <span class="carousel-control-prev-icon"
+                          aria-hidden="true">
+                    </span>
                     <span class="visually-hidden">Предыдущий</span>
                 </button>
-                <button class="carousel-control-next" type="button"
+                <button class="carousel-control-next"
+                        type="button"
                         data-bs-target="#carousel-example-captions"
-                        data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        data-bs-slide="next"
+                        style="margin-right: -10rem;">
+                    <span class="carousel-control-next-icon"
+                          aria-hidden="true">
+                    </span>
                     <span class="visually-hidden">Следующий</span>
                 </button>
             </div>
