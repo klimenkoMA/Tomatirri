@@ -98,7 +98,7 @@ public class TomatoesController {
                     "\ntomatoesAgroTech: " + tomatoesAgroTech +
                     "\ntomatoesDescription: " + tomatoesDescription +
                     "\ntomatoesTaste: " + tomatoesTaste
-                    );
+            );
             return getTomatoes(model);
         }
 
@@ -323,20 +323,6 @@ public class TomatoesController {
                 .findFirst()
                 .orElse(tomato.getIsPresent());
         tomato.setIsPresent(tomatoIsPresent);
-//
-//        if (checker.checkAttribute(tomatoesName)){
-//            tomatoesName = tomato.getTomatoesName();
-//        }
-//
-//        String specificityValue;
-//        if (!checker.checkAttribute(tomatoesSpecificity)) {
-//            specificityValue = tomatoesSpecificity.trim();
-//            tomato.setTomatoesSpecificity(specificityValue);
-//        } else {
-//            updateFieldIfProvided(tomato::setTomatoesSpecificity,
-//                    tomato::getTomatoesSpecificity,
-//                    tomato.getTomatoesSpecificity());
-//        }
 
         updateFieldIfProvided(tomato::setTomatoesSpecificity, tomato::getTomatoesSpecificity, tomatoesSpecificity);
         updateFieldIfProvided(tomato::setTomatoesName, tomato::getTomatoesName, tomatoesName);
@@ -404,9 +390,7 @@ public class TomatoesController {
 
             for (Tomatoes t : tomatoes
             ) {
-                if ((t.getId() + "").contains(attrTrim)) {
-                    tomatoesList.add(t);
-                } else if (t.getCategory().getCategory().contains(attrTrim)) {
+                if (t.getCategory().getCategory().contains(attrTrim)) {
                     tomatoesList.add(t);
                 } else if (t.getTomatoesName().contains(attrTrim)) {
                     tomatoesList.add(t);

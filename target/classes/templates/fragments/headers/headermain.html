@@ -5,12 +5,100 @@
 <head>
     <div th:replace="fragments/headers/head :: head"></div>
 </head>
-<header class="modal-header bg-success container"
+<header class="bg-success container"
         style="height: 10%;
         margin-bottom: 1rem;
         display: grid;
         border-radius: 1rem;"
         th:fragment="headermain">
+    <div id="top" class="top-menu">
+        <div class="container">
+            <div class="top-menu__links">
+                <div class="top-links btn-group">
+<!--                    <button class="top-menu__btn dropdown-toggle"-->
+<!--                            data-toggle="dropdown">-->
+<!--                        <i class="fas fa-bars">-->
+<!--                        </i>-->
+<!--                    </button>-->
+                    <ul class="top-links__ul dropdown-menu dropdown-menu-left">
+                        <li class="top-links__li">
+                            <a class="top-links__a"
+                               href="delivery"
+                               title="Оплата и доставка">
+                                Оплата и доставка
+                            </a>
+                        </li>
+                        <li class="top-links__li">
+                            <a class="top-links__a"
+                               href="contacts"
+                               title="Контакты и схема проезда">
+                                Контакты и схема проезда
+                            </a>
+                        </li>
+                        <li class="top-links__li">
+                            <a class="top-links__a"
+                               href="about_us"
+                               title="О компании">
+                                О компании
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="top-menu__buttons">
+                <div class="top-menu__wishlist status-2"
+                     data-products="">
+                    <div class="btn-group">
+                        <button class="top-menu__btn top-menu__wishlist-btn uni-href"
+                                data-href="/">
+                            <i class="far fa-heart"></i>
+                            <span class="top-menu__btn-text">
+                                Избранное
+                            </span>
+                            <span class="top-menu__wishlist-total uni-badge">0</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="top-menu__compare status-2" data-products="">
+                    <div class="btn-group">
+                        <button class="top-menu__btn top-menu__compare-btn uni-href"
+                                data-href="/">
+                            <i class="top-menu__compare-icon fas fa-align-right"></i>
+                            <span class="top-menu__btn-text">Сравнение</span>
+                            <span class="top-menu__compare-total uni-badge">0</span>
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="top-menu__account status-1">
+                    <div id="account" class="btn-group">
+                        <button class="top-menu__btn dropdown-toggle"
+                                data-toggle="dropdown">
+                            <i class="far fa-user"></i>
+                            <span class="top-menu__btn-text">Личный кабинет</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                                <a onclick="uniLoginOpen();">
+                                    <i class="fas fa-fw fa-sign-in-alt"></i>
+                                    Авторизация
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="uniRegisterOpen();">
+                                <i class="fas fa-fw fa-user-plus">
+                                </i>
+                                    Регистрация
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container text-center text-light fs-2 h-100"
          style="justify-self: center;
          display: grid">
