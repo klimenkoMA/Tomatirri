@@ -10,16 +10,15 @@
 <body>
 <div class="wrapper d-flex">
     <div th:replace="fragments/headers/headermain :: headermain"></div>
-    <main class="main"
-          style="display: grid">
+    <main class="main d-flex flex-column">
 
-        <div th:replace="fragments/carousel :: carousel"></div>
+        <div class="d-flex m-0" th:replace="fragments/carousel :: carousel"></div>
 
-        <div th:replace="fragments/advantage :: advantage"></div>
+        <div class="d-flex" th:replace="fragments/advantage :: advantage"></div>
 
-        <div th:replace="fragments/cards :: cards"></div>
+        <div class="d-flex" th:replace="fragments/cards :: cards"></div>
 
-        <div th:replace="fragments/videomain :: videomain"></div>
+<!--        <div th:replace="fragments/videomain :: videomain"></div>-->
 
 <!--        <div th:replace="fragments/accordion :: accordion"></div>-->
 

@@ -5,29 +5,44 @@
 <head>
     <div th:replace="fragments/headers/head :: head"></div>
 </head>
-<header class="bg-success container"
+<header class="bg-success container d-flex flex-column"
         style="height: 10%;
-        margin-bottom: 1rem;
-        display: grid;
+        margin-bottom: 0.5rem;
         border-radius: 1rem;"
         th:fragment="headermain">
-    <div id="top" class="top-menu">
-        <div class="container">
-
-        </div>
+    <div class="w-100 fs-6 text-light text-start"
+         style="padding-left: 5%;
+    text-shadow: 2px 2px 4px black"
+    >
+        <ul class="d-flex flex-row list-unstyled">
+            <li class="me-5">Оплата</li>
+            <li class="me-5">Контакты</li>
+            <li>О компании</li>
+            <li class="ms-auto pe-5 fs-4">Выход</li>
+        </ul>
     </div>
 
+    <div class="w-100 d-flex justify-content-start align-items-center"
+         style="padding-left: 5%">
+        <div class="text-center position-sticky text-light fs-2 fw-bold d-flex flex-row"
+             style="text-shadow: 2px 2px 4px black">
 
-    <div class="container text-center text-light fs-2 h-100"
-         style="justify-self: center;
-         display: grid">
+            <ul class="d-flex flex-column list-unstyled me-5">
+                <li><img src="../img/logo/ri_logo.png"
+                         style="max-height: 15vh;
+                 max-width: 15vh;
+                 border-radius: 20%;
+                 justify-self: center;"
+                 alt="irri_logo">
+                </li>
+            </ul>
+            <ul class="d-flex flex-row list-unstyled fs-5 h-25 align-self-end">
+                <li class="me-10">Новости</li>
+                <li class="me-10">Каталог семян</li>
+                <li class="me-10">Акции</li>
+                <li>Фотогалерея</li>
+            </ul>
 
-        <div class="text-center position-sticky text fw-bold"
-             style="width: 72%;
-             padding-top: 1%;
-             justify-self: center;
-             text-shadow: 2px 2px 4px black">
-            Семена seeds_Ri
         </div>
     </div>
 </header>
