@@ -7,8 +7,7 @@
 </head>
 <header class="bg-success container d-flex flex-column"
         style="height: 10%;
-        margin-bottom: 0.5rem;
-        border-radius: 1rem;"
+        margin-bottom: 0.5rem;"
         th:fragment="headermain">
     <div class="w-100 fs-6 text-light text-start"
          style="padding-left: 5%;
@@ -18,7 +17,20 @@
             <li class="me-5">Оплата</li>
             <li class="me-5">Контакты</li>
             <li>О компании</li>
-            <li class="ms-auto pe-5 fs-5">Выход</li>
+            <li class="ms-auto pe-5">
+                <form th:action="@{/logout}"
+                      method="post"
+                      style="
+                      align-items: center;
+                      width: 15%;">
+                    <button class="fs-5"
+                            aria-expanded="false"
+                            type="submit"
+                            value="Sign Out">
+                        Выход
+                    </button>
+                </form>
+            </li>
         </ul>
     </div>
 
@@ -28,12 +40,13 @@
              style="text-shadow: 2px 2px 4px black">
 
             <ul class="d-flex flex-column list-unstyled me-5">
-                <li><img src="../img/logo/ri_logo.png"
+                <li><img src="../img/logo/ri_logo_10.jpg"
                          style="max-height: 15vh;
-                 max-width: 15vh;
-                 border-radius: 20%;
+                 min-width: 15vh;
+                 /*border-radius: 20%;*/
+                 box-shadow: 0 0 2px 5px white;
                  justify-self: center;"
-                 alt="irri_logo">
+                         alt="irri_logo">
                 </li>
             </ul>
             <ul class="d-flex flex-row list-unstyled fs-5 h-25 align-self-end">
