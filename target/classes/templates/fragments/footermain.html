@@ -5,22 +5,19 @@
 <head>
     <div th:replace="fragments/headers/head :: head"></div>
 </head>
-<div class="modal-footer container bg-success" style="height: 8%; max-height: 10%; padding-left: 15%;
-        margin-top: 1rem; border-radius: 1rem; text-shadow: 2px 2px 4px black" th:fragment="footermain">
-    <div class="w-75 align-items-center text-center">
-        <p class="text-light m-3 p-3">Cat&Ri &copy 2025</p>
-    </div>
-    <div class="w-25 align-items-center" style="padding-right: 2%">
-        <form th:action="@{/logout}" method="post" style="float: right; align-items: center; width: 15%;
-                                                              padding-bottom: 1%;">
-            <button class="navbar-toggler fs-2"
-                    data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-                    aria-expanded="false" type="submit"
-                    value="Sign Out"><img src="../img/tux.png"
-                                          height="40" width="40"
-                                          alt="Линь">
-            </button>
-        </form>
+<div class="modal-footer container bg-success
+d-flex align-items-center justify-content-center"
+     style="height: 8%;
+     max-height: 10%;
+     margin-top: 1rem;
+     text-shadow: 2px 2px 4px black"
+     th:fragment="footermain">
+    <div class="d-flex flex-row text-center">
+        <p class="m-3 p-3 text-center fs-2"
+        style="color: white;
+            ">
+            <strong>Cat&Ri &copy 2025</strong>
+        </p>
     </div>
 </div>
 </html>
