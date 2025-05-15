@@ -18,7 +18,7 @@ html, body {
 }
 
 .container {
-    min-width: 90%;
+    min-width: 100%;
 }
 
 .me-10 {
@@ -339,4 +339,38 @@ input[type="password"] {
 
 *, *:before, *:after {
     box-sizing: border-box;
+}
+
+/*****************
+* Weather banner *
+******************/
+
+.weather-container {
+    display: flex;
+    justify-content: center;
+    min-height: 21rem;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.weather-widget-wrapper {
+    width: 100%;
+    max-width: 600px;
+    min-height: 21rem;
+    box-shadow: 0 0 2px 1px #198754;
+    text-shadow: 2px 2px 4px black;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .weather-container {
+        min-height: 18rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .weather-container {
+        min-height: 15rem;
+    }
 }
