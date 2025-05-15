@@ -71,7 +71,7 @@
     <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="26">
+          <list size="27">
             <item index="0" class="java.lang.String" itemvalue="nobr" />
             <item index="1" class="java.lang.String" itemvalue="noembed" />
             <item index="2" class="java.lang.String" itemvalue="comment" />
@@ -98,6 +98,7 @@
             <item index="23" class="java.lang.String" itemvalue="html" />
             <item index="24" class="java.lang.String" itemvalue="th:block" />
             <item index="25" class="java.lang.String" itemvalue="option" />
+            <item index="26" class="java.lang.String" itemvalue="ul" />
           </list>
         </value>
       </option>
