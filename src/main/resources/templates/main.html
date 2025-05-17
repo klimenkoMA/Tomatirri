@@ -8,32 +8,22 @@
     <div th:replace="fragments/headers/head :: head"></div>
 </head>
 <body>
-<div class="wrapper d-flex">
+<div class="wrapper d-flex p-0 m-0">
 
-    <main class="main d-flex flex-column">
-        <ul class="d-flex flex-column list-unstyled">
-            <li style="box-sizing: border-box">
-                <div th:replace="fragments/headers/headermain :: headermain"></div>
+    <main class="main d-flex flex-column p-0 m-0">
+        <ul class="d-flex flex-column list-unstyled p-0 m-0">
+            <li class="p-0 m-0">
+                <div class="p-0 m-0"
+                        th:replace="fragments/headers/headermain :: headermain"></div>
             </li>
-
-            <li style="box-sizing: border-box">
-                <div class="d-flex" th:replace="fragments/carousel :: carousel"></div>
+            <li class="p-0 m-0">
+                <div class="d-flex p-0 m-0" th:replace="fragments/cards/cardsmain :: cardsmain"></div>
             </li>
-
-            <!--        <div class="d-flex" th:replace="fragments/advantage :: advantage"></div>-->
-
-            <li style="box-sizing: border-box">
-                <div class="d-flex" th:replace="fragments/cards/cardsmain :: cardsmain"></div>
-            </li>
-
-
-            <!--        <div th:replace="fragments/videomain :: videomain"></div>-->
-
-            <!--        <div th:replace="fragments/accordion :: accordion"></div>-->
         </ul>
     </main>
-    <footer>
-        <div th:replace="fragments/footermain :: footermain"></div>
+    <footer class="p-0 m-0">
+        <div class="p-0 m-0"
+                th:replace="fragments/footermain :: footermain"></div>
     </footer>
 </div>
 </body>

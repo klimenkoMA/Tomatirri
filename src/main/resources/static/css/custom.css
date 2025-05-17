@@ -17,15 +17,26 @@ html, body {
 
 }
 
+.card-main{
+    width: 18rem;
+    min-height: 25rem;
+    color:  #044726;
+    box-shadow: 0 0 3px 1px #467a53;
+}
+
 .container {
-    min-width: 100%;
+    min-width: 99%;
 }
 
 .me-10 {
-    margin-right: 15rem;
+    margin-right: 21rem;
 }
 .me-8 {
     margin-right: 5.2rem;
+}
+
+.me-20 {
+    margin-right: 78rem;
 }
 
 .page-name {
@@ -89,7 +100,7 @@ html, body {
     appearance: none;
     border: 0;
     /*border-radius: 5px;*/
-    background-color: #198754;
+    background-color: #467a53;
     width: 130px;
     height: 5vh;
     color: #fcf6f6;
@@ -108,7 +119,7 @@ html, body {
     appearance: none;
     border: 0;
     /*border-radius: 5px;*/
-    background-color: #198754;
+    background-color: #467a53;
     width: 130px;
     height: 54px;
     line-height: 16px;
@@ -134,7 +145,7 @@ html, body {
 /* Изменение цвета при наведении */
 .carousel-control-prev-icon:hover,
 .carousel-control-next-icon:hover {
-    background-color: #198754;
+    background-color: #467a53;
 }
 
 .popup_try:hover {
@@ -144,7 +155,7 @@ html, body {
 
 .popup_try:focus {
     outline: 4px;
-    box-shadow: 0 0 0 4px #198754;
+    box-shadow: 0 0 0 4px #467a53;
 }
 
 .popup_try_1_row:hover {
@@ -154,7 +165,7 @@ html, body {
 
 .popup_try_1_row:focus {
     outline: 4px;
-    box-shadow: 0 0 0 4px #198754;
+    box-shadow: 0 0 0 4px #467a53;
 }
 
 .popup_form {
@@ -164,7 +175,7 @@ html, body {
     justify-content: center;
     /*border-radius: 15px; !* Закругляем углы *!*/
     background-color: #ffffff;
-    border: 2px solid #198754;
+    border: 2px solid #467a53;
     padding: 28px;
     text-transform: uppercase;
     color: #fcf6f6; /* Цвет текста */
@@ -186,8 +197,8 @@ input::placeholder {
     appearance: none;
     height: 30px;
     width: 9.4rem;
-    border: 0 #198754;
-    box-shadow: 0 0 3px 1px #198754;
+    border: 0 #467a53;
+    box-shadow: 0 0 3px 1px #467a53;
     /*border-radius: 5px;*/
     background: #fcf6f6;
     color: gray;
@@ -205,9 +216,9 @@ input[type="file"] {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    border: 2px solid #198754;
+    border: 2px solid #467a53;
     /*border-radius: 5px;*/
-    box-shadow: 0 0 0 2px #15467a;
+    box-shadow: 0 0 0 2px #467a53;
 }
 
 tr:nth-of-type(even) {
@@ -239,7 +250,7 @@ tr:nth-of-type(odd) {
 
 /* Стиль для ползунка (thumb) */
 ::-webkit-scrollbar-thumb {
-    background-color: #198754; /* Цвет ползунка */
+    background-color: #467a53; /* Цвет ползунка */
     /*border-radius: 6px; !* Закругление углов *!*/
     scroll-margin: 5px;
 
@@ -254,7 +265,7 @@ tr:nth-of-type(odd) {
 }
 
 .footer {
-    background: #198754;
+    background: #467a53;
     font-size: 16px;
     color: #fcf6f6;
     text-align: center;
@@ -266,7 +277,7 @@ button {
     appearance: none;
     border: 0;
     /*border-radius: 5px;*/
-    background: #198754;
+    background: #467a53;
     color: #fcf6f6;
     padding: 2px 5px;
     font-size: 12px;
@@ -280,7 +291,7 @@ button {
 
 .button:focus {
     outline: 4px;
-    box-shadow: 0 0 0 4px #198754;
+    box-shadow: 0 0 0 4px #467a53;
 }
 
 .crud-btn {
@@ -296,8 +307,8 @@ input[type="text"] {
     align-items: center;
     margin: 4px 0;
     padding: 2px;
-    box-shadow: 0 0 3px 1px #198754;
-    border: 0 #198754;
+    box-shadow: 0 0 3px 1px #467a53;
+    border: 0 #467a53;
     min-width: 19.5rem;
     height: 2rem;
 }
@@ -311,9 +322,9 @@ input[type="password"] {
     align-items: center;
     margin: 4px 0;
     padding: 2px;
-    box-shadow: 0 0 3px 1px #198754;
-    /*border-radius: 5px;*/
-    border: 0 #198754;
+    box-shadow: 0 0 3px 1px #467a53;
+    border-radius: 5px;
+    border: 0 #467a53;
     min-width: 19.5rem;
     height: 2rem;
 }
@@ -327,9 +338,9 @@ input[type="password"] {
     align-items: center;
     margin: 4px;
     padding: 2px;
-    box-shadow: 0 0 3px 1px #198754;
+    box-shadow: 0 0 3px 1px #467a53;
     /*border-radius: 5px;*/
-    border: 0 #198754;
+    border: 0 #467a53;
     min-width: 19.5rem;
     height: 2rem;
     text-align: center;
@@ -360,7 +371,7 @@ input[type="password"] {
     width: 100%;
     max-width: 600px;
     min-height: 21rem;
-    box-shadow: 0 0 2px 1px #198754;
+    box-shadow: 0 0 2px 1px #467a53;
     text-shadow: 2px 2px 4px black;
     margin: 0 auto;
 }

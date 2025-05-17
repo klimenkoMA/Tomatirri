@@ -5,56 +5,81 @@
 <head>
     <div th:replace="fragments/headers/head :: head"></div>
 </head>
-<header class="bg-success container d-flex flex-column"
+<header class="container d-flex flex-column p-0 m-0"
         style="height: 10%;
-        margin-bottom: 0.5rem;"
+        min-width: 100%;"
         th:fragment="headermain">
-    <div class="w-100 fs-6 text-light text-start"
-         style="padding-left: 5%;
-    text-shadow: 2px 2px 4px black"
-    >
-        <ul class="d-flex flex-row list-unstyled">
-            <li class="me-5">Оплата</li>
-            <li class="me-5">Контакты</li>
-            <li>О компании</li>
-            <li class="ms-auto pe-5">
-                <form th:action="@{/logout}"
-                      method="post"
-                      style="
-                      align-items: center;
-                      width: 15%;">
-                    <button class="fs-5"
-                            aria-expanded="false"
-                            type="submit"
-                            value="Sign Out">
-                        Выход
-                    </button>
-                </form>
+    <div class="w-100 text-light text-start p-0 m-0">
+        <ul class="d-flex flex-row list-unstyled p-0 m-0"
+            style="color:  #044726;">
+            <li class="ms-auto pe-5 p-0 m-0">
+
+
             </li>
         </ul>
     </div>
 
-    <div class="w-100 d-flex justify-content-start align-items-center"
-         style="padding-left: 5%">
-        <div class="text-center position-sticky text-light fs-2 fw-bold d-flex flex-row"
-             style="text-shadow: 2px 2px 4px black">
+    <div class="d-flex justify-content-start align-items-center p-0 m-0">
 
-            <ul class="d-flex flex-column list-unstyled me-5">
-                <li><img src="../img/logo/ri_logo_10.jpg"
-                         style="max-height: 15vh;
-                 min-width: 15vh;
-                 margin-bottom: 1rem;
-                 box-shadow: 0 0 2px 5px white;
-                 justify-self: center;"
-                         alt="irri_logo">
-                </li>
+        <div class="text-center position-sticky text-light
+        fs-2 fw-bold d-flex flex-column p-0 m-0 w-100"
+             style="text-shadow: 2px 2px 4px black;">
+
+            <ul class="d-flex flex-column list-unstyled me-1 align-self-start">
+                <ul class="d-flex flex-row list-unstyled me-1 align-self-start">
+                    <li class="me-20"
+                        style="padding-left: 13rem">
+                        <a th:href="@{/}" style="display: inline-block">
+                            <img src="../img/logo/ri_logo_11.png"
+                                 style="max-height: 18vh;
+                                    min-width: 8vh;
+                                    box-shadow: 0 0 2px 5px white;
+                                    justify-self: center;"
+                                 alt="irri_logo">
+                        </a>
+                    </li>
+                    <li class="d-flex justify-content-end w-100 align-self-center">
+                        <form th:action="@{/logout}"
+                              class="p-0 m-0 d-flex justify-content-end w-100"
+                              method="post"
+                              style="
+                      align-items: center;
+                      max-height: 1rem;">
+                            <button class="fs-5 bg-white p-0 me-3"
+                                    aria-expanded="false"
+                                    type="submit"
+                                    value="Sign Out"
+                                    style="
+                                    text-shadow: none;
+                                    color:  #044726">
+                                <strong>Выход</strong>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
             </ul>
-            <ul class="d-flex flex-row list-unstyled fs-5 h-25 align-self-end"
-            style="margin-bottom: 1rem">
-                <li class="me-10">Новости</li>
-                <li class="me-10">Каталог семян</li>
-                <li class="me-10">Акции</li>
-                <li>Фотогалерея</li>
+            <ul class="d-flex flex-row list-unstyled fs-5 h-50 align-self-end
+            text-center"
+                style="
+            background-color: #467a53;
+            width: 100%;
+            min-height: 4rem;">
+                <li class="me-10 d-flex align-self-center"
+                    style="padding-left: 15rem;">
+                    <select class="form-select" aria-label=""
+                    onchange="window.location.href =
+                    this.options[this.selectedIndex].getAttribute('data-url');">
+                        <option selected>Каталог семян</option>
+                        <option value=1 data-url="/tomatoes">Томаты</option>
+                        <option value="2">Два</option>
+                        <option value="3">Три</option>
+                    </select>
+                </li>
+                <li class="me-10 d-flex align-self-center">Новости</li>
+                <li class="me-10 d-flex align-self-center">Акции</li>
+                <li class="d-flex align-self-center">
+                    Фотогалерея
+                </li>
             </ul>
         </div>
     </div>

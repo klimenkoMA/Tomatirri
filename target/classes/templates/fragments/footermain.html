@@ -5,52 +5,18 @@
 <head>
     <div th:replace="fragments/headers/head :: head"></div>
 </head>
-<div class="container bg-success d-flex flex-column"
+<div class="container d-flex flex-column p-0 m-0"
      style="
      height: 8%;
+     background-color: #467a53;
+     min-width: 100%;
      max-height: 20%;
      margin-top: 1rem;
      text-shadow: 2px 2px 4px black"
      th:fragment="footermain">
-    <ul class="d-flex flex-row text-center m-0"
-        style="padding-left: 5%">
-        <li class="d-flex flex-row list-unstyled">
-            <ul class="d-flex flex-column list-unstyled m-0 p-0">
-                <li class="d-flex flex-row list-unstyled">
-                    <ul class="d-flex flex-row list-unstyled m-0 p-0">
-                        <li class="me-8 text-light text-start list-unstyled">
-                            Будьте в центре событий - подпишитесь на наши новости!
-                            <br> Новинки, скидки, акции.
-                        </li>
-                        <li class="d-flex flex-row list-unstyled w-100">
-                            <div class="bg-success-subtle d-flex flex-row w-100">
-                                <div class="input-group mb-3 w-100">
-                                    <span class="input-group-text"
-                                          id="basic-addon1">@</span>
-                                    <input type="text"
-                                           class="form-control flex-grow-1"
-                                           placeholder="Имя пользователя"
-                                           aria-label="Имя пользователя"
-                                           aria-describedby="basic-addon1">
-                                </div>
-                            </div>
-                        </li>
 
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li class="d-flex flex-row list-unstyled">
-
-        </li>
-        <li class="d-flex flex-row list-unstyled">
-
-        </li>
-        <li class="d-flex flex-row list-unstyled">
-            <div class="container m-3 p-3 text-center fs-2 text-light">
-                <strong>Cat&Ri &copy 2025</strong>
-            </div>
-        </li>
-    </ul>
+    <div class="container m-3 p-3 text-center fs-2 text-light">
+        <strong>Cat&Ri &copy 2025</strong>
+    </div>
 </div>
 </html>
