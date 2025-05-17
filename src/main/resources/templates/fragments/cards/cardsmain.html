@@ -9,63 +9,47 @@
      th:fragment="cardsmain">
     <div class="align-items-start justify-content-around m-2 d-flex flex-column"
          style="
-         padding-left: 5%;
+         padding-left: 3%;
          min-width: content-box;
          ">
         <ul class="d-flex flex-row list-unstyled mb-2">
-            <li class="me-8">
-                <div class="card col d-flex flex-column justify-content-center align-items-center
-                    text-center"
-                     style="
-                     width: 23rem;
-                     height: 25rem;
-                     color:  #044726;
-                     box-shadow: 0 0 3px 1px #198754;
-                     ">
-                    <img src="../img/tomatoes.png"
-                         class="card-img-top"
-                         alt="Филиалы"
-                         style="width: 12rem;
-                         height: 12rem">
-                    <div class="card-body d-grid gap-2">
-                        <h3 class="card-title">ТОМАТЫ</h3>
-                        <p class="card-text">Изменение информации о томатах</p>
-                        <a th:href="@{/tomatoes}"
-                           class="btn stretched-link text-light col fs-5"
-                           style="
-                           background-color: #198754;
-                            justify-self: center;
-                            height: 5vh;
-                            width: 10rem;
-                            align-self: center">
-                            Томаты
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="me-8">
+            <li class="me-2">
                 <div th:replace="fragments/cards/latishcard :: latishcard"></div>
             </li>
-            <li class="me-8">
+            <li class="me-2">
+                <div th:replace="fragments/cards/latishcard :: latishcard"></div>
+            </li>
+            <li class="me-2">
                 <div th:replace="fragments/cards/sweetcreamcard :: sweetcreamcard"></div>
             </li>
-            <li class="me-8">
+            <li class="me-2">
+                <div th:replace="fragments/cards/goldengrushacard :: goldengrushacard"></div>
+            </li>
+            <li class="me-2">
+                <div th:replace="fragments/cards/goldengrushacard :: goldengrushacard"></div>
+            </li>
+            <li class="me-2">
                 <div th:replace="fragments/cards/goldengrushacard :: goldengrushacard"></div>
             </li>
         </ul>
 
         <ul class="d-flex flex-row list-unstyled mb-2">
-            <li class="me-8">
+            <li class="me-2">
                 <div th:replace="fragments/cards/chocolatekapelkacard :: chocolatekapelkacard"></div>
             </li>
-            <li class="me-8">
+            <li class="me-2">
                 <div th:replace="fragments/cards/nastyaminicard :: nastyaminicard"></div>
             </li>
-            <li class="me-8">
+            <li class="me-2">
                 <div th:replace="fragments/cards/yellowgorshcard :: yellowgorshcard"></div>
             </li>
-            <li class="me-8">
+            <li class="me-2">
+                <div th:replace="fragments/cards/littleheartbreakercard :: littleheartbreakercard"></div>
+            </li>
+            <li class="me-2">
+                <div th:replace="fragments/cards/yellowgorshcard :: yellowgorshcard"></div>
+            </li>
+            <li class="me-2">
                 <div th:replace="fragments/cards/littleheartbreakercard :: littleheartbreakercard"></div>
             </li>
         </ul>

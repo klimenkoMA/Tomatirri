@@ -6,22 +6,25 @@
     <div th:replace="fragments/headers/head :: head"></div>
 </head>
 <div class="container m-0 p-0 d-flex flex-row"
-     th:fragment="carousel">
+     th:fragment="carousel"
+     style="border-radius: 5px;">
     <ul class="d-flex flex-row list-unstyled"
-        style="padding-left: 5.5%;">
-        <li  class="me-2"
-                style="min-width: 80rem">
+        style="padding-left: 5.5%;
+        margin-bottom: 0.2rem">
+        <li class="me-2"
+            style="min-width: 80rem">
             <div class="container text-center"
                  style="max-width: 80rem">
                 <div class="row justify-content-center"
                      style="
-             box-shadow: 0 0 3px 1px #198754;
+                     border-radius: 5px;
+             box-shadow: 0 0 3px 1px #467a53;
              max-width: 80rem;">
                     <div id="carousel-example-captions"
                          class="carousel slide"
                          style="width: 80%;
                          height: 20rem;
-                         margin-bottom: 1rem"
+                         margin-bottom: 0.2rem"
                          data-bs-interval="5000"
                          data-bs-ride="carousel">
                         <div class="carousel-indicators"
@@ -29,45 +32,52 @@
                             <button type="button"
                                     data-bs-target="#carousel-example-captions"
                                     data-bs-slide-to="0"
-                                    class="active bg-success"
+                                    class="active"
                                     aria-current="true"
-                                    aria-label="Slide 1">
+                                    aria-label="Slide 1"
+                                    style="background-color: #467a53">
                             </button>
                             <button type="button"
-                                    class="carousel-bot-btn bg-success"
+                                    class="carousel-bot-btn"
                                     data-bs-target="#carousel-example-captions"
                                     data-bs-slide-to="1"
-                                    aria-label="Slide 2">
+                                    aria-label="Slide 2"
+                                    style="background-color: #467a53">
                             </button>
                             <button type="button"
                                     class="carousel-bot-btn bg-success"
                                     data-bs-target="#carousel-example-captions"
                                     data-bs-slide-to="2"
-                                    aria-label="Slide 3">
+                                    aria-label="Slide 3"
+                                    style="background-color: #467a53">
                             </button>
                             <button type="button"
                                     class="carousel-bot-btn bg-success"
                                     data-bs-target="#carousel-example-captions"
                                     data-bs-slide-to="3"
-                                    aria-label="Slide 4">
+                                    aria-label="Slide 4"
+                                    style="background-color: #467a53">
                             </button>
                             <button type="button"
                                     class="carousel-bot-btn bg-success"
                                     data-bs-target="#carousel-example-captions"
                                     data-bs-slide-to="4"
-                                    aria-label="Slide 5">
+                                    aria-label="Slide 5"
+                                    style="background-color: #467a53">
                             </button>
                             <button type="button"
                                     class="carousel-bot-btn bg-success"
                                     data-bs-target="#carousel-example-captions"
                                     data-bs-slide-to="5"
-                                    aria-label="Slide 6">
+                                    aria-label="Slide 6"
+                                    style="background-color: #467a53">
                             </button>
                             <button type="button"
                                     class="carousel-bot-btn bg-success"
                                     data-bs-target="#carousel-example-captions"
                                     data-bs-slide-to="6"
-                                    aria-label="Slide 7">
+                                    aria-label="Slide 7"
+                                    style="background-color: #467a53">
                             </button>
                         </div>
                         <div class="carousel-inner"
@@ -327,9 +337,6 @@
                     </div>
                 </div>
             </div>
-        </li>
-        <li>
-            <div th:replace="fragments/weather :: weather"></div>
         </li>
     </ul>
 </div>
