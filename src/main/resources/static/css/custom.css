@@ -99,7 +99,7 @@ html, body {
     margin: 0 auto;
     appearance: none;
     border: 0;
-    /*border-radius: 5px;*/
+    border-radius: 5px;
     background-color: #467a53;
     width: 130px;
     height: 5vh;
@@ -109,25 +109,6 @@ html, body {
     text-shadow: #002349 2px 3px 4px;
     text-align: center;
     vertical-align: middle;
-    cursor: pointer;
-    transition: .3s all; /* Плавный переход */
-}
-
-.popup_try_1_row {
-    display: block; /* Это блоковый элемент */
-    margin: 0 auto;
-    appearance: none;
-    border: 0;
-    /*border-radius: 5px;*/
-    background-color: #467a53;
-    width: 130px;
-    height: 54px;
-    line-height: 16px;
-    color: #fcf6f6;
-    padding: 20px 10px;
-    font-size: 14px;
-    text-shadow: #002349 2px 3px 4px;
-    text-align: center;
     cursor: pointer;
     transition: .3s all; /* Плавный переход */
 }
@@ -173,7 +154,7 @@ html, body {
     width: min-content;
     align-items: center;
     justify-content: center;
-    /*border-radius: 15px; !* Закругляем углы *!*/
+    border-radius: 15px; /* Закругляем углы */
     background-color: #ffffff;
     border: 2px solid #467a53;
     padding: 28px;
@@ -217,7 +198,7 @@ input[type="file"] {
     align-items: center;
     justify-content: center;
     border: 2px solid #467a53;
-    /*border-radius: 5px;*/
+    border-radius: 5px;
     box-shadow: 0 0 0 2px #467a53;
 }
 
@@ -276,7 +257,7 @@ tr:nth-of-type(odd) {
 button {
     appearance: none;
     border: 0;
-    /*border-radius: 5px;*/
+    border-radius: 5px;
     background: #467a53;
     color: #fcf6f6;
     padding: 2px 5px;

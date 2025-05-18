@@ -7,17 +7,19 @@
     <div th:replace="fragments/headers/head :: head"></div>
 </head>
 <body>
-<div class="wrapper d-flex justify-content-center" style="align-self: center">
+<div class="wrapper d-flex justify-content-center p-0 m-0"
+     style="align-self: center">
     <header>
     <div class="p-0 m-0"
          th:replace="fragments/headers/headermain :: headermain"></div>
     </header>
 
-    <main class="main d-flex row"
+    <main class="main d-flex row p-0 m-0"
           style="align-content: baseline;
           background-image: url('../img/bg/bdfon_2.jpg');
           linear-gradient(rgba(255,255,255,1), rgba(255,255,255,1)),
-          url('../img/bg/bdfon.jpg') no-repeat center/cover;
+          url('../img/bg/bdfon.jpg')
+          no-repeat center/cover;
           background-repeat: no-repeat;
           background-size: cover;       /* Растягивает изображение чтобы покрыть весь элемент */
           background-position: center; /* Центрирует изображение */
@@ -27,7 +29,7 @@
 
         <div th:replace="fragments/crud/crudtomato :: crudtomato"></div>
 
-        <div class="table-result-db"
+        <div class="table-result-db m-0 p-0"
              style="justify-content: center;
              max-height: min-content">
 
