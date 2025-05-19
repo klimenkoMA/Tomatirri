@@ -62,8 +62,7 @@ html, body {
 
 .main {
     flex: 1 1 auto;
-    max-width: 100%;
-    margin-left: 0;
+    /*min-width: 100%;*/
 }
 
 .main-work {
@@ -211,7 +210,7 @@ tr:nth-of-type(odd) {
 }
 
 .table-result-db {
-    width: 80rem;
+    min-width: 90%;
 }
 
 .table-result-db table {
@@ -220,7 +219,8 @@ tr:nth-of-type(odd) {
 }
 
 .scroll-tbody {
-    height: 450px;
+    border: 0;
+    height: min-content;
     overflow-y: auto;
     display: block;
 }

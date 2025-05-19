@@ -5,16 +5,17 @@
 </head>
 
 <div th:fragment="updatetomato">
-    <label class="popup_try d-flex"
-           style="justify-content: center;
-           font-size: 17px;
+    <label class="popup_try d-flex fs-7 p-0 m-0 text-center
+    align-items-center justify-content-center"
+           style="
+           justify-content: center;
            box-shadow: 2px 2px 4px black">
-        Обновление
+        Изменить томат
         <button type="button"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasupdatetomato"
                 aria-controls="offcanvasupdatetomato"
-                style="background-color: #198754;
+                style="background-color: #467a53;
                 color: white;
                 height: 1px;
                 width: 1px" hidden>
@@ -96,7 +97,7 @@
                               name="tomatoesAgroTech"
                               id="tomatoesAgroTech"
                               rows="3"
-                              style="border: 1px solid #198754;
+                              style="border: 1px solid #467a53;
                               box-shadow: 0 0 0 1px #bcd3e9;">
                     </textarea>
                     <label for="tomatoesDescription">
@@ -106,7 +107,7 @@
                               name="tomatoesDescription"
                               id="tomatoesDescription"
                               rows="3"
-                              style="border: 1px solid #198754;
+                              style="border: 1px solid #467a53;
                               box-shadow: 0 0 0 1px #bcd3e9;">
                     </textarea>
                     <label>
@@ -122,7 +123,7 @@
                               name="tomatoesSpecificity"
                               id="tomatoesSpecificity"
                               rows="3"
-                              style="border: 1px solid #198754;
+                              style="border: 1px solid #467a53;
                               box-shadow: 0 0 0 1px #bcd3e9;">
                     </textarea>
                     <label>
@@ -135,7 +136,7 @@
                            style="margin: 4px 0;
                            width: 19.5rem;
                            min-height: 4rem;
-                           background-color: #198754;
+                           background-color: #467a53;
                            color: white;
                            text-shadow: #002349 2px 3px 4px;
                            font-size: large">
@@ -148,9 +149,10 @@
                     </label>
                 </div>
                 <div align="center">
-                    <button class="btn text-light crud-btn bg-success"
+                    <button class="btn text-light crud-btn"
                             type="submit"
                             style="justify-self: center;
+                            background-color: #467a53;
                             min-width: max-content;
                             max-height: min-content;
                             align-self: center;
