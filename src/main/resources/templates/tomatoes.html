@@ -14,110 +14,115 @@
              th:replace="fragments/headers/headermain :: headermain"></div>
     </header>
 
-    <main class="main d-flex row p-0 m-0"
+    <main class="main d-flex row p-0 m-0 justify-content-center"
           style="align-content: baseline;
           align-self: center;
           max-width: 90%;
           border-radius: 1rem">
 
 
-        <div th:replace="fragments/crud/crudtomato :: crudtomato"></div>
+        <div style="flex: 0 0 auto;"
+             th:replace="fragments/crud/crudtomato :: crudtomato"></div>
 
-        <div class="table-result-db m-0 p-0"
-             style="justify-content: center;
+        <div class="table-result-db p-0 w-100"
+             style="
+             justify-content: center;
+             flex: 0 0 auto;
+             margin-top: 1vh;
              min-height: min-content">
 
             <table class="row"
                    style=" justify-content: center;
                    align-content: center;
-                   height: 3rem;
+                   height: 3vh;
                    table-layout: fixed">
 
                 <tr class="text-light fs-7"
                     style="background-color: #467a53">
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 3rem;
+                        width: 3vw;
                         text-shadow: 2px 2px 4px #07237a">
                         ID
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 3rem;
+                        width: 3vw;
                         text-shadow: 2px 2px 4px #07237a">
                         Есть
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 10rem;
+                        width: 10vw;
                         text-shadow: 2px 2px 4px #07237a">
                         Тип
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 10rem;
+                        width: 10vw;
                         text-shadow: 2px 2px 4px #07237a">
                         Название
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 5rem;
+                        width: 5vw;
                         text-shadow: 2px 2px 4px #07237a">
                         h
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 5rem;
+                        width: 5vw;
                         text-shadow: 2px 2px 4px #07237a">
                         d
                     </th>
                     <th class="text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 5rem;
+                        width: 5vw;
                         text-shadow: 2px 2px 4px #07237a">
                         Вес
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 5rem;
+                        width: 5vw;
                         text-shadow: 2px 2px 4px #07237a">
                         Кашпо
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 15rem;
+                        width: 15vw;
                         text-shadow: 2px 2px 4px #07237a">
                         Созревание
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 15rem;
+                        width: 15vw;
                         text-shadow: 2px 2px 4px #07237a">
                         Описание
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 9rem;
+                        width: 9vw;
                         text-shadow: 2px 2px 4px #07237a">
                         Вкус
                     </th>
                     <th class=" text-center align-self-center"
                         style="
                          border-color: #467a53;
-                         width: 10rem;
+                         width: 10vw;
                          text-shadow: 2px 2px 4px #07237a">
                         Особенность
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #198754;
-                        width: 15rem;
+                        width: 15vw;
                         text-shadow: 2px 2px 4px #07237a">
                         Фото
                     </th>
                 </tr>
             </table>
 
-            <div class="scroll-tbody border-0">
+            <div class="scroll-tbody border-0"
+                 style="flex: 0 0 auto;">
                 <table class="col border-0"
                        style="align-self: center;
                        min-height: min-content;
@@ -130,15 +135,15 @@
                         <div class="col">
                             <tr style="align-self: center">
                                 <td class="p-2 m-2 text-center border border-0"
-                                    style="width: 3rem">
+                                    style="width: 3vw">
                                     <div>[[${element.idCount}]]</div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-0"
-                                    style="width: 3rem">
+                                    style="width: 3vw">
                                     <div>[[${element.isPresent}]]</div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-0"
-                                    style="width: 10rem;
+                                    style="width: 10vw;
                                     word-break: break-all;
                                     overflow-wrap: anywhere;
                                     white-space: normal">
@@ -156,43 +161,43 @@
                                     </form>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-0"
-                                    style="width: 10rem">
+                                    style="width: 10vw">
                                     <div><strong>[[${element.tomatoesName}]]</strong></div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-0"
-                                    style="width: 5rem">
+                                    style="width: 5vw">
                                     <div>[[${element.tomatoesHeight}]]</div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-0"
-                                    style="width: 5rem">
+                                    style="width: 5vw">
                                     <div>[[${element.tomatoesDiameter}]]</div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-0"
-                                    style="width: 5rem">
+                                    style="width: 5vw">
                                     <div>[[${element.tomatoesFruit}]]</div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-0"
-                                    style="width: 5rem">
+                                    style="width: 5vw">
                                     <div>[[${element.tomatoesFlowerpot}]]</div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-0"
-                                    style="width: 15rem">
+                                    style="width: 15vw">
                                     <div>[[${element.tomatoesAgroTech}]]</div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-0"
-                                    style="width: 15rem">
+                                    style="width: 15vw">
                                     <div>[[${element.tomatoesDescription}]]</div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-0"
-                                    style="width: 10rem">
+                                    style="width: 10vw">
                                     <div>[[${element.tomatoesTaste}]]</div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-0"
-                                    style="width: 9rem">
+                                    style="width: 9vw">
                                     <div>[[${element.tomatoesSpecificity}]]</div>
                                 </td>
                                 <td class="p-2 m-2 text-center border border-0 row"
-                                    style="width: 15rem">
+                                    style="width: 15vw">
                                     <div th:each="photo : ${element.photos}"
                                          class="col-4">
                                         <div>

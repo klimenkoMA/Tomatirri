@@ -12,105 +12,89 @@
      max-height: min-content"
      th:fragment="crudtomato">
 
-    <table class="crud_buttons col p-0 m-0"
-           cellpadding="20px"
-           align="center"
-           style="max-height: 5rem;">
+    <div class="d-flex flex-row list-unstyled me-1 p-0 m-0 align-items-center
+                justify-content-between w-100">
 
-        <tr>
-            <td>
-                <div>
-                    <a th:replace="fragments/crud/add/addtomato :: addtomato"
-                       class="btn text-light p-0 m-0"
-                       style="background-color: #467a53;
+        <div style="flex: 0 0 auto">
+            <a th:replace="fragments/crud/add/addtomato :: addtomato"
+               class="btn text-light p-0 m-0"
+               style="background-color: #467a53;
                            justify-self: center;
                            min-width: max-content;
                            max-height: min-content;
                            align-self: center;
                            box-shadow: 2px 2px 4px black">
-                        <strong>Добавить томат</strong>
-                    </a>
-                </div>
-            </td>
+                <strong>Добавить томат</strong>
+            </a>
+        </div>
 
-            <td>
-                <div>
-                    <a th:replace="fragments/crud/update/updatetomato :: updatetomato"
-                       class="btn text-light"
-                       style="background-color: #467a53;
+        <div style="flex: 0 0 auto">
+            <a th:replace="fragments/crud/update/updatetomato :: updatetomato"
+               class="btn text-light"
+               style="background-color: #467a53;
                            justify-self: center;
                            min-width: max-content;
                            max-height: min-content;
                            align-self: center;
                            box-shadow: 2px 2px 4px black">
-                        Обновить томат
-                    </a>
-                </div>
-            </td>
+                Обновить томат
+            </a>
+        </div>
 
-            <td>
-                <div>
-                    <a th:replace="fragments/searching/tomatosearching :: tomatosearching"
-                       class="btn text-light"
-                       style="background-color: #467a53;
+        <div style="flex: 0 0 auto">
+            <a th:replace="fragments/searching/tomatosearching :: tomatosearching"
+               class="btn text-light"
+               style="background-color: #467a53;
                            justify-self: center;
                            min-width: max-content;
                            max-height: min-content;
                            align-self: center;
                            box-shadow: 2px 2px 4px black">
-                        Искать томат
-                    </a>
-                </div>
-            </td>
+                Искать томат
+            </a>
+        </div>
 
-            <td>
-                <div>
-                    <a th:replace="fragments/crud/delete/deletetomato :: deletetomato"
-                       class="btn text-light"
-                       style="background-color: #467a53;
+        <div style="flex: 0 0 auto">
+            <a th:replace="fragments/crud/delete/deletetomato :: deletetomato"
+               class="btn text-light"
+               style="background-color: #467a53;
                            justify-self: center;
                            min-width: max-content;
                            max-height: min-content;
                            align-self: center;
                            box-shadow: 2px 2px 4px black">
-                        Удалить томат
-                    </a>
-                </div>
-            </td>
+                Удалить томат
+            </a>
+        </div>
 
-            <td>
-                <div>
-                    <a th:href="@{/tomatoes}"
-                       class="btn text-light"
-                       style="background-color: #467a53;
+        <div style="flex: 0 0 auto">
+            <a th:href="@{/tomatoes}"
+               class="btn text-light"
+               style="background-color: #467a53;
                             align-content: center;
                             box-shadow: 2px 2px 4px black;
                             height: 5vh;
                             font-size: medium;
                             width: 130px;
                             text-shadow: #002349 2px 3px 4px">
-                        Томаты
-                    </a>
-                </div>
-            </td>
+                Томаты
+            </a>
+        </div>
 
-            <td>
-                <div>
-                    <a th:href="@{/maxownercountreport}"
-                       class="btn text-light"
-                       style="background-color: #467a53;
+        <div style="flex: 0 0 auto">
+            <a th:href="@{/maxownercountreport}"
+               class="btn text-light"
+               style="background-color: #467a53;
                            align-content: center;
                            box-shadow: 2px 2px 4px black;
                            height: 5vh;
                            font-size: medium;
                            width: 130px;
                            text-shadow: #002349 2px 3px 4px">
-                        Отчет
-                    </a>
-                </div>
-            </td>
-        </tr>
-    </table>
+                Отчет
+            </a>
+        </div>
+    </div>
 </div>
 </html>
 

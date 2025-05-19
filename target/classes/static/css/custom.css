@@ -25,11 +25,11 @@ html, body {
 }
 
 .container {
-    min-width: 99%;
+    min-width: 99vw;
 }
 
 .me-10 {
-    margin-right: 21rem;
+    margin-right: 8vw;
 }
 .me-8 {
     margin-right: 5.2rem;
