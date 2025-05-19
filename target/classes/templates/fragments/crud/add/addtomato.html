@@ -5,16 +5,16 @@
 </head>
 
 <div th:fragment="addtomato">
-    <label class="popup_try d-flex"
-           style="justify-content: center;
-           font-size: 17px;
+    <label class="popup_try d-flex fs-7 p-0 m-0 text-center align-items-center"
+           style="
+           justify-content: center;
            box-shadow: 2px 2px 4px black">
-        Добавление
+        Добавить томат
         <button type="button"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasaddtomato"
                 aria-controls="offcanvasaddtomato"
-                style="background-color: #4ed652;
+                style="background-color: #467a53;
                 color: white;
                 height: 1px;
                 width: 1px" hidden>
@@ -82,7 +82,7 @@
                               id="tomatoesAgroTech"
                               rows="3"
                               required
-                              style="border: 1px solid #4ed652;
+                              style="border: 1px solid #467a53;
                               box-shadow: 0 0 0 1px #bcd3e9;"></textarea>
                     <label for="tomatoesDescription">
                         <strong>Описание</strong>
@@ -92,7 +92,7 @@
                               id="tomatoesDescription"
                               rows="3"
                               required
-                              style="border: 1px solid #4ed652;
+                              style="border: 1px solid #467a53;
                               box-shadow: 0 0 0 1px #bcd3e9;"></textarea>
                     <label>
                         <input type="text"
@@ -107,7 +107,7 @@
                               name="tomatoesSpecificity"
                               id="tomatoesSpecificity"
                               rows="3"
-                              style="border: 1px solid #4ed652;
+                              style="border: 1px solid #467a53;
                               box-shadow: 0 0 0 1px #bcd3e9;"></textarea>
                     <label class="d-flex justify-content-center align-items-center">
                         <select class="form-select-custom" name="isPresent">
@@ -121,8 +121,10 @@
                            style="margin: 4px 0;
                            width: 19.5rem;
                            min-height: 4rem;
-                           background-color: #198754;
+                           background-color: #467a53;
                            color: white;
+                           border-radius: 5px;
+                           box-shadow: 2px 2px 4px black;
                            text-shadow: #002349 2px 3px 4px;
                            font-size: large">
                         Выбрать фото
@@ -135,11 +137,12 @@
                     </label>
                 </div>
                 <div align="center">
-                    <button class="btn text-light crud-btn bg-success"
+                    <button class="btn text-light crud-btn"
                             type="submit"
                             style="justify-self: center;
                             min-width: max-content;
                             max-height: min-content;
+                            background-color: #467a53;
                             align-self: center;
                             box-shadow: 2px 2px 4px black;
                             text-shadow: #002349 2px 3px 4px;">

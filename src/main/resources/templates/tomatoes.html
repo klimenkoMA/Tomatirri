@@ -9,29 +9,23 @@
 <body>
 <div class="wrapper d-flex justify-content-center p-0 m-0"
      style="align-self: center">
-    <header>
-    <div class="p-0 m-0"
-         th:replace="fragments/headers/headermain :: headermain"></div>
+    <header class="p-0 m-0">
+        <div class="p-0 m-0"
+             th:replace="fragments/headers/headermain :: headermain"></div>
     </header>
 
     <main class="main d-flex row p-0 m-0"
           style="align-content: baseline;
-          background-image: url('../img/bg/bdfon_2.jpg');
-          linear-gradient(rgba(255,255,255,1), rgba(255,255,255,1)),
-          url('../img/bg/bdfon.jpg')
-          no-repeat center/cover;
-          background-repeat: no-repeat;
-          background-size: cover;       /* Растягивает изображение чтобы покрыть весь элемент */
-          background-position: center; /* Центрирует изображение */
           align-self: center;
-          max-width: 80rem;
+          max-width: 90%;
           border-radius: 1rem">
+
 
         <div th:replace="fragments/crud/crudtomato :: crudtomato"></div>
 
         <div class="table-result-db m-0 p-0"
              style="justify-content: center;
-             max-height: min-content">
+             min-height: min-content">
 
             <table class="row"
                    style=" justify-content: center;
@@ -55,49 +49,49 @@
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 4rem;
+                        width: 10rem;
                         text-shadow: 2px 2px 4px #07237a">
                         Тип
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 7rem;
+                        width: 10rem;
                         text-shadow: 2px 2px 4px #07237a">
                         Название
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 3rem;
+                        width: 5rem;
                         text-shadow: 2px 2px 4px #07237a">
                         h
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 3rem;
+                        width: 5rem;
                         text-shadow: 2px 2px 4px #07237a">
                         d
                     </th>
                     <th class="text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 3rem;
+                        width: 5rem;
                         text-shadow: 2px 2px 4px #07237a">
                         Вес
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 3rem;
+                        width: 5rem;
                         text-shadow: 2px 2px 4px #07237a">
                         Кашпо
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 11rem;
+                        width: 15rem;
                         text-shadow: 2px 2px 4px #07237a">
                         Созревание
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #467a53;
-                        width: 11rem;
+                        width: 15rem;
                         text-shadow: 2px 2px 4px #07237a">
                         Описание
                     </th>
@@ -116,33 +110,35 @@
                     </th>
                     <th class=" text-center align-self-center"
                         style="border-color: #198754;
-                        width: 7rem;
+                        width: 15rem;
                         text-shadow: 2px 2px 4px #07237a">
                         Фото
                     </th>
                 </tr>
             </table>
 
-            <div class="scroll-tbody">
-                <table class="col"
+            <div class="scroll-tbody border-0">
+                <table class="col border-0"
                        style="align-self: center;
+                       min-height: min-content;
                        font-size: small;
                        word-break: break-all;
+                       border: 0;
                        overflow-wrap: anywhere;
                        white-space: normal">
                     <div th:each="element : ${tomatoesList}">
                         <div class="col">
                             <tr style="align-self: center">
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
+                                <td class="p-2 m-2 text-center border border-0"
                                     style="width: 3rem">
                                     <div>[[${element.idCount}]]</div>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
+                                <td class="p-2 m-2 text-center border border-0"
                                     style="width: 3rem">
                                     <div>[[${element.isPresent}]]</div>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 4rem;
+                                <td class="p-2 m-2 text-center border border-0"
+                                    style="width: 10rem;
                                     word-break: break-all;
                                     overflow-wrap: anywhere;
                                     white-space: normal">
@@ -159,53 +155,55 @@
                                         </button>
                                     </form>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 7rem">
+                                <td class="p-2 m-2 text-center border border-0"
+                                    style="width: 10rem">
                                     <div><strong>[[${element.tomatoesName}]]</strong></div>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 3rem">
+                                <td class="p-2 m-2 text-center border border-0"
+                                    style="width: 5rem">
                                     <div>[[${element.tomatoesHeight}]]</div>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 3rem">
+                                <td class="p-2 m-2 text-center border border-0"
+                                    style="width: 5rem">
                                     <div>[[${element.tomatoesDiameter}]]</div>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 3rem">
+                                <td class="p-2 m-2 text-center border border-0"
+                                    style="width: 5rem">
                                     <div>[[${element.tomatoesFruit}]]</div>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 3rem">
+                                <td class="p-2 m-2 text-center border border-0"
+                                    style="width: 5rem">
                                     <div>[[${element.tomatoesFlowerpot}]]</div>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 11rem">
+                                <td class="p-2 m-2 text-center border border-0"
+                                    style="width: 15rem">
                                     <div>[[${element.tomatoesAgroTech}]]</div>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 11rem">
+                                <td class="p-2 m-2 text-center border border-0"
+                                    style="width: 15rem">
                                     <div>[[${element.tomatoesDescription}]]</div>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
+                                <td class="p-2 m-2 text-center border border-0"
                                     style="width: 10rem">
                                     <div>[[${element.tomatoesTaste}]]</div>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
+                                <td class="p-2 m-2 text-center border border-0"
                                     style="width: 9rem">
                                     <div>[[${element.tomatoesSpecificity}]]</div>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
-                                    style="width: 7rem">
-                                    <div th:each="photo : ${element.photos}">
+                                <td class="p-2 m-2 text-center border border-0 row"
+                                    style="width: 15rem">
+                                    <div th:each="photo : ${element.photos}"
+                                         class="col-4">
                                         <div>
                                             <img th:src="@{'data:image/jpg;base64,'+${photo.getImageDataBase64()}}"
                                                  alt="images from database"
-                                                 width="50%"
-                                                 height="50%"/>
+                                                 class="img-fluid"
+                                                 style="max-width: 100%;
+                                                 height: auto;
+                                                 object-fit: contain;"/>
                                         </div>
                                     </div>
-
                                 </td>
                             </tr>
                         </div>

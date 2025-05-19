@@ -4,16 +4,19 @@
 <head>
     <div th:replace="fragments/headers/head :: head"></div>
 </head>
-<div th:fragment="deletetomato">
-    <label class="popup_try d-flex"
-           style="justify-content: center;
-           font-size: 17px;
+<div th:fragment="deletetomato" class="d-flex flex-column">
+    <label class="popup_try d-flex fs-7 p-0 m-0 text-center
+    align-items-center justify-content-center"
+           style="
+           justify-content: center;
            box-shadow: 2px 2px 4px black">
-        Удаление
-        <button type="button" data-bs-toggle="offcanvas"
+        Удалить томат
+        <button type="button"
+                data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasdeletedtomato"
                 aria-controls="offcanvasdeletedtomato"
-                style="background-color: #198754;
+                style="
+                background-color: #467a53;
                 color: white;
                 height: 1px;
                 width: 1px" hidden>
@@ -21,20 +24,18 @@
     </label>
 
     <div class="card col offcanvas offcanvas-end border border-0"
-         tabindex="-1" id="offcanvasdeletedtomato" aria-labelledby="offcanvasRightDeleteTomatoLabel"
+         tabindex="-1" id="offcanvasdeletedtomato"
+         aria-labelledby="offcanvasRightDeleteTomatoLabel"
          style="width: 40vh">
-        <img src="../img/greendelete.png" class="card-img-top" alt="AddDevice"
-             style="max-height: 10vh;
-             max-width: 10vh;
-             border-radius: 10%;
-             align-self: center;
-             margin-bottom: 18rem;
-             margin-top: 2rem">
-        <div class="card-body d-grid gap-2 offcanvas-title bg-light" id="offcanvasRightDeleteTomatoLabel"
-             style="min-height: 100vh;
-             align-content: start">
 
-            <form action="/deletetomato" method="post" autocomplete="off">
+        <div class="card-body offcanvas-title bg-light"
+             id="offcanvasRightDeleteTomatoLabel"
+             style="min-height: 100vh;
+             align-content: center">
+
+            <form action="/deletetomato"
+                  method="post"
+                  autocomplete="off">
                 <div align="center">
                     <label>
                         <input type="text" name="id" align="middle"
@@ -43,8 +44,9 @@
                     </label>
                 </div>
                 <div align="center">
-                    <button class="btn text-light" type="submit"
-                            style="background-color: #198754;
+                    <button class="btn text-light"
+                            type="submit"
+                            style="background-color: #467a53;
                             justify-self: center;
                             min-width: max-content;
                             max-height: min-content;
@@ -55,13 +57,6 @@
                 </div>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
             </form>
-            <img src="../img/tomatoes.png" class="card-img-bottom" alt="Томаты"
-                 style="max-height: 10vh;
-                 max-width: 10vh;
-                 justify-self: center;
-                 margin-top: 20rem;
-                 border-radius: 10%;
-                 align-self: end">
         </div>
     </div>
 </div>
