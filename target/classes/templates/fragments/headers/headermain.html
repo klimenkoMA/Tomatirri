@@ -7,12 +7,13 @@
 </head>
 <header class="container d-flex flex-column p-0 m-0"
         style="height: 10%;
+
         min-width: 99vw;"
         th:fragment="headermain">
 
     <div class="d-flex justify-content-center align-items-center p-0 m-0">
 
-        <div class="text-end fs-2 fw-bold d-flex flex-column p-0 m-0 w-75 align-items-center"
+        <div class="text-end fs-4 fw-bold d-flex flex-column p-0 m-0 w-75 align-items-center"
              style="text-shadow: 2px 2px 4px black;">
 
             <div class="d-flex flex-row list-unstyled p-0 m-0 align-items-end w-100
@@ -29,52 +30,124 @@
                     </a>
                 </div>
 
-                <div style="flex: 0 0 auto;
-                    min-width: 15vw;
+                <div class="flex-column w-100">
+
+                    <div class="p-0 m-0 w-100 d-flex flex-row">
+
+                        <form class="p-0 m-0 w-75"
+                              style="min-width: 30vw"
+                              action="/findtomato"
+                              method="post"
+                              autocomplete="off">
+                            <div class="d-flex flex-row
+                            justify-content-center align-items-end">
+                                <div>
+                                    <label for="attr"></label>
+                                    <input type="text"
+                                           class="text-start"
+                                           style="min-width: 30vw"
+                                           name="attr"
+                                           id="attr"
+                                           placeholder="Поиск"
+                                           required>
+                                </div>
+                                <div style="margin-left: 1vw">
+                                    <button class="btn text-light"
+                                            type="submit"
+                                            style="background-color: #467a53;
+                                                 min-width: 5vw;
+                                                 max-height: 5vh;
+                                                 box-shadow: 2px 2px 4px black">
+                                        Найти
+                                    </button>
+                                </div>
+                            </div>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                        </form>
+
+                        <div class="flex-row">
+                            <a style="text-shadow: none;
+                               color:  #044726;
+                               text-decoration: none;"
+                               href="https://t.me/seeds_Ri"
+                               target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="32"
+                                     height="32"
+                                     fill="currentColor"
+                                     class="bi bi-telegram"
+                                     viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8
+                                     8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666
+                                      2.01-.378.15-.577.298-.595.442-.03.243.275.339
+                                      .69.47l.175.055c.408.133.958.288 1.243.294.26
+                                      .006.549-.1.868-.32 2.179-1.471 3.304-2.214
+                                       3.374-2.23.05-.012.12-.026.166.016.047.041
+                                       .042.12.037.141-.03.129-1.227 1.241-1.846
+                                       1.817-.193.18-.33.307-.358.336a8.154 8.154
+                                        0 0 1-.188.186c-.38.366-.664.64.015 1.088
+                                        .327.216.589.393.85.571.284.194.568.387.936
+                                        .629.093.06.183.125.27.187.331.236.63.448
+                                        .997.414.214-.02.435-.22.547-.82.265-1.417
+                                        .786-4.486.906-5.751a1.426 1.426 0 0 0-
+                                        .013-.315.337.337 0 0 0-.114-.217.526.526
+                                         0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+                                </svg>
+                                @seeds_Ri
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-end w-100
+                    justify-content-between">
+                        <div style="flex: 0 0 auto;
+                    min-width: 12vw;
                     text-shadow: none;
                     color:  #044726">
-                    <select class="form-select fs-3"
-                            aria-label=""
-                            style="color:  #044726"
-                            onchange="window.location.href =
+                            <select class="form-select fs-4 border-0"
+                                    aria-label=""
+                                    style="color:  #044726; font-weight: bold"
+                                    onchange="window.location.href =
                     this.options[this.selectedIndex].getAttribute('data-url');">
-                        <option selected style="color:  #044726;">
-                            Каталог семян
-                        </option>
-                        <option value=1 data-url="/tomatoes">Томаты</option>
-                        <option value="2">Перцы</option>
-                        <option value="3">Огурцы</option>
-                    </select>
-                </div>
-                <div style="flex: 0 0 auto;
+                                <option selected style="color:  #044726;">
+                                    Каталог семян
+                                </option>
+                                <option value=1 data-url="/tomatoes">Томаты</option>
+                                <option value="2">Перцы</option>
+                                <option value="3">Огурцы</option>
+                            </select>
+                        </div>
+                        <div style="flex: 0 0 auto;
                     color:  #044726;
                     text-shadow: none;">
-                    Новости
-                </div>
-                <div style="flex: 0 0 auto;
+                            Новости
+                        </div>
+                        <div style="flex: 0 0 auto;
                     color:  #044726;
                     text-shadow: none;">
-                    Акции
-                </div>
-                <div style="flex: 0 0 auto;
+                            Акции
+                        </div>
+                        <div style="flex: 0 0 auto;
                     color:  #044726;
                     text-shadow: none;">
-                    Фотогалерея
-                </div>
-                <div style="flex: 0 0 auto">
-                    <form th:action="@{/logout}"
-                          class="p-0 m-0 w-100"
-                          method="post">
-                        <button class="fs-2 bg-white"
-                                aria-expanded="false"
-                                type="submit"
-                                value="Sign Out"
-                                style="
+                            Фотогалерея
+                        </div>
+                        <div style="flex: 0 0 auto">
+                            <form th:action="@{/logout}"
+                                  class="p-0 m-0 w-100"
+                                  method="post">
+                                <button class="fs-4 bg-white"
+                                        aria-expanded="false"
+                                        type="submit"
+                                        value="Sign Out"
+                                        style="
                                     text-shadow: none;
                                     color:  #044726">
-                            <strong>Выход</strong>
-                        </button>
-                    </form>
+                                    <strong>Выход</strong>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
