@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+
+<head>
+    <div th:replace="fragments/headers/head :: head"></div>
+</head>
+<div
+     th:fragment="dinamiccard">
+    <div th:each="element : ${tomatoesList}"
+     class="col-9">
+
+        <div class="card card-main d-flex flex-column
+    justify-content-center align-items-center
+                    text-center">
+            <img th:src="@{'data:image/jpg;base64,'+${element.photos.get(0).getImageDataBase64()}}"
+                 class="card-img-top"
+                 alt="Latish"
+                 style="
+                         width: 12rem;
+                         padding-top: 1rem;
+                         height: 12rem
+                         ">
+            <div class="card-body d-flex flex-column align-items-center
+                        justify-content-center p-0 m-0">
+                <h6 class="card-title p-0 m-0">
+                    <strong th:text="${element.tomatoesName}">
+                    </strong>
+                </h6>
+                <div><strong>Высота</strong>: [[${element.tomatoesHeight}]]</div>
+                <div><strong>Диаметр: </strong>[[${element.tomatoesDiameter}]]</div>
+                <div><strong>Вес: </strong>[[${element.tomatoesFruit}]]</div>
+                <div><strong>Кашпо: </strong>[[${element.tomatoesFlowerpot}]]</div>
+                <a th:href="@{/}"
+                   class="btn stretched-link text-light col fs-5"
+                   style="
+                           background-color: #467a53;
+                           justify-self: end;
+                           max-height: 3rem;
+                           width: 10rem;
+                           margin-bottom: 1vh;
+                           margin-top: auto">
+                    Подробнее
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
