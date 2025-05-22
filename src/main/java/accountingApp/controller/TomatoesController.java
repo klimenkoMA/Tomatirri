@@ -259,7 +259,9 @@ public class TomatoesController {
         }
     }
 
-    private void createPhotoList(MultipartFile[] content, List<Photo> photos, long count) throws IOException {
+    private void createPhotoList(MultipartFile[] content,
+                                 List<Photo> photos,
+                                 long count) throws IOException {
         if (content != null) {
             for (MultipartFile f : content
             ) {
@@ -456,6 +458,26 @@ public class TomatoesController {
             return "tomatoes";
         } catch (Exception e) {
             logger.error("*** TomatoesController.findTomatoesListByCategory(): wrong DB's values! *** "
+                    + e.getMessage());
+            return getTomatoes(model);
+        }
+    }
+
+    @GetMapping ("/tomatoes/{idCount}")
+    public String getFullCard(@PathVariable Long idCount
+    , Model model){
+
+        try{
+            String realId = getIdFromMap(idCount);
+            Tomatoes tomato = tomatoesService.getTomatoById(realId);
+            List<Tomatoes> cardList = new ArrayList<>();
+            cardList.add(tomato);
+            model.addAttribute("cardList", cardList);
+
+            return "fragments/cards/fullcard";
+
+        }catch (Exception e){
+            logger.error("*** TomatoesController.getFullCard(): wrong DB's values! *** "
                     + e.getMessage());
             return getTomatoes(model);
         }
