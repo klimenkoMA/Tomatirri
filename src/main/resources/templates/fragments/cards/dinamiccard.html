@@ -8,7 +8,7 @@
 <div th:fragment="dinamiccard">
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-4"
-    style="padding: 3vh">
+         style="padding: 3vh">
 
         <div th:each="element : ${tomatoesList}"
              class="col">
@@ -43,7 +43,8 @@
                            width: 10rem;
                            text-shadow: #002349 2px 3px 4px;
                            margin-bottom: 1vh;
-                           margin-top: auto">
+                           margin-top: auto"
+                       target="_self">
                         Подробнее
                     </a>
                 </div>

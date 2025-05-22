@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+
+<head>
+    <div th:replace="fragments/headers/head :: head"></div>
+</head>
+
+<body>
+<div class="wrapper d-flex justify-content-center p-0 m-0"
+     style="align-self: center;">
+
+    <div th:replace="fragments/headers/headermain :: headermain"></div>
+
+    <main class="main d-flex flex-column p-0 m-0"
+          style="
+          align-self: center;
+          max-width: 90%;">
+
+        <div class="flex-column"
+             style="padding: 3vh;
+             min-height: 70vh;
+             min-width: 90vw;">
+
+
+            <div th:each="element : ${cardList}"
+                 class="col">
+
+                <div class="d-flex flex-row p-0 justify-content-between">
+                    <h5 class=""
+                        style="color: #044726;
+                    margin-bottom: 0;
+                    margin-left: 1vw">
+                        <strong th:text="${element.tomatoesName}"></strong>
+                    </h5>
+                    <hr class="border-top border-1 border-success my-auto"
+                        style="min-width: 55vw;
+                    margin-top: 1vh;
+                    background-color: #467a53;
+                    max-height: 0.1vh">
+                </div>
+
+                <div class="d-flex flex-row">
+                    <img th:src="@{'data:image/jpg;base64,
+                    '+${element.photos.get(0).getImageDataBase64()}}"
+                         class=""
+                         alt="Latish"
+                         style="
+                         width: 27rem;
+                         padding-top: 1vh;
+                         height: 27rem
+                         ">
+                    <div class="flex-column"
+                         style="margin-left: 1vw;
+                         margin-top: 7vh;
+                         max-height: 12rem">
+                        <div><strong>Наличие: [[${element.isPresent}]]</strong></div>
+                        <div><strong><br/>Тип: </strong>[[${element.category}]]</div>
+                        <div><strong><br/>Высота: </strong>[[${element.tomatoesHeight}]]</div>
+                        <div><strong><br/>Диаметр: </strong>[[${element.tomatoesDiameter}]]</div>
+                        <div><strong><br/>Вес: </strong>[[${element.tomatoesFruit}]]</div>
+                        <div><strong><br/>Кашпо: </strong>[[${element.tomatoesFlowerpot}]]</div>
+                    </div>
+                    <div class="card text-center border-0"
+                         style="text-shadow: none;
+                    margin-top: 5vh;
+                    margin-left: 2vw">
+                        <div class="card-header border-0">
+                            <ul class="nav nav-tabs card-header-tabs"
+                                id="tomatoTabs"
+                                role="tablist">
+                                <li class="nav-item text-start"
+                                    role="presentation">
+                                    <button class="nav-link active"
+                                            id="ripening-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#ripening"
+                                            type="button"
+                                            role="tab"
+                                            aria-controls="ripening"
+                                            aria-selected="true"
+                                            style="text-shadow: none; color: #044726">
+                                        Созревание
+                                    </button>
+                                </li>
+                                <li class="nav-item text-start" role="presentation">
+                                    <button class="nav-link"
+                                            id="description-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#description"
+                                            type="button"
+                                            role="tab"
+                                            aria-controls="description"
+                                            aria-selected="false"
+                                            style="text-shadow: none; color: #044726">
+                                        Описание
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link"
+                                            id="taste-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#taste"
+                                            type="button"
+                                            role="tab"
+                                            aria-controls="taste"
+                                            aria-selected="false"
+                                            style="text-shadow: none; color: #044726">
+                                        Вкус
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link"
+                                            id="spec-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#spec"
+                                            type="button"
+                                            role="tab"
+                                            aria-controls="spec"
+                                            aria-selected="false"
+                                            style="text-shadow: none; color: #044726">
+                                        Особенности
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="tomatoTabsContent">
+                            <div class="tab-pane fade show active card-body text-start"
+                                 id="ripening"
+                                 role="tabpanel"
+                                 aria-labelledby="ripening-tab"
+                                 style="max-width: 40vw;">
+                                <p class="card-text">[[${element.tomatoesAgroTech}]]</p>
+                            </div>
+                            <div class="tab-pane fade card-body text-start"
+                                 id="description"
+                                 role="tabpanel"
+                                 aria-labelledby="description-tab"
+                                 style="max-width: 40vw;">
+                                <p class="card-text">[[${element.tomatoesDescription}]]</p>
+                            </div>
+                            <div class="tab-pane fade card-body text-start"
+                                 id="taste"
+                                 role="tabpanel"
+                                 aria-labelledby="taste-tab"
+                                 style="max-width: 40vw;">
+                                <p class="card-text">[[${element.tomatoesTaste}]]</p>
+                            </div>
+                            <div class="tab-pane fade card-body text-start"
+                                 id="spec"
+                                 role="tabpanel"
+                                 aria-labelledby="spec-tab"
+                                 style="max-width: 40vw;">
+                                <p class="card-text">[[${element.tomatoesSpecificity}]]</p>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+                <hr class="border-top border-1 border-success my-5"
+                    style="min-width: 55vw;
+                    margin-top: 1vh;
+                    background-color: #467a53;
+                    max-height: 0.1vh">
+
+            </div>
+
+        </div>
+
+    </main>
+    <footer>
+        <div th:replace="fragments/footermain :: footermain"></div>
+    </footer>
+</div>
+</body>
+</html>
