@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+
+<head>
+    <title>Full Card</title>
+    <div th:replace="fragments/headers/head :: head"></div>
+</head>
+<body>
+<div class="wrapper d-flex justify-content-center p-0 m-0"
+     style="align-self: center;">
+    <header>
+        <div
+                th:replace="fragments/headers/headermain :: headermain"></div>
+    </header>
+    <div>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-4"
+             style="padding: 3vh">
+
+            <div th:each="element : ${cardList}"
+                 class="col">
+                <div class="card card-main d-flex flex-column
+    justify-content-center align-items-center
+                    text-center">
+                    <img th:src="@{'data:image/jpg;base64,'+${element.photos.get(0).getImageDataBase64()}}"
+                         class="card-img-top"
+                         alt="Latish"
+                         style="
+                         width: 32rem;
+                         padding-top: 1vh;
+                         height: 32rem
+                         ">
+                    <div class="card-body d-flex flex-column align-items-center
+                        justify-content-center p-0 m-0">
+                        <h6 class="card-title p-0 m-0">
+                            <strong th:text="${element.tomatoesName}">
+                            </strong>
+                        </h6>
+                        <div><strong>Высота</strong>: [[${element.tomatoesHeight}]]</div>
+                        <div><strong>Диаметр: </strong>[[${element.tomatoesDiameter}]]</div>
+                        <div><strong>Вес: </strong>[[${element.tomatoesFruit}]]</div>
+                        <div><strong>Кашпо: </strong>[[${element.tomatoesFlowerpot}]]</div>
+                        <a th:href="@{/}"
+                           class="btn stretched-link text-light col fs-5"
+                           style="
+                           background-color: #467a53;
+                           justify-self: end;
+                           max-height: 3rem;
+                           width: 10rem;
+                           text-shadow: #002349 2px 3px 4px;
+                           margin-bottom: 1vh;
+                           margin-top: auto">
+                            Подробнее
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div th:replace="fragments/footermain :: footermain"></div>
+    </footer>
+</div>
+</body>
+</html>
