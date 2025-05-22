@@ -463,23 +463,23 @@ public class TomatoesController {
         }
     }
 
-    @GetMapping ("/tomatoes/{idCount}")
+    @GetMapping("/tomatoes/{idCount}")
     public String getFullCard(@PathVariable Long idCount
-    , Model model){
+            , Model model) {
 
-        try{
+        try {
             String realId = getIdFromMap(idCount);
             Tomatoes tomato = tomatoesService.getTomatoById(realId);
             List<Tomatoes> cardList = new ArrayList<>();
             cardList.add(tomato);
             model.addAttribute("cardList", cardList);
 
-            return "fragments/cards/fullcard";
+            return "fullcard";
 
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("*** TomatoesController.getFullCard(): wrong DB's values! *** "
                     + e.getMessage());
-            return getTomatoes(model);
+            return "/";
         }
     }
 }
