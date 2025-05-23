@@ -55,6 +55,19 @@
                     max-height: 0.1vh">
 
                 <div th:replace="fragments/cards/cardphotoes :: cardphotoes"></div>
+                <script>
+                    // Сохраняем исходное изображение
+                    const originalImageSrc = document.getElementById('mainImage').src;
+
+                    function changeMainImage(thumbnail) {
+                        const newSrc = thumbnail.getAttribute('data-main-image-src');
+                        document.getElementById('mainImage').src = newSrc;
+                    }
+
+                    function resetMainImage() {
+                        document.getElementById('mainImage').src = originalImageSrc;
+                    }
+                </script>
             </div>
 
         </div>

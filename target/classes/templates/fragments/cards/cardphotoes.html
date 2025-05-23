@@ -9,21 +9,23 @@
      style="min-width: available"
      th:fragment="cardphotoes">
 
-    <div class="flex-row">
-        <div class="p-2 m-2 text-center
-                    d-flex flex-row"
-             style="width: 50vw;
-                        height: 15vh">
+    <div class="flex-row justify-content-center">
+        <div class="text-center d-flex flex-row justify-content-center"
+             style="width: 50vw; height: 15vh">
             <div class="d-flex flex-row"
-                 th:each="photo : ${element.photos}">
-                <div class="d-flex flex-row">
-                    <img th:src="@{'data:image/jpg;base64,
-                                '+${photo.getImageDataBase64()}}"
-                         alt="images from database"
-                         class="img-fluid"
+                 th:each="photo, iterStat : ${element.photos}">
+                <div class="d-flex flex-row me-4 thumbnail-container">
+                    <img th:src="@{'data:image/jpg;base64,' + ${photo.getImageDataBase64()}}"
+                         alt="Thumbnail"
+                         class="img-thumbnail thumbnail"
                          style="max-width: 100%;
-                                                 height: auto;
-                                                 object-fit: contain;"/>
+                         height: auto;
+                         object-fit: contain;
+                         cursor: pointer;"
+                         th:attr="data-main-image-src=@{'data:image/jpg;base64,'
+                         + ${photo.getImageDataBase64()}}"
+                         onmouseover="changeMainImage(this)"
+                         onmouseout="resetMainImage()">
                 </div>
             </div>
         </div>
