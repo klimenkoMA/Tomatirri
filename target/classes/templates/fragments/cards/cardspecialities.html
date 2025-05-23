@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+
+<head>
+    <div th:replace="fragments/headers/head :: head"></div>
+</head>
+<div th:fragment="cardspecialities">
+
+    <div class="card text-center border-0"
+         style="text-shadow: none;
+                    margin-top: 5vh;
+                    margin-left: 2vw">
+        <div class="card-header border-0">
+            <ul class="nav nav-tabs card-header-tabs"
+                id="tomatoTabs"
+                role="tablist">
+                <li class="nav-item text-start"
+                    role="presentation">
+                    <button class="nav-link active"
+                            id="ripening-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#ripening"
+                            type="button"
+                            role="tab"
+                            aria-controls="ripening"
+                            aria-selected="true"
+                            style="text-shadow: none; color: #044726">
+                        Созревание
+                    </button>
+                </li>
+                <li class="nav-item text-start" role="presentation">
+                    <button class="nav-link"
+                            id="description-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#description"
+                            type="button"
+                            role="tab"
+                            aria-controls="description"
+                            aria-selected="false"
+                            style="text-shadow: none; color: #044726">
+                        Описание
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link"
+                            id="taste-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#taste"
+                            type="button"
+                            role="tab"
+                            aria-controls="taste"
+                            aria-selected="false"
+                            style="text-shadow: none; color: #044726">
+                        Вкус
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link"
+                            id="spec-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#spec"
+                            type="button"
+                            role="tab"
+                            aria-controls="spec"
+                            aria-selected="false"
+                            style="text-shadow: none; color: #044726">
+                        Особенности
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content" id="tomatoTabsContent">
+            <div class="tab-pane fade show active card-body text-start"
+                 id="ripening"
+                 role="tabpanel"
+                 aria-labelledby="ripening-tab"
+                 style="max-width: 40vw;">
+                <p class="card-text">[[${element.tomatoesAgroTech}]]</p>
+            </div>
+            <div class="tab-pane fade card-body text-start"
+                 id="description"
+                 role="tabpanel"
+                 aria-labelledby="description-tab"
+                 style="max-width: 40vw;">
+                <p class="card-text">[[${element.tomatoesDescription}]]</p>
+            </div>
+            <div class="tab-pane fade card-body text-start"
+                 id="taste"
+                 role="tabpanel"
+                 aria-labelledby="taste-tab"
+                 style="max-width: 40vw;">
+                <p class="card-text">[[${element.tomatoesTaste}]]</p>
+            </div>
+            <div class="tab-pane fade card-body text-start"
+                 id="spec"
+                 role="tabpanel"
+                 aria-labelledby="spec-tab"
+                 style="max-width: 40vw;">
+                <p class="card-text">[[${element.tomatoesSpecificity}]]</p>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
