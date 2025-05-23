@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+
+<head>
+    <div th:replace="fragments/headers/head :: head"></div>
+</head>
+<div class="d-flex flex-row justify-content-center align-items-center"
+     style="min-width: available"
+     th:fragment="cardphotoes">
+
+    <div class="flex-row">
+        <div class="p-2 m-2 text-center
+                    d-flex flex-row"
+             style="width: 50vw;
+                        height: 15vh">
+            <div class="d-flex flex-row"
+                 th:each="photo : ${element.photos}">
+                <div class="d-flex flex-row">
+                    <img th:src="@{'data:image/jpg;base64,
+                                '+${photo.getImageDataBase64()}}"
+                         alt="images from database"
+                         class="img-fluid"
+                         style="max-width: 100%;
+                                                 height: auto;
+                                                 object-fit: contain;"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</html>

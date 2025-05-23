@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+
+<head>
+    <div th:replace="fragments/headers/head :: head"></div>
+</head>
+<div class="d-flex flex-row mb-2"
+     th:fragment="cardstats">
+
+    <img th:src="@{'data:image/jpg;base64,
+                    '+${element.photos.get(0).getImageDataBase64()}}"
+         class=""
+         alt="Latish"
+         style="width: 27rem;
+         padding-top: 2vh;
+         height: 27rem">
+
+    <div class="flex-column"
+         style="margin-left: 1vw;
+                         margin-top: 7vh;
+                         max-height: 12rem">
+        <div><strong>Наличие: [[${element.isPresent}]]</strong></div>
+        <div><strong><br/>Тип: </strong>[[${element.category}]]</div>
+        <div><strong><br/>Высота: </strong>[[${element.tomatoesHeight}]]</div>
+        <div><strong><br/>Диаметр: </strong>[[${element.tomatoesDiameter}]]</div>
+        <div><strong><br/>Вес: </strong>[[${element.tomatoesFruit}]]</div>
+        <div><strong><br/>Кашпо: </strong>[[${element.tomatoesFlowerpot}]]</div>
+    </div>
+
+</div>
+</html>
