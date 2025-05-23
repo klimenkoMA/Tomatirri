@@ -381,4 +381,21 @@ input[type="password"] {
     .weather-container {
         min-height: 15rem;
     }
+
+/*********************
+*Cardphotoes fragment*
+**********************/
+
+    .thumbnail {
+        transition: transform 0.2s;
+    }
+
+    .thumbnail:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .main-image {
+        transition: opacity 0.3s;
+    }
 }
