@@ -476,7 +476,10 @@ public class TomatoesController {
             Tomatoes tomato = tomatoesService.getTomatoById(realId);
             List<Tomatoes> cardList = new ArrayList<>();
             cardList.add(tomato);
+
+            List<Tomatoes> tomatoesList = tomatoesService.findAllTomatoes();
             model.addAttribute("cardList", cardList);
+            model.addAttribute("tomatoesList", tomatoesList);
 
             return "fullcard";
 

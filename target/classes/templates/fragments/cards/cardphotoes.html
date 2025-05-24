@@ -3,33 +3,62 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
 
 
-    <div th:replace="fragments/headers/head :: head"></div>
+<div th:replace="fragments/headers/head :: head"></div>
 
 <div class="d-flex flex-row justify-content-center align-items-center"
-     style="min-width: available"
+     style="max-width: 90vw"
      th:fragment="cardphotoes">
 
-    <div class="flex-row justify-content-center">
-        <div class="text-center d-flex flex-row justify-content-center"
-             style="width: 50vw; height: 15vh">
+    <div class="d-flex flex-row"
+         style="min-width: 90vw">
+        <div class="text-center d-flex flex-row justify-content-between"
+             style="width: 90vw;">
+            <!-- Контейнер для фото (теперь обернут в один div) -->
             <div class="d-flex flex-row"
-                 th:each="photo, iterStat : ${element.photos}">
-                <div class="d-flex flex-row me-4 thumbnail-container">
-                    <img th:src="@{'data:image/jpg;base64,' + ${photo.getImageDataBase64()}}"
+                 style="max-width: 27vw">
+                <div th:each="photo, iterStat : ${element.photos}"
+                     class="me-1 thumbnail-container">
+                    <img th:src="@{'data:image/jpg;base64,'
+                     + ${photo.getImageDataBase64()}}"
                          alt="Thumbnail"
                          class="img-thumbnail thumbnail"
                          style="max-width: 100%;
-                         height: auto;
-                         object-fit: contain;
-                         cursor: pointer;"
+                 height: auto;
+                 object-fit: contain;
+                 cursor: pointer;"
                          th:attr="data-main-image-src=@{'data:image/jpg;base64,'
-                         + ${photo.getImageDataBase64()}}"
+                 + ${photo.getImageDataBase64()}}"
                          onmouseover="changeMainImage(this)"
                          onmouseout="resetMainImage()">
                 </div>
             </div>
+
+            <!-- Контейнер для селекта -->
+            <div class="d-flex align-items-baseline"
+                 style="width: 20vw;
+                 margin-right: 3vw">
+                <label class="w-100">
+                    <select class="m-2 border border-0 fs-4"
+                            name="tomatoesName"
+                            style="max-width: 100%;
+                            cursor: pointer;
+                            color:  orangered;
+                            font-weight: bold"
+                            onchange="window.location.href =
+                    this.options[this.selectedIndex].getAttribute('data-url');">
+                        <option style="color:  orangered;"
+                                value="0">Посмотрите другой томат
+                        </option>
+                        <option th:each="elem : ${tomatoesList}"
+                                th:value="${elem.tomatoesName}"
+                                th:text="${elem.tomatoesName}"
+                                th:attr="data-url=@{/tomatoes/{idCount}(idCount=${elem.idCount})}"
+                                style="color:  #044726;">
+                        </option>
+                    </select>
+                </label>
+            </div>
         </div>
     </div>
-
 </div>
 </html>

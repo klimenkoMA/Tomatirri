@@ -3,8 +3,8 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
 
 
-    <div th:replace="fragments/headers/head :: head"></div>
-    <script type="text/javascript" th:src="@{/js/cards/changeMainImage.js}"></script>
+<div th:replace="fragments/headers/head :: head"></div>
+<script type="text/javascript" th:src="@{/js/cards/changeMainImage.js}"></script>
 
 
 <body>
@@ -27,6 +27,14 @@
             <div th:each="element : ${cardList}"
                  class="col">
 
+                <div style="width: 90vw">
+                    <h2 class="text-center"
+                        style="color: orangered;
+                        margin-bottom: 1rem;">
+                        <strong th:text="${element.tomatoesName}"></strong>
+                    </h2>
+                </div>
+
                 <hr class="border-top border-1 border-success my-auto"
                     style="min-width: border-box;
                     background-color: #467a53;
@@ -41,21 +49,13 @@
 
                 </div>
 
-                <div style="width: 27rem">
-                    <h5 class="text-center"
-                        style="color: #044726;
-                        margin-bottom: 0;">
-                        <strong th:text="${element.tomatoesName}"></strong>
-                    </h5>
-                </div>
+                <div th:replace="fragments/cards/cardphotoes :: cardphotoes"></div>
 
                 <hr class="border-top border-1 border-success my-3"
                     style="min-width: 55vw;
                     margin-top: 1vh;
                     background-color: #467a53;
                     max-height: 0.1vh">
-
-                <div th:replace="fragments/cards/cardphotoes :: cardphotoes"></div>
 
             </div>
 
