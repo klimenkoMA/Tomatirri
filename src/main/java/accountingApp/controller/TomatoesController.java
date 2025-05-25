@@ -480,6 +480,7 @@ public class TomatoesController {
             List<Tomatoes> tomatoesList = tomatoesService.findAllTomatoes();
             model.addAttribute("cardList", cardList);
             model.addAttribute("tomatoesList", tomatoesList);
+            model.addAttribute("photos", tomato.getPhotos());
 
             return "fullcard";
 
