@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
 
 
@@ -66,5 +65,123 @@
         <div th:replace="fragments/footermain :: footermain"></div>
     </footer>
 </div>
+<div th:replace="fragments/cards/modalImage :: modalImage"></div>
 </body>
 </html>
+<script>
+    function openModal(imgSrc) {
+        const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+        document.getElementById('modalImage').src = imgSrc;
+        modal.show();
+    }
+</script>
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">-->
+
+<!--<div th:replace="fragments/headers/head :: head"></div>-->
+<!--&lt;!&ndash; Подключаем Bootstrap (если ещё не подключен) &ndash;&gt;-->
+<!--<style>-->
+<!--    .carousel-control-prev, .carousel-control-next {-->
+<!--        background-color: rgba(0, 0, 0, 0.3);-->
+<!--        width: 40px;-->
+<!--        height: 40px;-->
+<!--        border-radius: 50%;-->
+<!--        top: 50%;-->
+<!--        transform: translateY(-50%);-->
+<!--    }-->
+
+<!--    .carousel-indicators button {-->
+<!--        width: 10px;-->
+<!--        height: 10px;-->
+<!--        border-radius: 50%;-->
+<!--    }-->
+
+<!--    .modal-img {-->
+<!--        max-height: 80vh;-->
+<!--        object-fit: contain;-->
+<!--    }-->
+<!--</style>-->
+
+<!--&lt;!&ndash; Кнопка/элемент для открытия модального окна &ndash;&gt;-->
+<!--<div class="d-flex justify-content-center">-->
+<!--    <button class="btn btn-primary"-->
+<!--            data-bs-toggle="modal"-->
+<!--            data-bs-target="#imageModal">-->
+<!--        Показать галерею-->
+<!--    </button>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Модальное окно с каруселью &ndash;&gt;-->
+<!--<div class="modal fade"-->
+<!--     id="imageModal"-->
+<!--     tabindex="-1"-->
+<!--     aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-dialog-centered modal-xl">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title">Галерея изображений</h5>-->
+<!--                <button type="button"-->
+<!--                        class="btn-close"-->
+<!--                        data-bs-dismiss="modal"-->
+<!--                        aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                &lt;!&ndash; Карусель Bootstrap &ndash;&gt;-->
+<!--                <div id="galleryCarousel"-->
+<!--                     class="carousel slide"-->
+<!--                     data-bs-ride="carousel">-->
+<!--                    &lt;!&ndash; Индикаторы &ndash;&gt;-->
+<!--                    <div class="carousel-indicators">-->
+<!--                        <button th:each="photo, iterStat : ${photos}"-->
+<!--                                type="button"-->
+<!--                                data-bs-target="#galleryCarousel"-->
+<!--                                th:attr="data-bs-slide-to=${iterStat.index}"-->
+<!--                                th:classappend="${iterStat.first} ? 'active' : ''"></button>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; Слайды &ndash;&gt;-->
+<!--                    <div class="carousel-inner">-->
+<!--                        <div th:each="photo, iterStat : ${photos}"-->
+<!--                             th:classappend="${iterStat.first} ?-->
+<!--                             'carousel-item active' : 'carousel-item'">-->
+<!--                            <img th:src="@{'data:image/jpg;base64,'-->
+<!--                            + ${photo.getImageDataBase64()}}"-->
+<!--                                 class="d-block w-100 modal-img"-->
+<!--                                 alt="Изображение">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; Кнопки навигации &ndash;&gt;-->
+<!--                    <button class="carousel-control-prev"-->
+<!--                            type="button"-->
+<!--                            data-bs-target="#galleryCarousel"-->
+<!--                            data-bs-slide="prev">-->
+<!--                        <span class="carousel-control-prev-icon"-->
+<!--                              aria-hidden="true"></span>-->
+<!--                        <span class="visually-hidden">Предыдущее</span>-->
+<!--                    </button>-->
+<!--                    <button class="carousel-control-next"-->
+<!--                            type="button"-->
+<!--                            data-bs-target="#galleryCarousel"-->
+<!--                            data-bs-slide="next">-->
+<!--                        <span class="carousel-control-next-icon"-->
+<!--                              aria-hidden="true"></span>-->
+<!--                        <span class="visually-hidden">Следующее</span>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button"-->
+<!--                        class="btn btn-secondary"-->
+<!--                        data-bs-dismiss="modal">Закрыть-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</html>-->
+<!--<script>-->
+<!--    // Инициализация карусели при открытии модального окна-->
+<!--    document.getElementById('imageModal').addEventListener('shown.bs.modal', function () {-->
+<!--        let carousel = new bootstrap.Carousel(document.getElementById('galleryCarousel'));-->
+<!--    });-->
+<!--</script>-->
