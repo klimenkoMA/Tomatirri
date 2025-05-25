@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
 
 
@@ -66,5 +65,13 @@
         <div th:replace="fragments/footermain :: footermain"></div>
     </footer>
 </div>
+<div th:replace="fragments/cards/modalImage :: modalImage"></div>
 </body>
 </html>
+<script>
+    function openModal(imgSrc) {
+        const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+        document.getElementById('modalImage').src = imgSrc;
+        modal.show();
+    }
+</script>

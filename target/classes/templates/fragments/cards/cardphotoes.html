@@ -35,7 +35,7 @@
 
             <!-- Контейнер для селекта -->
             <div class="d-flex align-items-baseline"
-                 style="width: 20vw;
+                 style="width: 12vw;
                  margin-right: 3vw">
                 <label class="w-100">
                     <select class="m-2 border border-0 fs-4"
@@ -47,7 +47,7 @@
                             onchange="window.location.href =
                     this.options[this.selectedIndex].getAttribute('data-url');">
                         <option style="color:  orangered;"
-                                value="0">Посмотрите другой томат
+                                value="0">Другой томат
                         </option>
                         <option th:each="elem : ${tomatoesList}"
                                 th:value="${elem.tomatoesName}"

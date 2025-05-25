@@ -16,7 +16,7 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="46">
+          <list size="47">
             <item index="0" class="java.lang.String" itemvalue="charset" />
             <item index="1" class="java.lang.String" itemvalue="placeholder" />
             <item index="2" class="java.lang.String" itemvalue="th:each" />
@@ -63,6 +63,7 @@
             <item index="43" class="java.lang.String" itemvalue="th:title" />
             <item index="44" class="java.lang.String" itemvalue="async" />
             <item index="45" class="java.lang.String" itemvalue="a" />
+            <item index="46" class="java.lang.String" itemvalue="th:classappend" />
           </list>
         </value>
       </option>
