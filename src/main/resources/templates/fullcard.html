@@ -68,11 +68,26 @@
 <div th:replace="fragments/cards/modalImage :: modalImage"></div>
 </body>
 </html>
-<script>
-    function openModal(imgSrc) {
-        const modal = new bootstrap.Modal(document.getElementById('galleryModal'));
-        document.getElementById('modalImage').src = imgSrc;
-        modal.show();
-    }
-</script>
 
+<script>
+    // Новая функция для подготовки модального окна
+    function prepareGalleryModal(imgElement) {
+        const index = imgElement.getAttribute('data-index');
+        document.getElementById('galleryModal').setAttribute('data-start-index', index);
+        document.getElementById('galleryBtn').click();
+    }
+
+    // Модифицированный скрипт инициализации карусели
+    document.addEventListener('DOMContentLoaded', function () {
+        var galleryModal = document.getElementById('galleryModal');
+        if (galleryModal) {
+            galleryModal.addEventListener('shown.bs.modal', function () {
+                var startIndex = parseInt(this.getAttribute('data-start-index')) || 0;
+                var carousel = new bootstrap.Carousel(document.getElementById('galleryCarousel'), {
+
+                });
+                carousel.to(startIndex); // Переходим к нужному слайду
+            });
+        }
+    });
+</script>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+
+
+<div th:replace="fragments/headers/head :: head"></div>
+<script type="text/javascript" th:src="@{/js/cards/changeMainImage.js}"></script>
+
+<style>
+    .carousel-control-prev, .carousel-control-next {
+        background-color: rgba(0, 0, 0, 0.3);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .carousel-indicators button {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: 0 5px;
+    }
+
+    .modal-img {
+        max-height: 40vh;
+        /*object-fit: contain;*/
+    }
+
+    .carousel-inner {
+        text-align: center;
+    }
+</style>
+
+<body>
+<div class="wrapper d-flex justify-content-center p-0 m-0"
+     style="align-self: center;">
+
+    <div th:replace="fragments/headers/headermain :: headermain"></div>
+
+    <main class="main d-flex flex-column p-0 m-0"
+          style="
+          align-self: center;
+          max-width: 90%;">
+
+        <div class="flex-column"
+             style="padding: 3vh;
+             min-height: 70vh;
+             min-width: 90vw;">
+
+
+            <div th:each="element : ${cardList}"
+                 class="col">
+
+                <div style="width: 90vw">
+                    <h2 class="text-center"
+                        style="color: orangered;
+                        margin-bottom: 1rem;">
+                        <strong th:text="${element.tomatoesName}"></strong>
+                    </h2>
+                </div>
+
+                <hr class="border-top border-1 border-success my-auto"
+                    style="min-width: border-box;
+                    background-color: #467a53;
+                    max-height: 0.1vh">
+
+
+                <div class="d-flex flex-row mb-2">
+
+                    <img id="mainImage"
+                         th:src="@{'data:image/jpg;base64,' + ${element.photos.get(0).getImageDataBase64()}}"
+                         class="img-fluid main-image"
+                         alt="Tomato"
+                         style="width: 27rem;
+            padding-top: 2vh;
+            cursor: pointer;
+            object-fit: cover;
+            height: 27rem"
+                         onclick="document.getElementById('galleryBtn').click()">
+
+                    <button id="galleryBtn"
+                            class="btn btn-primary visually-hidden"
+                            data-bs-toggle="modal"
+                            data-bs-target="#galleryModal">
+                        Показать галерею
+                    </button>
+
+
+                    <div class="flex-column"
+                         style="margin-left: 1vw;
+                         margin-top: 7vh;
+                         max-height: 12rem">
+                        <div><strong>Наличие: [[${element.isPresent}]]</strong></div>
+                        <div><strong><br/>Тип: </strong>[[${element.category}]]</div>
+                        <div><strong><br/>Высота: </strong>[[${element.tomatoesHeight}]]</div>
+                        <div><strong><br/>Диаметр: </strong>[[${element.tomatoesDiameter}]]</div>
+                        <div><strong><br/>Вес: </strong>[[${element.tomatoesFruit}]]</div>
+                        <div><strong><br/>Кашпо: </strong>[[${element.tomatoesFlowerpot}]]</div>
+                    </div>
+
+                    <div class="card text-center border-0"
+                         style="text-shadow: none;
+                    margin-top: 5vh;
+                    margin-left: 2vw">
+                        <div class="card-header border-0">
+                            <ul class="nav nav-tabs card-header-tabs"
+                                id="tomatoTabs"
+                                role="tablist">
+                                <li class="nav-item text-start"
+                                    role="presentation">
+                                    <button class="nav-link active"
+                                            id="ripening-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#ripening"
+                                            type="button"
+                                            role="tab"
+                                            aria-controls="ripening"
+                                            aria-selected="true"
+                                            style="text-shadow: none; color: #044726">
+                                        Созревание
+                                    </button>
+                                </li>
+                                <li class="nav-item text-start" role="presentation">
+                                    <button class="nav-link"
+                                            id="description-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#description"
+                                            type="button"
+                                            role="tab"
+                                            aria-controls="description"
+                                            aria-selected="false"
+                                            style="text-shadow: none; color: #044726">
+                                        Описание
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link"
+                                            id="taste-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#taste"
+                                            type="button"
+                                            role="tab"
+                                            aria-controls="taste"
+                                            aria-selected="false"
+                                            style="text-shadow: none; color: #044726">
+                                        Вкус
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link"
+                                            id="spec-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#spec"
+                                            type="button"
+                                            role="tab"
+                                            aria-controls="spec"
+                                            aria-selected="false"
+                                            style="text-shadow: none; color: #044726">
+                                        Особенности
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="tomatoTabsContent">
+                            <div class="tab-pane fade show active card-body text-start"
+                                 id="ripening"
+                                 role="tabpanel"
+                                 aria-labelledby="ripening-tab"
+                                 style="max-width: 40vw;">
+                                <p class="card-text">[[${element.tomatoesAgroTech}]]</p>
+                            </div>
+                            <div class="tab-pane fade card-body text-start"
+                                 id="description"
+                                 role="tabpanel"
+                                 aria-labelledby="description-tab"
+                                 style="max-width: 40vw;">
+                                <p class="card-text">[[${element.tomatoesDescription}]]</p>
+                            </div>
+                            <div class="tab-pane fade card-body text-start"
+                                 id="taste"
+                                 role="tabpanel"
+                                 aria-labelledby="taste-tab"
+                                 style="max-width: 40vw;">
+                                <p class="card-text">[[${element.tomatoesTaste}]]</p>
+                            </div>
+                            <div class="tab-pane fade card-body text-start"
+                                 id="spec"
+                                 role="tabpanel"
+                                 aria-labelledby="spec-tab"
+                                 style="max-width: 40vw;">
+                                <p class="card-text">[[${element.tomatoesSpecificity}]]</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="d-flex flex-row"
+                     style="min-width: 90vw">
+                    <div class="text-center d-flex flex-row justify-content-between"
+                         style="width: 90vw;">
+                        <!-- Контейнер для фото (теперь обернут в один div) -->
+                        <div class="d-flex flex-row"
+                             style="max-width: 27vw">
+                            <div th:each="photo, iterStat : ${element.photos}"
+                                 class="me-1 thumbnail-container">
+                                <img th:src="@{'data:image/jpg;base64,'
+                     + ${photo.getImageDataBase64()}}"
+                                     alt="Thumbnail"
+                                     class="img-thumbnail thumbnail"
+                                     style="max-width: 100%;
+                 height: auto;
+                 object-fit: contain;
+                 cursor: pointer;"
+                                     th:attr="data-main-image-src=@{'data:image/jpg;base64,'
+                 + ${photo.getImageDataBase64()}}"
+                                     onmouseover="changeMainImage(this)"
+                                     onmouseout="resetMainImage()">
+                            </div>
+                        </div>
+
+                        <!-- Контейнер для селекта -->
+                        <div class="d-flex align-items-baseline"
+                             style="width: 12vw;
+                 margin-right: 3vw">
+                            <label class="w-100">
+                                <select class="m-2 border border-0 fs-4"
+                                        name="tomatoesName"
+                                        style="max-width: 100%;
+                            cursor: pointer;
+                            color:  orangered;
+                            font-weight: bold"
+                                        onchange="window.location.href =
+                    this.options[this.selectedIndex].getAttribute('data-url');">
+                                    <option style="color:  orangered;"
+                                            value="0">Другой томат
+                                    </option>
+                                    <option th:each="elem : ${tomatoesList}"
+                                            th:value="${elem.tomatoesName}"
+                                            th:text="${elem.tomatoesName}"
+                                            th:attr="data-url=@{/tomatoes/{idCount}(idCount=${elem.idCount})}"
+                                            style="color:  #044726;">
+                                    </option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-top border-1 border-success my-3"
+                    style="min-width: 55vw;
+                    margin-top: 1vh;
+                    background-color: #467a53;
+                    max-height: 0.1vh">
+
+            </div>
+
+        </div>
+
+    </main>
+    <footer>
+        <div th:replace="fragments/footermain :: footermain"></div>
+    </footer>
+</div>
+
+<!-- Модальное окно с каруселью -->
+<div class="modal fade"
+     id="galleryModal"
+     tabindex="-1"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <!-- Карусель Bootstrap -->
+                <div id="galleryCarousel"
+                     class="carousel slide"
+                     data-bs-ride="carousel">
+                    <!-- Индикаторы -->
+                    <div class="carousel-indicators">
+                        <button th:each="photo, iterStat : ${cardList[0].photos}"
+                                type="button"
+                                data-bs-target="#galleryCarousel"
+                                th:attr="data-bs-slide-to=${iterStat.index}"
+                                th:classappend="${iterStat.first} ? 'active' : ''"
+                                aria-label="Slide ${iterStat.index + 1}"></button>
+                    </div>
+                    <!-- Слайды -->
+                    <div class="carousel-inner modal-lg">
+                        <div
+                                th:each="photo, iterStat : ${cardList[0].photos}"
+                                th:classappend="${iterStat.first} ?
+                                 'carousel-item active' : 'carousel-item'">
+                            <img th:src="@{'data:image/jpg;base64,' + ${photo.getImageDataBase64()}}"
+                                 class="d-block mx-auto modal-img w-50 h-50"
+                                 alt="Изображение">
+                        </div>
+                    </div>
+                    <!-- Кнопки навигации -->
+                    <button class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#galleryCarousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"
+                                  aria-hidden="true"></span>
+                        <span class="visually-hidden">Предыдущее</span>
+                    </button>
+                    <button class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#galleryCarousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon"
+                                  aria-hidden="true"></span>
+                        <span class="visually-hidden">Следующее</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Инициализация карусели
+        document.addEventListener('DOMContentLoaded', function () {
+            var galleryModal = document.getElementById('galleryModal');
+            if (galleryModal) {
+                galleryModal.addEventListener('shown.bs.modal', function () {
+                    var carousel = new bootstrap.Carousel(document.getElementById('galleryCarousel')
+                        , {
+                            interval: false
+                        });
+                });
+            }
+        });
+    </script>
+</div>
+
+</body>
+</html>
+<script>
+    function openModal(imgSrc) {
+        const modal = new bootstrap.Modal(document.getElementById('galleryModal'));
+        document.getElementById('modalImage').src = imgSrc;
+        modal.show();
+    }
+</script>
+
