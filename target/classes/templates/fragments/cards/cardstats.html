@@ -12,12 +12,13 @@
          th:src="@{'data:image/jpg;base64,' + ${element.photos.get(0).getImageDataBase64()}}"
          class="img-fluid main-image"
          alt="Tomato"
+         data-index="0"
          style="width: 27rem;
-            padding-top: 2vh;
-            cursor: pointer;
-            object-fit: cover;
-            height: 27rem"
-         onclick="document.getElementById('galleryBtn').click()">
+     padding-top: 2vh;
+     cursor: pointer;
+     object-fit: cover;
+     height: 27rem"
+         onclick="prepareGalleryModal(this)">
 
     <button id="galleryBtn"
             class="btn btn-primary visually-hidden"
