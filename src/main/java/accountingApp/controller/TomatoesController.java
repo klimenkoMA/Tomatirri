@@ -40,7 +40,7 @@ public class TomatoesController {
         this.checker = checker;
     }
 
-    @GetMapping("/tomatoes")
+    @GetMapping("/tomatoescatalog")
     public String getTomatoes(Model model) {
         List<Tomatoes> tomatoesList = tomatoesService.findAllTomatoes()
                 .stream()
@@ -59,7 +59,7 @@ public class TomatoesController {
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("isPresentList", isPresentList);
 
-        return "tomatoes";
+        return "tomatoescatalog";
     }
 
     @PostMapping("/addtomato")
@@ -429,7 +429,7 @@ public class TomatoesController {
             }
 
             model.addAttribute("tomatoesList", tomatoesList);
-            return "tomatoes";
+            return "tomatoescatalog";
 
         } catch (Exception e) {
             logger.error("*** TomatoesController.findTomato(): wrong DB's values! *** "
@@ -459,7 +459,7 @@ public class TomatoesController {
             }
             model.addAttribute("tomatoesList", tomatoesList);
 
-            return "tomatoes";
+            return "tomatoescatalog";
         } catch (Exception e) {
             logger.error("*** TomatoesController.findTomatoesListByCategory(): wrong DB's values! *** "
                     + e.getMessage());

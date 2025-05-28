@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+
+
+<title>TOMATOES CATALOG</title>
+<div th:replace="fragments/headers/head :: head"></div>
+
+<body>
+<div class="wrapper d-flex justify-content-center p-0 m-0"
+     style="align-self: center;">
+    <header>
+        <div th:replace="fragments/headers/headermain :: headermain"></div>
+    </header>
+
+        <div class="d-flex flex-row align-self-center">
+
+            <div class="align-items-start justify-content-around m-2 d-flex flex-column"
+                 style="min-width: content-box;">
+
+                <div th:replace="fragments/cards/dinamiccard :: dinamiccard"></div>
+
+            </div>
+        </div>
+
+    <footer>
+        <div th:replace="fragments/footermain :: footermain"></div>
+    </footer>
+</div>
+</body>
+</html>

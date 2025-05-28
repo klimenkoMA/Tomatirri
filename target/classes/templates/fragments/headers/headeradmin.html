@@ -8,7 +8,7 @@
 <header class="container d-flex flex-column p-0 m-0"
         style="height: 10%;
         min-width: 99vw;"
-        th:fragment="headermain">
+        th:fragment="headeradmin">
     <a style=" width:5rem;
          height:1rem;"
        href="/users">
@@ -115,27 +115,30 @@
                                     onchange="window.location.href =
                     this.options[this.selectedIndex].getAttribute('data-url');">
                                 <option selected style="color:  #044726;">
-                                    Каталог семян
+                                    Редактировать семена
                                 </option>
-                                <option value=1 data-url="/tomatoescatalog">Томаты</option>
-                                <option value="2">Перцы</option>
-                                <option value="3">Огурцы</option>
+                                <option value=1 data-url="/tomatoes">Редактировать томаты</option>
+                                <option value="2">Редактировать Перцы</option>
+                                <option value="3">Редактировать Огурцы</option>
                             </select>
                         </div>
                         <div style="flex: 0 0 auto;
                     color:  #044726;
                     text-shadow: none;">
-                            Новости
+                            <a class="nav-link" style="color: #ffc107"
+                               th:href="@{/users}">Пользователи</a>
                         </div>
                         <div style="flex: 0 0 auto;
                     color:  #044726;
                     text-shadow: none;">
-                            Акции
+                            <a class="nav-link" style="color: #ffc107"
+                               th:href="@{/feedbacks}">Обратная связь</a>
                         </div>
                         <div style="flex: 0 0 auto;
                     color:  #044726;
                     text-shadow: none;">
-                            Фотогалерея
+                            <a class="nav-link" style="color: #ffc107"
+                               th:href="@{/documents}">Документы</a>
                         </div>
                         <div style="flex: 0 0 auto">
                             <form th:action="@{/logout}"
