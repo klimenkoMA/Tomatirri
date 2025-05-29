@@ -2,70 +2,101 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
 
-<head>
-    <title>USERS</title>
-    <div th:replace="fragments/headers/head :: head"></div>
-</head>
+<title>USERS</title>
+<div th:replace="fragments/headers/head :: head"></div>
 <body>
-<div class="wrapper d-flex justify-content-center" style="align-self: center">
+<div class="wrapper d-flex justify-content-center p-0 m-0"
+     style="align-self: center">
 
     <div class="p-0 m-0"
          th:replace="fragments/headers/headeradmin :: headeradmin"></div>
 
-    <main class="main d-flex row" style="align-content: baseline;
-        background-image: url('../img/bg/bdfon2.jpg');
-        background-repeat: no-repeat; align-self: center;
-        max-width: 80rem; border-radius: 1rem">
+    <main class="main d-flex p-0 m-0 justify-content-center"
+          style="align-content: baseline;
+          align-self: center;
+          max-width: 90%;">
 
-        <div th:replace="fragments/crud/crudusers :: crudusers"></div>
+        <div style="flex: 0 0 auto;"
+             th:replace="fragments/crud/crudusers :: crudusers">
+        </div>
 
-        <div class="table-result-db" style="justify-content: center; max-height: min-content">
+        <div class="table-result-db p-0 w-100"
+             style="justify-content: center;
+             flex: 0 0 auto;
+             margin-top: 2vh;
+             max-height: min-content">
 
-            <table class="row" style=" justify-content: center;
-                  align-content: center; height: 3rem; table-layout: fixed">
+            <table class="row"
+                   style="
+                   justify-content: center;
+                   align-content: center;
+                   margin-bottom: 1rem;
+                   height: 3vh;
+                   table-layout: fixed">
 
-                <tr class="text-light fs-5" style="background-color: #62a0f6">
-                    <th class="p-2 m-2 text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
-                        ; width: 15rem; text-shadow: 2px 2px 4px #07237a">
+                <tr class="text-light fs-5"
+                    style="background-color: #467a53">
+                    <th class="text-center align-self-center"
+                        style="padding-left: 2vh;
+                        padding-right: 2vh;
+                        border-color: #467a53;
+                        width: 15rem;
+                        text-shadow: 2px 2px 4px #07237a">
                         ID
                     </th>
-                    <th class="p-2 m-2 text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
-                        ; width: 25rem; text-shadow: 2px 2px 4px #07237a">
+                    <th class="text-center align-self-center"
+                        style="padding-left: 2vh;
+                        padding-right: 2vh;
+                        border-color: #467a53;
+                        width: 25rem;
+                        text-shadow: 2px 2px 4px #07237a">
                         Логин
                     </th>
-                    <th class="p-2 m-2 text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
-                        ; width: 25rem; text-shadow: 2px 2px 4px #07237a">
+                    <th class="text-center align-self-center"
+                        style="padding-left: 2vh;
+                        padding-right: 2vh;
+                        border-color: #467a53;
+                        width: 25rem;
+                        text-shadow: 2px 2px 4px #07237a">
                         Состояние
                     </th>
-                    <th class="p-2 m-2 text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
-                        ; width: 25rem; text-shadow: 2px 2px 4px #07237a">
+                    <th class="text-center align-self-center"
+                        style="padding-left: 2vh;
+                        padding-right: 2vh;
+                        border-color: #467a53;
+                        width: 25rem;
+                        text-shadow: 2px 2px 4px #07237a">
                         Роль
                     </th>
                 </tr>
             </table>
 
-            <div class="scroll-tbody">
-                <table class="col" style="align-self: center">
+            <div class="scroll-tbody border-0"
+                 style="flex: 0 0 auto;">
+                <table class="col border-0 fs-5"
+                       style="align-self: center;
+                       min-height: min-content;
+                       font-size: small;
+                       word-break: break-all;
+                       border: 0;
+                       overflow-wrap: anywhere;
+                       white-space: normal">
                     <div th:each="element : ${tomatirriUserList}">
                         <div class="col">
                             <tr style="align-self: center">
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
+                                <td class="text-center border border-0"
                                     style="width: 15rem">
                                     <div>[[${element.id}]]</div>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
+                                <td class="text-center border border-0"
                                     style="width: 25rem">
                                     <div>[[${element.userName}]]</div>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
+                                <td class="text-center border border-0"
                                     style="width: 25rem">
                                     <div>[[${element.isActiveForView}]]</div>
                                 </td>
-                                <td class="p-2 m-2 text-center border border-1 border-dark"
+                                <td class="text-center border border-0"
                                     style="width: 25rem">
                                     <div>[[${element.roles}]]</div>
                                 </td>
