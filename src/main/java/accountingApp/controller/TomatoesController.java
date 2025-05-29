@@ -62,6 +62,28 @@ public class TomatoesController {
         return "tomatoescatalog";
     }
 
+    @GetMapping("/tomatoes")
+    public String getTomatoesForCRUD(Model model) {
+        List<Tomatoes> tomatoesList = tomatoesService.findAllTomatoes()
+                .stream()
+                .sorted(Comparator.comparingLong(Tomatoes::getIdCount).reversed())
+                .collect(Collectors.toList());
+
+        List<String> categoryList = Arrays.stream(TOMATOES_CATEGORIES)
+                .map(TomatoesCategory::getCategory)
+                .collect(Collectors.toList());
+
+        List<String> isPresentList = Arrays.stream(IS_PRESENTS)
+                .map(IsPresent::getPresent)
+                .collect(Collectors.toList());
+
+        model.addAttribute("tomatoesList", tomatoesList);
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("isPresentList", isPresentList);
+
+        return "tomatoes";
+    }
+
     @PostMapping("/addtomato")
     public String addTomato(@RequestParam(required = false) String category
             , @RequestParam String tomatoesName
