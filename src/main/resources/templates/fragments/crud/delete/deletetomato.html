@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
 
-<head>
     <div th:replace="fragments/headers/head :: head"></div>
-</head>
+
 <div th:fragment="deletetomato" class="d-flex flex-column">
     <label class="popup_try d-flex fs-7 p-0 m-0 text-center
     align-items-center justify-content-center"
@@ -38,7 +37,8 @@
                   autocomplete="off">
                 <div align="center">
                     <label>
-                        <input type="text" name="id" align="middle"
+                        <input type="text"
+                               name="id" align="middle"
                                required
                                placeholder="ID томата"/>
                     </label>
@@ -55,7 +55,9 @@
                         Удалить
                     </button>
                 </div>
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                <input type="hidden"
+                       name="${_csrf.parameterName}"
+                       value="${_csrf.token}">
             </form>
         </div>
     </div>
