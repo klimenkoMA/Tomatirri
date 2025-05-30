@@ -47,14 +47,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                             response.sendRedirect("/users");
                         }
                     } else {
-                        response.sendRedirect("/main");
+                        response.sendRedirect("/");
                     }
                 })
                 .authenticationEntryPoint((request, response, authException) -> {
                     response.sendRedirect("/login");
                 })
                 .defaultAuthenticationEntryPointFor((request, response, authException) -> {
-                    response.sendRedirect("/main");
+                    response.sendRedirect("/");
                 }, new AntPathRequestMatcher("/**"))
                 .and()
                 .csrf().disable();
