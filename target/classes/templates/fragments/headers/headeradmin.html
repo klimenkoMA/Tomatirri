@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
-
 
 <div th:replace="fragments/headers/head :: head"></div>
 
@@ -103,7 +101,7 @@
                     </div>
 
                     <div class="d-flex flex-row align-items-end w-100
-                    justify-content-between">
+                    justify-content-around">
                         <div style="flex: 0 0 auto;
                     min-width: 12vw;
                     text-shadow: none;
@@ -111,34 +109,44 @@
                             <select class="form-select fs-4 border-0"
                                     aria-label=""
                                     style="color:  #044726;
+                                    max-width: 17rem;
                                     font-weight: bold"
                                     onchange="window.location.href =
                     this.options[this.selectedIndex].getAttribute('data-url');">
                                 <option selected style="color:  #044726;">
-                                    Редактировать семена
+                                    Редактирование
                                 </option>
                                 <option value=1 data-url="/tomatoes">Редактировать томаты</option>
-                                <option value="2">Редактировать Перцы</option>
-                                <option value="3">Редактировать Огурцы</option>
+                                <option value="2">Редактировать перцы</option>
+                                <option value="3">Редактировать огурцы</option>
                             </select>
                         </div>
                         <div style="flex: 0 0 auto;
                     color:  #044726;
                     text-shadow: none;">
-                            <a class="nav-link" style="color: #ffc107"
-                               th:href="@{/users}">Пользователи</a>
+                            <a class="nav-link"
+                               style="color: #044726"
+                               th:href="@{/users}">
+                                Пользователи
+                            </a>
                         </div>
                         <div style="flex: 0 0 auto;
                     color:  #044726;
                     text-shadow: none;">
-                            <a class="nav-link" style="color: #ffc107"
-                               th:href="@{/feedbacks}">Обратная связь</a>
+                            <a class="nav-link"
+                               style="color: #044726"
+                               th:href="@{/feedbacks}">
+                                Обратная связь
+                            </a>
                         </div>
                         <div style="flex: 0 0 auto;
                     color:  #044726;
                     text-shadow: none;">
-                            <a class="nav-link" style="color: #ffc107"
-                               th:href="@{/documents}">Документы</a>
+                            <a class="nav-link"
+                               style="color: #044726"
+                               th:href="@{/documents}">
+                                Документы
+                            </a>
                         </div>
                         <div style="flex: 0 0 auto">
                             <form th:action="@{/logout}"

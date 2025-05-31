@@ -9,6 +9,7 @@ html, body {
     padding: 0;
 }
 
+.
 
 .wrapper {
     min-height: 100%;
@@ -69,14 +70,9 @@ html, body {
 .nav-link.active {
     color: coral !important;
 }
-.nav-link:hover {
-    color: #ffffff;
-    background-color: #04472680;
-}
 
 .main {
     flex: 1 1 auto;
-    /*min-width: 100%;*/
 }
 
 .main-work {
