@@ -7,7 +7,8 @@
 
 
 <body>
-<div class="wrapper d-flex justify-content-center p-0 m-0"
+<div class="wrapper d-flex flex-column
+justify-content-center p-0 m-0"
      style="align-self: center;">
 
     <div th:replace="fragments/headers/headermain :: headermain"></div>
@@ -26,7 +27,7 @@
             <div th:each="element : ${cardList}"
                  class="col">
 
-                <div style="width: 90vw">
+                <div style="width: 90%">
                     <h2 class="text-center"
                         style="color: orangered;
                         margin-bottom: 1rem;">
@@ -83,9 +84,7 @@
         if (galleryModal) {
             galleryModal.addEventListener('shown.bs.modal', function () {
                 var startIndex = parseInt(this.getAttribute('data-start-index')) || 0;
-                var carousel = new bootstrap.Carousel(document.getElementById('galleryCarousel'), {
-
-                });
+                var carousel = new bootstrap.Carousel(document.getElementById('galleryCarousel'), {});
                 carousel.to(startIndex); // Переходим к нужному слайду
             });
         }

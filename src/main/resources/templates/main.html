@@ -8,8 +8,9 @@
     <div th:replace="fragments/headers/head :: head"></div>
 </head>
 <body>
-<div class="wrapper d-flex p-0 m-0"
-     style="max-width: 98%">
+<div class="wrapper d-flex flex-column p-0 m-0"
+     style="max-width: 98%;
+     min-height: 99%">
 
     <main class="main d-flex flex-column p-0 m-0">
         <ul class="d-flex flex-column list-unstyled p-0 m-0">
@@ -23,9 +24,8 @@
             </li>
         </ul>
     </main>
-    <footer class="p-0 m-0">
-        <div class="p-0 m-0"
-                th:replace="fragments/footermain :: footermain"></div>
+    <footer>
+        <div th:replace="fragments/footermain :: footermain"></div>
     </footer>
 </div>
 </body>

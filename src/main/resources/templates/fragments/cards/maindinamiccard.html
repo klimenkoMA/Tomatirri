@@ -2,15 +2,14 @@
 <html lang="en">
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
 
-<head>
     <div th:replace="fragments/headers/head :: head"></div>
-</head>
-<div th:fragment="maindinamiccard">
+
+<div class="d-flex flex-column"
+        th:fragment="maindinamiccard">
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 row-cols-xl-4 g-2
         justify-content-center"
-         style="padding: 3vh;
-         margin-top: 3rem">
+         style="padding: 3vh;">
 
         <div th:each="element : ${tomatoesList}"
              class="col flex-row"
