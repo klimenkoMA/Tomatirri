@@ -2,7 +2,6 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
 
-
     <title>TOMATOES</title>
     <div th:replace="fragments/headers/head :: head"></div>
 
@@ -10,7 +9,7 @@
 <div class="wrapper d-flex flex-column justify-content-center p-0 m-0"
      style="align-self: center;">
     <header>
-        <div th:replace="fragments/headers/headermain :: headermain"></div>
+        <div th:replace="fragments/headers/headeradmin :: headeradmin"></div>
     </header>
 
     <main class="main d-flex row p-0 m-0 justify-content-center"
@@ -145,8 +144,11 @@
                                     word-break: break-all;
                                     overflow-wrap: anywhere;
                                     white-space: normal">
-                                    <form action="/filtertomatoesbycategory" method="post">
-                                        <input type="hidden" name="category" th:value="${element.category}"/>
+                                    <form action="/filtertomatoesbycategory"
+                                          method="post">
+                                        <input type="hidden"
+                                               name="category"
+                                               th:value="${element.category}"/>
                                         <button type="submit" class=""
                                                 style="background: none;
                                                 color: darkblue;
@@ -199,7 +201,8 @@
                                     <div th:each="photo : ${element.photos}"
                                          class="col-4">
                                         <div>
-                                            <img th:src="@{'data:image/jpg;base64,'+${photo.getImageDataBase64()}}"
+                                            <img th:src="@{'data:image/jpg;base64,'
+                                            +${photo.getImageDataBase64()}}"
                                                  alt="images from database"
                                                  class="img-fluid"
                                                  style="max-width: 100%;
