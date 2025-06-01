@@ -2,3 +2,18 @@
 2025-05-31 08:10:02.591  WARN 11548 --- [http-nio-8080-exec-10] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername: INITIALISATION
 2025-05-31 08:10:02.670  WARN 11548 --- [http-nio-8080-exec-10] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername Successful authorization with user: u
 2025-05-31 08:10:02.671  WARN 11548 --- [http-nio-8080-exec-10] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername User's role is : ADMIN
+2025-05-31 08:33:47.621  WARN 11548 --- [http-nio-8080-exec-8] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername: INITIALISATION
+2025-05-31 08:33:47.627  WARN 11548 --- [http-nio-8080-exec-8] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername Successful authorization with user: u
+2025-05-31 08:33:47.628  WARN 11548 --- [http-nio-8080-exec-8] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername User's role is : ADMIN
+2025-05-31 09:00:47.176  WARN 11548 --- [http-nio-8080-exec-1] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername: INITIALISATION
+2025-05-31 09:00:47.188  WARN 11548 --- [http-nio-8080-exec-1] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername Successful authorization with user: u
+2025-05-31 09:00:47.189  WARN 11548 --- [http-nio-8080-exec-1] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername User's role is : ADMIN
+2025-05-31 09:15:05.546  WARN 11548 --- [http-nio-8080-exec-5] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername: INITIALISATION
+2025-05-31 09:15:05.551  WARN 11548 --- [http-nio-8080-exec-5] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername Successful authorization with user: u
+2025-05-31 09:15:05.552  WARN 11548 --- [http-nio-8080-exec-5] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername User's role is : ADMIN
+2025-05-31 12:49:45.568  WARN 11548 --- [http-nio-8080-exec-1] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername: INITIALISATION
+2025-05-31 12:49:45.581  WARN 11548 --- [http-nio-8080-exec-1] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername Successful authorization with user: u
+2025-05-31 12:49:45.581  WARN 11548 --- [http-nio-8080-exec-1] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername User's role is : ADMIN
+2025-05-31 12:53:47.170  WARN 11548 --- [http-nio-8080-exec-1] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername: INITIALISATION
+2025-05-31 12:53:47.175  WARN 11548 --- [http-nio-8080-exec-1] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername Successful authorization with user: u
+2025-05-31 12:53:47.176  WARN 11548 --- [http-nio-8080-exec-1] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername User's role is : ADMIN

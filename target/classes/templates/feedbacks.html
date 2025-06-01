@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
 
-<head>
     <title>Feedbacks</title>
     <div th:replace="fragments/headers/head :: head"></div>
-</head>
+
 <body>
-<div class="wrapper d-flex justify-content-center" style="align-self: center">
+<div class="wrapper d-flex flex-column
+justify-content-center"
+     style="align-self: center;
+     min-height: 100%">
 
     <div class="p-0 m-0"
          th:replace="fragments/headers/headeradmin :: headeradmin"></div>
 
-    <main class="main d-flex row" style="align-content: baseline;
-        background-image: url('../img/bg/bdfon2.jpg');
-        background-repeat: no-repeat; align-self: center;
-        width: 80rem; border-radius: 1rem">
+    <main class="main d-flex row"
+          style="align-content: baseline;
+          align-self: center;
+          min-height: 100%;
+          width: 80rem;
+          border-radius: 1rem">
 
         <div class="col" th:replace="fragments/crud/crudfeedbacks :: crudfeedbacks"></div>
 
@@ -23,24 +27,24 @@
             <table class="row" style=" justify-content: center;
                   align-content: center; height: 3rem; table-layout: fixed">
 
-                <tr class="text-light fs-7" style="background-color: #62a0f6">
+                <tr class="text-light fs-7" style="background-color: #467a53">
                     <th class="p-2 m-2 text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
+                        style="padding-left: 2vh; padding-right: 2vh; border-color: #467a53
                                 ; width: 5rem; text-shadow: 2px 2px 4px #07237a">
                         ID
                     </th>
                     <th class="p-2 m-2 text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
+                        style="padding-left: 2vh; padding-right: 2vh; border-color: #467a53
                                 ; width: 15rem; text-shadow: 2px 2px 4px #07237a">
                         Имя
                     </th>
                     <th class="p-2 m-2 text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
+                        style="padding-left: 2vh; padding-right: 2vh; border-color: #467a53
                                 ; width: 15rem; text-shadow: 2px 2px 4px #07237a">
                         E-mail
                     </th>
                     <th class="p-2 m-2 text-center align-self-center"
-                        style="padding-left: 2vh; padding-right: 2vh; border-color: #62a0f6
+                        style="padding-left: 2vh; padding-right: 2vh; border-color: #467a53
                                 ; width: 45rem; text-shadow: 2px 2px 4px #07237a">
                         Отзыв
                     </th>
@@ -84,6 +88,5 @@
         <div th:replace="fragments/footermain :: footermain"></div>
     </footer>
 </div>
-
 </body>
 </html>

@@ -15,7 +15,7 @@
              style="width: 90vw;">
             <!-- Контейнер для фото (теперь обернут в один div) -->
             <div class="d-flex flex-row"
-                 style="max-width: 27vw">
+                 style="max-width: 27vw; max-height: 23rem;">
                 <div th:each="photo, iterStat : ${element.photos}"
                      class="me-1 thumbnail-container">
                     <img th:src="@{'data:image/jpg;base64,' + ${photo.getImageDataBase64()}}"
