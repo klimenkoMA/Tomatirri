@@ -414,33 +414,45 @@ public class TomatoesController {
         try {
             List<Tomatoes> tomatoes = tomatoesService.findAllTomatoes();
             List<Tomatoes> tomatoesList = new ArrayList<>();
-            String attrTrim = attr.trim();
+            String attrTrim = attr.trim().toLowerCase(Locale.ROOT);
 
             for (Tomatoes t : tomatoes
             ) {
-                if (t.getCategory().getCategory().contains(attrTrim)) {
+                if (t.getCategory().getCategory().toLowerCase(Locale.ROOT)
+                        .contains(attrTrim)) {
                     tomatoesList.add(t);
-                } else if (t.getTomatoesName().contains(attrTrim)) {
+                } else if (t.getTomatoesName().toLowerCase(Locale.ROOT)
+                        .contains(attrTrim)) {
                     tomatoesList.add(t);
-                } else if (t.getTomatoesHeight().contains(attrTrim)) {
+                } else if (t.getTomatoesHeight().toLowerCase(Locale.ROOT)
+                        .contains(attrTrim)) {
                     tomatoesList.add(t);
-                } else if (t.getTomatoesDiameter().contains(attrTrim)) {
+                } else if (t.getTomatoesDiameter().toLowerCase(Locale.ROOT)
+                        .contains(attrTrim)) {
                     tomatoesList.add(t);
-                } else if (t.getTomatoesFruit().contains(attrTrim)) {
+                } else if (t.getTomatoesFruit().toLowerCase(Locale.ROOT)
+                        .contains(attrTrim)) {
                     tomatoesList.add(t);
-                } else if (t.getTomatoesFlowerpot().contains(attrTrim)) {
+                } else if (t.getTomatoesFlowerpot().toLowerCase(Locale.ROOT)
+                        .contains(attrTrim)) {
                     tomatoesList.add(t);
-                } else if (t.getTomatoesAgroTech().contains(attrTrim)) {
+                } else if (t.getTomatoesAgroTech().toLowerCase(Locale.ROOT)
+                        .contains(attrTrim)) {
                     tomatoesList.add(t);
-                } else if (t.getTomatoesDescription().contains(attrTrim)) {
+                } else if (t.getTomatoesDescription().toLowerCase(Locale.ROOT)
+                        .contains(attrTrim)) {
                     tomatoesList.add(t);
-                } else if (t.getTomatoesTaste().contains(attrTrim)) {
+                } else if (t.getTomatoesTaste().toLowerCase(Locale.ROOT)
+                        .contains(attrTrim)) {
                     tomatoesList.add(t);
-                } else if (t.getTomatoesSpecificity().contains(attrTrim)) {
+                } else if (t.getTomatoesSpecificity().toLowerCase(Locale.ROOT)
+                        .contains(attrTrim)) {
                     tomatoesList.add(t);
-                } else if (t.getIsPresent().getPresent().contains(attrTrim)) {
+                } else if (t.getIsPresent().getPresent().toLowerCase(Locale.ROOT)
+                        .contains(attrTrim)) {
                     tomatoesList.add(t);
-                } else if ((t.getIdCount() + "").contains(attrTrim)) {
+                } else if ((t.getIdCount() + "").toLowerCase(Locale.ROOT).
+                        contains(attrTrim)) {
                     tomatoesList.add(t);
                 }
             }
