@@ -32,11 +32,15 @@ public class TomatoesController {
     private static final TomatoesCategory[] TOMATOES_CATEGORIES = TomatoesCategory.values();
     private static final IsPresent[] IS_PRESENTS = IsPresent.values();
     private final TomatoesService tomatoesService;
+    private final AdminTomatoesService adminTomatoesService;
     private final Checker checker;
 
     @Autowired
-    public TomatoesController(TomatoesService tomatoesService, Checker checker) {
+    public TomatoesController(TomatoesService tomatoesService
+            , AdminTomatoesService adminTomatoesService
+            , Checker checker) {
         this.tomatoesService = tomatoesService;
+        this.adminTomatoesService = adminTomatoesService;
         this.checker = checker;
     }
 
@@ -399,6 +403,16 @@ public class TomatoesController {
                     "  WRONG DB VALUES*** " + e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    @PostMapping("/adminfindtomato")
+    public String adminFindTomato(@RequestParam String attr
+            , Model model) {
+
+        List<Tomatoes> tomatoesList = adminTomatoesService.findTomatoesForAdmin(attr);
+        model.addAttribute("tomatoesList", tomatoesList);
+
+        return "tomatoes";
     }
 
     @PostMapping("/findtomato")
