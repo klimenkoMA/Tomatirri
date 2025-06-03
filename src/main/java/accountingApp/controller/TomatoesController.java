@@ -394,7 +394,9 @@ public class TomatoesController {
                             .filename(tomato.getName())
                             .build());
                     headers.setContentLength(ph.getContent().length);
-                    return new ResponseEntity<>(ph.getContent(), headers, HttpStatus.OK);
+                    return new ResponseEntity<>(ph.getContent()
+                            , headers
+                            , HttpStatus.OK);
                 }
             }
             throw new Exception("tomato is NULL");
