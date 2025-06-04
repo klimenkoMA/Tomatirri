@@ -125,7 +125,7 @@ public class TomatoesController {
                     "\ntomatoesDescription: " + tomatoesDescription +
                     "\ntomatoesTaste: " + tomatoesTaste
             );
-            return getTomatoes(model);
+            return getTomatoesForCRUD(model);
         }
 
         String tomatoesNameTrim = tomatoesName.trim();
@@ -194,11 +194,11 @@ public class TomatoesController {
             tomato.setIdCount(idCount);
             tomatoesService.addNewTomato(tomato);
 
-            return getTomatoes(model);
+            return getTomatoesForCRUD(model);
         } catch (Exception e) {
             logger.error("*** TomatoesController.addTomato():" +
                     "  wrong DB's values! ***" + e.getMessage());
-            return getTomatoes(model);
+            return getTomatoesForCRUD(model);
         }
     }
 
@@ -251,11 +251,11 @@ public class TomatoesController {
 
             tomatoesService.addNewTomato(tomato);
 
-            return getTomatoes(model);
+            return getTomatoesForCRUD(model);
         } catch (Exception e) {
             logger.error("*** TomatoesController.updateTomato():" +
                     "  wrong DB's values! ***" + e.getMessage() + " ||| " + e);
-            return getTomatoes(model);
+            return getTomatoesForCRUD(model);
         }
     }
 
@@ -267,25 +267,25 @@ public class TomatoesController {
         ) {
             logger.warn("*** TomatoesController.deleteTomato():" +
                     "  Attribute has a null value! ***");
-            return getTomatoes(model);
+            return getTomatoesForCRUD(model);
         }
 
         try {
             long idCheck = Long.parseLong(id);
             if (idCheck <= 0 || checker.checkAttribute(idCheck + "")) {
                 logger.warn("*** TomatoesController.deleteTomato(): id <<<< 0 ***");
-                return getTomatoes(model);
+                return getTomatoesForCRUD(model);
             }
 
             String realId = getIdFromMap(idCheck);
             Tomatoes tomato = tomatoesService.getTomatoById(realId);
             tomatoesService.deleteTomato(tomato);
-            return getTomatoes(model);
+            return getTomatoesForCRUD(model);
 
         } catch (Exception e) {
             logger.error("*** TomatoesController.deleteTomato(): wrong DB's values! *** "
                     + e.getMessage());
-            return getTomatoes(model);
+            return getTomatoesForCRUD(model);
         }
     }
 
@@ -495,7 +495,7 @@ public class TomatoesController {
         if (checker.checkAttribute(category)) {
             logger.warn("*** TomatoesController.findTomatoesListByCategory():" +
                     "  Attribute has a null value! ***");
-            return getTomatoes(model);
+            return getTomatoesForCRUD(model);
         }
 
         try {
@@ -513,7 +513,7 @@ public class TomatoesController {
         } catch (Exception e) {
             logger.error("*** TomatoesController.findTomatoesListByCategory(): wrong DB's values! *** "
                     + e.getMessage());
-            return getTomatoes(model);
+            return getTomatoesForCRUD(model);
         }
     }
 
