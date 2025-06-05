@@ -221,7 +221,7 @@ public class TomatoesController {
             String tomatoesIdTrim = id.trim();
             String realId = getIdFromMap(Long.parseLong(tomatoesIdTrim));
             Tomatoes tomato = tomatoesService.getTomatoById(realId);
-            List<Photo> currentPhotoes = tomato.getPhotos();
+            List<Photo> currentPhotos = tomato.getPhotos();
 
             updateTomatoFields(tomato
                     , category
@@ -246,7 +246,7 @@ public class TomatoesController {
             if (photos.size() > 1) {
                 tomato.setPhotos(photos);
             } else {
-                tomato.setPhotos(currentPhotoes);
+                tomato.setPhotos(currentPhotos);
             }
 
             tomatoesService.addNewTomato(tomato);

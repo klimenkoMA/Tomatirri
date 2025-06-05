@@ -59,11 +59,7 @@ public class Peppers extends MultipartFileAdapter {
             , String peppersDescription
             , String peppersTaste
             , String peppersSpecificity
-            , Long idCount
-            , Map<ObjectId
-            , Long> idMap
-            , IsPresent isPresent
-            , List<Photo> photos) {
+            , IsPresent isPresent) {
         this.category = category;
         this.peppersName = peppersName;
         this.peppersHeight = peppersHeight;
@@ -74,10 +70,7 @@ public class Peppers extends MultipartFileAdapter {
         this.peppersDescription = peppersDescription;
         this.peppersTaste = peppersTaste;
         this.peppersSpecificity = peppersSpecificity;
-        this.idCount = idCount;
-        this.idMap = idMap;
         this.isPresent = isPresent;
-        this.photos = photos;
     }
 
     public Peppers(ObjectId id
@@ -91,11 +84,7 @@ public class Peppers extends MultipartFileAdapter {
             , String peppersDescription
             , String peppersTaste
             , String peppersSpecificity
-            , Long idCount
-            , Map<ObjectId
-            , Long> idMap
-            , IsPresent isPresent
-            , List<Photo> photos) {
+            , IsPresent isPresent) {
         this.id = id;
         this.category = category;
         this.peppersName = peppersName;
@@ -107,10 +96,7 @@ public class Peppers extends MultipartFileAdapter {
         this.peppersDescription = peppersDescription;
         this.peppersTaste = peppersTaste;
         this.peppersSpecificity = peppersSpecificity;
-        this.idCount = idCount;
-        this.idMap = idMap;
         this.isPresent = isPresent;
-        this.photos = photos;
     }
 
     public ObjectId getId() {
