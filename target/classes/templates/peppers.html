@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+
+<title>PEPPERS</title>
+<div th:replace="fragments/headers/head :: head"></div>
+
+<body>
+<div class="wrapper d-flex flex-column justify-content-center p-0 m-0"
+     style="align-self: center;">
+    <header>
+        <div th:replace="fragments/headers/headeradmin :: headeradmin"></div>
+    </header>
+
+    <main class="main d-flex row p-0 m-0 justify-content-center"
+          style="
+          align-content: baseline;
+          align-self: center;
+          max-width: 90%;">
+
+        <div style="flex: 0 0 auto;"
+             th:replace="fragments/crud/crudpepper :: crudpepper"></div>
+
+        <div class="table-result-db p-0 w-100"
+             style="
+             justify-content: center;
+             flex: 0 0 auto;
+             margin-top: 2vh;
+             min-height: min-content">
+
+            <table class="row w-100"
+                   style=" justify-content: center;
+                   align-content: center;
+                   height: 3vh;
+                   table-layout: fixed">
+
+                <tr class="text-light fs-7"
+                    style="background-color: #467a53">
+                    <th class="text-center align-self-center border border-0 p-0 m-0"
+                        style="
+                        min-width: 3rem;
+                        text-shadow: 2px 2px 4px #07237a">
+                        ID
+                    </th>
+                    <th class="text-center align-self-center border border-0 p-0 m-0"
+                        style="
+                        min-width: 3rem;
+                        text-shadow: 2px 2px 4px #07237a">
+                        Есть
+                    </th>
+                    <th class="text-center align-self-center border border-0  p-0 m-0"
+                        style="
+                        min-width: 10rem;
+                        text-shadow: 2px 2px 4px #07237a">
+                        Тип
+                    </th>
+                    <th class="text-center align-self-center border border-0 p-0 m-0"
+                        style="
+                        min-width: 10rem;
+                        text-shadow: 2px 2px 4px #07237a">
+                        Название
+                    </th>
+                    <th class="text-center align-self-center border border-0 p-0 m-0"
+                        style="
+                        min-width: 5rem;
+                        text-shadow: 2px 2px 4px #07237a">
+                        h
+                    </th>
+                    <th class="text-center align-self-center border border-0 p-0 m-0"
+                        style="
+                        min-width: 5rem;
+                        text-shadow: 2px 2px 4px #07237a">
+                        d
+                    </th>
+                    <th class="text-center align-self-center border border-0 p-0 m-0"
+                        style="
+                        min-width: 5rem;
+                        text-shadow: 2px 2px 4px #07237a">
+                        Вес
+                    </th>
+                    <th class="text-center align-self-center border border-0 p-0 m-0"
+                        style="
+                        min-width: 5rem;
+                        text-shadow: 2px 2px 4px #07237a">
+                        Кашпо
+                    </th>
+                    <th class="text-center align-self-center border border-0 p-0 m-0"
+                        style="
+                        min-width: 15rem;
+                        text-shadow: 2px 2px 4px #07237a">
+                        Созревание
+                    </th>
+                    <th class="text-center align-self-center border border-0 p-0 m-0"
+                        style="border-color: #467a53;
+                        min-width: 15rem;
+                        text-shadow: 2px 2px 4px #07237a">
+                        Описание
+                    </th>
+                    <th class="text-center align-self-center border border-0 p-0 m-0"
+                        style="border-color: #467a53;
+                        min-width: 11rem;
+                        text-shadow: 2px 2px 4px #07237a">
+                        Вкус
+                    </th>
+                    <th class="text-center align-self-center border border-0 p-0 m-0"
+                        style="
+                         border-color: #467a53;
+                         min-width: 11rem;
+                         text-shadow: 2px 2px 4px #07237a">
+                        Особенность
+                    </th>
+                    <th class="text-center align-self-center border border-0 p-0 m-0"
+                        style="border-color: #198754;
+                        min-width: 10rem;
+                        text-shadow: 2px 2px 4px #07237a">
+                        Фото
+                    </th>
+                </tr>
+            </table>
+
+            <div class="scroll-tbody border-0"
+                 style="flex: 0 0 auto;">
+                <table class="col border-0"
+                       style="align-self: center;
+                       min-height: min-content;
+                       font-size: small;
+                       word-break: break-all;
+                       border: 0;
+                       overflow-wrap: anywhere;
+                       white-space: normal">
+                    <div th:each="element : ${peppersList}">
+                        <div class="col">
+                            <tr style="align-self: center">
+                                <td class="text-center border border-0"
+                                    style="min-width: 3rem">
+                                    <div>[[${element.idCount}]]</div>
+                                </td>
+                                <td class="text-center border border-0"
+                                    style="min-width: 3rem">
+                                    <div>[[${element.isPresent}]]</div>
+                                </td>
+                                <td class="text-center border border-0"
+                                    style="min-width: 10rem;
+                                    word-break: break-all;
+                                    overflow-wrap: anywhere;
+                                    white-space: normal">
+                                    <form action="/filterpeppersbycategory"
+                                          method="post">
+                                        <input type="hidden"
+                                               name="category"
+                                               th:value="${element.category}"/>
+                                        <button type="submit" class=""
+                                                style="background: none;
+                                                color: darkblue;
+                                                border: none;
+                                                cursor: pointer;
+                                                text-shadow: none;
+                                                word-break: break-word;">
+                                            [[${element.category}]]
+                                        </button>
+                                    </form>
+                                </td>
+                                <td class="text-center border border-0"
+                                    style="min-width: 10rem">
+                                    <div><strong>[[${element.peppersName}]]</strong></div>
+                                </td>
+                                <td class="text-center border border-0"
+                                    style="min-width: 5rem">
+                                    <div>[[${element.peppersHeight}]]</div>
+                                </td>
+                                <td class="text-center border border-0"
+                                    style="min-width: 5rem">
+                                    <div>[[${element.peppersDiameter}]]</div>
+                                </td>
+                                <td class="text-center border border-0"
+                                    style="min-width: 5rem">
+                                    <div>[[${element.peppersFruit}]]</div>
+                                </td>
+                                <td class="text-center border border-0"
+                                    style="min-width: 5rem">
+                                    <div>[[${element.peppersFlowerpot}]]</div>
+                                </td>
+                                <td class="text-center border border-0"
+                                    style="min-width: 15rem">
+                                    <div>[[${element.peppersAgroTech}]]</div>
+                                </td>
+                                <td class="text-center border border-0"
+                                    style="min-width: 15rem">
+                                    <div>[[${element.peppersDescription}]]</div>
+                                </td>
+                                <td class="text-center border border-0"
+                                    style="min-width: 11rem">
+                                    <div>[[${element.peppersTaste}]]</div>
+                                </td>
+                                <td class="text-center border border-0"
+                                    style="min-width: 11rem">
+                                    <div>[[${element.peppersSpecificity}]]</div>
+                                </td>
+                                <td class="text-center border border-0 row"
+                                    style="min-width: 10rem">
+                                    <div th:each="photo : ${element.photos}"
+                                         class="col-4">
+                                        <div>
+                                            <img th:src="@{'data:image/jpg;base64,'
+                                            +${photo.getImageDataBase64()}}"
+                                                 alt="images from database"
+                                                 class="img-fluid"
+                                                 style="max-width: 100%;
+                                                 height: auto;
+                                                 object-fit: contain;"/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </div>
+                    </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                </table>
+            </div>
+        </div>
+
+    </main>
+    <footer>
+        <div th:replace="fragments/footermain :: footermain"></div>
+    </footer>
+</div>
+</body>
+</html>
