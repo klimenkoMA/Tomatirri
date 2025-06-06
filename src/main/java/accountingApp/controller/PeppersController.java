@@ -1,10 +1,10 @@
 package accountingApp.controller;
 
 import accountingApp.service.AdminPeppersService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping
 @Controller
 public class PeppersController {
-
-    final Logger logger = LoggerFactory.getLogger(PeppersController.class);
 
     private final AdminPeppersService adminPeppersService;
 
@@ -34,12 +32,14 @@ public class PeppersController {
     }
 
     @GetMapping("/peppers")
+    @Secured("ROLE_ADMIN")
     public String getPeppersForCrud(Model model) {
         model = adminPeppersService.preparePeppersModel(model);
         return "peppers";
     }
 
     @PostMapping("/addpepper")
+    @Secured("ROLE_ADMIN")
     public String addPepper(@RequestParam(required = false) String category
             , @RequestParam String peppersName
             , @RequestParam String peppersHeight
@@ -72,6 +72,7 @@ public class PeppersController {
     }
 
     @PostMapping("/updatepepper")
+    @Secured("ROLE_ADMIN")
     public String updatePepper(@RequestParam String id
             , @RequestParam(required = false) String category
             , @RequestParam String peppersName
@@ -106,23 +107,25 @@ public class PeppersController {
     }
 
     @PostMapping("/deletepepper")
+    @Secured("ROLE_ADMIN")
     public String deleteOnePepper(@RequestParam String id
-    , Model model){
+            , Model model) {
 
         model = adminPeppersService.deletePepper(id, model);
         return "peppers";
     }
 
-    @GetMapping("download/{id}")
-    public ResponseEntity<byte[]> downloadAllPeppersPhoto(@PathVariable String id){
+    @GetMapping("/peppers/download/{id}")
+    public ResponseEntity<byte[]> downloadAllPeppersPhoto(@PathVariable String id) {
 
         return adminPeppersService.downloadPeppersPhoto(id);
 
     }
 
     @PostMapping("/adminfindpepper")
+    @Secured("ROLE_ADMIN")
     public String adminFindSomePeppers(@RequestParam String attr
-    , Model model){
+            , Model model) {
 
         model = adminPeppersService.findPeppersForAdmin(attr, model);
         return "peppers";
@@ -130,15 +133,16 @@ public class PeppersController {
 
     @PostMapping("/findpepper")
     public String findSomePeppers(@RequestParam String attr
-            , Model model){
+            , Model model) {
 
         model = adminPeppersService.findPeppersForAdmin(attr, model);
         return "peppers";
     }
 
     @PostMapping("/findpepperbycategory")
+    @Secured("ROLE_ADMIN")
     public String findSomePeppersByCategory(@RequestParam String category
-            , Model model){
+            , Model model) {
 
         model = adminPeppersService.findPeppersListByCategory(category, model);
         return "peppers";
@@ -146,7 +150,7 @@ public class PeppersController {
 
     @PostMapping("/peppers/{idCount}")
     public String getFullCard(@RequestParam Long idCount
-            , Model model){
+            , Model model) {
 
         model = adminPeppersService.getFullCard(idCount, model);
         return "peppers";

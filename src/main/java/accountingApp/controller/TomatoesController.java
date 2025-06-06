@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -67,6 +68,7 @@ public class TomatoesController {
     }
 
     @GetMapping("/tomatoes")
+    @Secured("ROLE_ADMIN")
     public String getTomatoesForCRUD(Model model) {
         List<Tomatoes> tomatoesList = tomatoesService.findAllTomatoes()
                 .stream()
@@ -89,6 +91,7 @@ public class TomatoesController {
     }
 
     @PostMapping("/addtomato")
+    @Secured("ROLE_ADMIN")
     public String addTomato(@RequestParam(required = false) String category
             , @RequestParam String tomatoesName
             , @RequestParam String tomatoesHeight
@@ -203,6 +206,7 @@ public class TomatoesController {
     }
 
     @PostMapping("/updatetomato")
+    @Secured("ROLE_ADMIN")
     public String updateTomato(@RequestParam String id
             , @RequestParam(required = false) String category
             , @RequestParam(required = false) String tomatoesName
@@ -260,6 +264,7 @@ public class TomatoesController {
     }
 
     @PostMapping("/deletetomato")
+    @Secured("ROLE_ADMIN")
     public String deleteTomato(@RequestParam String id
             , Model model) {
 
@@ -408,6 +413,7 @@ public class TomatoesController {
     }
 
     @PostMapping("/adminfindtomato")
+    @Secured("ROLE_ADMIN")
     public String adminFindTomato(@RequestParam String attr
             , Model model) {
 
@@ -489,6 +495,7 @@ public class TomatoesController {
     }
 
     @PostMapping("/filtertomatoesbycategory")
+    @Secured("ROLE_ADMIN")
     public String findTomatoesListByCategory(@RequestParam String category
             , Model model) {
 

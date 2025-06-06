@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+
+<div th:replace="fragments/headers/head :: head"></div>
+
+<div class="d-flex mt-2"
+     style="min-width: max-content;
+     justify-content: center;
+     max-height: min-content"
+     th:fragment="crudpepper">
+
+    <div class="d-flex flex-row p-0 m-0 align-items-center
+                justify-content-around w-100">
+
+        <div style="flex: 0 0 auto">
+            <a th:replace="fragments/crud/add/addpepper :: addpepper"
+               class="btn text-light p-0 m-0"
+               style="background-color: #467a53;
+                           justify-self: center;
+                           min-width: max-content;
+                           max-height: min-content;
+                           align-self: center;
+                           box-shadow: 2px 2px 4px black">
+                <strong>Добавить перец</strong>
+            </a>
+        </div>
+
+        <div style="flex: 0 0 auto">
+            <a th:replace="fragments/crud/update/updatepepper :: updatepepper"
+               class="btn text-light"
+               style="background-color: #467a53;
+                           justify-self: center;
+                           min-width: max-content;
+                           max-height: min-content;
+                           align-self: center;
+                           box-shadow: 2px 2px 4px black">
+                Обновить перец
+            </a>
+        </div>
+
+        <div style="flex: 0 0 auto">
+            <a th:replace="fragments/searching/peppersearching :: peppersearching"
+               class="btn text-light"
+               style="background-color: #467a53;
+                           justify-self: center;
+                           min-width: max-content;
+                           max-height: min-content;
+                           align-self: center;
+                           box-shadow: 2px 2px 4px black">
+                Искать перец
+            </a>
+        </div>
+
+        <div style="flex: 0 0 auto">
+            <a th:replace="fragments/crud/delete/deletepepper :: deletepepper"
+               class="btn text-light"
+               style="background-color: #467a53;
+                           justify-self: center;
+                           min-width: max-content;
+                           max-height: min-content;
+                           align-self: center;
+                           box-shadow: 2px 2px 4px black">
+                Удалить перец
+            </a>
+        </div>
+
+        <div style="flex: 0 0 auto">
+            <a th:href="@{/peppers}"
+               class="btn text-light"
+               style="background-color: #467a53;
+                            align-content: center;
+                            box-shadow: 2px 2px 4px black;
+                            height: 5vh;
+                            font-size: medium;
+                            width: 130px;
+                            text-shadow: #002349 2px 3px 4px">
+                Перцы
+            </a>
+        </div>
+
+        <div style="flex: 0 0 auto">
+            <a th:href="@{/maxownercountreport}"
+               class="btn text-light"
+               style="background-color: #467a53;
+                           align-content: center;
+                           box-shadow: 2px 2px 4px black;
+                           height: 5vh;
+                           font-size: medium;
+                           width: 130px;
+                           text-shadow: #002349 2px 3px 4px">
+                Отчет
+            </a>
+        </div>
+    </div>
+</div>
+</html>
+
