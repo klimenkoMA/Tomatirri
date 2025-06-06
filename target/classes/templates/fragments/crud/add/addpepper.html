@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+    <div th:replace="fragments/headers/head :: head"></div>
+</head>
+
+<div th:fragment="addpepper">
+    <label class="popup_try d-flex fs-7 p-0 m-0 text-center align-items-center"
+           style="
+           justify-content: center;
+           box-shadow: 2px 2px 4px black">
+        Добавить перец
+        <button type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasaddpepper"
+                aria-controls="offcanvasaddpepper"
+                style="background-color: #467a53;
+                color: white;
+                height: 1px;
+                width: 1px" hidden>
+        </button>
+    </label>
+
+    <div class="card col offcanvas offcanvas-end border border-0"
+         tabindex="-1" id="offcanvasaddpepper"
+         aria-labelledby="offcanvasRightAddTomatoLabel"
+         style="width: 40vh">
+        <div class="card-body d-grid gap-2 offcanvas-title bg-light"
+             id="offcanvasRightAddPepperLabel"
+             style="min-height: 100vh;
+             align-content: start">
+
+            <form action="/addpepper"
+                  method="post"
+                  autocomplete="off"
+                  enctype="multipart/form-data"
+                  class="card-text offcanvas-body align-self-start">
+                <div align="center">
+                    <label class="d-flex justify-content-center align-items-center">
+                        <select class="form-select-custom" name="category">
+                            <option value="0">Категория</option>
+                            <option th:each="element : ${categoryList}"
+                                    th:value="${element}"
+                                    th:text="${element}"></option>
+                        </select>
+                    </label>
+                    <label>
+                        <input type="text"
+                               name="peppersName"
+                               align="middle"
+                               placeholder="Название перца"/>
+                    </label>
+                    <label>
+                        <input type="text"
+                               name="peppersHeight"
+                               align="middle"
+                               placeholder="Высота перца"/>
+                    </label>
+                    <label>
+                        <input type="text"
+                               name="peppersDiameter"
+                               align="middle"
+                               placeholder="Диаметр перца"/>
+                    </label>
+                    <label>
+                        <input type="text"
+                               name="peppersFruit"
+                               align="middle"
+                               placeholder="Вес плода"/>
+                    </label>
+                    <label>
+                        <input type="text"
+                               name="peppersFlowerpot"
+                               align="middle"
+                               placeholder="Выращивание"/>
+                    </label>
+                    <label for="peppersAgroTech">
+                        <strong>Созревание</strong>
+                    </label>
+                    <textarea class="form-control"
+                              name="peppersAgroTech"
+                              id="peppersAgroTech"
+                              rows="3"
+                              required
+                              style="border: 1px solid #467a53;
+                              box-shadow: 0 0 0 1px #bcd3e9;"></textarea>
+                    <label for="peppersDescription">
+                        <strong>Описание</strong>
+                    </label>
+                    <textarea class="form-control"
+                              name="peppersDescription"
+                              id="peppersDescription"
+                              rows="3"
+                              required
+                              style="border: 1px solid #467a53;
+                              box-shadow: 0 0 0 1px #bcd3e9;"></textarea>
+                    <label>
+                        <input type="text"
+                               name="peppersTaste"
+                               align="middle"
+                               placeholder="Вкус перца"/>
+                    </label>
+                    <label for="peppersSpecificity">
+                        <strong>Особенности(необязательно)</strong>
+                    </label>
+                    <textarea class="form-control"
+                              name="peppersSpecificity"
+                              id="peppersSpecificity"
+                              rows="3"
+                              style="border: 1px solid #467a53;
+                              box-shadow: 0 0 0 1px #bcd3e9;"></textarea>
+                    <label class="d-flex justify-content-center align-items-center">
+                        <select class="form-select-custom" name="isPresent">
+                            <option value="0">В наличии</option>
+                            <option th:each="element : ${isPresentList}"
+                                    th:text="${element}"></option>
+                        </select>
+                    </label>
+                    <label class="d-flex justify-content-center align-items-center
+                        button custom-file-upload"
+                           style="margin: 4px 0;
+                           width: 19.5rem;
+                           min-height: 4rem;
+                           background-color: #467a53;
+                           color: white;
+                           border-radius: 5px;
+                           box-shadow: 2px 2px 4px black;
+                           text-shadow: #002349 2px 3px 4px;
+                           font-size: large">
+                        Выбрать фото
+                        <input type="file"
+                               name="content"
+                               multiple
+                               accept="image/*"
+                               align="middle"
+                               placeholder="Фото"/>
+                    </label>
+                </div>
+                <div align="center">
+                    <button class="btn text-light crud-btn"
+                            type="submit"
+                            style="justify-self: center;
+                            min-width: max-content;
+                            max-height: min-content;
+                            background-color: #467a53;
+                            align-self: center;
+                            box-shadow: 2px 2px 4px black;
+                            text-shadow: #002349 2px 3px 4px;">
+                        Добавить
+                    </button>
+                </div>
+                <input type="hidden"
+                       name="${_csrf.parameterName}"
+                       value="${_csrf.token}">
+            </form>
+        </div>
+    </div>
+</div>
+</html>
