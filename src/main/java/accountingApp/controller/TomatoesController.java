@@ -516,7 +516,7 @@ public class TomatoesController {
             }
             model.addAttribute("tomatoesList", tomatoesList);
 
-            return "tomatoescatalog";
+            return "tomatoes";
         } catch (Exception e) {
             logger.error("*** TomatoesController.findTomatoesListByCategory(): wrong DB's values! *** "
                     + e.getMessage());

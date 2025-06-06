@@ -18,11 +18,15 @@ public class TomatirriUserService {
 
     private final Logger logger = LoggerFactory.getLogger(TomatirriUserService.class);
 
-    @Autowired
-    private TomatirriUserRepository tomatirriUserRepository;
+    private final TomatirriUserRepository tomatirriUserRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public TomatirriUserService(TomatirriUserRepository tomatirriUserRepository
+            , PasswordEncoder passwordEncoder) {
+        this.tomatirriUserRepository = tomatirriUserRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
