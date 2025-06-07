@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+
+
+<div th:replace="fragments/headers/head :: head"></div>
+
+<div class="d-flex flex-row mb-2"
+     th:fragment="cardstatspeppers">
+
+    <img id="mainImage"
+         th:src="@{'data:image/jpg;base64,' + ${element.photos.get(0).getImageDataBase64()}}"
+         class="img-fluid main-image"
+         alt="Pepper"
+         data-index="0"
+         style="width: 27rem;
+     padding-top: 2vh;
+     cursor: pointer;
+     object-fit: cover;
+     height: 27rem"
+         onclick="prepareGalleryModal(this)">
+
+    <button id="galleryBtn"
+            class="btn btn-primary visually-hidden"
+            data-bs-toggle="modal"
+            data-bs-target="#galleryModal">
+        Показать галерею
+    </button>
+
+
+    <div class="flex-column"
+         style="margin-left: 1vw;
+                         margin-top: 7vh;
+                         max-height: 12rem">
+        <div><strong>Наличие: [[${element.isPresent}]]</strong></div>
+        <div><strong><br/>Тип: </strong>[[${element.category}]]</div>
+        <div><strong><br/>Высота: </strong>[[${element.peppersHeight}]]</div>
+        <div><strong><br/>Диаметр: </strong>[[${element.peppersDiameter}]]</div>
+        <div><strong><br/>Вес: </strong>[[${element.peppersFruit}]]</div>
+        <div><strong><br/>Кашпо: </strong>[[${element.peppersFlowerpot}]]</div>
+    </div>
+
+</div>
+</html>
