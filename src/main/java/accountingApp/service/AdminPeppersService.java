@@ -10,10 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -115,7 +111,7 @@ public class AdminPeppersService {
         String peppersAgroTechTrim = peppersAgroTech.trim();
         String peppersDescriptionTrim = peppersDescription.trim();
         String peppersTasteTrim = peppersTaste.trim();
-        String peppersSpecificityTrim = "\uD83C\uDF45 \uD83C\uDF45 \uD83C\uDF45";
+        String peppersSpecificityTrim = "\uD83C\uDF36 \uD83C\uDF36 \uD83C\uDF36";
 
         if (!checker.checkAttribute(peppersSpecificity)) {
             peppersSpecificityTrim = peppersSpecificity.trim();
@@ -125,7 +121,7 @@ public class AdminPeppersService {
             PeppersCategory peppersCategory = Arrays.stream(PEPPERS_CATEGORIES)
                     .filter(cat -> cat.getCategory().equals(category))
                     .findFirst()
-                    .orElse(PeppersCategory.Неострый);
+                    .orElse(PeppersCategory.Сладкий);
 
             IsPresent pepperIsPresent = Arrays.stream(IS_PRESENTS)
                     .filter(isp -> isp.getPresent().equals(isPresent))
@@ -257,6 +253,10 @@ public class AdminPeppersService {
             String realId = getIdFromMap(idCheck);
             Peppers pepper = getPepperById(realId);
             peppersRepository.delete(pepper);
+
+            List<Peppers> peppersList = peppersRepository.findAll();
+            model.addAttribute("peppersList", peppersList);
+
             return model;
 
         } catch (Exception e) {

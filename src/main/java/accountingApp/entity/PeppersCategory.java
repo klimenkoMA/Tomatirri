@@ -3,7 +3,7 @@ package accountingApp.entity;
 public enum PeppersCategory {
 
     Острый,
-    Неострый;
+    Сладкий;
 
     public String getCategory(){
         return name();

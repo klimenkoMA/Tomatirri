@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+
+<head>
+    <div th:replace="fragments/headers/head :: head"></div>
+</head>
+<div th:fragment="dinamiccardpeppers">
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-4"
+         style="padding: 3vh">
+
+        <div th:each="element : ${peppersList}"
+             class="col">
+
+            <div class="card card-main d-flex flex-column
+    justify-content-center align-items-center
+                    text-center">
+                <img th:src="@{'data:image/jpg;base64,'+${element.photos.get(0).getImageDataBase64()}}"
+                     class="card-img-top"
+                     alt="Pepper"
+                     style="
+                         width: 12rem;
+                         padding-top: 1vh;
+                         height: 12rem
+                         ">
+                <div class="card-body d-flex flex-column align-items-center
+                        justify-content-center p-0 m-0">
+                    <h6 class="card-title p-0 m-0">
+                        <strong th:text="${element.peppersName}">
+                        </strong>
+                    </h6>
+                    <div><strong>Высота</strong>: [[${element.peppersHeight}]]</div>
+                    <div><strong>Диаметр: </strong>[[${element.peppersDiameter}]]</div>
+                    <div><strong>Вес: </strong>[[${element.peppersFruit}]]</div>
+                    <div><strong>Кашпо: </strong>[[${element.peppersFlowerpot}]]</div>
+                    <a th:href="@{/peppers/{idCount}(idCount=${element.idCount})}"
+                       class="btn stretched-link text-light col fs-5"
+                       style="
+                           background-color: #467a53;
+                           justify-self: end;
+                           max-height: 3rem;
+                           width: 10rem;
+                           text-shadow: #002349 2px 3px 4px;
+                           margin-bottom: 1vh;
+                           margin-top: auto"
+                       target="_self">
+                        Подробнее
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

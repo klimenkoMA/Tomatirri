@@ -5,9 +5,10 @@
 <title>PEPPERS</title>
 <div th:replace="fragments/headers/head :: head"></div>
 
-<body>
+<body style="overflow-x: hidden;">
 <div class="wrapper d-flex flex-column justify-content-center p-0 m-0"
-     style="align-self: center;">
+     style="align-self: center;
+     overflow-x: hidden;">
     <header>
         <div th:replace="fragments/headers/headeradmin :: headeradmin"></div>
     </header>
@@ -15,6 +16,7 @@
     <main class="main d-flex row p-0 m-0 justify-content-center"
           style="
           align-content: baseline;
+          overflow-x: hidden;
           align-self: center;
           max-width: 90%;">
 
@@ -24,18 +26,21 @@
         <div class="table-result-db p-0 w-100"
              style="
              justify-content: center;
+             overflow-x: hidden;
              flex: 0 0 auto;
              margin-top: 2vh;
              min-height: min-content">
 
-            <table class="row w-100"
+            <table class="row"
                    style=" justify-content: center;
+                   overflow-x: hidden;
                    align-content: center;
+                   min-width: fit-content;
                    height: 3vh;
                    table-layout: fixed">
 
                 <tr class="text-light fs-7"
-                    style="background-color: #467a53">
+                    style="background-color: #467a53; min-width: available">
                     <th class="text-center align-self-center border border-0 p-0 m-0"
                         style="
                         min-width: 3rem;
@@ -119,10 +124,12 @@
             </table>
 
             <div class="scroll-tbody border-0"
-                 style="flex: 0 0 auto;">
+                 style="flex: 0 0 auto;
+                 overflow-x: hidden;">
                 <table class="col border-0"
                        style="align-self: center;
                        min-height: min-content;
+                       overflow-x: hidden;
                        font-size: small;
                        word-break: break-all;
                        border: 0;
@@ -196,11 +203,11 @@
                                     style="min-width: 11rem">
                                     <div>[[${element.peppersSpecificity}]]</div>
                                 </td>
-                                <td class="text-center border border-0 row"
-                                    style="min-width: 10rem">
+                                <td class="text-center row p-0 m-0"
+                                    style="min-width: 10rem;">
                                     <div th:each="photo : ${element.photos}"
                                          class="col-4">
-                                        <div>
+                                        <div class="p-0 m-0">
                                             <img th:src="@{'data:image/jpg;base64,'
                                             +${photo.getImageDataBase64()}}"
                                                  alt="images from database"
