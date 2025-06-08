@@ -53,7 +53,7 @@
                         <option th:each="elem : ${peppersList}"
                                 th:value="${elem.peppersName}"
                                 th:text="${elem.peppersName}"
-                                th:attr="data-url=@{/tomatoes/{idCount}(idCount=${elem.idCount})}"
+                                th:attr="data-url=@{/peppers/{idCount}(idCount=${elem.idCount})}"
                                 style="color:  #044726;">
                         </option>
                     </select>

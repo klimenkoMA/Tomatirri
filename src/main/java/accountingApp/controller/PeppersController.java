@@ -148,11 +148,11 @@ public class PeppersController {
         return "peppers";
     }
 
-    @PostMapping("/peppers/{idCount}")
-    public String getFullCard(@RequestParam Long idCount
+    @GetMapping("/peppers/{idCount}")
+    public String getFullCarPeppers(@PathVariable Long idCount
             , Model model) {
 
         model = adminPeppersService.getFullCard(idCount, model);
-        return "peppers";
+        return "fullcardpeppers";
     }
 }
