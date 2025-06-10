@@ -17,10 +17,4 @@ public interface TomatoesRepository extends MongoRepository<Tomatoes, String> {
     List<Tomatoes> findAll();
 
 
-//    @Query(value = "select new accountingApp.entity.dto.devicesdto.MaxOwnerCountDTO(" +
-//            " i.name, count(i.id)) " +
-//            " from Tomatoes  d" +
-//            " join d.itstaff i" +
-//            " group by i.name")
-//    List<MaxOwnerCountDTO> reportingDevicesMaxOwnerCount();
 }

@@ -2,33 +2,35 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="fragments/headers/head :: head"></div>
+<link th:href="@{/css/moidalImage.css}" rel="stylesheet">
 
-<style>
-    .carousel-control-prev, .carousel-control-next {
-        background-color: rgba(0, 0, 0, 0.3);
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        top: 50%;
-        transform: translateY(-50%);
-    }
+<!--<style>-->
+<!--   -->
+<!--    .carousel-control-prev, .carousel-control-next {-->
+<!--        background-color: rgba(0, 0, 0, 0.3);-->
+<!--        width: 40px;-->
+<!--        height: 40px;-->
+<!--        border-radius: 50%;-->
+<!--        top: 50%;-->
+<!--        transform: translateY(-50%);-->
+<!--    }-->
 
-    .carousel-indicators button {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        margin: 0 5px;
-    }
+<!--    .carousel-indicators button {-->
+<!--        width: 10px;-->
+<!--        height: 10px;-->
+<!--        border-radius: 50%;-->
+<!--        margin: 0 5px;-->
+<!--    }-->
 
-    .modal-img {
-        max-height: 40vh;
-        /*object-fit: contain;*/
-    }
+<!--    .modal-img {-->
+<!--        max-height: 40vh;-->
+<!--        /*object-fit: contain;*/-->
+<!--    }-->
 
-    .carousel-inner {
-        text-align: center;
-    }
-</style>
+<!--    .carousel-inner {-->
+<!--        text-align: center;-->
+<!--    }-->
+<!--</style>-->
 
 <div class="d-flex flex-row justify-content-center align-items-center"
      style="max-width: 90vw;"
@@ -91,18 +93,4 @@
     </div>
 </div>
 
-<script>
-    // Инициализация карусели
-    document.addEventListener('DOMContentLoaded', function () {
-        var galleryModal = document.getElementById('galleryModal');
-        if (galleryModal) {
-            galleryModal.addEventListener('shown.bs.modal', function () {
-                var carousel = new bootstrap.Carousel(document.getElementById('galleryCarousel')
-                    , {
-                        interval: false
-                    });
-            });
-        }
-    });
-</script>
 </html>
