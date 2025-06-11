@@ -7,10 +7,15 @@ import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+
 import org.springframework.web.multipart.MultipartFile;
+
 
 import java.io.IOException;
 import java.util.*;
@@ -23,6 +28,7 @@ import java.util.stream.LongStream;
 public class AdminPeppersService {
 
     final Logger logger = LoggerFactory.getLogger(AdminPeppersService.class);
+    private static final int DEFAULT_PAGE_LIMIT = 10;
     private static final PeppersCategory[] PEPPERS_CATEGORIES = PeppersCategory.values();
     private static final IsPresent[] IS_PRESENTS = IsPresent.values();
     private final PeppersRepository peppersRepository;
@@ -35,6 +41,30 @@ public class AdminPeppersService {
         this.checker = checker;
     }
 
+    public Model preparePeppersModelWithPages(int pageNumber
+            , Integer limit
+            , Model model) {
+
+        int pageLimit = limit != null ? limit : DEFAULT_PAGE_LIMIT;
+
+        Pageable pageable = PageRequest.of(pageNumber, pageLimit);
+
+        Page<Peppers> peppersList = peppersRepository.findAll(pageable);
+
+
+        List<String> categoryList = getCategoryList();
+        List<String> isPresentList = getIsPresentList();
+
+        model.addAttribute("peppersList", peppersList.getContent());
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", peppersList.getTotalPages());
+        model.addAttribute("pageSize", pageLimit);
+        model.addAttribute("totalItems", peppersList.getTotalElements());
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("isPresentList", isPresentList);
+
+        return model;
+    }
 
     public Model preparePeppersModel(Model model) {
         List<Peppers> peppersList = peppersRepository.findAll()
@@ -267,7 +297,7 @@ public class AdminPeppersService {
     }
 
     public Model findPeppersForAdmin(String attr
-    , Model model) {
+            , Model model) {
 
         if (checker.checkAttribute(attr)) {
             logger.error("*** AdminPeppersService.findPeppersForAdmin():" +

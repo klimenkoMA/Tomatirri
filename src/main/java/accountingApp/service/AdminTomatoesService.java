@@ -1,21 +1,33 @@
 package accountingApp.service;
 
+import accountingApp.entity.IsPresent;
+import accountingApp.entity.Peppers;
 import accountingApp.entity.Tomatoes;
+import accountingApp.entity.TomatoesCategory;
 import accountingApp.repository.TomatoesRepository;
 import accountingApp.usefulmethods.Checker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 @Service
 public class AdminTomatoesService {
 
     final Logger logger = LoggerFactory.getLogger(AdminTomatoesService.class);
+    private static final int DEFAULT_PAGE_LIMIT = 10;
+    private static final TomatoesCategory[] TOMATOES_CATEGORIES = TomatoesCategory.values();
+    private static final IsPresent[] IS_PRESENTS = IsPresent.values();
     private final TomatoesService tomatoesService;
     private final TomatoesRepository tomatoesRepository;
     private final Checker checker;
@@ -29,7 +41,44 @@ public class AdminTomatoesService {
         this.checker = checker;
     }
 
-    public List<Tomatoes> findTomatoesForAdmin(String attr){
+    public Model prepareTomatoesModelWithPages(int pageNumber
+            , Integer limit
+            , Model model) {
+
+        int pageLimit = limit != null ? limit : DEFAULT_PAGE_LIMIT;
+
+        Pageable pageable = PageRequest.of(pageNumber, pageLimit);
+
+        Page<Tomatoes> tomatoesList = tomatoesRepository.findAll(pageable);
+
+
+        List<String> categoryList = getCategoryList();
+        List<String> isPresentList = getIsPresentList();
+
+        model.addAttribute("peppersList", tomatoesList.getContent());
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", tomatoesList.getTotalPages());
+        model.addAttribute("pageSize", pageLimit);
+        model.addAttribute("totalItems", tomatoesList.getTotalElements());
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("isPresentList", isPresentList);
+
+        return model;
+    }
+
+    private List<String> getIsPresentList() {
+        return Arrays.stream(IS_PRESENTS)
+                .map(IsPresent::getPresent)
+                .collect(Collectors.toList());
+    }
+
+    private List<String> getCategoryList() {
+        return Arrays.stream(TOMATOES_CATEGORIES)
+                .map(TomatoesCategory::getCategory)
+                .collect(Collectors.toList());
+    }
+
+    public List<Tomatoes> findTomatoesForAdmin(String attr) {
 
         if (checker.checkAttribute(attr)) {
             logger.error("*** AdminTomatoesService.findTomatoesForAdmin():" +

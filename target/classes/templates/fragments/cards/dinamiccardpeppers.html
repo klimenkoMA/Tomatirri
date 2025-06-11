@@ -51,6 +51,37 @@
                 </div>
             </div>
         </div>
+
+        <div class="pagination">
+            <!-- Кнопка "Назад" -->
+            <span th:if="${currentPage > 0}">
+            <a th:href="@{/tomatoes(page=${currentPage - 1}, size=${pageSize})}">
+                Previous
+            </a>
+        </span>
+
+            <!-- Номера страниц -->
+            <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+            <a th:if="${i != currentPage}"
+               th:href="@{/tomatoes(page=${i}, size=${pageSize})}"
+               th:text="${i + 1}"></a>
+            <span th:unless="${i != currentPage}" th:text="${i + 1}"></span>
+        </span>
+
+            <!-- Кнопка "Вперед" -->
+            <span th:if="${currentPage < totalPages - 1}">
+            <a th:href="@{/peppers(page=${currentPage + 1}, size=${pageSize})}">
+                Next
+            </a>
+        </span>
+
+            <!-- Информация о странице -->
+            <div>
+                Page <span th:text="${currentPage + 1}"></span> of
+                <span th:text="${totalPages}"></span> |
+                Total items: <span th:text="${totalItems}"></span>
+            </div>
+        </div>
     </div>
 </div>
 </html>
