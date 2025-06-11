@@ -31,6 +31,14 @@ public class PeppersController {
         return "pepperscatalog";
     }
 
+    @GetMapping("/pepperscatalogwithpages")
+    public String getPeppersWithPage(@RequestParam(defaultValue = "0") int pageNumber
+            , @RequestParam(required = false) Integer limit
+            , Model model) {
+        model = adminPeppersService.preparePeppersModelWithPages(pageNumber, limit, model);
+        return "pepperscatalogwithpages";
+    }
+
     @GetMapping("/peppers")
     @Secured("ROLE_ADMIN")
     public String getPeppersForCrud(Model model) {

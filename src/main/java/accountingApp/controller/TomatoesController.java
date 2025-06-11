@@ -45,6 +45,14 @@ public class TomatoesController {
         this.checker = checker;
     }
 
+    @GetMapping("/tomatoescatalogwithpages")
+    public String getPeppersWithPage(@RequestParam(defaultValue = "0") int pageNumber
+            , @RequestParam(required = false) Integer limit
+            , Model model) {
+        model = adminTomatoesService.prepareTomatoesModelWithPages(pageNumber, limit, model);
+        return "tomatoescatalogwithpages";
+    }
+
     @GetMapping("/tomatoescatalog")
     public String getTomatoes(Model model) {
         List<Tomatoes> tomatoesList = tomatoesService.findAllTomatoes()
