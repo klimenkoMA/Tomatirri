@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+
+<title>TOMATOES CATALOG WITH PAGES</title>
+<div th:replace="fragments/headers/head :: head"></div>
+
+<body>
+<div class="wrapper d-flex flex-column
+justify-content-center p-0 m-0"
+     style="align-self: center;">
+    <header>
+        <div th:replace="fragments/headers/headermain :: headermain"></div>
+    </header>
+
+        <div class="d-flex flex-row align-self-center">
+
+            <div class="align-items-start justify-content-around m-2 d-flex flex-column"
+                 style="min-width: content-box;">
+
+                <div th:replace="fragments/cards/dinamiccard :: dinamiccard"></div>
+
+            </div>
+
+            <div class="pagination">
+                <!-- Кнопка "Назад" -->
+                <span th:if="${currentPage > 0}">
+            <a th:href="@{/tomatoescatalogwithpages(page=${currentPage - 1}, size=${pageSize})}">
+                Previous
+            </a>
+        </span>
+
+                <!-- Номера страниц -->
+                <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+            <a th:if="${i != currentPage}"
+               th:href="@{/tomatoescatalogwithpages(page=${i}, size=${pageSize})}"
+               th:text="${i + 1}"></a>
+            <span th:unless="${i != currentPage}" th:text="${i + 1}"></span>
+        </span>
+
+                <!-- Кнопка "Вперед" -->
+                <span th:if="${currentPage < totalPages - 1}">
+            <a th:href="@{/tomatoescatalogwithpages(page=${currentPage + 1}, size=${pageSize})}">
+                Next
+            </a>
+        </span>
+
+                <!-- Информация о странице -->
+                <div>
+                    Page <span th:text="${currentPage + 1}"></span> of
+                    <span th:text="${totalPages}"></span> |
+                    Total items: <span th:text="${totalItems}"></span>
+                </div>
+            </div>
+
+        </div>
+
+    <footer>
+        <div th:replace="fragments/footermain :: footermain"></div>
+    </footer>
+</div>
+</body>
+</html>

@@ -55,7 +55,7 @@ public class AdminTomatoesService {
         List<String> categoryList = getCategoryList();
         List<String> isPresentList = getIsPresentList();
 
-        model.addAttribute("peppersList", tomatoesList.getContent());
+        model.addAttribute("tomatoesList", tomatoesList.getContent());
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", tomatoesList.getTotalPages());
         model.addAttribute("pageSize", pageLimit);
