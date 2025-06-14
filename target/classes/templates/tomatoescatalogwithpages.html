@@ -13,47 +13,47 @@ justify-content-center p-0 m-0"
         <div th:replace="fragments/headers/headermain :: headermain"></div>
     </header>
 
-        <div class="d-flex flex-row align-self-center">
+    <div class="d-flex flex-row align-self-center">
 
-            <div class="align-items-start justify-content-around m-2 d-flex flex-column"
-                 style="min-width: content-box;">
+        <div class="align-items-start justify-content-around m-2 d-flex flex-column"
+             style="min-width: content-box;">
 
-                <div th:replace="fragments/cards/dinamiccard :: dinamiccard"></div>
-
-            </div>
-
-            <div class="pagination">
-                <!-- Кнопка "Назад" -->
-                <span th:if="${currentPage > 0}">
-            <a th:href="@{/tomatoescatalogwithpages(page=${currentPage - 1}, size=${pageSize})}">
-                Previous
-            </a>
-        </span>
-
-                <!-- Номера страниц -->
-                <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
-            <a th:if="${i != currentPage}"
-               th:href="@{/tomatoescatalogwithpages(page=${i}, size=${pageSize})}"
-               th:text="${i + 1}"></a>
-            <span th:unless="${i != currentPage}" th:text="${i + 1}"></span>
-        </span>
-
-                <!-- Кнопка "Вперед" -->
-                <span th:if="${currentPage < totalPages - 1}">
-            <a th:href="@{/tomatoescatalogwithpages(page=${currentPage + 1}, size=${pageSize})}">
-                Next
-            </a>
-        </span>
-
-                <!-- Информация о странице -->
-                <div>
-                    Page <span th:text="${currentPage + 1}"></span> of
-                    <span th:text="${totalPages}"></span> |
-                    Total items: <span th:text="${totalItems}"></span>
-                </div>
-            </div>
+            <div th:replace="fragments/cards/dinamiccard :: dinamiccard"></div>
 
         </div>
+
+    </div>
+
+    <div class="pagination justify-content-center align-items-center d-flex">
+        <!-- Кнопка "Назад" -->
+        <span th:if="${pageNumber > 0}">
+            <a th:href="@{/tomatoescatalogwithpages(page=${pageNumber - 1}, size=${pageLimit})}">
+                Предыдущая
+            </a>
+        </span>
+
+        <!-- Номера страниц -->
+        <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+            <a th:if="${i != pageNumber}"
+               th:href="@{/tomatoescatalogwithpages(page=${i}, size=${pageLimit})}"
+               th:text="${i + 1}"></a>
+            <span th:unless="${i != pageNumber}" th:text="${i + 1}"></span>
+        </span>
+
+        <!-- Кнопка "Вперед" -->
+        <span th:if="${pageNumber < totalPages - 1}">
+            <a th:href="@{/tomatoescatalogwithpages(page=${pageNumber + 1}, size=${pageLimit})}">
+                Следующая
+            </a>
+        </span>
+
+        <!-- Информация о странице -->
+        <div>
+            Страница <span th:text="${pageNumber + 1}"></span> of
+            <span th:text="${totalPages}"></span> |
+            Всего: <span th:text="${totalItems}"></span>
+        </div>
+    </div>
 
     <footer>
         <div th:replace="fragments/footermain :: footermain"></div>
