@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class AdminTomatoesService {
 
     final Logger logger = LoggerFactory.getLogger(AdminTomatoesService.class);
-    private static final int DEFAULT_PAGE_LIMIT = 10;
+    private static final int DEFAULT_PAGE_LIMIT = 5;
     private static final TomatoesCategory[] TOMATOES_CATEGORIES = TomatoesCategory.values();
     private static final IsPresent[] IS_PRESENTS = IsPresent.values();
     private final TomatoesService tomatoesService;
@@ -56,9 +56,9 @@ public class AdminTomatoesService {
         List<String> isPresentList = getIsPresentList();
 
         model.addAttribute("tomatoesList", tomatoesList.getContent());
-        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("pageNumber", pageNumber);
         model.addAttribute("totalPages", tomatoesList.getTotalPages());
-        model.addAttribute("pageSize", pageLimit);
+        model.addAttribute("pageLimit", pageLimit);
         model.addAttribute("totalItems", tomatoesList.getTotalElements());
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("isPresentList", isPresentList);
