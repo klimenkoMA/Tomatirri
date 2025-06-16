@@ -24,40 +24,47 @@ justify-content-center p-0 m-0"
 
     </div>
 
-    <div class="pagination justify-content-center align-items-center d-flex">
-        <!-- Кнопка "Назад" -->
-        <span th:if="${pageNumber > 0}">
-            <a th:href="@{/tomatoescatalogwithpages(page=${pageNumber - 1}, size=${pageLimit})}">
-                Предыдущая
-            </a>
-        </span>
+    <nav th:if="${totalPages > 1}">
+        <ul class="pagination">
+            <!-- Кнопка "Предыдущая" -->
+            <li class="page-item"
+                th:classappend="${pageNumber == 0} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/tomatoescatalogwithpages(page=${pageNumber - 1},
+                   limit=${pageLimit})}">Предыдущая</a>
+            </li>
 
-        <!-- Номера страниц -->
-        <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
-            <a th:if="${i != pageNumber}"
-               th:href="@{/tomatoescatalogwithpages(page=${i}, size=${pageLimit})}"
-               th:text="${i + 1}"></a>
-            <span th:unless="${i != pageNumber}" th:text="${i + 1}"></span>
-        </span>
+            <!-- Номера страниц -->
+            <li class="page-item"
+                th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                th:classappend="${i == pageNumber} ? 'active'">
+                <a class="page-link" th:href="@{/tomatoescatalogwithpages(page=${i},
+                limit=${pageLimit})}"
+                   th:text="${i + 1}"></a>
+            </li>
 
-        <!-- Кнопка "Вперед" -->
-        <span th:if="${pageNumber < totalPages - 1}">
-            <a th:href="@{/tomatoescatalogwithpages(page=${pageNumber + 1}, size=${pageLimit})}">
-                Следующая
-            </a>
-        </span>
+            <!-- Кнопка "Следующая" -->
+            <li class="page-item"
+                th:classappend="${pageNumber >= totalPages - 1} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/tomatoescatalogwithpages(page=${pageNumber + 1},
+                    limit=${pageLimit})}">Next</a>
+            </li>
+        </ul>
+    </nav>
 
-        <!-- Информация о странице -->
-        <div>
-            Страница <span th:text="${pageNumber + 1}"></span> of
-            <span th:text="${totalPages}"></span> |
-            Всего: <span th:text="${totalItems}"></span>
-        </div>
+    <!-- Информация о странице -->
+    <div class="mt-2">
+        <span>Showing items <span th:text="${pageNumber * pageLimit + 1}"></span> to
+              <span th:text="${(pageNumber + 1) * pageLimit > totalItems ? totalItems : (pageNumber + 1) * pageLimit}"></span>
+              of <span th:text="${totalItems}"></span> entries</span>
     </div>
 
-    <footer>
-        <div th:replace="fragments/footermain :: footermain"></div>
-    </footer>
+</div>
+
+<footer>
+    <div th:replace="fragments/footermain :: footermain"></div>
+</footer>
 </div>
 </body>
 </html>
