@@ -49,19 +49,16 @@ public class AdminTomatoesService {
 
         Pageable pageable = PageRequest.of(pageNumber, pageLimit);
 
-        Page<Tomatoes>  pageTomatoesList = tomatoesRepository.findAll(pageable);
-        List<Tomatoes> tomatoesList = tomatoesRepository.findAll();
-
+        Page<Tomatoes>  tomatoesList = tomatoesRepository.findAll(pageable);
 
         List<String> categoryList = getCategoryList();
         List<String> isPresentList = getIsPresentList();
 
-        model.addAttribute("tomatoesList", tomatoesList);
-        model.addAttribute("pageTomatoesList", pageTomatoesList.getContent());
+        model.addAttribute("tomatoesList", tomatoesList.getContent());
         model.addAttribute("pageNumber", pageNumber);
-        model.addAttribute("totalPages", pageTomatoesList.getTotalPages());
+        model.addAttribute("totalPages", tomatoesList.getTotalPages());
         model.addAttribute("pageLimit", pageLimit);
-        model.addAttribute("totalItems", pageTomatoesList.getTotalElements());
+        model.addAttribute("totalItems", tomatoesList.getTotalElements());
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("isPresentList", isPresentList);
 
