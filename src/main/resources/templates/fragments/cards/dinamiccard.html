@@ -5,12 +5,12 @@
 <head>
     <div th:replace="fragments/headers/head :: head"></div>
 </head>
-<div th:fragment="dinamiccard">
+<div th:fragment="dinamiccard(pageNum, pageLimit)">
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-4"
          style="padding: 3vh">
 
-        <div th:each="element : ${tomatoesList}"
+        <div th:each="element : ${tomatoesPages}"
              class="col">
 
             <div class="card card-main d-flex flex-column

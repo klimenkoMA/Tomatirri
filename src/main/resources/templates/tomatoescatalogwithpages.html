@@ -18,7 +18,7 @@ justify-content-center p-0 m-0"
         <div class="align-items-start justify-content-around m-2 d-flex flex-column"
              style="min-width: content-box;">
 
-            <div th:replace="fragments/cards/dinamiccard :: dinamiccard"></div>
+            <div th:replace="fragments/cards/dinamiccard :: dinamiccard(${pageNumber}, ${pageLimit})"></div>
 
         </div>
 
@@ -30,7 +30,7 @@ justify-content-center p-0 m-0"
             <li class="page-item"
                 th:classappend="${pageNumber == 0} ? 'disabled'">
                 <a class="page-link"
-                   th:href="@{/tomatoescatalogwithpages(page=${pageNumber - 1},
+                   th:href="@{tomatoescatalogwithpages(page=${pageNumber - 1},
                    limit=${pageLimit})}">Предыдущая</a>
             </li>
 
@@ -38,7 +38,7 @@ justify-content-center p-0 m-0"
             <li class="page-item"
                 th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
                 th:classappend="${i == pageNumber} ? 'active'">
-                <a class="page-link" th:href="@{/tomatoescatalogwithpages(page=${i},
+                <a class="page-link" th:href="@{tomatoescatalogwithpages(page=${i},
                 limit=${pageLimit})}"
                    th:text="${i + 1}"></a>
             </li>
@@ -47,7 +47,7 @@ justify-content-center p-0 m-0"
             <li class="page-item"
                 th:classappend="${pageNumber >= totalPages - 1} ? 'disabled'">
                 <a class="page-link"
-                   th:href="@{/tomatoescatalogwithpages(page=${pageNumber + 1},
+                   th:href="@{tomatoescatalogwithpages(page=${pageNumber + 1},
                     limit=${pageLimit})}">Next</a>
             </li>
         </ul>
@@ -73,7 +73,8 @@ justify-content-center p-0 m-0"
 <!--                <a class="page-link" href="#">...</a>-->
 <!--            </li>-->
 <!--            <li class="page-item" th:classappend="${page == currentPage} ? 'active'"-->
-<!--                th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">-->
+<!--                th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1,
+                        currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">-->
 <!--                <a th:replace="fragments/paging :: paging(${page}, ${page}, 'Page ' + ${page})"></a>-->
 <!--            </li>-->
 <!--            <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">-->
