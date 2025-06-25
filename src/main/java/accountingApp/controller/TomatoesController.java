@@ -45,7 +45,7 @@ public class TomatoesController {
         this.checker = checker;
     }
 
-    @GetMapping("/tomatoescatalogwithpages")
+    @GetMapping("/tomatoescatalogwithpages/{pageNumber}")
     public String getPeppersWithPage(@RequestParam(defaultValue = "0") int pageNumber
             , @RequestParam(required = false) Integer limit
             , Model model) {
