@@ -30,16 +30,16 @@ justify-content-center p-0 m-0"
             <li class="page-item"
                 th:classappend="${pageNumber == 0} ? 'disabled'">
                 <a class="page-link"
-                   th:href="@{tomatoescatalogwithpages(page=${pageNumber - 1},
-                   limit=${pageLimit})}">Предыдущая</a>
+                   th:href="@{tomatoescatalogwithpages(${pageNumber - 1})}">
+                    Предыдущая
+                </a>
             </li>
 
             <!-- Номера страниц -->
             <li class="page-item"
                 th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
                 th:classappend="${i == pageNumber} ? 'active'">
-                <a class="page-link" th:href="@{tomatoescatalogwithpages(page=${i},
-                limit=${pageLimit})}"
+                <a class="page-link" th:href="@{tomatoescatalogwithpages(${i})}"
                    th:text="${i + 1}"></a>
             </li>
 
@@ -47,8 +47,8 @@ justify-content-center p-0 m-0"
             <li class="page-item"
                 th:classappend="${pageNumber >= totalPages - 1} ? 'disabled'">
                 <a class="page-link"
-                   th:href="@{tomatoescatalogwithpages(page=${pageNumber + 1},
-                    limit=${pageLimit})}">Next</a>
+                   th:href="@{tomatoescatalogwithpages(${pageNumber + 1})}">
+                    Следующая</a>
             </li>
         </ul>
     </nav>
