@@ -70,31 +70,40 @@ public class AdminTomatoesService {
 //        return "tutorials";
 //    }
 
-    public Model prepareTomatoesModelWithPages(int pageNumber
+    public Model prepareTomatoesModelWithPages(String pageNumber
             , Integer limit
             , Model model) {
 
-        int pageLimit = limit != null ? limit : DEFAULT_PAGE_LIMIT;
+        try{
 
-        List<Tomatoes> tomatoesList = new ArrayList<>();
+            int convertedPageNumber = Integer.parseInt(pageNumber);
 
-        Pageable pageable = PageRequest.of(pageNumber, pageLimit);
+            int pageLimit = limit != null ? limit : DEFAULT_PAGE_LIMIT;
 
-        Page<Tomatoes>  tomatoesPages = tomatoesRepository.findAll(pageable);
+            List<Tomatoes> tomatoesList = new ArrayList<>();
 
-        List<String> categoryList = getCategoryList();
-        List<String> isPresentList = getIsPresentList();
+            Pageable pageable = PageRequest.of(convertedPageNumber, pageLimit);
 
-        model.addAttribute("tomatoesList", tomatoesList);
-        model.addAttribute("tomatoesPages", tomatoesPages.getContent());
-        model.addAttribute("pageNumber", pageNumber);
-        model.addAttribute("totalPages", tomatoesPages.getTotalPages());
-        model.addAttribute("pageLimit", pageLimit);
-        model.addAttribute("totalItems", tomatoesPages.getTotalElements());
-        model.addAttribute("categoryList", categoryList);
-        model.addAttribute("isPresentList", isPresentList);
+            Page<Tomatoes>  tomatoesPages = tomatoesRepository.findAll(pageable);
 
-        return model;
+            List<String> categoryList = getCategoryList();
+            List<String> isPresentList = getIsPresentList();
+
+            model.addAttribute("tomatoesList", tomatoesList);
+            model.addAttribute("tomatoesPages", tomatoesPages.getContent());
+            model.addAttribute("pageNumber", convertedPageNumber);
+            model.addAttribute("totalPages", tomatoesPages.getTotalPages());
+            model.addAttribute("pageLimit", pageLimit);
+            model.addAttribute("totalItems", tomatoesPages.getTotalElements());
+            model.addAttribute("categoryList", categoryList);
+            model.addAttribute("isPresentList", isPresentList);
+
+            return model;
+
+        }catch (Exception e){
+            logger.warn(e.getMessage());
+            return   model;
+        }
     }
 
     private List<String> getIsPresentList() {
