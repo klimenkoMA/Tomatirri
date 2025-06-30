@@ -27,10 +27,10 @@ a {
     box-shadow: 0 0 0 4px #467a53;
 }
 
-.card-main{
+.card-main {
     width: 18rem;
     min-height: 25rem;
-    color:  #044726;
+    color: #044726;
     box-shadow: 0 0 3px 1px #467a53;
 }
 
@@ -40,7 +40,7 @@ a {
     width: 3rem;
     height: 3rem;
     background-size: 50% 50%; /* Размер стрелки внутри кнопки */
-    box-shadow: 0 0 3px 1px rgba(0,0,0,0.3);
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.3);
     border: 2px solid white;
 }
 
@@ -111,7 +111,7 @@ a {
     margin-bottom: 4px;
 }
 
-.fs-7{
+.fs-7 {
     font-size: 12px;
 }
 
@@ -190,6 +190,7 @@ input[type="file"] {
 .me-10 {
     margin-right: 8vw;
 }
+
 .me-8 {
     margin-right: 5.2rem;
 }
@@ -219,8 +220,19 @@ input[type="file"] {
     background-color: transparent;
     border: none;
 }
+
 .nav-link.active {
     color: coral !important;
+}
+
+.page-item.active .page-link {
+    background-color: coral; /* Серый (можно заменить на любой HEX/RGB) */
+    border-color: coral; /* Цвет границы */
+    color: white; /* Цвет текста */
+}
+
+.page-link {
+    color: #044726;
 }
 
 .page-name {
@@ -297,7 +309,6 @@ input[type="file"] {
 }
 
 
-
 .scroll-tbody {
     border: 0;
     height: min-content;
@@ -321,7 +332,6 @@ tr:nth-of-type(odd) {
     table-layout: fixed;
     border: none;
 }
-
 
 
 ::-webkit-scrollbar {
@@ -375,17 +385,16 @@ tr:nth-of-type(odd) {
         min-height: 15rem;
     }
 
-/*********************
-*Cardphotoes fragment*
-**********************/
-
+    /*********************
+    *Cardphotoes fragment*
+    **********************/
     .thumbnail {
         transition: transform 0.2s;
     }
 
     .thumbnail:hover {
         transform: scale(1.05);
-        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
 
     .main-image {

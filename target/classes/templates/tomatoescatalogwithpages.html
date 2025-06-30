@@ -5,7 +5,9 @@
 <title>TOMATOES CATALOG WITH PAGES</title>
 <div th:replace="fragments/headers/head :: head"></div>
 
-<body>
+<body style="position: absolute;
+              max-width: 99%;
+              max-height: 90%">
 <div class="wrapper d-flex flex-column
 justify-content-center p-0 m-0"
      style="align-self: center;">
@@ -24,70 +26,37 @@ justify-content-center p-0 m-0"
 
     </div>
 
-    <nav th:if="${totalPages > 1}">
-        <ul class="pagination">
-            <!-- Кнопка "Предыдущая" -->
-            <li class="page-item"
-                th:classappend="${pageNumber == 0} ? 'disabled'">
-                <a class="page-link"
-                   th:href="@{/tomatoescatalogwithpages/{page}(page=${pageNumber - 1})}">
-                    Предыдущая
-                </a>
-            </li>
+    <div class="d-flex justify-content-center align-items-center"
+            >
+        <nav th:if="${totalPages > 1}">
+            <ul class="pagination pagination-lg">
+                <!-- Кнопка "Предыдущая" -->
+                <li class="page-item"
+                    th:classappend="${pageNumber == 0} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{/tomatoescatalogwithpages/{page}(page=${pageNumber - 1})}">
+                        &laquo;
+                    </a>
+                </li>
 
-            <!-- Номера страниц -->
-            <li class="page-item"
-                th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
-                th:classappend="${i == pageNumber} ? 'active'">
-                <a class="page-link" th:href="@{/tomatoescatalogwithpages/{page}(page=${i})}"
-                   th:text="${i + 1}"></a>
-            </li>
+                <!-- Номера страниц -->
+                <li class="page-item"
+                    th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                    th:classappend="${i == pageNumber} ? 'active'">
+                    <a class="page-link" th:href="@{/tomatoescatalogwithpages/{page}(page=${i})}"
+                       th:text="${i + 1}"></a>
+                </li>
 
-            <!-- Кнопка "Следующая" -->
-            <li class="page-item"
-                th:classappend="${pageNumber >= totalPages - 1} ? 'disabled'">
-                <a class="page-link"
-                   th:href="@{/tomatoescatalogwithpages/{page}(page=${pageNumber + 1})}">
-                    Следующая</a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- Информация о странице -->
-    <div class="mt-2">
-        <span>Showing items <span th:text="${pageNumber * pageLimit + 1}"></span> to
-              <span th:text="${(pageNumber + 1) * pageLimit >
-               totalItems ? totalItems : (pageNumber + 1) * pageLimit}"></span>
-              of <span th:text="${totalItems}"></span> entries</span>
+                <!-- Кнопка "Следующая" -->
+                <li class="page-item"
+                    th:classappend="${pageNumber >= totalPages - 1} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{/tomatoescatalogwithpages/{page}(page=${pageNumber + 1})}">
+                        &raquo;</a>
+                </li>
+            </ul>
+        </nav>
     </div>
-
-<!--    <nav aria-label="Pagination" th:if="${totalPages > 0}">-->
-<!--        <ul class="pagination justify-content-center">-->
-<!--            <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">-->
-<!--                <a th:replace="fragments/paging :: paging(1, '<<', 'First Page')"></a>-->
-<!--            </li>-->
-<!--            <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">-->
-<!--                <a th:replace="fragments/paging :: paging(${currentPage - 1}, 'Prev', 'Previous Page')"></a>-->
-<!--            </li>-->
-<!--            <li class="page-item disabled" th:if="${currentPage - 2 > 1}">-->
-<!--                <a class="page-link" href="#">...</a>-->
-<!--            </li>-->
-<!--            <li class="page-item" th:classappend="${page == currentPage} ? 'active'"-->
-<!--                th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1,
-                        currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">-->
-<!--                <a th:replace="fragments/paging :: paging(${page}, ${page}, 'Page ' + ${page})"></a>-->
-<!--            </li>-->
-<!--            <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">-->
-<!--                <a class="page-link" href="#">...</a>-->
-<!--            </li>-->
-<!--            <li class="page-item font-weight-bold" th:classappend="${currentPage == totalPages} ? 'disabled'">-->
-<!--                <a th:replace="fragments/paging :: paging(${currentPage + 1},'Next', 'Next Page')"></a>-->
-<!--            </li>-->
-<!--            <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">-->
-<!--                <a th:replace="fragments/paging :: paging(${totalPages}, '>>', 'Last Page')"></a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </nav>-->
 
 </div>
 
