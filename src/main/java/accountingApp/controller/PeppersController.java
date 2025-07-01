@@ -31,8 +31,8 @@ public class PeppersController {
         return "pepperscatalog";
     }
 
-    @GetMapping("/pepperscatalogwithpages")
-    public String getPeppersWithPage(@RequestParam(defaultValue = "0") int pageNumber
+    @GetMapping("/pepperscatalogwithpages/{pageNumber}")
+    public String getPeppersWithPage(@PathVariable("pageNumber") String pageNumber
             , @RequestParam(required = false) Integer limit
             , Model model) {
         model = adminPeppersService.preparePeppersModelWithPages(pageNumber, limit, model);

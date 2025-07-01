@@ -25,35 +25,35 @@ justify-content-center p-0 m-0"
         </div>
     </div>
 
-    <div class="pagination">
-        <!-- Кнопка "Назад" -->
-        <span th:if="${currentPage > 0}">
-            <a th:href="@{/peppers(page=${currentPage - 1}, size=${pageSize})}">
-                Previous
-            </a>
-        </span>
+    <div class="d-flex justify-content-center align-items-center mt-5">
+        <nav th:if="${totalPages > 1}">
+            <ul class="pagination pagination-lg">
+                <!-- Кнопка "Предыдущая" -->
+                <li class="page-item"
+                    th:classappend="${pageNumber == 0} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{/pepperscatalogwithpages/{page}(page=${pageNumber - 1})}">
+                        &laquo;
+                    </a>
+                </li>
 
-        <!-- Номера страниц -->
-        <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
-            <a th:if="${i != currentPage}"
-               th:href="@{/peppers(page=${i}, size=${pageSize})}"
-               th:text="${i + 1}"></a>
-            <span th:unless="${i != currentPage}" th:text="${i + 1}"></span>
-        </span>
+                <!-- Номера страниц -->
+                <li class="page-item"
+                    th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                    th:classappend="${i == pageNumber} ? 'active'">
+                    <a class="page-link" th:href="@{/pepperscatalogwithpages/{page}(page=${i})}"
+                       th:text="${i + 1}"></a>
+                </li>
 
-        <!-- Кнопка "Вперед" -->
-        <span th:if="${currentPage < totalPages - 1}">
-            <a th:href="@{/peppers(page=${currentPage + 1}, size=${pageSize})}">
-                Next
-            </a>
-        </span>
-
-        <!-- Информация о странице -->
-        <div>
-            Page <span th:text="${currentPage + 1}"></span> of
-            <span th:text="${totalPages}"></span> |
-            Total items: <span th:text="${totalItems}"></span>
-        </div>
+                <!-- Кнопка "Следующая" -->
+                <li class="page-item"
+                    th:classappend="${pageNumber >= totalPages - 1} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{/pepperscatalogwithpages/{page}(page=${pageNumber + 1})}">
+                        &raquo;</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 
     <footer>

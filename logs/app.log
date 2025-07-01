@@ -1,4 +1,1 @@
-2025-06-30 05:12:34.925  WARN 22664 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-06-30 05:12:44.708  WARN 22664 --- [http-nio-8080-exec-10] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername: INITIALISATION
-2025-06-30 05:12:44.764  WARN 22664 --- [http-nio-8080-exec-10] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername Successful authorization with user: u
-2025-06-30 05:12:44.765  WARN 22664 --- [http-nio-8080-exec-10] a.service.CustomUserDetailsService       : CustomUserDetailsService.loadUserByUsername User's role is : ADMIN
+2025-07-01 04:53:50.200  WARN 28188 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7h19m41s831ms20µs600ns).
