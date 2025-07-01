@@ -41,35 +41,6 @@ public class AdminTomatoesService {
         this.checker = checker;
     }
 
-//    @GetMapping("/tutorials")
-//    public String getAll(Model model, @RequestParam(required = false) String keyword,
-//                         @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "3") int size) {
-//        try {
-//            List<Tutorial> tutorials = new ArrayList<Tutorial>();
-//            Pageable paging = PageRequest.of(page - 1, size);
-//
-//            Page<Tutorial> pageTuts;
-//            if (keyword == null) {
-//                pageTuts = tutorialRepository.findAll(paging);
-//            } else {
-//                pageTuts = tutorialRepository.findByTitleContainingIgnoreCase(keyword, paging);
-//                model.addAttribute("keyword", keyword);
-//            }
-//
-//            tutorials = pageTuts.getContent();
-//
-//            model.addAttribute("tutorials", tutorials);
-//            model.addAttribute("currentPage", pageTuts.getNumber() + 1);
-//            model.addAttribute("totalItems", pageTuts.getTotalElements());
-//            model.addAttribute("totalPages", pageTuts.getTotalPages());
-//            model.addAttribute("pageSize", size);
-//        } catch (Exception e) {
-//            model.addAttribute("message", e.getMessage());
-//        }
-//
-//        return "tutorials";
-//    }
-
     public Model prepareTomatoesModelWithPages(String pageNumber
             , Integer limit
             , Model model) {
@@ -101,7 +72,7 @@ public class AdminTomatoesService {
             return model;
 
         }catch (Exception e){
-            logger.warn(e.getMessage());
+            logger.warn("AdminTomatoesService.prepareTomatoesModelWithPages()" + e.getMessage());
             return   model;
         }
     }

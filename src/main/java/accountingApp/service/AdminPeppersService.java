@@ -16,7 +16,6 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.multipart.MultipartFile;
 
-
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Consumer;
@@ -41,29 +40,41 @@ public class AdminPeppersService {
         this.checker = checker;
     }
 
-    public Model preparePeppersModelWithPages(int pageNumber
+    public Model preparePeppersModelWithPages(String pageNumber
             , Integer limit
             , Model model) {
 
-        int pageLimit = limit != null ? limit : DEFAULT_PAGE_LIMIT;
+        try {
+            int convertedPageNumber = Integer.parseInt(pageNumber);
 
-        Pageable pageable = PageRequest.of(pageNumber, pageLimit);
+            int pageLimit = limit != null ? limit : DEFAULT_PAGE_LIMIT;
 
-        Page<Peppers> peppersList = peppersRepository.findAll(pageable);
+            List<Peppers> peppersList = new ArrayList<>();
+
+            Pageable pageable = PageRequest.of(convertedPageNumber, pageLimit);
+
+            Page<Peppers> peppersPages = peppersRepository.findAll(pageable);
 
 
-        List<String> categoryList = getCategoryList();
-        List<String> isPresentList = getIsPresentList();
+            List<String> categoryList = getCategoryList();
+            List<String> isPresentList = getIsPresentList();
 
-        model.addAttribute("peppersList", peppersList.getContent());
-        model.addAttribute("currentPage", pageNumber);
-        model.addAttribute("totalPages", peppersList.getTotalPages());
-        model.addAttribute("pageSize", pageLimit);
-        model.addAttribute("totalItems", peppersList.getTotalElements());
-        model.addAttribute("categoryList", categoryList);
-        model.addAttribute("isPresentList", isPresentList);
+            model.addAttribute("peppersList", peppersList);
+            model.addAttribute("peppersPages", peppersPages.getContent());
+            model.addAttribute("pageNumber", convertedPageNumber);
+            model.addAttribute("totalPages", peppersPages.getTotalPages());
+            model.addAttribute("pageLimit", pageLimit);
+            model.addAttribute("totalItems", peppersPages.getTotalElements());
+            model.addAttribute("categoryList", categoryList);
+            model.addAttribute("isPresentList", isPresentList);
 
-        return model;
+            return model;
+
+        } catch (Exception e){
+            logger.warn( "AdminPeppersService.preparePeppersModelWithPages(): " + e.getMessage());
+            return model;
+        }
+
     }
 
     public Model preparePeppersModel(Model model) {

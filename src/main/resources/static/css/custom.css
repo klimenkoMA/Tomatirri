@@ -223,16 +223,24 @@ input[type="file"] {
 
 .nav-link.active {
     color: coral !important;
+
 }
 
 .page-item.active .page-link {
     background-color: coral; /* Серый (можно заменить на любой HEX/RGB) */
     border-color: coral; /* Цвет границы */
     color: white; /* Цвет текста */
+    border-radius: 50%;
 }
 
 .page-link {
     color: #044726;
+    border-radius: 50%;
+    border: none;
+}
+
+.page-link:hover {
+    color: coral;
 }
 
 .page-name {

@@ -5,58 +5,62 @@
 <title>TOMATOES CATALOG WITH PAGES</title>
 <div th:replace="fragments/headers/head :: head"></div>
 
-<body style="position: absolute;
-              max-width: 99%;
-              max-height: 90%">
+<body>
 <div class="wrapper d-flex flex-column
 justify-content-center p-0 m-0"
-     style="align-self: center;">
-    <header>
-        <div th:replace="fragments/headers/headermain :: headermain"></div>
-    </header>
+     style="align-self: center;
+            max-width: 98%;
+            max-height: 91%;
+            min-height: 90%">
 
-    <div class="d-flex flex-row align-self-center">
+    <main class="main d-flex flex-column p-0 m-0">
+        <header>
+            <div th:replace="fragments/headers/headermain :: headermain"></div>
+        </header>
 
-        <div class="align-items-start justify-content-around m-2 d-flex flex-column"
-             style="min-width: content-box;">
+        <div class="d-flex flex-row align-self-center mt-5">
 
-            <div th:replace="fragments/cards/dinamiccard :: dinamiccard"></div>
+            <div class="align-items-start justify-content-around m-2 d-flex flex-column"
+                 style="min-width: content-box;">
+
+                <div th:replace="fragments/cards/dinamiccard :: dinamiccard"></div>
+
+            </div>
 
         </div>
 
-    </div>
+        <div class="d-flex justify-content-center align-items-center mt-5">
+            <nav th:if="${totalPages > 1}">
+                <ul class="pagination pagination-lg">
+                    <!-- Кнопка "Предыдущая" -->
+                    <li class="page-item"
+                        th:classappend="${pageNumber == 0} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/tomatoescatalogwithpages/{page}(page=${pageNumber - 1})}">
+                            &laquo;
+                        </a>
+                    </li>
 
-    <div class="d-flex justify-content-center align-items-center"
-            >
-        <nav th:if="${totalPages > 1}">
-            <ul class="pagination pagination-lg">
-                <!-- Кнопка "Предыдущая" -->
-                <li class="page-item"
-                    th:classappend="${pageNumber == 0} ? 'disabled'">
-                    <a class="page-link"
-                       th:href="@{/tomatoescatalogwithpages/{page}(page=${pageNumber - 1})}">
-                        &laquo;
-                    </a>
-                </li>
+                    <!-- Номера страниц -->
+                    <li class="page-item"
+                        th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                        th:classappend="${i == pageNumber} ? 'active'">
+                        <a class="page-link" th:href="@{/tomatoescatalogwithpages/{page}(page=${i})}"
+                           th:text="${i + 1}"></a>
+                    </li>
 
-                <!-- Номера страниц -->
-                <li class="page-item"
-                    th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
-                    th:classappend="${i == pageNumber} ? 'active'">
-                    <a class="page-link" th:href="@{/tomatoescatalogwithpages/{page}(page=${i})}"
-                       th:text="${i + 1}"></a>
-                </li>
+                    <!-- Кнопка "Следующая" -->
+                    <li class="page-item"
+                        th:classappend="${pageNumber >= totalPages - 1} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/tomatoescatalogwithpages/{page}(page=${pageNumber + 1})}">
+                            &raquo;</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
-                <!-- Кнопка "Следующая" -->
-                <li class="page-item"
-                    th:classappend="${pageNumber >= totalPages - 1} ? 'disabled'">
-                    <a class="page-link"
-                       th:href="@{/tomatoescatalogwithpages/{page}(page=${pageNumber + 1})}">
-                        &raquo;</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+    </main>
 
 </div>
 
