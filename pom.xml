@@ -112,6 +112,16 @@
             <version>1.9.0</version> <!-- укажите актуальную версию -->
         </dependency>
 
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots</artifactId>
+            <version>6.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots-spring-boot-starter</artifactId>
+            <version>6.7.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.junit.vintage</groupId>
