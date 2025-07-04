@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Microsoft SQL Server - AccAppDB@localhost" uuid="add7a296-9df3-4c43-9f3b-3cf94e691883">
-      <driver-ref>sqlserver.ms</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
-      <jdbc-url>jdbc:sqlserver://localhost:1433;database=AccAppDB;trustServerCertificate=true;</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
     <data-source source="LOCAL" name="MongoDB - upcdocs@localhost" uuid="42e616d2-6211-4c98-97e9-9f77f121534d">
       <driver-ref>mongo</driver-ref>
       <synchronize>true</synchronize>
