@@ -18,6 +18,41 @@
                 <div class="p-0 m-0"
                      th:replace="fragments/headers/headermain :: headermain"></div>
             </li>
+            <li class="d-flex justify-content-center align-items-center">
+
+                <form action="/sendgetme"
+                      method="post"
+                      autocomplete="off"
+                      enctype="multipart/form-data"
+                      class="card-text offcanvas-body align-self-start">
+                    <div align="center">
+                        <label class="d-flex justify-content-center align-items-center">
+
+                           ********************************************
+                            допиши ссылку на контроллер для проверки тг бота
+
+
+                        </label>
+                    </div>
+                    <div align="center">
+                        <button class="btn text-light crud-btn"
+                                type="submit"
+                                style="justify-self: center;
+                            min-width: max-content;
+                            max-height: min-content;
+                            background-color: #467a53;
+                            align-self: center;
+                            box-shadow: 2px 2px 4px black;
+                            text-shadow: #002349 2px 3px 4px;">
+                            Добавить
+                        </button>
+                    </div>
+                    <input type="hidden"
+                           name="${_csrf.parameterName}"
+                           value="${_csrf.token}">
+
+                </form>
+            </li>
             <li class="p-0 m-0 d-flex justify-content-center align-items-center">
                 <div class=" p-0 m-0"
                      th:replace="fragments/cards/cardsmain :: cardsmain"></div>
