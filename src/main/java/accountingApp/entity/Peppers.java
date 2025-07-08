@@ -13,7 +13,7 @@ import java.util.*;
  */
 
 @Document(collection = "peppers")
-public class Peppers extends MultipartFileAdapter {
+public class Peppers extends MultipartFileAdapter implements Seed {
     @Id
     private ObjectId id;
     @Field

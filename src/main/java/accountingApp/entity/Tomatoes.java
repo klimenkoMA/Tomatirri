@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Cacheable
 
 @Document(collection = "tomatoes")
-public class Tomatoes extends MultipartFileAdapter {
+public class Tomatoes extends MultipartFileAdapter implements Seed{
     @Id
     private ObjectId id;
     @Field

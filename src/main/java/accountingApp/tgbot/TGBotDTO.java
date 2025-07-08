@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="channel_posts")
-public class TGBot {
+public class TGBotDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
