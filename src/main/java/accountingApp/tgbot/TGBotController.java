@@ -29,7 +29,7 @@ public class TGBotController {
 
         try {
             tgBotService.sendTextMessage(chatId, message);
-            return "main";
+            return "redirect:/main";
         } catch (Exception e) {
             return "Failed to send message: " + e.getMessage();
         }

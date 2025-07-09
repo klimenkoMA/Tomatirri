@@ -1,5 +1,8 @@
 package accountingApp.tgbot;
 
+import accountingApp.controller.TomatoesController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
@@ -17,8 +20,10 @@ import java.util.List;
 @Component
 public class TGBotService implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
 
+    final Logger logger = LoggerFactory.getLogger(TomatoesController.class);
     @Value("${telegram.bot.token}")
     private String botToken;
+
 
     private TelegramClient telegramClient;
 
@@ -32,7 +37,7 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
         return this;
     }
 
-    // Инициализация TelegramClient
+//    // Инициализация TelegramClient
     @PostConstruct
     public void init() {
         this.telegramClient = new OkHttpTelegramClient(getBotToken());
@@ -44,8 +49,14 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
             throw new IllegalStateException("TelegramClient is not initialized!");
         }
 
-        SendMessage message = new SendMessage(chatId, text);
-        telegramClient.execute(message);
+        try {
+            SendMessage message = new SendMessage(chatId, text);
+            telegramClient.execute(message);
+        } catch (Exception e) {
+            logger.error("TGBotService.sendTextMessage: " + e.getMessage());
+            e.printStackTrace();
+        }
+
     }
 
     @Override
