@@ -3,7 +3,7 @@
 /workspace.xml
 /Check List
 /tgb
-/application.properties
+/resources/application.properties
 # Datasource local storage ignored files
 /../../../../../:\JAVA\REPOSITORY\AccApp\.idea/dataSources/
 /dataSources.local.xml
