@@ -10,3 +10,6 @@
 /target/test-classes/accountingApp/repository/EventsControllerTest.class
 /target/AccApp-1.0-SNAPSHOT.jar.original
 /.idea/dataSources/Check List
+/src/test/AccApp-1.0-SNAPSHOT/application.properties
+/src/main/resources/application.properties
+/target/classes/application.properties
