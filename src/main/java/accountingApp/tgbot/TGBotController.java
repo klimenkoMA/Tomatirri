@@ -25,7 +25,7 @@ import java.util.List;
 public class TGBotController {
 
     private final TGBotService tgBotService;
-    private final TomatoesController tomatoesController;
+
     private final TomatoesRepository tomatoesRepository;
     private final PeppersRepository peppersRepository;
 
@@ -35,11 +35,9 @@ public class TGBotController {
 
     @Autowired
     public TGBotController(TGBotService tgBotService,
-                           TomatoesController tomatoesController,
                            TomatoesRepository tomatoesRepository,
                            PeppersRepository peppersRepository) {
         this.tgBotService = tgBotService;
-        this.tomatoesController = tomatoesController;
         this.tomatoesRepository = tomatoesRepository;
         this.peppersRepository = peppersRepository;
     }
@@ -61,9 +59,12 @@ public class TGBotController {
         seedList.addAll(peppersList);
 
         model.addAttribute("seedList", seedList);
+        model.addAttribute("tomatoesList", tomatoesList);
+        model.addAttribute("peppersList", peppersList);
 
         return "main";
     }
+
 
 }
 

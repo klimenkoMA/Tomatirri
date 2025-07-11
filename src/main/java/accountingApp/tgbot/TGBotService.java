@@ -1,8 +1,11 @@
 package accountingApp.tgbot;
 
 import accountingApp.controller.TomatoesController;
+import accountingApp.entity.Tomatoes;
+import accountingApp.repository.TomatoesRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
@@ -24,8 +27,14 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
     @Value("${telegram.bot.token}")
     private String botToken;
 
+    private final TomatoesRepository tomatoesRepository;
 
     private TelegramClient telegramClient;
+
+    @Autowired
+    public TGBotService(TomatoesRepository tomatoesRepository) {
+        this.tomatoesRepository = tomatoesRepository;
+    }
 
     @Override
     public String getBotToken() {
@@ -69,6 +78,23 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
     @Override
     public void consume(Update update) {
 
+    }
+
+    private String getSingleMessageTomatoesContent(){
+
+        List<Tomatoes> tomatoList = tomatoesRepository.findAll();
+        Tomatoes tomato = tomatoList.get(0);
+
+        StringBuffer text = new StringBuffer();
+
+        text.append(tomato.getName())
+                .append( "\n")
+                .append(tomato.getCategory())
+                .append( "\n")
+                .append(tomato.getTomatoesHeight())
+                .append( "\n");
+
+        return text.toString();
     }
 
 
