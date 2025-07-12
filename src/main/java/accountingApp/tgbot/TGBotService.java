@@ -1,6 +1,7 @@
 package accountingApp.tgbot;
 
 import accountingApp.controller.TomatoesController;
+import accountingApp.entity.Photo;
 import accountingApp.entity.Tomatoes;
 import accountingApp.repository.TomatoesRepository;
 import org.slf4j.Logger;
@@ -13,12 +14,18 @@ import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsume
 import org.telegram.telegrambots.longpolling.starter.SpringLongPollingBot;
 import org.telegram.telegrambots.longpolling.util.LongPollingSingleThreadUpdateConsumer;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import javax.annotation.PostConstruct;
+import java.io.ByteArrayInputStream;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Component
 public class TGBotService implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
@@ -46,20 +53,28 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
         return this;
     }
 
-//    // Инициализация TelegramClient
+    //    // Инициализация TelegramClient
     @PostConstruct
     public void init() {
         this.telegramClient = new OkHttpTelegramClient(getBotToken());
     }
 
     // Метод для отправки текстового сообщения
-    public void sendTextMessage(String chatId, String text) throws TelegramApiException {
+    public void sendTextMessage(String chatId) throws TelegramApiException {
         if (telegramClient == null) {
             throw new IllegalStateException("TelegramClient is not initialized!");
         }
 
         try {
-            SendMessage message = new SendMessage(chatId, text);
+            List<Tomatoes> tomatoList = tomatoesRepository.findAll();
+            Tomatoes tomato = tomatoList.get(0);
+            String text = getSingleMessageTomatoesContent(tomato);
+            byte[] photo = getSingleTomatoesPhotos(tomato);
+            InputFile photoFile = new InputFile(new ByteArrayInputStream(photo), tomato.getTomatoesName() + ".jpg");
+            SendPhoto message = new SendPhoto(chatId, photoFile);
+            message.setCaption(text);
+
+//            SendMessage message = new SendMessage(chatId, text);
             telegramClient.execute(message);
         } catch (Exception e) {
             logger.error("TGBotService.sendTextMessage: " + e.getMessage());
@@ -80,21 +95,45 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
 
     }
 
-    private String getSingleMessageTomatoesContent(){
-
-        List<Tomatoes> tomatoList = tomatoesRepository.findAll();
-        Tomatoes tomato = tomatoList.get(0);
+    private String getSingleMessageTomatoesContent(Tomatoes tomato) {
 
         StringBuffer text = new StringBuffer();
 
-        text.append(tomato.getName())
-                .append( "\n")
+        text.append(tomato.getTomatoesName())
+                .append("\n")
                 .append(tomato.getCategory())
-                .append( "\n")
+                .append("\n")
+                .append("- Высота: ")
                 .append(tomato.getTomatoesHeight())
-                .append( "\n");
+                .append("\n")
+                .append("- Диаметр: ")
+                .append(tomato.getTomatoesDiameter())
+                .append("\n")
+                .append("- Вес: ")
+                .append(tomato.getTomatoesFruit())
+                .append("\n")
+                .append("- Кашпо: ")
+                .append(tomato.getTomatoesFlowerpot())
+                .append("\n")
+                .append("- Созревание: ")
+                .append(tomato.getTomatoesAgroTech())
+                .append("\n")
+                .append("- Описание: ")
+                .append(tomato.getTomatoesDescription())
+                .append("\n")
+                .append("- Вкус: ")
+                .append(tomato.getTomatoesTaste())
+                .append("\n")
+                .append("- Особенность: ")
+                .append(tomato.getTomatoesSpecificity());
 
         return text.toString();
+    }
+
+    private byte[] getSingleTomatoesPhotos(Tomatoes tomato) {
+
+        byte[] photos = tomato.getPhotos().get(0).getContent();
+        return photos;
     }
 
 
