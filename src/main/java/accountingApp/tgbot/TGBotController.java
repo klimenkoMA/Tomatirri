@@ -44,11 +44,9 @@ public class TGBotController {
 
     @SneakyThrows
     @PostMapping("/sendCommonMessage")
-    public String sendTGCommonMessage(@RequestParam(required = false) String message,
-                                      Model model) {
+    public String sendTGCommonMessage(Model model) {
 
-        message = message != null ? message : "Привет, кисечка!";
-        tgBotService.sendTextMessage(chatId, message);
+        tgBotService.sendTextMessage(chatId);
 
         List<Seed> seedList = new ArrayList<>();
 
