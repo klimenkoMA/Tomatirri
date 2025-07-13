@@ -404,7 +404,7 @@ public class TomatoesController {
                     assert contentType != null;
                     headers.setContentType(MediaType.parseMediaType(contentType));
                     headers.setContentDisposition(ContentDisposition.attachment()
-                            .filename(tomato.getName())
+                            .filename(tomato.getTomatoesName())
                             .build());
                     headers.setContentLength(ph.getContent().length);
                     return new ResponseEntity<>(ph.getContent()

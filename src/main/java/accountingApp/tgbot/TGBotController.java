@@ -1,13 +1,10 @@
 package accountingApp.tgbot;
 
-import accountingApp.controller.TomatoesController;
-
 import accountingApp.entity.Peppers;
 import accountingApp.entity.Seed;
 import accountingApp.entity.Tomatoes;
 import accountingApp.repository.PeppersRepository;
 import accountingApp.repository.TomatoesRepository;
-import accountingApp.service.TomatoesService;
 import lombok.SneakyThrows;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +42,7 @@ public class TGBotController {
     @PostMapping("/sendCommonMessage")
     public String sendTGCommonMessage(Model model) {
 
-        tgBotService.sendTextMessage(chatId);
+        tgBotService.sendAllSeedsTextAndPhotosMessage(chatId);
 
         List<Seed> seedList = new ArrayList<>();
 

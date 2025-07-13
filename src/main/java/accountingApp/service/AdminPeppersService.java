@@ -132,14 +132,14 @@ public class AdminPeppersService {
             logger.warn("*** AdminPeppersService.addNewPepper():" +
                     "  Attribute has a null value! ***" +
                     "\ncategory: " + category +
-                    "\ntomatoesName: " + peppersName +
-                    "\ntomatoesHeight: " + peppersHeight +
-                    "\ntomatoesDiameter: " + peppersDiameter +
-                    "\ntomatoesFruit: " + peppersFruit +
-                    "\ntomatoesFlowerpot: " + peppersFlowerpot +
-                    "\ntomatoesAgroTech: " + peppersAgroTech +
-                    "\ntomatoesDescription: " + peppersDescription +
-                    "\ntomatoesTaste: " + peppersTaste
+                    "\npeppersName: " + peppersName +
+                    "\npeppersHeight: " + peppersHeight +
+                    "\npeppersDiameter: " + peppersDiameter +
+                    "\npeppersFruit: " + peppersFruit +
+                    "\npeppersFlowerpot: " + peppersFlowerpot +
+                    "\npeppersAgroTech: " + peppersAgroTech +
+                    "\npeppersDescription: " + peppersDescription +
+                    "\npeppersTaste: " + peppersTaste
             );
             return model;
         }
@@ -422,15 +422,15 @@ public class AdminPeppersService {
 
     private void updatePepperFields(Peppers pepper
             , String category
-            , String tomatoesName
-            , String tomatoesHeight
-            , String tomatoesDiameter
-            , String tomatoesFruit
-            , String tomatoesFlowerpot
-            , String tomatoesAgroTech
-            , String tomatoesDescription
-            , String tomatoesTaste
-            , String tomatoesSpecificity
+            , String peppersName
+            , String peppersHeight
+            , String peppersDiameter
+            , String peppersFruit
+            , String peppersFlowerpot
+            , String peppersAgroTech
+            , String peppersDescription
+            , String peppersTaste
+            , String peppersSpecificity
             , String isPresent
     ) {
         PeppersCategory peppersCategory = Arrays.stream(PEPPERS_CATEGORIES)
@@ -445,15 +445,15 @@ public class AdminPeppersService {
                 .orElse(pepper.getIsPresent());
         pepper.setIsPresent(pepperIsPresent);
 
-        updateFieldIfProvided(pepper::setPeppersSpecificity, pepper::getPeppersSpecificity, tomatoesSpecificity);
-        updateFieldIfProvided(pepper::setPeppersName, pepper::getPeppersName, tomatoesName);
-        updateFieldIfProvided(pepper::setPeppersHeight, pepper::getPeppersHeight, tomatoesHeight);
-        updateFieldIfProvided(pepper::setPeppersDiameter, pepper::getPeppersDiameter, tomatoesDiameter);
-        updateFieldIfProvided(pepper::setPeppersFruit, pepper::getPeppersFruit, tomatoesFruit);
-        updateFieldIfProvided(pepper::setPeppersFlowerpot, pepper::getPeppersFlowerpot, tomatoesFlowerpot);
-        updateFieldIfProvided(pepper::setPeppersAgroTech, pepper::getPeppersAgroTech, tomatoesAgroTech);
-        updateFieldIfProvided(pepper::setPeppersDescription, pepper::getPeppersDescription, tomatoesDescription);
-        updateFieldIfProvided(pepper::setPeppersTaste, pepper::getPeppersTaste, tomatoesTaste);
+        updateFieldIfProvided(pepper::setPeppersSpecificity, pepper::getPeppersSpecificity, peppersSpecificity);
+        updateFieldIfProvided(pepper::setPeppersName, pepper::getPeppersName, peppersName);
+        updateFieldIfProvided(pepper::setPeppersHeight, pepper::getPeppersHeight, peppersHeight);
+        updateFieldIfProvided(pepper::setPeppersDiameter, pepper::getPeppersDiameter, peppersDiameter);
+        updateFieldIfProvided(pepper::setPeppersFruit, pepper::getPeppersFruit, peppersFruit);
+        updateFieldIfProvided(pepper::setPeppersFlowerpot, pepper::getPeppersFlowerpot, peppersFlowerpot);
+        updateFieldIfProvided(pepper::setPeppersAgroTech, pepper::getPeppersAgroTech, peppersAgroTech);
+        updateFieldIfProvided(pepper::setPeppersDescription, pepper::getPeppersDescription, peppersDescription);
+        updateFieldIfProvided(pepper::setPeppersTaste, pepper::getPeppersTaste, peppersTaste);
     }
 
     private void updateFieldIfProvided(Consumer<String> setter,
@@ -485,7 +485,7 @@ public class AdminPeppersService {
                 assert contentType != null;
                 headers.setContentType(MediaType.parseMediaType(contentType));
                 headers.setContentDisposition(ContentDisposition.attachment()
-                        .filename(peppers.getName())
+                        .filename(peppers.getPeppersName())
                         .build());
                 headers.setContentLength(ph.getContent().length);
                 return new ResponseEntity<>(ph.getContent()
