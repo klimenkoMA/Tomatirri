@@ -1,15 +1,14 @@
 package accountingApp.service;
 
-import accountingApp.entity.TomatoesCategory;
+
 import accountingApp.entity.Tomatoes;
-import accountingApp.entity.dto.devicesdto.MaxOwnerCountDTO;
-import org.bson.types.ObjectId;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import accountingApp.repository.TomatoesRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 public class TomatoesService {
@@ -40,8 +39,4 @@ public class TomatoesService {
                 .findFirst()
                 .orElse(new Tomatoes());
     }
-
-//    public List<MaxOwnerCountDTO> getOwnersCount(){
-//        return tomatoesRepository.reportingDevicesMaxOwnerCount();
-//    }
 }

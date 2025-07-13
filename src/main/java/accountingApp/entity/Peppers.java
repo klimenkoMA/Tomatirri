@@ -265,15 +265,15 @@ public class Peppers extends MultipartFileAdapter implements Seed {
         return "Peppers{" +
                 "id=" + id +
                 ", category=" + category +
-                ", tomatoesName='" + peppersName + '\'' +
-                ", tomatoesHeight='" + peppersHeight + '\'' +
-                ", tomatoesDiameter='" + peppersDiameter + '\'' +
-                ", tomatoesFruit='" + peppersFruit + '\'' +
-                ", tomatoesFlowerpot='" + peppersFlowerpot + '\'' +
-                ", tomatoesAgroTech='" + peppersAgroTech + '\'' +
-                ", tomatoesDescription='" + peppersDescription + '\'' +
-                ", tomatoesTaste='" + peppersTaste + '\'' +
-                ", tomatoesSpecificity='" + peppersSpecificity + '\'' +
+                ", peppersName='" + peppersName + '\'' +
+                ", peppersHeight='" + peppersHeight + '\'' +
+                ", peppersDiameter='" + peppersDiameter + '\'' +
+                ", peppersFruit='" + peppersFruit + '\'' +
+                ", peppersFlowerpot='" + peppersFlowerpot + '\'' +
+                ", peppersAgroTech='" + peppersAgroTech + '\'' +
+                ", peppersDescription='" + peppersDescription + '\'' +
+                ", peppersTaste='" + peppersTaste + '\'' +
+                ", peppersSpecificity='" + peppersSpecificity + '\'' +
                 ", idCount=" + idCount +
                 ", idMap=" + idMap +
                 ", isPresent=" + isPresent +

@@ -2,7 +2,6 @@ package accountingApp.entity;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.bson.types.ObjectId;
-import org.hibernate.annotations.Target;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;

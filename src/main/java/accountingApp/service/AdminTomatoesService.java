@@ -1,7 +1,6 @@
 package accountingApp.service;
 
 import accountingApp.entity.IsPresent;
-import accountingApp.entity.Peppers;
 import accountingApp.entity.Tomatoes;
 import accountingApp.entity.TomatoesCategory;
 import accountingApp.repository.TomatoesRepository;
