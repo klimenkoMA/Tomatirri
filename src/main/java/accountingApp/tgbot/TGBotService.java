@@ -26,6 +26,7 @@ import javax.annotation.PostConstruct;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 @Component
 public class TGBotService implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
@@ -85,7 +86,7 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
             seedList.addAll(tomatoesList);
             seedList.addAll(peppersList);
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < seedList.size(); i++) {
                 Seed s = seedList.get(i);
                 sendTextWithPhotoMessage(chatId, s);
                 Thread.sleep(1000);
@@ -120,7 +121,24 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
                 photoFile.setParseMode("HTML");
                 mediaGroup.add(photoFile);
 
-                getAllPhotosFromSeed(mediaGroup, photos, tomato);
+                getAllPhotosFromSeed(mediaGroup, photos, tomato, Tomatoes::getTomatoesName);
+
+                telegramClient.execute(new SendMediaGroup(chatId, mediaGroup));
+            }else if(seed instanceof Peppers){
+                Peppers pepper = (Peppers) seed;
+                String text = getSingleMessagePeppersContent(pepper);
+                List<Photo> photos = pepper.getPhotos();
+
+                List<InputMedia> mediaGroup = new ArrayList<>();
+
+                byte[] photo = getSingleSeedPhotos(photos.get(0));
+                InputMediaPhoto photoFile = new InputMediaPhoto(new ByteArrayInputStream(photo),
+                        pepper.getPeppersName() + ".jpg");
+                photoFile.setCaption(text);
+                photoFile.setParseMode("HTML");
+                mediaGroup.add(photoFile);
+
+                getAllPhotosFromSeed(mediaGroup, photos, pepper, Peppers::getPeppersName);
 
                 telegramClient.execute(new SendMediaGroup(chatId, mediaGroup));
             }
@@ -133,19 +151,18 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
 
     }
 
-    private void getAllPhotosFromSeed(List<InputMedia> mediaGroup,
-                                      List<Photo> photos,
-                                      Tomatoes tomato) {
-
+    private <T> void getAllPhotosFromSeed(List<InputMedia> mediaGroup,
+                                          List<Photo> photos,
+                                          T plant,
+                                          Function<T, String> nameExtractor) {
         for (int i = 1; i < photos.size(); i++) {
-            InputMediaPhoto otherPhotoFile = new InputMediaPhoto(
+            InputMediaPhoto photoFile = new InputMediaPhoto(
                     new ByteArrayInputStream(photos.get(i).getContent()),
-                    tomato.getTomatoesName() + "_" + (i + 1) + ".jpg"
+                    nameExtractor.apply(plant) + "_" + (i + 1) + ".jpg"
             );
-            mediaGroup.add(otherPhotoFile);
+            mediaGroup.add(photoFile);
         }
     }
-
 
     private String getSingleMessageTomatoesContent(Tomatoes tomato) {
 
@@ -182,10 +199,44 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
         return text.toString();
     }
 
+    private String getSingleMessagePeppersContent(Peppers pepper) {
+
+        StringBuffer text = new StringBuffer();
+
+        text.append("<b>").append(pepper.getPeppersName()).append("</b>")
+                .append("\n")
+                .append("<i>").append(pepper.getCategory()).append("</i>")
+                .append("\n")
+                .append("- Высота: ")
+                .append("<i>").append(pepper.getPeppersHeight()).append("</i>")
+                .append("\n")
+                .append("- Диаметр: ")
+                .append("<i>").append(pepper.getPeppersDiameter()).append("</i>")
+                .append("\n")
+                .append("- Вес: ")
+                .append("<i>").append(pepper.getPeppersFruit()).append("</i>")
+                .append("\n")
+                .append("- Кашпо: ")
+                .append("<i>").append(pepper.getPeppersFlowerpot()).append("</i>")
+                .append("\n")
+                .append("- Созревание: ")
+                .append("<i>").append(pepper.getPeppersAgroTech()).append("</i>")
+                .append("\n")
+                .append("- Описание: ")
+                .append("<i>").append(pepper.getPeppersDescription()).append("</i>")
+                .append("\n")
+                .append("- Вкус: ")
+                .append("<i>").append(pepper.getPeppersTaste()).append("</i>")
+                .append("\n")
+                .append("- Особенность: ")
+                .append("<i>").append(pepper.getPeppersSpecificity()).append("</i>");
+
+        return text.toString();
+    }
+
     private byte[] getSingleSeedPhotos(Photo photo) {
 
-        byte[] photos = photo.getContent();
-        return photos;
+        return photo.getContent();
     }
 
 
