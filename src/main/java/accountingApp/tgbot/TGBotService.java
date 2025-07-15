@@ -86,7 +86,7 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
             seedList.addAll(tomatoesList);
             seedList.addAll(peppersList);
 
-            for (int i = 0; i < seedList.size(); i++) {
+            for (int i = 0; i < 1; i++) {
                 Seed s = seedList.get(i);
                 sendTextWithPhotoMessage(chatId, s);
                 Thread.sleep(1000);
@@ -172,6 +172,11 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
                 .append("\n")
                 .append("<i>").append(tomato.getCategory()).append("</i>")
                 .append("\n")
+                .append("- Есть в наличии: ")
+                .append("<b>")
+                .append(tomato.getIsPresent().getPresent())
+                .append("</b>")
+                .append("\n")
                 .append("- Высота: ")
                 .append("<i>").append(tomato.getTomatoesHeight()).append("</i>")
                 .append("\n")
@@ -206,6 +211,11 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
         text.append("<b>").append(pepper.getPeppersName()).append("</b>")
                 .append("\n")
                 .append("<i>").append(pepper.getCategory()).append("</i>")
+                .append("\n")
+                .append("- Есть в наличии: ")
+                .append("<b>")
+                .append(pepper.getIsPresent().getPresent())
+                .append("</b>")
                 .append("\n")
                 .append("- Высота: ")
                 .append("<i>").append(pepper.getPeppersHeight()).append("</i>")
