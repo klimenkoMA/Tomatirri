@@ -466,7 +466,7 @@ public class AdminPeppersService {
         }
     }
 
-    private Peppers getPepperById(String id) {
+    public Peppers getPepperById(String id) {
         return peppersRepository.findAll().stream()
                 .filter(pepId -> (pepId.getId() + "").equals(id))
                 .findFirst()

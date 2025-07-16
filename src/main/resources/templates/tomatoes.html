@@ -2,8 +2,8 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
 
-    <title>TOMATOES</title>
-    <div th:replace="fragments/headers/head :: head"></div>
+<title>TOMATOES</title>
+<div th:replace="fragments/headers/head :: head"></div>
 
 <body>
 <div class="wrapper d-flex flex-column justify-content-center p-0 m-0"
@@ -163,6 +163,30 @@
                                 <td class="text-center border border-0"
                                     style="min-width: 10rem">
                                     <div><strong>[[${element.tomatoesName}]]</strong></div>
+
+                                    <form action="/sendTomatoMessage"
+                                          method="post"
+                                          autocomplete="off"
+                                          class="card-text offcanvas-body align-self-start">
+                                        <div align="center">
+                                            <input type="hidden" name="id" th:value="${element.id}">
+                                            <button class="btn text-light crud-btn"
+                                                    type="submit"
+                                                    style="justify-self: center;
+                                                    white-space: nowrap;
+                                                    max-width: min-content;
+                                                    max-height: min-content;
+                                                    background-color: #467a53;
+                                                    align-self: center;
+                                                    box-shadow: 2px 2px 4px black;
+                                                    text-shadow: #002349 2px 3px 4px;">
+                                                <div class="fs-7">Опубликовать</div>
+                                            </button>
+                                        </div>
+                                        <input type="hidden"
+                                               name="${_csrf.parameterName}"
+                                               value="${_csrf.token}">
+                                    </form>
                                 </td>
                                 <td class="text-center border border-0"
                                     style="min-width: 5rem">
