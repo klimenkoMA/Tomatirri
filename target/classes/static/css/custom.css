@@ -6,6 +6,31 @@ a {
     box-sizing: border-box;
 }
 
+.btn-crud{
+    background-color: #467a53;
+    justify-self: center;
+    text-align: center;
+    text-justify: distribute-center-last;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    width: 1rem;
+    height: 1rem;
+    align-self: center;
+    box-shadow: 2px 2px 4px black
+}
+
+.btn-crud:hover{
+    color: #ffc107;
+    cursor: pointer;
+}
+
+.btn-crud:focus {
+    outline: 4px;
+    box-shadow: 0 0 0 4px #467a53;
+}
+
+
 .button {
     appearance: none;
     border: 0;
