@@ -5,12 +5,9 @@
 </head>
 
 <div th:fragment="updatetomato">
-    <label class="popup_try d-flex fs-7 p-0 m-0 text-center
-    align-items-center justify-content-center"
-           style="
-           justify-content: center;
-           box-shadow: 2px 2px 4px black">
-        Изменить томат
+    <label class="btn-crud d-flex fs-5 p-1 m-1 text-light text-center
+    align-items-center justify-content-center">
+        <strong>></strong>
         <button type="button"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasupdatetomato"
@@ -40,12 +37,12 @@
                   enctype="multipart/form-data"
                   class="card-text offcanvas-body align-self-start">
                 <div align="center">
-                    <label>
-                        <input type="text"
-                               name="id"
-                               align="middle"
-                               placeholder="ID томата">
-                    </label>
+<!--                    <label>-->
+<!--                        <input type="text"-->
+<!--                               name="id"-->
+<!--                               align="middle"-->
+<!--                               placeholder="ID томата">-->
+<!--                    </label>-->
                     <label class="d-flex justify-content-center align-items-center">
                         <select class="form-select-custom"
                                 name="category">
