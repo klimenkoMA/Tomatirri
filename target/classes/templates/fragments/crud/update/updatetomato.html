@@ -4,7 +4,7 @@
     <div th:replace="fragments/headers/head :: head"></div>
 </head>
 
-<div th:fragment="updatetomato">
+<div th:fragment="updatetomato(idCount)">
     <label class="btn-crud d-flex fs-5 p-1 m-1 text-light text-center
     align-items-center justify-content-center">
         <strong>></strong>
@@ -37,12 +37,16 @@
                   enctype="multipart/form-data"
                   class="card-text offcanvas-body align-self-start">
                 <div align="center">
-<!--                    <label>-->
+                    <label>
 <!--                        <input type="text"-->
 <!--                               name="id"-->
-<!--                               align="middle"-->
-<!--                               placeholder="ID томата">-->
-<!--                    </label>-->
+<!--                               th:value="${element.idCount}">-->
+                        <input type="hidden"
+                               name="id"
+                               align="middle"
+                               th:value="${idCount}"
+                               placeholder="ID томата">
+                    </label>
                     <label class="d-flex justify-content-center align-items-center">
                         <select class="form-select-custom"
                                 name="category">
