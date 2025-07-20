@@ -21,6 +21,33 @@
         <div style="flex: 0 0 auto;"
              th:replace="fragments/crud/crudtomato :: crudtomato"></div>
 
+        <form action="/sendCommonMessage"
+              method="post"
+              autocomplete="off"
+              class="card-text offcanvas-body align-self-start">
+            <div align="center">
+                <label class="d-flex justify-content-center align-items-center">
+                </label>
+            </div>
+            <div align="center">
+                <button class="btn text-light crud-btn"
+                        type="submit"
+                        style="justify-self: center;
+                            min-width: max-content;
+                            max-height: min-content;
+                            background-color: #467a53;
+                            align-self: center;
+                            box-shadow: 2px 2px 4px black;
+                            text-shadow: #002349 2px 3px 4px;">
+                    Добавить
+                </button>
+            </div>
+            <input type="hidden"
+                   name="${_csrf.parameterName}"
+                   value="${_csrf.token}">
+
+        </form>
+
         <div class="table-result-db p-0 w-100"
              style="
              justify-content: center;
@@ -221,7 +248,7 @@
                                         </div>
 
                                         <div>
-                                            <a th:replace="fragments/crud/update/updatetomato :: updatetomato(${element.idCount})"></a>
+                                            <a th:replace="fragments/crud/update/updatetomato :: updatetomato"></a>
                                         </div>
 
                                         <div>
