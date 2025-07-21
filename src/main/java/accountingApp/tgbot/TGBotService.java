@@ -17,9 +17,13 @@ import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsume
 import org.telegram.telegrambots.longpolling.starter.SpringLongPollingBot;
 import org.telegram.telegrambots.longpolling.util.LongPollingSingleThreadUpdateConsumer;
 import org.telegram.telegrambots.meta.api.methods.send.SendMediaGroup;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
 import org.telegram.telegrambots.meta.api.objects.media.InputMediaPhoto;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import javax.annotation.PostConstruct;
@@ -65,6 +69,68 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
     @Override
     public void consume(Update update) {
 
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            String messageText = update.getMessage().getText();
+            long chatId = update.getMessage().getChatId();
+
+            if (messageText.equals("/start")) {
+                sendInlineKeyboard(chatId, "Выберите действие:", createInlineKeyboard());
+            } else {
+                // Обработка других команд и сообщений
+            }
+        } else if (update.hasCallbackQuery()) {
+            String callbackData = update.getCallbackQuery().getData();
+            long chatId = update.getCallbackQuery().getMessage().getChatId();
+            // Обработка нажатий на кнопки
+            if(callbackData.equals("button1")){
+                sendMessage(chatId, "Вы нажали кнопку 1");
+            } else if (callbackData.equals("button2")){
+                sendMessage(chatId, "Вы нажали кнопку 2");
+            }
+        }
+
+    }
+
+    private void sendInlineKeyboard(long chatId, String text, InlineKeyboardMarkup keyboard) {
+        SendMessage message = new SendMessage();
+        message.setChatId(String.valueOf(chatId));
+        message.setText(text);
+        message.setReplyMarkup(keyboard);
+
+        try {
+            execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendMessage(long chatId, String text) {
+        SendMessage message = new SendMessage();
+        message.setChatId(String.valueOf(chatId));
+        message.setText(text);
+
+        try {
+            execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private InlineKeyboardMarkup createInlineKeyboard() {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
+        List<InlineKeyboardButton> rowInline = new ArrayList<>();
+        InlineKeyboardButton button1 = new InlineKeyboardButton();
+        button1.setText("Кнопка 1");
+        button1.setCallbackData("button1");
+        InlineKeyboardButton button2 = new InlineKeyboardButton();
+        button2.setText("Кнопка 2");
+        button2.setCallbackData("button2");
+        rowInline.add(button1);
+        rowInline.add(button2);
+        rowsInline.add(rowInline);
+        inlineKeyboardMarkup.setKeyboard(rowsInline);
+        return inlineKeyboardMarkup;
     }
 
     @PostConstruct
@@ -153,12 +219,12 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
 
     private <T> void getAllPhotosFromSeed(List<InputMedia> mediaGroup,
                                           List<Photo> photos,
-                                          T plant,
+                                          T seed,
                                           Function<T, String> nameExtractor) {
         for (int i = 1; i < photos.size(); i++) {
             InputMediaPhoto photoFile = new InputMediaPhoto(
                     new ByteArrayInputStream(photos.get(i).getContent()),
-                    nameExtractor.apply(plant) + "_" + (i + 1) + ".jpg"
+                    nameExtractor.apply(seed) + "_" + (i + 1) + ".jpg"
             );
             mediaGroup.add(photoFile);
         }
