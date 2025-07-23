@@ -83,54 +83,98 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
             long chatId = update.getCallbackQuery().getMessage().getChatId();
             // Обработка нажатий на кнопки
             if(callbackData.equals("button1")){
-                sendMessage(chatId, "Вы нажали кнопку 1");
+                sendTextMessage(chatId, "Вы нажали кнопку 1");
             } else if (callbackData.equals("button2")){
-                sendMessage(chatId, "Вы нажали кнопку 2");
+                sendTextMessage(chatId, "Вы нажали кнопку 2");
             }
         }
 
     }
 
-    private void sendInlineKeyboard(long chatId, String text, InlineKeyboardMarkup keyboard) {
-        SendMessage message = new SendMessage();
-        message.setChatId(String.valueOf(chatId));
-        message.setText(text);
+    private void sendInlineKeyboard(long chatId,
+                                    String text,
+                                    InlineKeyboardMarkup keyboard) {
+        SendMessage message = new SendMessage(String.valueOf(chatId), text);
+//        message.setChatId(String.valueOf(chatId));
+//        message.setText(text);
         message.setReplyMarkup(keyboard);
 
         try {
-            execute(message);
+            telegramClient.execute(message);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
     }
 
-    private void sendMessage(long chatId, String text) {
-        SendMessage message = new SendMessage();
-        message.setChatId(String.valueOf(chatId));
-        message.setText(text);
+    private void sendTextMessage(long chatId, String text) {
+        SendMessage message = new SendMessage(String.valueOf(chatId), text);
+
+//        message.setChatId(String.valueOf(chatId));
+//        message.setText(text);
 
         try {
-            execute(message);
+            telegramClient.execute(message);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
     }
 
-    private InlineKeyboardMarkup createInlineKeyboard() {
-        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
-        List<InlineKeyboardButton> rowInline = new ArrayList<>();
+//    private InlineKeyboardMarkup createInlineKeyboard() {
+//        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+//
+//        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
+//
+//        List<InlineKeyboardButton> rowInline = new ArrayList<>();
+//
+//        InlineKeyboardButton button1 = new InlineKeyboardButton();
+//
+//        button1.setText("Кнопка 1");
+//        button1.setCallbackData("button1");
+//
+//        InlineKeyboardButton button2 = new InlineKeyboardButton();
+//        button2.setText("Кнопка 2");
+//        button2.setCallbackData("button2");
+//
+//        rowInline.add(button1);
+//        rowInline.add(button2);
+//        rowsInline.add(rowInline);
+//
+//        inlineKeyboardMarkup.setKeyboard(rowsInline);
+//
+//        return inlineKeyboardMarkup;
+//    }
+
+    public InlineKeyboardMarkup createInlineKeyboard() {
+        // Создаем клавиатуру
+        InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
+
+        // Создаем список рядов кнопок
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+
+        // Создаем первый ряд кнопок
+        List<InlineKeyboardButton> firstRow = new ArrayList<>();
+
+        // Первая кнопка
         InlineKeyboardButton button1 = new InlineKeyboardButton();
         button1.setText("Кнопка 1");
-        button1.setCallbackData("button1");
+        button1.setCallbackData("button1_pressed");
+
+        // Вторая кнопка
         InlineKeyboardButton button2 = new InlineKeyboardButton();
         button2.setText("Кнопка 2");
-        button2.setCallbackData("button2");
-        rowInline.add(button1);
-        rowInline.add(button2);
-        rowsInline.add(rowInline);
-        inlineKeyboardMarkup.setKeyboard(rowsInline);
-        return inlineKeyboardMarkup;
+        button2.setCallbackData("button2_pressed");
+
+        // Добавляем кнопки в первый ряд
+        firstRow.add(button1);
+        firstRow.add(button2);
+
+        // Добавляем ряд в клавиатуру
+        keyboard.add(firstRow);
+
+        // Устанавливаем клавиатуру
+        inlineKeyboard.setKeyboard(keyboard);
+
+        return inlineKeyboard;
     }
 
     @PostConstruct
