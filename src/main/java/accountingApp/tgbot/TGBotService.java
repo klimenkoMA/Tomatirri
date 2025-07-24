@@ -23,12 +23,14 @@ import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
 import org.telegram.telegrambots.meta.api.objects.media.InputMediaPhoto;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import javax.annotation.PostConstruct;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
@@ -146,21 +148,22 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
 
     public InlineKeyboardMarkup createInlineKeyboard() {
         // Создаем клавиатуру
-        InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
+        InlineKeyboardMarkup inlineKeyboard = InlineKeyboardMarkup.builder().build();
 
         // Создаем список рядов кнопок
-        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+//        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        List<InlineKeyboardRow> keyboard = Collections.singletonList(new InlineKeyboardRow());
 
         // Создаем первый ряд кнопок
         List<InlineKeyboardButton> firstRow = new ArrayList<>();
 
         // Первая кнопка
-        InlineKeyboardButton button1 = new InlineKeyboardButton();
+        InlineKeyboardButton button1 = InlineKeyboardButton.builder().build();
         button1.setText("Кнопка 1");
         button1.setCallbackData("button1_pressed");
 
         // Вторая кнопка
-        InlineKeyboardButton button2 = new InlineKeyboardButton();
+        InlineKeyboardButton button2 = InlineKeyboardButton.builder().build();
         button2.setText("Кнопка 2");
         button2.setCallbackData("button2_pressed");
 
@@ -169,7 +172,7 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
         firstRow.add(button2);
 
         // Добавляем ряд в клавиатуру
-        keyboard.add(firstRow);
+        keyboard.add((InlineKeyboardRow) firstRow);
 
         // Устанавливаем клавиатуру
         inlineKeyboard.setKeyboard(keyboard);
