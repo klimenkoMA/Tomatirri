@@ -75,7 +75,7 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
             String messageText = update.getMessage().getText();
             long chatId = update.getMessage().getChatId();
 
-            if (messageText.equals("/start")) {
+            if (messageText.equals("/hi")) {
                 sendInlineKeyboard(chatId, "Выберите действие:", createInlineKeyboard());
             } else {
                 // Обработка других команд и сообщений
@@ -121,30 +121,6 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
         }
     }
 
-//    private InlineKeyboardMarkup createInlineKeyboard() {
-//        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-//
-//        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
-//
-//        List<InlineKeyboardButton> rowInline = new ArrayList<>();
-//
-//        InlineKeyboardButton button1 = new InlineKeyboardButton();
-//
-//        button1.setText("Кнопка 1");
-//        button1.setCallbackData("button1");
-//
-//        InlineKeyboardButton button2 = new InlineKeyboardButton();
-//        button2.setText("Кнопка 2");
-//        button2.setCallbackData("button2");
-//
-//        rowInline.add(button1);
-//        rowInline.add(button2);
-//        rowsInline.add(rowInline);
-//
-//        inlineKeyboardMarkup.setKeyboard(rowsInline);
-//
-//        return inlineKeyboardMarkup;
-//    }
 
     public InlineKeyboardMarkup createInlineKeyboard() {
         // Создаем клавиатуру
@@ -236,7 +212,11 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
 
                 getAllPhotosFromSeed(mediaGroup, photos, tomato, Tomatoes::getTomatoesName);
 
+                String mess = "Welcome!";
+                sendInlineKeyboard(Long.parseLong(chatId), mess, createInlineKeyboard());
+
                 telegramClient.execute(new SendMediaGroup(chatId, mediaGroup));
+
             }else if(seed instanceof Peppers){
                 Peppers pepper = (Peppers) seed;
                 String text = getSingleMessagePeppersContent(pepper);
