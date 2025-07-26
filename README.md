@@ -1,2 +1,1 @@
-# Accounting App
-Institute project, application for accounting of computer equipment
+Web application for small business, niche City farming.
