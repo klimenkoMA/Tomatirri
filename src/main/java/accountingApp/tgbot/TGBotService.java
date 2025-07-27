@@ -84,9 +84,9 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
             String callbackData = update.getCallbackQuery().getData();
             long chatId = update.getCallbackQuery().getMessage().getChatId();
             // Обработка нажатий на кнопки
-            if(callbackData.equals("button1")){
+            if(callbackData.equals("button1_pressed")){
                 sendTextMessage(chatId, "Вы нажали кнопку 1");
-            } else if (callbackData.equals("button2")){
+            } else if (callbackData.equals("button2_pressed")){
                 sendTextMessage(chatId, "Вы нажали кнопку 2");
             }
         }
@@ -104,6 +104,7 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
         try {
             telegramClient.execute(message);
         } catch (TelegramApiException e) {
+            logger.error("TGBotService.sendInlineKeyboard: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -123,37 +124,25 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
 
 
     public InlineKeyboardMarkup createInlineKeyboard() {
-        // Создаем клавиатуру
-        InlineKeyboardMarkup inlineKeyboard = InlineKeyboardMarkup.builder().build();
+        // Создаем первую кнопку
+        InlineKeyboardButton button1 = InlineKeyboardButton.builder()
+                .text("Кнопка 1")
+                .callbackData("button1_pressed")
+                .build();
 
-        // Создаем список рядов кнопок
-//        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
-        List<InlineKeyboardRow> keyboard = Collections.singletonList(new InlineKeyboardRow());
+        // Создаем вторую кнопку
+        InlineKeyboardButton button2 = InlineKeyboardButton.builder()
+                .text("Кнопка 2")
+                .callbackData("button2_pressed")
+                .build();
 
-        // Создаем первый ряд кнопок
-        List<InlineKeyboardButton> firstRow = new ArrayList<>();
+        // Создаем ряд кнопок
+        InlineKeyboardRow row = new InlineKeyboardRow(button1, button2);
 
-        // Первая кнопка
-        InlineKeyboardButton button1 = InlineKeyboardButton.builder().build();
-        button1.setText("Кнопка 1");
-        button1.setCallbackData("button1_pressed");
-
-        // Вторая кнопка
-        InlineKeyboardButton button2 = InlineKeyboardButton.builder().build();
-        button2.setText("Кнопка 2");
-        button2.setCallbackData("button2_pressed");
-
-        // Добавляем кнопки в первый ряд
-        firstRow.add(button1);
-        firstRow.add(button2);
-
-        // Добавляем ряд в клавиатуру
-        keyboard.add((InlineKeyboardRow) firstRow);
-
-        // Устанавливаем клавиатуру
-        inlineKeyboard.setKeyboard(keyboard);
-
-        return inlineKeyboard;
+        // Создаем клавиатуру с этим рядом
+        return InlineKeyboardMarkup.builder()
+                .keyboard(Collections.singletonList(row))
+                .build();
     }
 
     @PostConstruct
@@ -212,10 +201,13 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
 
                 getAllPhotosFromSeed(mediaGroup, photos, tomato, Tomatoes::getTomatoesName);
 
-                String mess = "Welcome!";
-                sendInlineKeyboard(Long.parseLong(chatId), mess, createInlineKeyboard());
+
 
                 telegramClient.execute(new SendMediaGroup(chatId, mediaGroup));
+
+                String mess = "Welcome!";
+                InlineKeyboardMarkup keyboard = createInlineKeyboard();
+                sendInlineKeyboard(Long.parseLong(chatId), mess, keyboard );
 
             }else if(seed instanceof Peppers){
                 Peppers pepper = (Peppers) seed;
