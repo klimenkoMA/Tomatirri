@@ -77,16 +77,16 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
 
             if (messageText.equals("/hi")) {
                 sendInlineKeyboard(chatId, "Выберите действие:", createInlineKeyboard());
-            } else {
-                // Обработка других команд и сообщений
             }
+            // Убрали else, так как обработка callback должна быть в отдельном блоке
         } else if (update.hasCallbackQuery()) {
             String callbackData = update.getCallbackQuery().getData();
             long chatId = update.getCallbackQuery().getMessage().getChatId();
+
             // Обработка нажатий на кнопки
-            if(callbackData.equals("button1_pressed")){
+            if (callbackData.equals("button1_pressed")) {  // Обратите внимание на опечатку в вашем коде (pressed vs pressed)
                 sendTextMessage(chatId, "Вы нажали кнопку 1");
-            } else if (callbackData.equals("button2_pressed")){
+            } else if (callbackData.equals("button2_pressed")) {
                 sendTextMessage(chatId, "Вы нажали кнопку 2");
             }
         }
