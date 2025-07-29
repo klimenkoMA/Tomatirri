@@ -16,6 +16,7 @@ import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
 import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsumer;
 import org.telegram.telegrambots.longpolling.starter.SpringLongPollingBot;
 import org.telegram.telegrambots.longpolling.util.LongPollingSingleThreadUpdateConsumer;
+import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.methods.send.SendMediaGroup;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -71,24 +72,35 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
     @Override
     public void consume(Update update) {
 
-        if (update.hasMessage() && update.getMessage().hasText()) {
-            String messageText = update.getMessage().getText();
-            long chatId = update.getMessage().getChatId();
+        try {
+            if (update.hasMessage() && update.getMessage().hasText()) {
+                String messageText = update.getMessage().getText();
+                long chatId = update.getMessage().getChatId();
 
-            if (messageText.equals("/hi")) {
-                sendInlineKeyboard(chatId, "Выберите действие:", createInlineKeyboard());
-            }
-            // Убрали else, так как обработка callback должна быть в отдельном блоке
-        } else if (update.hasCallbackQuery()) {
-            String callbackData = update.getCallbackQuery().getData();
-            long chatId = update.getCallbackQuery().getMessage().getChatId();
+                if (messageText.equals("/hi")) {
+                    sendInlineKeyboard(chatId, "Выберите действие:", createInlineKeyboard());
+                }
+            } else if (update.hasCallbackQuery()) {
+                String callbackData = update.getCallbackQuery().getData();
+                long chatId = update.getCallbackQuery().getMessage().getChatId();
+                String callbackQueryId = update.getCallbackQuery().getId();
 
-            // Обработка нажатий на кнопки
-            if (callbackData.equals("button1_pressed")) {  // Обратите внимание на опечатку в вашем коде (pressed vs pressed)
-                sendTextMessage(chatId, "Вы нажали кнопку 1");
-            } else if (callbackData.equals("button2_pressed")) {
-                sendTextMessage(chatId, "Вы нажали кнопку 2");
+                // Обработка нажатий на кнопки
+                if (callbackData.equals("button1_pressed")) {
+                    sendTextMessage(chatId, "Вы нажали кнопку 1");
+                } else if (callbackData.equals("button2_pressed")) {
+                    sendTextMessage(chatId, "Вы нажали кнопку 2");
+                }
+
+                // Ответ на callback (обязательно)
+                try {
+                    telegramClient.execute(new AnswerCallbackQuery(callbackQueryId));
+                } catch (TelegramApiException e) {
+                    logger.error("Error answering callback query: ", e);
+                }
             }
+        } catch (Exception e) {
+            logger.error("TGBotService.consume error: ", e);
         }
 
     }
