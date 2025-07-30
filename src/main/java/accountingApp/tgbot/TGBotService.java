@@ -7,11 +7,13 @@ import accountingApp.entity.Seed;
 import accountingApp.entity.Tomatoes;
 import accountingApp.repository.PeppersRepository;
 import accountingApp.repository.TomatoesRepository;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
 import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsumer;
 import org.telegram.telegrambots.longpolling.starter.SpringLongPollingBot;
@@ -35,7 +37,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-@Component
+
+@Service
 public class TGBotService implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
 
     final Logger logger = LoggerFactory.getLogger(TomatoesController.class);
@@ -63,54 +66,96 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
         return this;
     }
 
-    @Override
-    public void consume(List<Update> updates) {
-        // Обработка входящих обновлений (если нужно)
-        updates.forEach(this::consume);
+    @SneakyThrows
+    public void onUpdateReceived(Update update) {
+      consume(update);
     }
 
+//    @Override
+//    public void consume(List<Update> updates) {
+//        // Обработка входящих обновлений (если нужно)
+//        updates.forEach(this::consume);
+//    }
+
+    @SneakyThrows
     @Override
     public void consume(Update update) {
-
-        try {
-            if (update.hasMessage() && update.getMessage().hasText()) {
-                String messageText = update.getMessage().getText();
-                long chatId = update.getMessage().getChatId();
-
-                if (messageText.equals("/hi")) {
-                    sendInlineKeyboard(chatId, "Выберите действие:", createInlineKeyboard());
-                }
-            } else if (update.hasCallbackQuery()) {
-                String callbackData = update.getCallbackQuery().getData();
-                long chatId = update.getCallbackQuery().getMessage().getChatId();
-                String callbackQueryId = update.getCallbackQuery().getId();
-
-                // Обработка нажатий на кнопки
-                if (callbackData.equals("button1_pressed")) {
-                    sendTextMessage(chatId, "Вы нажали кнопку 1");
-                } else if (callbackData.equals("button2_pressed")) {
-                    sendTextMessage(chatId, "Вы нажали кнопку 2");
-                }
-
-                // Ответ на callback (обязательно)
-                try {
-                    telegramClient.execute(new AnswerCallbackQuery(callbackQueryId));
-                } catch (TelegramApiException e) {
-                    logger.error("Error answering callback query: ", e);
-                }
-            }
-        } catch (Exception e) {
-            logger.error("TGBotService.consume error: ", e);
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            String responseText = "default";
+            long chatId = update.getMessage().getChatId();
+            InlineKeyboardMarkup keyboard = createInlineKeyboard();
+            sendInlineKeyboard(chatId, responseText, keyboard);
+        }else{
+            System.out.println("consume is out!");
         }
-
     }
 
-    private void sendInlineKeyboard(long chatId,
-                                    String text,
-                                    InlineKeyboardMarkup keyboard) {
+
+//    @SneakyThrows
+//    @Override
+//    public void consume(Update update) {
+//        String responseText = "default";
+//        long chatId = update.getMessage().getChatId();
+//        SendMessage message = SendMessage // Create a message object
+//                .builder()
+//                .chatId(chatId)
+//                .text(responseText)
+//                .build();
+//
+//        telegramClient.execute(message);
+////
+////        try {
+////            if (update.hasMessage() && update.getMessage().hasText()) {
+////                String messageText = update.getMessage().getText();
+////                chatId = update.getMessage().getChatId();
+////                System.out.println(chatId);
+////
+////                if (messageText.equals("/hi")) {
+////                    sendInlineKeyboard(chatId, "Выберите действие:", createInlineKeyboard());
+////                }
+////            } else if (update.hasCallbackQuery()) {
+////                String callbackData = update.getCallbackQuery().getData();
+////              chatId = update.getCallbackQuery().getMessage().getChatId();
+////                String callbackQueryId = update.getCallbackQuery().getId();
+////                responseText = "default";
+////
+////                // Обработка нажатий на кнопки
+////                if (callbackData.equals("button1_pressed")) {
+////
+//////                    sendTextMessage(chatId, "Вы нажали кнопку 1");
+////                   responseText ="Вы нажали кнопку 1";
+////
+////                } else if (callbackData.equals("button2_pressed")) {
+//////                    sendTextMessage(chatId, "Вы нажали кнопку 2");
+////                    responseText ="Вы нажали кнопку 2";
+////                }
+////
+////                SendMessage message2 = SendMessage // Create a message object
+////                        .builder()
+////                        .chatId(chatId)
+////                        .text(responseText)
+////                        .build();
+////
+////                telegramClient.execute(message2);
+////                // Ответ на callback (обязательно)
+////                try {
+////                    telegramClient.execute(new AnswerCallbackQuery(callbackQueryId));
+////                } catch (TelegramApiException e) {
+////                    logger.error("Error answering callback query: ", e);
+////                }
+////            }
+////        } catch (Exception e) {
+////            logger.error("TGBotService.consume error: ", e);
+////        }
+//
+//    }
+
+
+    public void sendInlineKeyboard(long chatId,
+                                   String text,
+                                   InlineKeyboardMarkup keyboard) {
         SendMessage message = new SendMessage(String.valueOf(chatId), text);
-//        message.setChatId(String.valueOf(chatId));
-//        message.setText(text);
+
         message.setReplyMarkup(keyboard);
 
         try {
@@ -121,11 +166,9 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
         }
     }
 
-    private void sendTextMessage(long chatId, String text) {
+    public void sendTextMessage(long chatId, String text) {
         SendMessage message = new SendMessage(String.valueOf(chatId), text);
 
-//        message.setChatId(String.valueOf(chatId));
-//        message.setText(text);
 
         try {
             telegramClient.execute(message);
@@ -138,13 +181,13 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
     public InlineKeyboardMarkup createInlineKeyboard() {
         // Создаем первую кнопку
         InlineKeyboardButton button1 = InlineKeyboardButton.builder()
-                .text("Кнопка 1")
+                .text("Томаты")
                 .callbackData("button1_pressed")
                 .build();
 
         // Создаем вторую кнопку
         InlineKeyboardButton button2 = InlineKeyboardButton.builder()
-                .text("Кнопка 2")
+                .text("Перцы")
                 .callbackData("button2_pressed")
                 .build();
 
@@ -162,12 +205,12 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
         this.telegramClient = new OkHttpTelegramClient(getBotToken());
     }
 
-    public void sendAllSeedsTextAndPhotosMessage(String chatId){
+    public void sendAllSeedsTextAndPhotosMessage(String chatId) {
         if (telegramClient == null) {
             throw new IllegalStateException("TelegramClient is not initialized!");
         }
 
-        try{
+        try {
             List<Seed> seedList = new ArrayList<>();
 
             List<Tomatoes> tomatoesList = tomatoesRepository.findAll();
@@ -197,7 +240,7 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
 
         try {
 
-            if (seed instanceof Tomatoes){
+            if (seed instanceof Tomatoes) {
                 Tomatoes tomato = (Tomatoes) seed;
                 String text = getSingleMessageTomatoesContent(tomato);
                 List<Photo> photos = tomato.getPhotos();
@@ -214,14 +257,13 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
                 getAllPhotosFromSeed(mediaGroup, photos, tomato, Tomatoes::getTomatoesName);
 
 
-
                 telegramClient.execute(new SendMediaGroup(chatId, mediaGroup));
 
                 String mess = "Welcome!";
                 InlineKeyboardMarkup keyboard = createInlineKeyboard();
-                sendInlineKeyboard(Long.parseLong(chatId), mess, keyboard );
+                sendInlineKeyboard(Long.parseLong(chatId), mess, keyboard);
 
-            }else if(seed instanceof Peppers){
+            } else if (seed instanceof Peppers) {
                 Peppers pepper = (Peppers) seed;
                 String text = getSingleMessagePeppersContent(pepper);
                 List<Photo> photos = pepper.getPhotos();
