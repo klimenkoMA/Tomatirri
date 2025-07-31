@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
 import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsumer;
 import org.telegram.telegrambots.longpolling.starter.SpringLongPollingBot;
@@ -64,11 +65,6 @@ public class TGBotService implements SpringLongPollingBot, LongPollingSingleThre
     @Override
     public LongPollingUpdateConsumer getUpdatesConsumer() {
         return this;
-    }
-
-    @SneakyThrows
-    public void onUpdateReceived(Update update) {
-      consume(update);
     }
 
 //    @Override
