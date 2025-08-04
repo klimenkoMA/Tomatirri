@@ -36,7 +36,9 @@ public class TGBotController {
     @Autowired
     public TGBotController(TGBotService tgBotService,
                            TomatoesRepository tomatoesRepository,
-                           PeppersRepository peppersRepository, TomatoesService tomatoesService, AdminPeppersService peppersService) {
+                           PeppersRepository peppersRepository,
+                           TomatoesService tomatoesService,
+                           AdminPeppersService peppersService) {
         this.tgBotService = tgBotService;
         this.tomatoesRepository = tomatoesRepository;
         this.peppersRepository = peppersRepository;
