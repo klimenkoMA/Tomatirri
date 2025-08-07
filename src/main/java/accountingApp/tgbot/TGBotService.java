@@ -23,7 +23,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -147,38 +146,23 @@ public class TGBotService {
 
     public void sendTextWithPhotoMessage(String chatId, Seed seed) {
         try {
-            long longChatId = Long.parseLong(chatId);
+
             if (seed instanceof Tomatoes) {
                 Tomatoes tomato = (Tomatoes) seed;
                 String text = getSingleMessageTomatoesContent(tomato);
                 List<Photo> photos = tomato.getPhotos();
 
-                List<InputMediaPhoto> mediaGroup = new ArrayList<>();
+                InputMediaPhoto[] mediaGroup = new InputMediaPhoto[photos.size()];
 
                 byte[] photo = getSingleSeedPhotos(photos.get(0));
                 InputMediaPhoto photoFile = new InputMediaPhoto(photo);
                 photoFile.caption(text);
                 photoFile.parseMode(ParseMode.valueOf("HTML"));
-                mediaGroup.add(photoFile);
+                mediaGroup[0] = photoFile;
 
                 getAllPhotosFromSeed(mediaGroup, photos, tomato, Tomatoes::getTomatoesName);
 
-                bot.execute(new SendMediaGroup(mediaGroup));
-
-//                getAllPhotosFromSeed(longChatId,
-//                        photos,
-//                        tomato,
-//                        Tomatoes::getTomatoesName,
-//                        text);
-
-//                if (!photos.isEmpty()) {
-//                    byte[] photo = photos.get(0).getContent();
-//                    SendPhoto request = new SendPhoto(chatId, photo)
-//                            .caption(text)
-//                            .parseMode(ParseMode.valueOf("HTML"));
-//
-//                    bot.execute(request);
-//                }
+                bot.execute(new SendMediaGroup(chatId, mediaGroup));
 
                 InlineKeyboardMarkup keyboard = createInlineKeyboard();
                 sendInlineKeyboard(Long.parseLong(chatId), "Welcome!", keyboard);
@@ -188,21 +172,18 @@ public class TGBotService {
                 String text = getSingleMessagePeppersContent(pepper);
                 List<Photo> photos = pepper.getPhotos();
 
+                InputMediaPhoto[] mediaGroup = new InputMediaPhoto[photos.size()];
 
-//                getAllPhotosFromSeed(longChatId,
-//                                     photos,
-//                                     pepper,
-//                                     Peppers::getPeppersName,
-//                                     text);
+                byte[] photo = getSingleSeedPhotos(photos.get(0));
+                InputMediaPhoto photoFile = new InputMediaPhoto(photo);
+                photoFile.caption(text);
+                photoFile.parseMode(ParseMode.valueOf("HTML"));
+                mediaGroup[0] = photoFile;
 
-//                if (!photos.isEmpty()) {
-//                    byte[] photo = photos.get(0).getContent();
-//                    SendPhoto request = new SendPhoto(chatId, photo)
-//                            .caption(text)
-//                            .parseMode(ParseMode.valueOf("HTML"));
-//
-//                    bot.execute(request);
-//                }
+                getAllPhotosFromSeed(mediaGroup, photos, pepper, Peppers::getPeppersName);
+
+                bot.execute(new SendMediaGroup(chatId, mediaGroup));
+
             }
         } catch (Exception e) {
             logger.error("Error sending photo message: {}", e.getMessage());
@@ -210,14 +191,14 @@ public class TGBotService {
     }
 
 
-        private <T> void getAllPhotosFromSeed(List<InputMediaPhoto> mediaGroup,
+    private <T> void getAllPhotosFromSeed(InputMediaPhoto[] mediaGroup,
                                           List<Photo> photos,
                                           T seed,
                                           Function<T, String> nameExtractor) {
         for (int i = 1; i < photos.size(); i++) {
             InputMediaPhoto photoFile = new InputMediaPhoto(
-                   photos.get(i).getContent());
-            mediaGroup.add(photoFile);
+                    photos.get(i).getContent());
+            mediaGroup[i] = photoFile;
         }
     }
 
@@ -225,32 +206,6 @@ public class TGBotService {
 
         return photo.getContent();
     }
-
-
-
-//    private <T> void getAllPhotosFromSeed(long chatId, List<Photo> photos, T seed,
-//                                          Function<T, String> nameExtractor, String caption) {
-//        if (photos == null || photos.isEmpty()) {
-//            return;
-//        }
-//
-//        // Отправляем первую фотографию с подписью
-//        sendPhotoWithCaption(chatId, photos.get(0).getContent(), caption, nameExtractor.apply(seed) + "_1.jpg");
-//
-//
-//
-//        // Отправляем остальные фотографии (без подписи)
-//        for (int i = 1; i < photos.size(); i++) {
-//            sendPhoto(chatId, photos.get(i).getContent(), nameExtractor.apply(seed) + "_" + (i + 1) + ".jpg");
-//            try {
-//                Thread.sleep(500); // Небольшая задержка между отправкой фото
-//            } catch (InterruptedException e) {
-//                Thread.currentThread().interrupt();
-//                logger.error("Thread interrupted while sending photos", e);
-//            }
-//        }
-//    }
-
 
     private void sendPhotoWithCaption(long chatId, byte[] photoBytes, String caption, String fileName) {
         SendPhoto request = new SendPhoto(chatId, photoBytes)
@@ -267,66 +222,6 @@ public class TGBotService {
 
         bot.execute(request);
     }
-
-//        public void sendTextWithPhotoMessage(String chatId, Seed seed) {
-////        if (telegramClient == null) {
-////            throw new IllegalStateException("TelegramClient is not initialized!");
-////        }
-//
-//        try {
-//
-//            if (seed instanceof Tomatoes) {
-//                Tomatoes tomato = (Tomatoes) seed;
-//                String text = getSingleMessageTomatoesContent(tomato);
-//                List<Photo> photos = tomato.getPhotos();
-//
-//                List<InputMedia> mediaGroup = new ArrayList<>();
-//
-//                byte[] photo = getSingleSeedPhotos(photos.get(0));
-//                InputMediaPhoto photoFile = new InputMediaPhoto(new ByteArrayInputStream(photo),
-//                        tomato.getTomatoesName() + ".jpg");
-//                photoFile.caption(text);
-//                photoFile.parseMode(ParseMode.valueOf("HTML"));
-//                mediaGroup.add(photoFile);
-//
-//                getAllPhotosFromSeed(mediaGroup, photos, tomato, Tomatoes::getTomatoesName);
-//
-//
-//                bot.execute(new SendMediaGroup(chatId, mediaGroup));
-//
-//                String mess = "Welcome!";
-//                InlineKeyboardMarkup keyboard = createInlineKeyboard();
-//                sendInlineKeyboard(Long.parseLong(chatId), mess, keyboard);
-//
-//            } else if (seed instanceof Peppers) {
-//                Peppers pepper = (Peppers) seed;
-//                String text = getSingleMessagePeppersContent(pepper);
-//                List<Photo> photos = pepper.getPhotos();
-//
-//                List<InputMedia> mediaGroup = new ArrayList<>();
-//
-//                byte[] photo = getSingleSeedPhotos(photos.get(0));
-//                InputMediaPhoto photoFile = new InputMediaPhoto(new ByteArrayInputStream(photo),
-//                        pepper.getPeppersName() + ".jpg");
-//                photoFile.caption(text);
-//                photoFile.parseMode(ParseMode.valueOf("HTML"));
-//                mediaGroup.add(photoFile);
-//
-//                getAllPhotosFromSeed(mediaGroup, photos, pepper, Peppers::getPeppersName);
-//
-//                bot.execute(new SendMediaGroup(chatId, mediaGroup));
-//            }
-//
-//
-//        } catch (Exception e) {
-//            logger.error("TGBotService.sendTextWithPhotoMessage: " + e.getMessage());
-//            e.printStackTrace();
-//        }
-//
-//    }
-//
-
-
 
     private String getSingleMessageTomatoesContent(Tomatoes tomato) {
 
@@ -407,36 +302,6 @@ public class TGBotService {
         return text.toString();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //package accountingApp.tgbot;
