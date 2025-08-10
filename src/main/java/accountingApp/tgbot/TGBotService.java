@@ -17,6 +17,7 @@ import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SendPhoto;
 import com.pengrad.telegrambot.response.SendResponse;
 
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -150,48 +151,45 @@ public class TGBotService {
     public void sendTextWithPhotoMessage(String chatId, Seed seed) {
         try {
 
+            List<Photo> photos = new ArrayList<>();
+            String text = "";
+
             if (seed instanceof Tomatoes) {
                 Tomatoes tomato = (Tomatoes) seed;
-                String text = getSingleMessageTomatoesContent(tomato);
-                List<Photo> photos = tomato.getPhotos();
-
-                InputMediaPhoto[] mediaGroup = new InputMediaPhoto[photos.size()];
-
-                byte[] photo = getSingleSeedPhotos(photos.get(0));
-                InputMediaPhoto photoFile = new InputMediaPhoto(photo);
-                photoFile.caption(text);
-                photoFile.parseMode(ParseMode.valueOf("HTML"));
-                mediaGroup[0] = photoFile;
-
-                getAllPhotosFromSeed(mediaGroup, photos);
-
-                bot.execute(new SendMediaGroup(chatId, mediaGroup));
-
-                InlineKeyboardMarkup keyboard = createInlineKeyboard();
-                sendInlineKeyboard(Long.parseLong(chatId), "Welcome!", keyboard);
-
-            } else if (seed instanceof Peppers) {
+                photos = tomato.getPhotos();
+                text = getSingleMessageTomatoesContent(tomato);
+            }else if (seed instanceof Peppers){
                 Peppers pepper = (Peppers) seed;
-                String text = getSingleMessagePeppersContent(pepper);
-                List<Photo> photos = pepper.getPhotos();
-
-                InputMediaPhoto[] mediaGroup = new InputMediaPhoto[photos.size()];
-
-                byte[] photo = getSingleSeedPhotos(photos.get(0));
-                InputMediaPhoto photoFile = new InputMediaPhoto(photo);
-                photoFile.caption(text);
-                photoFile.parseMode(ParseMode.valueOf("HTML"));
-                mediaGroup[0] = photoFile;
-
-                getAllPhotosFromSeed(mediaGroup, photos);
-
-                bot.execute(new SendMediaGroup(chatId, mediaGroup));
+                photos = pepper.getPhotos();
+                text = getSingleMessagePeppersContent(pepper);
 
             }
+
+            InputMediaPhoto[] mediaGroup = getInputMediaPhotos(photos, text);
+
+            getAllPhotosFromSeed(mediaGroup, photos);
+
+            bot.execute(new SendMediaGroup(chatId, mediaGroup));
+
+            InlineKeyboardMarkup keyboard = createInlineKeyboard();
+            sendInlineKeyboard(Long.parseLong(chatId), "Welcome!", keyboard);
+
         } catch (Exception e) {
             logger.error("TGBotService.sendTextWithPhotoMessage(): Error sending photo message: {}",
                     e.getMessage());
         }
+    }
+
+    @NotNull
+    private InputMediaPhoto[] getInputMediaPhotos(List<Photo> photos, String text) {
+        InputMediaPhoto[] mediaGroup = new InputMediaPhoto[photos.size()];
+
+        byte[] photo = getSingleSeedPhotos(photos.get(0));
+        InputMediaPhoto photoFile = new InputMediaPhoto(photo);
+        photoFile.caption(text);
+        photoFile.parseMode(ParseMode.valueOf("HTML"));
+        mediaGroup[0] = photoFile;
+        return mediaGroup;
     }
 
 
