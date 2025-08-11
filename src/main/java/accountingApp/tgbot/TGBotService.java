@@ -84,11 +84,20 @@ public class TGBotService {
         String callbackQueryId = update.callbackQuery().id();
         String responseText = "default";
 
+        InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
+
+
         if ("button1_pressed".equals(callbackData)) {
-            responseText = "Вы нажали кнопку 1";
-            sendTextMessage(chatId, responseText);
+            responseText = "Какие виды томатов Вас интересуют?";
+            InlineKeyboardButton button1 = new InlineKeyboardButton("Гномы").callbackData("dwarfs");
+            InlineKeyboardButton button2 = new InlineKeyboardButton("Индетерменантные").callbackData("indeterm");
+            InlineKeyboardButton[] row = {button1, button2};
+            keyboard.addRow(row);
+
+//            sendTextMessage(chatId, responseText);
+            sendInlineKeyboard(chatId, responseText,keyboard);
         } else if ("button2_pressed".equals(callbackData)) {
-            responseText = "Вы нажали кнопку 2";
+            responseText = "Какие виды перцев Вас интересуют?";
             sendTextMessage(chatId, responseText);
         }
 
@@ -193,7 +202,7 @@ public class TGBotService {
     }
 
 
-    private <T> void getAllPhotosFromSeed(InputMediaPhoto[] mediaGroup,
+    private void getAllPhotosFromSeed(InputMediaPhoto[] mediaGroup,
                                           List<Photo> photos) {
         for (int i = 1; i < photos.size(); i++) {
             InputMediaPhoto photoFile = new InputMediaPhoto(
@@ -203,7 +212,6 @@ public class TGBotService {
     }
 
     private byte[] getSingleSeedPhotos(Photo photo) {
-
         return photo.getContent();
     }
 
