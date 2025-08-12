@@ -101,6 +101,18 @@ public class TGBotService {
             sendTextMessage(chatId, responseText);
         }
 
+        if ("dwarfs".equals(callbackData)){
+            responseText = "Выберите томат:";
+            InlineKeyboardButton button1 = new InlineKeyboardButton("Вишня").callbackData("dwarfs");
+            InlineKeyboardButton button2 = new InlineKeyboardButton("Физик").callbackData("indeterm");
+            InlineKeyboardButton button3 = new InlineKeyboardButton("Латыш").callbackData("indeterm");
+            InlineKeyboardButton[] row = {button1, button2, button3};
+            keyboard.addRow(row);
+
+//            sendTextMessage(chatId, responseText);
+            sendInlineKeyboard(chatId, responseText,keyboard);
+        }
+
         // Ответ на callback (обязательно)
         bot.execute(new AnswerCallbackQuery(callbackQueryId).text(responseText));
     }
