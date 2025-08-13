@@ -103,14 +103,35 @@ public class TGBotService {
 
         if ("dwarfs".equals(callbackData)){
             responseText = "Выберите томат:";
-            InlineKeyboardButton button1 = new InlineKeyboardButton("Вишня").callbackData("dwarfs");
-            InlineKeyboardButton button2 = new InlineKeyboardButton("Физик").callbackData("indeterm");
-            InlineKeyboardButton button3 = new InlineKeyboardButton("Латыш").callbackData("indeterm");
+            InlineKeyboardButton button1 = new InlineKeyboardButton("Фиолетовое сердце").callbackData("dwarf_purple_heart");
+            InlineKeyboardButton button2 = new InlineKeyboardButton("Физик").callbackData("fizik");
+            InlineKeyboardButton button3 = new InlineKeyboardButton("Латыш").callbackData("latish");
+            InlineKeyboardButton button4 = new InlineKeyboardButton("Желтый горшечный").callbackData("yellow_potted");
             InlineKeyboardButton[] row = {button1, button2, button3};
             keyboard.addRow(row);
 
 //            sendTextMessage(chatId, responseText);
             sendInlineKeyboard(chatId, responseText,keyboard);
+        }
+
+        if ("indeterm".equals(callbackData)){
+
+        }
+
+        if ("latish".equals(callbackData)){
+
+        }
+
+        if ("dwarf_purple_heart".equals(callbackData)){
+
+        }
+
+        if ("fizik".equals(callbackData)){
+
+        }
+
+        if ("yellow_potted".equals(callbackData)){
+
         }
 
         // Ответ на callback (обязательно)
