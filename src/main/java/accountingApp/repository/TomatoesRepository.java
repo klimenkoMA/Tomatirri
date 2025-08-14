@@ -20,4 +20,7 @@ public interface TomatoesRepository extends MongoRepository<Tomatoes, String> {
 
     Page<Tomatoes> findAll(Pageable pageable);
 
+    @Query("{'tomatoesName' :  {$regex: ?0, $options: 'i' }}")
+    Tomatoes findTomatoesByName(String tomatoesName);
+
 }

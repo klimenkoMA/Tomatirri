@@ -95,42 +95,95 @@ public class TGBotService {
             keyboard.addRow(row);
 
 //            sendTextMessage(chatId, responseText);
-            sendInlineKeyboard(chatId, responseText,keyboard);
+            sendInlineKeyboard(chatId, responseText, keyboard);
         } else if ("button2_pressed".equals(callbackData)) {
             responseText = "Какие виды перцев Вас интересуют?";
             sendTextMessage(chatId, responseText);
         }
 
-        if ("dwarfs".equals(callbackData)){
+        if ("dwarfs".equals(callbackData)) {
             responseText = "Выберите томат:";
             InlineKeyboardButton button1 = new InlineKeyboardButton("Фиолетовое сердце").callbackData("dwarf_purple_heart");
             InlineKeyboardButton button2 = new InlineKeyboardButton("Физик").callbackData("fizik");
             InlineKeyboardButton button3 = new InlineKeyboardButton("Латыш").callbackData("latish");
             InlineKeyboardButton button4 = new InlineKeyboardButton("Желтый горшечный").callbackData("yellow_potted");
-            InlineKeyboardButton[] row = {button1, button2, button3};
-            keyboard.addRow(row);
+            InlineKeyboardButton button5 = new InlineKeyboardButton("Йохалос").callbackData("jochalos");
+            InlineKeyboardButton button6 = new InlineKeyboardButton("Жирная лягушка").callbackData("fat_frog");
+            InlineKeyboardButton button7 = new InlineKeyboardButton("Трюфель").callbackData("tartufo");
+            InlineKeyboardButton button8 = new InlineKeyboardButton("Маленький сердцеед").callbackData("little_heartbreaker");
+
+            InlineKeyboardButton[] row1 = {button1};
+            InlineKeyboardButton[] row2 = {button2, button3};
+            InlineKeyboardButton[] row3 = {button4};
+            InlineKeyboardButton[] row4 = {button5, button7};
+            InlineKeyboardButton[] row5 = {button6};
+            InlineKeyboardButton[] row6 = {button8};
+
+            keyboard.addRow(row1);
+            keyboard.addRow(row2);
+            keyboard.addRow(row3);
+            keyboard.addRow(row4);
+            keyboard.addRow(row5);
+            keyboard.addRow(row6);
 
 //            sendTextMessage(chatId, responseText);
-            sendInlineKeyboard(chatId, responseText,keyboard);
+            sendInlineKeyboard(chatId, responseText, keyboard);
         }
 
-        if ("indeterm".equals(callbackData)){
-
-        }
-
-        if ("latish".equals(callbackData)){
+        if ("indeterm".equals(callbackData)) {
 
         }
 
-        if ("dwarf_purple_heart".equals(callbackData)){
+        if ("latish".equals(callbackData)) {
+            Seed tomato = tomatoesRepository.findTomatoesByName("Латыш");
+
+            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
+        }
+
+        if ("dwarf_purple_heart".equals(callbackData)) {
+            Seed tomato = tomatoesRepository.findTomatoesByName("Гном Фиолетовое сердце (Dwarf Purple Heart)");
+
+            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
+        }
+
+        if ("fizik".equals(callbackData)) {
+            Seed tomato = tomatoesRepository.findTomatoesByName("Физик");
+
+            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
 
         }
 
-        if ("fizik".equals(callbackData)){
+        if ("yellow_potted".equals(callbackData)) {
+            Seed tomato = tomatoesRepository.findTomatoesByName("Жёлтый Горшечный");
+
+            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
 
         }
 
-        if ("yellow_potted".equals(callbackData)){
+        if ("jochalos".equals(callbackData)) {
+            Seed tomato = tomatoesRepository.findTomatoesByName("Йохалос (Microdwarf Jochalos)");
+
+            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
+
+        }
+
+        if ("fat_frog".equals(callbackData)) {
+            Seed tomato = tomatoesRepository.findTomatoesByName("Микрогном Жирная (Толстая) лягушка (Fat Frog Micro Dwarf)");
+
+            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
+
+        }
+
+        if ("tartufo".equals(callbackData)) {
+            Seed tomato = tomatoesRepository.findTomatoesByName("Трюфель");
+
+            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
+        }
+
+        if ("little_heartbreaker".equals(callbackData)) {
+            Seed tomato = tomatoesRepository.findTomatoesByName("Маленький сердцеед (Little Heartbreaker)");
+
+            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
 
         }
 
@@ -200,7 +253,7 @@ public class TGBotService {
                 Tomatoes tomato = (Tomatoes) seed;
                 photos = tomato.getPhotos();
                 text = getSingleMessageTomatoesContent(tomato);
-            }else if (seed instanceof Peppers){
+            } else if (seed instanceof Peppers) {
                 Peppers pepper = (Peppers) seed;
                 photos = pepper.getPhotos();
                 text = getSingleMessagePeppersContent(pepper);
@@ -236,7 +289,7 @@ public class TGBotService {
 
 
     private void getAllPhotosFromSeed(InputMediaPhoto[] mediaGroup,
-                                          List<Photo> photos) {
+                                      List<Photo> photos) {
         for (int i = 1; i < photos.size(); i++) {
             InputMediaPhoto photoFile = new InputMediaPhoto(
                     photos.get(i).getContent());
