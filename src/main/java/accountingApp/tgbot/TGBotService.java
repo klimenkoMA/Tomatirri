@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 @Service
@@ -59,6 +60,26 @@ public class TGBotService {
                 logger.error("TGBotService.init(): Telegram update listener error", e);
             }
         });
+    }
+
+    public Seed getSeedByNameFromDB(String attr) {
+
+        List<Tomatoes> tomatoes = tomatoesRepository.findAll();
+        String attrTrim = attr.trim().toLowerCase(Locale.ROOT);
+
+//        for (Tomatoes t : tomatoes
+//        ) {
+//            if (t.getTomatoesName().toLowerCase(Locale.ROOT)
+//                    .contains(attrTrim)) {
+//                tomatoesList.add(t);
+//
+//            }
+//        }
+
+        return tomatoes.stream()
+                .filter(t -> t.getTomatoesName().toLowerCase(Locale.ROOT).equals(attrTrim))
+                .findFirst()
+                .orElse(null);
     }
 
     private void processUpdate(Update update) {
@@ -141,47 +162,48 @@ public class TGBotService {
         }
 
         if ("dwarf_purple_heart".equals(callbackData)) {
-            Seed tomato = tomatoesRepository.findTomatoesByName("Гном Фиолетовое сердце (Dwarf Purple Heart)");
+
+            Seed tomato = getSeedByNameFromDB("Гном Фиолетовое сердце (Dwarf Purple Heart)");
 
             sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
         }
 
         if ("fizik".equals(callbackData)) {
-            Seed tomato = tomatoesRepository.findTomatoesByName("Физик");
+            Seed tomato = getSeedByNameFromDB("Физик");
 
             sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
 
         }
 
         if ("yellow_potted".equals(callbackData)) {
-            Seed tomato = tomatoesRepository.findTomatoesByName("Жёлтый Горшечный");
+            Seed tomato = getSeedByNameFromDB("Жёлтый Горшечный");
 
             sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
 
         }
 
         if ("jochalos".equals(callbackData)) {
-            Seed tomato = tomatoesRepository.findTomatoesByName("Йохалос (Microdwarf Jochalos)");
+            Seed tomato = getSeedByNameFromDB("Йохалос (Microdwarf Jochalos)");
 
             sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
 
         }
 
         if ("fat_frog".equals(callbackData)) {
-            Seed tomato = tomatoesRepository.findTomatoesByName("Микрогном Жирная (Толстая) лягушка (Fat Frog Micro Dwarf)");
+            Seed tomato = getSeedByNameFromDB("Микрогном Жирная (Толстая) лягушка (Fat Frog Micro Dwarf)");
 
             sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
 
         }
 
         if ("tartufo".equals(callbackData)) {
-            Seed tomato = tomatoesRepository.findTomatoesByName("Трюфель");
+            Seed tomato = getSeedByNameFromDB("Трюфель");
 
             sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
         }
 
         if ("little_heartbreaker".equals(callbackData)) {
-            Seed tomato = tomatoesRepository.findTomatoesByName("Маленький сердцеед (Little Heartbreaker)");
+            Seed tomato = getSeedByNameFromDB("Маленький сердцеед (Little Heartbreaker)");
 
             sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
 
@@ -260,6 +282,7 @@ public class TGBotService {
 
             }
 
+            System.out.println("Photos size:" + photos.size());
             InputMediaPhoto[] mediaGroup = getInputMediaPhotos(photos, text);
 
             getAllPhotosFromSeed(mediaGroup, photos);
