@@ -94,7 +94,7 @@ public class TGBotService {
         String callbackData = update.callbackQuery().data();
         long chatId = update.callbackQuery().message().chat().id();
         String callbackQueryId = update.callbackQuery().id();
-        String responseText = "default";
+        String responseText = "success";
         Seed seed;
 
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
@@ -114,29 +114,34 @@ public class TGBotService {
         }
 
         if ("dwarfs".equals(callbackData)) {
+
+            List<Tomatoes> dwarfList = tomatoesRepository.findAllByCategoryDwarf();
+            int lengthCount;
+
+            for (int i = 0; i < dwarfList.size(); i++) {
+
+                InlineKeyboardButton[] row;
+
+                String buttonText = dwarfList.get(i).getTgBotButtonName();
+                lengthCount = buttonText.length();
+
+                InlineKeyboardButton button = new InlineKeyboardButton(buttonText).callbackData(buttonText);
+                if (lengthCount <= 14) {
+
+                    i++;
+                    buttonText = dwarfList.get(i).getTgBotButtonName();
+                    InlineKeyboardButton button2 = new InlineKeyboardButton(buttonText).callbackData(buttonText);
+                    row = new InlineKeyboardButton[]{button, button2};
+
+                } else {
+                    row = new InlineKeyboardButton[]{button};
+                }
+                keyboard.addRow(row);
+            }
+
+
             responseText = "Выберите томат:";
-            InlineKeyboardButton button1 = new InlineKeyboardButton("Фиолетовое сердце").callbackData("dwarf_purple_heart");
-            InlineKeyboardButton button2 = new InlineKeyboardButton("Физик").callbackData("fizik");
-            InlineKeyboardButton button3 = new InlineKeyboardButton("Латыш").callbackData("latish");
-            InlineKeyboardButton button4 = new InlineKeyboardButton("Желтый горшечный").callbackData("yellow_potted");
-            InlineKeyboardButton button5 = new InlineKeyboardButton("Йохалос").callbackData("jochalos");
-            InlineKeyboardButton button6 = new InlineKeyboardButton("Жирная лягушка").callbackData("fat_frog");
-            InlineKeyboardButton button7 = new InlineKeyboardButton("Трюфель").callbackData("tartufo");
-            InlineKeyboardButton button8 = new InlineKeyboardButton("Маленький сердцеед").callbackData("little_heartbreaker");
 
-            InlineKeyboardButton[] row1 = {button1};
-            InlineKeyboardButton[] row2 = {button2, button3};
-            InlineKeyboardButton[] row3 = {button4};
-            InlineKeyboardButton[] row4 = {button5, button7};
-            InlineKeyboardButton[] row5 = {button6};
-            InlineKeyboardButton[] row6 = {button8};
-
-            keyboard.addRow(row1);
-            keyboard.addRow(row2);
-            keyboard.addRow(row3);
-            keyboard.addRow(row4);
-            keyboard.addRow(row5);
-            keyboard.addRow(row6);
 
             sendInlineKeyboard(chatId, responseText, keyboard);
         }
@@ -145,43 +150,8 @@ public class TGBotService {
 
         }
 
-
-
-        switch (callbackData) {
-            case "latish":
-                seed = tomatoesRepository.findTomatoesByName("Латыш");
-                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
-                break;
-            case "dwarf_purple_heart":
-                seed = getSeedByNameFromDB("Гном Фиолетовое сердце (Dwarf Purple Heart)");
-                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
-                break;
-            case "fizik":
-                seed = getSeedByNameFromDB("Физик");
-                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
-                break;
-            case "yellow_potted":
-                seed = getSeedByNameFromDB("Жёлтый Горшечный");
-                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
-                break;
-            case "jochalos":
-                seed = getSeedByNameFromDB("Йохалос (Microdwarf Jochalos)");
-                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
-                break;
-            case "fat_frog":
-                seed = getSeedByNameFromDB("Микрогном Жирная (Толстая) лягушка (Fat Frog Micro Dwarf)");
-                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
-                break;
-            case "tartufo":
-                seed = getSeedByNameFromDB("Трюфель (Tartufo)");
-                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
-                break;
-            case "little_heartbreaker":
-                seed = getSeedByNameFromDB("Маленький сердцеед (Little Heartbreaker)");
-                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
-                break;
-            default:
-        }
+        seed = tomatoesRepository.findTomatoesByShortName(callbackData);
+        sendTextWithPhotoMessage(String.valueOf(chatId), seed);
 
         // Ответ на callback (обязательно)
         bot.execute(new AnswerCallbackQuery(callbackQueryId).text(responseText));
@@ -263,7 +233,7 @@ public class TGBotService {
             bot.execute(new SendMediaGroup(chatId, mediaGroup));
 
             InlineKeyboardMarkup keyboard = createInlineKeyboard();
-            sendInlineKeyboard(Long.parseLong(chatId), "Welcome!", keyboard);
+            sendInlineKeyboard(Long.parseLong(chatId), "Выберите семена:", keyboard);
 
         } catch (Exception e) {
             logger.error("TGBotService.sendTextWithPhotoMessage(): Error sending photo message: {}",
