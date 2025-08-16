@@ -102,6 +102,7 @@ public class TomatoesController {
     @Secured("ROLE_ADMIN")
     public String addTomato(@RequestParam(required = false) String category
             , @RequestParam String tomatoesName
+            , @RequestParam String tgBotButtonName
             , @RequestParam String tomatoesHeight
             , @RequestParam String tomatoesDiameter
             , @RequestParam String tomatoesFruit
@@ -116,6 +117,7 @@ public class TomatoesController {
     ) {
         if (category == null
                 || checker.checkAttribute(tomatoesName)
+                || checker.checkAttribute(tgBotButtonName)
                 || checker.checkAttribute(tomatoesHeight)
                 || checker.checkAttribute(tomatoesDiameter)
                 || checker.checkAttribute(tomatoesFruit)
@@ -128,6 +130,7 @@ public class TomatoesController {
                     "  Attribute has a null value! ***" +
                     "\ncategory: " + category +
                     "\ntomatoesName: " + tomatoesName +
+                    "\ntgBotButtonName: " + tgBotButtonName +
                     "\ntomatoesHeight: " + tomatoesHeight +
                     "\ntomatoesDiameter: " + tomatoesDiameter +
                     "\ntomatoesFruit: " + tomatoesFruit +
@@ -140,6 +143,7 @@ public class TomatoesController {
         }
 
         String tomatoesNameTrim = tomatoesName.trim();
+        String tgBotButtonNameTrim = tgBotButtonName.trim();
         String tomatoesHeightTrim = tomatoesHeight.trim();
         String tomatoesDiameterTrim = tomatoesDiameter.trim();
         String tomatoesFruitTrim = tomatoesFruit.trim();
@@ -175,6 +179,7 @@ public class TomatoesController {
                     , tomatoesTasteTrim
                     , tomatoesSpecificityTrim
                     , tomatoIsPresent
+                    , tgBotButtonNameTrim
             );
 
             tomatoesService.addNewTomato(tomato);
@@ -218,6 +223,7 @@ public class TomatoesController {
     public String updateTomato(@RequestParam String id
             , @RequestParam(required = false) String category
             , @RequestParam(required = false) String tomatoesName
+            , @RequestParam(required = false) String tgBotButtonName
             , @RequestParam(required = false) String tomatoesHeight
             , @RequestParam(required = false) String tomatoesDiameter
             , @RequestParam(required = false) String tomatoesFruit
@@ -238,6 +244,7 @@ public class TomatoesController {
             updateTomatoFields(tomato
                     , category
                     , tomatoesName
+                    , tgBotButtonName
                     , tomatoesHeight
                     , tomatoesDiameter
                     , tomatoesFruit
@@ -347,6 +354,7 @@ public class TomatoesController {
     private void updateTomatoFields(Tomatoes tomato
             , String category
             , String tomatoesName
+            , String tgBotButtonName
             , String tomatoesHeight
             , String tomatoesDiameter
             , String tomatoesFruit
@@ -378,6 +386,7 @@ public class TomatoesController {
         updateFieldIfProvided(tomato::setTomatoesAgroTech, tomato::getTomatoesAgroTech, tomatoesAgroTech);
         updateFieldIfProvided(tomato::setTomatoesDescription, tomato::getTomatoesDescription, tomatoesDescription);
         updateFieldIfProvided(tomato::setTomatoesTaste, tomato::getTomatoesTaste, tomatoesTaste);
+        updateFieldIfProvided(tomato::setTgBotButtonName, tomato::getTgBotButtonName, tgBotButtonName);
     }
 
     private void updateFieldIfProvided(Consumer<String> setter,
