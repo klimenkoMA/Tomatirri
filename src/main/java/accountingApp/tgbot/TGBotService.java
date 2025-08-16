@@ -67,15 +67,6 @@ public class TGBotService {
         List<Tomatoes> tomatoes = tomatoesRepository.findAll();
         String attrTrim = attr.trim().toLowerCase(Locale.ROOT);
 
-//        for (Tomatoes t : tomatoes
-//        ) {
-//            if (t.getTomatoesName().toLowerCase(Locale.ROOT)
-//                    .contains(attrTrim)) {
-//                tomatoesList.add(t);
-//
-//            }
-//        }
-
         return tomatoes.stream()
                 .filter(t -> t.getTomatoesName().toLowerCase(Locale.ROOT).equals(attrTrim))
                 .findFirst()
@@ -104,6 +95,7 @@ public class TGBotService {
         long chatId = update.callbackQuery().message().chat().id();
         String callbackQueryId = update.callbackQuery().id();
         String responseText = "default";
+        Seed seed;
 
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
 
@@ -115,7 +107,6 @@ public class TGBotService {
             InlineKeyboardButton[] row = {button1, button2};
             keyboard.addRow(row);
 
-//            sendTextMessage(chatId, responseText);
             sendInlineKeyboard(chatId, responseText, keyboard);
         } else if ("button2_pressed".equals(callbackData)) {
             responseText = "Какие виды перцев Вас интересуют?";
@@ -147,7 +138,6 @@ public class TGBotService {
             keyboard.addRow(row5);
             keyboard.addRow(row6);
 
-//            sendTextMessage(chatId, responseText);
             sendInlineKeyboard(chatId, responseText, keyboard);
         }
 
@@ -155,58 +145,42 @@ public class TGBotService {
 
         }
 
-        if ("latish".equals(callbackData)) {
-            Seed tomato = tomatoesRepository.findTomatoesByName("Латыш");
 
-            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
-        }
 
-        if ("dwarf_purple_heart".equals(callbackData)) {
-
-            Seed tomato = getSeedByNameFromDB("Гном Фиолетовое сердце (Dwarf Purple Heart)");
-
-            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
-        }
-
-        if ("fizik".equals(callbackData)) {
-            Seed tomato = getSeedByNameFromDB("Физик");
-
-            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
-
-        }
-
-        if ("yellow_potted".equals(callbackData)) {
-            Seed tomato = getSeedByNameFromDB("Жёлтый Горшечный");
-
-            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
-
-        }
-
-        if ("jochalos".equals(callbackData)) {
-            Seed tomato = getSeedByNameFromDB("Йохалос (Microdwarf Jochalos)");
-
-            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
-
-        }
-
-        if ("fat_frog".equals(callbackData)) {
-            Seed tomato = getSeedByNameFromDB("Микрогном Жирная (Толстая) лягушка (Fat Frog Micro Dwarf)");
-
-            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
-
-        }
-
-        if ("tartufo".equals(callbackData)) {
-            Seed tomato = getSeedByNameFromDB("Трюфель");
-
-            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
-        }
-
-        if ("little_heartbreaker".equals(callbackData)) {
-            Seed tomato = getSeedByNameFromDB("Маленький сердцеед (Little Heartbreaker)");
-
-            sendTextWithPhotoMessage(String.valueOf(chatId), tomato);
-
+        switch (callbackData) {
+            case "latish":
+                seed = tomatoesRepository.findTomatoesByName("Латыш");
+                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
+                break;
+            case "dwarf_purple_heart":
+                seed = getSeedByNameFromDB("Гном Фиолетовое сердце (Dwarf Purple Heart)");
+                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
+                break;
+            case "fizik":
+                seed = getSeedByNameFromDB("Физик");
+                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
+                break;
+            case "yellow_potted":
+                seed = getSeedByNameFromDB("Жёлтый Горшечный");
+                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
+                break;
+            case "jochalos":
+                seed = getSeedByNameFromDB("Йохалос (Microdwarf Jochalos)");
+                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
+                break;
+            case "fat_frog":
+                seed = getSeedByNameFromDB("Микрогном Жирная (Толстая) лягушка (Fat Frog Micro Dwarf)");
+                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
+                break;
+            case "tartufo":
+                seed = getSeedByNameFromDB("Трюфель (Tartufo)");
+                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
+                break;
+            case "little_heartbreaker":
+                seed = getSeedByNameFromDB("Маленький сердцеед (Little Heartbreaker)");
+                sendTextWithPhotoMessage(String.valueOf(chatId), seed);
+                break;
+            default:
         }
 
         // Ответ на callback (обязательно)
@@ -282,7 +256,6 @@ public class TGBotService {
 
             }
 
-            System.out.println("Photos size:" + photos.size());
             InputMediaPhoto[] mediaGroup = getInputMediaPhotos(photos, text);
 
             getAllPhotosFromSeed(mediaGroup, photos);

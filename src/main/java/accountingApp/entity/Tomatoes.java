@@ -49,6 +49,8 @@ public class Tomatoes extends MultipartFileAdapter implements Seed{
     @Field
     @Lazy
     private List<Photo> photos = new ArrayList<>();
+    @Field
+    private String tgBotButtonName;
 
     public Tomatoes() {
     }
@@ -63,7 +65,8 @@ public class Tomatoes extends MultipartFileAdapter implements Seed{
                     String tomatoesDescription,
                     String tomatoesTaste,
                     String tomatoesSpecificity,
-                    IsPresent isPresent
+                    IsPresent isPresent,
+                    String tgBotButtonName
     ) {
         this.tomatoesName = tomatoesName;
         this.category = category;
@@ -76,6 +79,7 @@ public class Tomatoes extends MultipartFileAdapter implements Seed{
         this.tomatoesTaste = tomatoesTaste;
         this.tomatoesSpecificity = tomatoesSpecificity;
         this.isPresent = isPresent;
+        this.tgBotButtonName = tgBotButtonName;
     }
 
     public Tomatoes(ObjectId id,
@@ -89,7 +93,8 @@ public class Tomatoes extends MultipartFileAdapter implements Seed{
                     String tomatoesDescription,
                     String tomatoesTaste,
                     String tomatoesSpecificity,
-                    IsPresent isPresent
+                    IsPresent isPresent,
+                    String tgBotButtonName
     ) {
         this.id = id;
         this.category = category;
@@ -103,6 +108,7 @@ public class Tomatoes extends MultipartFileAdapter implements Seed{
         this.tomatoesTaste = tomatoesTaste;
         this.tomatoesSpecificity = tomatoesSpecificity;
         this.isPresent = isPresent;
+        this.tgBotButtonName = tgBotButtonName;
     }
 
     public List<String> getListOfImagesDataBase64() {
@@ -110,6 +116,14 @@ public class Tomatoes extends MultipartFileAdapter implements Seed{
         return this.photos.stream()
                 .map(ph -> Base64.encodeBase64String(ph.getContent()))
                 .collect(Collectors.toList());
+    }
+
+    public String getTgBotButtonName() {
+        return tgBotButtonName;
+    }
+
+    public void setTgBotButtonName(String tgBotButtonName) {
+        this.tgBotButtonName = tgBotButtonName;
     }
 
     public ObjectId getId() {
